@@ -12,7 +12,9 @@ Master Sword Continued is a Half Life 1 (GoldSRC) modification that adds RPG fan
 - An extensive list of development commands, and up to date item scriptfiles.
 - The stripper2 plugin for developmental servers, to test your additions to the code, by spawning in items or necessary NPCs in maps that wouldn't ordinarily have them; saves time.
 - Reverse engineered half-life dedicated server, for uses of the stripper2 plugin.
+- FuzNet (FN) source code, used to securely host MSCs RPG global stats, xp adjustments, characters, and progress.
 - Other miscellaneous files, and imagery in context to MSC development.
+- Scriptpack compiler source code.
 - The games soundtrack.
 
 # Maintainers:

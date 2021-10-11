@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Scriptpack", "scriptpack.vcproj", "{D1E2AE3E-5AB0-484B-B983-9EB59764C842}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Debug DS = Debug DS
+		DebugDS = DebugDS
+		Release = Release
+		Release(Debug) = Release(Debug)
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Debug.ActiveCfg = Debug|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Debug.Build.0 = Debug|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Debug DS.ActiveCfg = Debug DS|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Debug DS.Build.0 = Debug DS|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.DebugDS.ActiveCfg = DebugDS|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.DebugDS.Build.0 = DebugDS|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Release.ActiveCfg = Release|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Release.Build.0 = Release|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Release(Debug).ActiveCfg = Release(Debug)|Win32
+		{D1E2AE3E-5AB0-484B-B983-9EB59764C842}.Release(Debug).Build.0 = Release(Debug)|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
