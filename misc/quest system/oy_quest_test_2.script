@@ -1,0 +1,68 @@
+#scope server
+
+{
+	const CHAT_AUTO_HAIL 1 //Not necessary for you to know
+	const CHAT_CONV_ANIMS "anim_convo;nod" //Not necessary for you to know
+	setvar ANIM_IDLE idle //Not necessary for you to know
+
+
+	const QUEST_GIVER 1 //Is able to give quests?
+	const QUEST_RECIEVER 1 //Is able to complete quests?
+
+	const USE_Q_IDX 1 //If this is a quest line, use the idxs to track which quest you're on. If this is 0, it will NOT increment the idx, and will NOT check if you have the proper Q_IDX
+
+	//PLEASE READ ME
+	const Q_IDX "2;3" //These are the indexes which the npc can give quests to, and complete. If the player has never done a quest yet, and you want this npc to be the start
+	//in a line of quests, it should includ '0'. 99% of programming languages starts indexing at 0 instead of 1, this is no exception. If you, for example, want this npc to have
+	//3 quests to start a line with, and another npc to give different quests in the same line, THIS one should be "0;1;2". It's importnant that it's separated by semi-colons.
+	//The other npc should then have "3;4;5" for 3 more quests in the same line. Because this techically only supports one quest line universally, you can, however, easily spoof other
+	//quest lines just by applying context via dialogue. It would, still however, have to follow the same indexing format, incrementing with each new quest in the line. The index should
+	//never be set back to 0 unless you want the player to restart the whole chain of quests. If you do NOT want to follow the quest line format, and only want an individual quest with no
+	//line, for the npc, set USE_Q_IDX to 0. This will then NOT check the quest index, and will NOT increment the quest index upon quest completion.
+
+	//PLEASE READ ME
+
+	const GENERIC_JOB 1 //Use generic dialogue? vvv
+	const QUEST_DIALOGUE_0 "Perhaps you can help me? For no reason in particular, I need some things dead."
+	const QUEST_DIALOGUE_1 "I need you to kill %kill %who %map. Think you can do that for me?" //What does he say generically? Uses %who as the monster name, %kill as kill amt, and %map to fill in info. %map will autofill "at" if necessary.
+}
+
+#include test_scripts/oy_quest_base //If you want, you can look in oy_quest_base and fiddle around in that to see what will change, but otherwise it's not necessary for you to know
+
+{ game_spawn
+
+	name a|Dwarven Forger 2
+	setmodel dwarf/male1.mdl
+	//setmodelbody 1 8
+	width 32
+	height 48
+
+	setidleanim ANIM_IDLE
+	playanim once ANIM_IDLE
+}
+
+{ [override] create_quests //This event is called right when the NPC spawns. The array.adds down there adds quests to the npc.
+
+	array.add A_QUESTS "Rat;3;any;the Dwarven Forger"
+
+	array.add A_QUESTS "Skeleton;3;any;the Dwarven Forger"
+}
+
+{ [override] say_hi
+
+	if ( !CHAT_BUSY )
+	{
+		callevent chat_now "Hello. My two quests come after the first two from the Dwarven Forger 1. oy_quest_test_1 has the info to makes quests for me also." 1
+	}
+}
+
+{ quest_get_dialogue //<playerid> <questidx>
+
+	callevent chat_now "Thank you. Come back to me when you're done." 0
+}
+
+{ quest_complete_dialogue
+
+	callevent chat_now "I knew I could count on you." 0
+	offer PARAM1 gold 1000
+}

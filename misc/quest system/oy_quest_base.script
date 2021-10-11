@@ -1,0 +1,299 @@
+//notes
+//quest tag will be underquest
+//structure will be questindex;curamt;monster;max;map;origin;mapinfo
+//questindex is a reference for npcs, increment it upon turn in
+//curamt how many monsters killed
+//monster name to check for
+//max how many to kill
+//map specify map to kill monsters on, or use any
+//origin being the map you got the quest from, used for info.
+//mapinfo being what will display where to kill the monsters.
+
+//When a quest is complete, increment questidx and remove all other data.
+//If there's other data, the npc will interpret the quest as still ongoing.
+
+//Events:
+//	create_quests					//The event used to add the quests to the A_QUEST array. Override with your quests in the higher script.
+//	quest_get <playerid>				//Gives the quest to the player. Normally given from the game_menu_getoptions.
+//	quest_get_dialogue <playerid> <quest index>	//Purely for higher scripts to use dialogue according to the quest index. Just in an easier format, 'cuz the quest index is provided.
+//	quest_complete <playerid>			//Increments the quest index by 1 if USE_Q_IDX is 1. Sets the QUEST_STRING to only the index.
+//	quest_complete_dialogue <playerid> <quest index>//Purely for higher scripts to use dialogue according to the quest index. Just in an easier format, 'cuz the quest index is provided. I suppose you could even use this with rewards.
+//	say_hi <playerid>				//Called when the player clicks "Hail" in the menu. This does NOT catch speech, as catch speech does not pass the playerid to the first param.
+//	say_job <playerid>				//Called when the player clicks "Ask about Jobs" in the menu. Uses generic dialogue if GENERIC_JOB is 1. Re-sends the menu to the player with the option to accept the job.
+//	say_job_dialogue <playerid> <quest index>	//Purely for higher scripts to use dialogue according to the quest index. Just in an easier format, 'cuz the quest index is provided.
+//	func_build_dialogue <idx>			//Builds the dialogue to tell the player what he needs to do. Only used with GENERIC_JOB. 
+//	func_get_quest_step <playerid>			//Checks if the player can get a quest with this npc or if the quest assigned from this npc is finished. You cannot if you do not have the correct quest index or have a job already. 
+//							//Vars passed back from func_get_quest_step:
+//								//complete = quest complete
+//								//wip = quest still being worked on
+//								//open = no quest assigned
+//								//noquest = If he doesn't have a quest to give you
+//
+//	menu_open <playerid>				//Just so I can set the open menu on a delay.
+//
+//Consts:
+//	QUEST_STRING	//The quest tag to check for on the player
+//	QUEST_GIVER	//Can this NPC give quests? Meant for an NPC giving a quest while a player has to turn it in to someone else.
+//	QUEST_RECIEVER	//Can this NPC recieve/complete quests? Meant for an NPC giving a quest while a player has to turn it in to someone else.
+//	USE_Q_IDX	//Uses token 0 on the player's quest string to store indexes to track quest line progress. Only oyster may use this, please, unless under special circumstances.
+//	Q_IDX		//Which quest indexes can the NPC give out and have players turn in quests to
+//	GENERIC_JOB	//Uses QUEST_DIALOGUE_0 and QUEST_DIALOGUE_1 as generic quest dialogue if set to 1.
+
+#scope server
+
+{
+	const CHAT_AUTO_HAIL 1
+
+	const QUEST_STRING "underquest"
+
+	const QUEST_GIVER 1 //Is able to give quests?
+	const QUEST_RECIEVER 1 //Is able to complete quests?
+
+	const USE_Q_IDX 1 //If this is a quest line, use the idxs to track which quest you're on. If this is 0, it will NOT increment the idx, and will NOT check if you have the proper Q_IDX
+	const Q_IDX "0;1;2;3" //Which quest idxs can we give quests to.
+
+	const GENERIC_JOB 1 //Use generic dialogue? vvv
+	const QUEST_DIALOGUE_0 "Perhaps you can help me? For no reason in particular, I need some things dead."
+	const QUEST_DIALOGUE_1 "I need you to kill %kill %who %map. Think you can do that for me?" //What does he say generically? Uses %who as the monster name, %kill as kill amt, and %map to fill in info. %map will autofill "at" if necessary.
+
+	setvard MENU_OWNER 0 //Who is currently using the menu, only gonna be used for comparing to READY_QUEST
+	setvard READY_QUEST 0 //Who is about to take a quest from the NPC?
+}
+
+#include monsters/externals
+#include monsters/base_chat_array
+
+{ game_spawn
+
+	hp 20
+	name Smellelin
+	width 32
+	height 72
+	race beloved
+	roam 0
+	setmodel npc/human1.mdl
+	invincible  1
+	nopush 1
+
+	//catchspeech say_job job work //This doesn't pass the playerid as a param, so I'm not gonna use it :(
+
+	array.create A_QUESTS //Start adding quests. IT DOES MATTER WHICH ORDER YOU ADD THEM IN, KEEP IT IN NUMERICAL ORDER //If you override create_quests, please still use A_QUESTS as the array
+	callevent create_quests
+}
+
+{ create_quests
+
+	//Start adding quests. IT DOES MATTER WHICH ORDER YOU ADD THEM IN, KEEP IT IN NUMERICAL ORDER
+	//array.add A_QUESTS "Rat;3;edana;the test_underquest dude;Edana" //IDX 0
+	//array.add A_QUESTS "Spider;3;thornlands;the test_underquest dude;the Thornlands" //IDX 1
+	//array.add A_QUESTS "Orc;3;orc_for;the test_underquest dude; the Orc Forest" //IDX 2
+	//array.add A_QUESTS "Keledros;1;keledrosruins;the test_underquest dude;Ruins of Keledros' Castle" //IDX 3
+}
+
+{ game_menu_getoptions //<playerid> 
+	//complete = quest complete
+	//wip = quest still being worked on
+	//open = no quest assigned
+	//noquest = If he doesn't have a quest to give you
+
+	local L_PLAYER PARAM1
+	local L_QUEST $func(func_get_quest_step,L_PLAYER)
+
+	if ( L_PLAYER equals READY_QUEST ) //If the player asked about jobs
+	{
+		setvard READY_QUEST 0
+
+		local reg.mitem.title "Accept Job"
+		local reg.mitem.type callback
+		local reg.mitem.callback quest_get
+		menuitem.register
+	}
+	else if ( QUEST_GIVER )
+	{
+		if ( L_QUEST equals 'open' )
+		{
+			local reg.mitem.title "Ask about Jobs"
+			local reg.mitem.type callback
+			local reg.mitem.callback say_job
+			menuitem.register
+		}
+	}
+
+	if ( QUEST_RECIEVER )
+	{
+		if ( L_QUEST equals 'complete' )
+		{
+			local reg.mitem.title "Turn in Quest"
+			local reg.mitem.type callback
+			local reg.mitem.callback quest_complete
+			menuitem.register
+		}
+		else if ( L_QUEST equals 'wip' )
+		{
+			callexternal GAME_MASTER oy_quest_notify L_PLAYER
+
+			local reg.mitem.title "Turn in Quest"
+			local reg.mitem.type disabled
+			menuitem.register
+		}
+	}
+
+	//local reg.mitem.title "Reset Quest"
+	//local reg.mitem.type callback
+	//local reg.mitem.callback say_reset
+	//menuitem.register
+}
+
+//{ say_reset //<player>
+//
+//	quest set PARAM1 QUEST_STRING 0
+//
+//	callevent chat_now "ohh no quest is goen now :("
+//}
+
+{ quest_get //<playerid>
+
+	local L_PLAYER PARAM1
+
+	local L_QUEST $get_quest_data(L_PLAYER,QUEST_STRING)
+	local L_IDX $get_find_token(Q_IDX,L_QUEST)
+
+	token.add L_QUEST 0
+	token.add L_QUEST $get_array(A_QUESTS,L_IDX) //The array doesn't have the same indexes of the ones in Q_IDX. We need to get the proper index.
+
+	quest set L_PLAYER QUEST_STRING L_QUEST
+
+	callevent quest_get_dialogue L_PLAYER L_IDX
+	callexternal GAME_MASTER oy_give_quest L_PLAYER
+}
+
+{ quest_get_dialogue //<playerid> <quest index> //Purely for higher scripts to use dialogue according to the quest index. Just in an easier format, 'cuz the quest index is provided.
+
+	//Purely for higher scripts to use dialogue according to the quest index. Just in an easier format, 'cuz the quest index is provided.
+}
+
+{ quest_complete //<playerid>
+
+	local L_PLAYER PARAM1
+	local L_QUEST $get_quest_data(L_PLAYER,QUEST_STRING)
+	local L_IDX $get_token(L_QUEST,0)
+
+	callevent quest_complete_dialogue L_PLAYER L_IDX
+
+	if ( USE_Q_IDX )
+	{
+		local L_IDX $int($math(add,L_IDX,1))
+	}
+
+	quest set L_PLAYER QUEST_STRING L_IDX
+}
+
+{ quest_complete_dialogue //<playerid> <quest index> //Purely for higher scripts to use dialogue according to the quest index. Just in an easier format, 'cuz the quest index is provided.
+
+	//Purely for higher scripts to use dialogue according to the quest index. Just in an easier format, 'cuz the quest index is provided.
+}
+
+{ say_hi
+
+	if ( !CHAT_BUSY )
+	{
+		callevent chat_now "hello yees it is me the grate smellarino pls ask job pls" 0.2
+	}
+}
+
+{ say_job //<playerid>
+
+	if ( !CHAT_BUSY )
+	{
+		local L_PLAYER PARAM1
+		local L_IDX $get_quest_data(L_PLAYER,QUEST_STRING)
+
+		if ( GENERIC_JOB ) //Use generic dialogue? If not, then it'll call an event, quest_id_x where x is an index. The index being one from Q_IDX
+		{
+			callevent chat_now QUEST_DIALOGUE_0 2
+			callevent chat_now $func(func_build_dialogue,L_IDX) 2
+		}
+
+		setvard READY_QUEST L_PLAYER
+
+		callevent say_job_dialogue L_PLAYER L_IDX
+		callevent 3 menu_open
+	}
+}
+
+{ say_job_dialogue //<playerid> <quest idx>
+
+}
+
+{ func_build_dialogue //<idx> //Builds the dialogue to tell the player what he needs to do. Only used with GENERIC_JOB
+
+	local L_IDX $get_find_token(Q_IDX,PARAM1) //The array doesn't have the same indexes of the ones in Q_IDX. We need to get the proper index.
+	local L_QUEST $get_array(A_QUESTS,L_IDX)
+
+	local L_MONSTER $get_token(L_QUEST,0)
+	local L_KILL $get_token(L_QUEST,1)
+	local L_MAP $get_token(L_QUEST,6)
+
+	if ( L_KILL > 1 )
+	{
+		stradd L_MONSTER 's'
+	}
+
+	if ( $lcase(L_MAP) equals 'any' )
+	{
+		local L_MAP "anywhere"
+	}
+	else
+	{
+		local L_STR "at "
+		stradd L_STR L_MAP
+		local L_MAP L_STR
+	}
+
+	local L_STRING QUEST_DIALOGUE_1
+
+	local L_STRING $subst(L_STRING,'%who',L_MONSTER)
+	local L_STRING $subst(L_STRING,'%kill',L_KILL)
+	local L_STRING $subst(L_STRING,'%map',L_MAP)
+
+	return L_STRING
+}
+
+{ func_get_quest_step //<playerid> 
+	//complete = quest complete
+	//wip = quest still being worked on
+	//open = no quest assigned
+	//noquest = If he doesn't have a quest to give you
+
+	local L_QUEST $get_quest_data(PARAM1,QUEST_STRING)
+
+	if ( $get_find_token(Q_IDX,$get_token(L_QUEST,0)) != -1 ) //If you have the correct idx to get or turn in a quest from the npc
+	{
+		if ( $get_token_amt(L_QUEST) == 1 ) //If you only have one token, which means you're not doing a quest right now
+		{
+			return "open"
+			exitevent
+		}
+		else if ( $get_token(L_QUEST,1) == $get_token(L_QUEST,3) ) //If you have killed the proper amount of enemies
+		{
+		
+			return "complete"
+			exitevent
+		}
+		else //If you haven't killed the enemies yet
+		{
+			return "wip"
+			exitevent
+		}
+	}
+	else //If he doesn't have a quest to give you
+	{
+		return "noquest"
+		exitevent
+	}
+}
+
+{ menu_open //<playerid> //Just so I can set the open menu on a delay.
+
+	menu.open READY_QUEST
+}

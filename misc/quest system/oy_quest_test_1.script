@@ -1,0 +1,89 @@
+#scope server
+
+{
+	const CHAT_AUTO_HAIL 1 //Not necessary for you to know
+	const CHAT_CONV_ANIMS "anim_convo;nod" //Not necessary for you to know
+	setvar ANIM_IDLE idle //Not necessary for you to know
+
+
+	const QUEST_GIVER 1 //Is able to give quests?
+	const QUEST_RECIEVER 1 //Is able to complete quests?
+
+	//PLEASE READ ME
+	const Q_IDX "0;1" //These are the indexes which the npc can give quests to, and complete. If the player has never done a quest yet, and you want this npc to be the start
+	//in a line of quests, it should includ '0'. 99% of programming languages starts indexing at 0 instead of 1, this is no exception. If you, for example, want this npc to have
+	//3 quests to start a line with, and another npc to give different quests in the same line, THIS one should be "0;1;2". It's importnant that it's separated by semi-colons.
+	//The other npc should then have "3;4;5" for 3 more quests in the same line. Because this techically only supports one quest line universally, you can, however, easily spoof other
+	//quest lines just by applying context via dialogue. It would, still however, have to follow the same indexing format, incrementing with each new quest in the line. The index should
+	//never be set back to 0 unless you want the player to restart the whole chain of quests. If you do NOT want to follow the quest line format, and only want an individual quest with no
+	//line, for the npc, set USE_Q_IDX to 0. This will then NOT check the quest index, and will NOT increment the quest index upon quest completion.
+
+	//PLEASE READ ME
+
+	const GENERIC_JOB 1 //Use generic dialogue? vvv
+	const QUEST_DIALOGUE_0 "Perhaps you can help me? For no reason in particular, I need some things dead."
+	const QUEST_DIALOGUE_1 "I need you to kill %kill %who %map. Think you can do that for me?" //What does he say generically? Uses %who as the monster name, %kill as kill amt, and %map to fill in info. %map will autofill "at" if necessary.
+}
+
+#include test_scripts/oy_quest_base //If you want, you can look in oy_quest_base and fiddle around in that to see what will change, but otherwise it's not necessary for you to know
+
+{ game_spawn
+
+	name a|Dwarven Forger 1
+	setmodel dwarf/male1.mdl
+	//setmodelbody 1 8
+	width 32
+	height 48
+
+	setidleanim ANIM_IDLE
+	playanim once ANIM_IDLE
+}
+
+{ [override] create_quests //This event is called right when the NPC spawns. The array.adds down there adds quests to the npc.
+	//When you add a quest to the npc, it does it in order, meaning that if you have Q_IDX as "0;1", the first array.add will assign the quest to index 0.
+	//The next array.add will assign the quest to index 1. The structure of the quest is just a stripped version of the whole quest data that's stored on underquest, being:
+	//questindex;curamt;monster;max;map;origin
+	//questindex is a reference for npcs, increment it upon turn in
+	//curamt how many monsters killed
+	//monster name to check for
+	//max how many to kill
+	//map specify map to kill monsters on, or use any
+	//origin being the map you got the quest from, used for info.
+
+	//The only info you need for these quests is the monster, max, map, and origin.
+	//For example, if we want to kill 3 rats anywhere, from this npc, the dwarven forger, we want the monster first, the rat, the ma amt of monsters you need to kill,
+	//3, the map, but since we want it anywhere, we put any, then the origin, the Dwarven Forger. The origin can be any message, not just the npc name. We then attach all this information together, separated by semi-colons (;)
+	//You CANNOT have spaces in between the semi-colons! this will mess up the information. You can, however, have spaces with the monster names and origins.
+	//To complete the example, we will have the full quest:
+	//Rat;3;any;the Dwarven Forger
+	//Now that we have the quest, we need to have the npc ready to assign it. That's where we do the array.add. This part is simple, just put
+	//array.add A_QUESTS "Then-Your-quest-here-in-quotes"
+	//The finished product would look like: vvvv
+
+	array.add A_QUESTS "Rat;3;any;the Dwarven Forger"
+
+	//Because that didn't have two forward slashes behind it, we did assign this quest to the npc. Talk to him and this will be the first quest you get.
+	//Now overwrite the info below with a quest you want using the information provided above. Because this is spawned in test_scripts, use a npc you can spawn anywhere
+	//via dev commands, because your character wont save.
+
+	array.add A_QUESTS "Skeleton;3;any;the Dwarven Forger"
+}
+
+{ [override] say_hi
+
+	if ( !CHAT_BUSY )
+	{
+		callevent chat_now "Hello. Please read my script file for information on how to make your own quest." 1
+	}
+}
+
+{ quest_get_dialogue //<playerid> <questidx>
+
+	callevent chat_now "Thank you. Come back to me when you're done." 0
+}
+
+{ quest_complete_dialogue
+
+	callevent chat_now "I knew I could count on you." 0
+	offer PARAM1 gold 1000
+}
