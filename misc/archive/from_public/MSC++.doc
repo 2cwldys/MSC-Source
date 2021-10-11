@@ -1,0 +1,86 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Verdana;}}
+{\colortbl ;\red0\green255\blue0;\red255\green255\blue0;\red255\green0\blue0;\red0\green0\blue0;}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\f0\fs20 MSC++ Scratchpad II, the revenge:\par
+\par
+(\bullet  Priority: \cf1\bullet  = low\cf2 ,  \bullet  = moderate\cf1 , \cf3\bullet  = high\cf1 )\par
+\cf0 (\u9674? Est. Difficulty: \cf1\u9674? = low\cf2 ,  \u9674? = moderate\cf1 , \cf3\u9674? = high\cf1 )\par
+\cf0\i I\rquote ll try to sort this from priority, high to low, and ease, high to low.\cf1\ul\par
+\ulnone\i0\par
+\cf3\bullet\cf1\b\u9674? \cf0 GetProp Scriptfile ( $get(<target>,scriptfile) )\par
+\b0 - Return the top scriptfile name of the targeted entity. There may already be a function for this. If you find it, tell me what it is. ^_^ (closest thing is $currentscript, which only works on the\'85 Current script.)\par
+\i --MiB: Note, the $currentscript works by referencing a variable of the struct 'm'. Entities don't have access to their 'm', but 'm's have access to their entities. Haven't had time to work something out, but it may be as simple as adding a new variable on the entity and having 'm' set it on spawn.\i0\par
+\cf3\bullet\cf2\b\u9674? \cf0 Race based triggers\par
+\b0 - Add a \ldblquote race\rdblquote  option to trigger_xxx so that we can have specific races of monsters trigger specific events. Either via spawnflag (for each major race type) or by token string. For simplified spawn flags, I\rquote d say \ldblquote Only Hostile\rdblquote  (which means is triggered by all monsters not of \ldblquote human\rdblquote , \ldblquote hguard\rdblquote , or \ldblquote beloved\rdblquote  race) and \ldblquote Only Friendly\rdblquote  (only triggered by \ldblquote human\rdblquote , \ldblquote hguard\rdblquote , or \ldblquote beloved\rdblquote  race). Search trigger_hurt \endash  there\rquote s a cpp dedicated to trigger ents.\par
+- Kinda need this for Helena2, since the multi-source is bjorking on me. Bandits/orcs are supposed to break stands they get near \endash  but I don\rquote t want wandering humans to break them too! Also allows for many plot possibilities, escort missions, etc.\par
+--\i MiB: Thothie has a workaround for this right now - he attaches a script to a trigger. This works, but it would probably be better to get the above worked out.\cf2\b\i0\par
+\cf3\b0\bullet\cf2\b\u9674? \cf0 Tweak $get_insphere() function\par
+\b0 - Search $get_insphere and getents functions. Useful, but buggy.\par
+\b - \b0 Make it sort objects from nearest to farthest. ( $get_insphere should always return the nearest ent first, getents should return a sorted list )\par
+- \ldblquote gettokenents\rdblquote  would be a good alternative to getents \endash  make it return a token string the way \ldblquote getplayers\rdblquote  does. (I woulda done that originally, had I thought of it at the time.)\b\par
+\cf3\b0\bullet\b\u9674? \cf0 Viewmodel properties\par
+\b0 - So we can set skins and submodels on the viewmodel, and thus consolidate our viewmodels either partially, or entirely.\par
+- Suggest just starting with attempting to make the viewmodel render additive, as it\rquote s normally easy (rendermode/renderamt), and doesn\rquote t require a new model.\par
+- Script command format suggestion:\par
+setviewmodelprop <target> <renderemode|skin|renderamt|submodelbody> <value> [value]\par
+- See setviewmodel and setmodelbody commands for more info\par
+\cf3\bullet\b\u9674? \cf0 new armor view bug fix\par
+\b0 - The current armor view bug fix, in addition to not being buggy, is very limiting.\par
+- Need a system that uses the old p_armorvest.mdl (single submodel system) \endash  this should remove the submodel confusion we have going now (works fine on crests)\par
+- Issue with the armor system seems to be that a players submodel settings are not propagating to other clients\par
+- Difficult to test without a dedicated server and a second steam client (I\rquote ve a setup for that here).\par
+\cf3\bullet\b\u9674? \cf0 Mod_ExtraData Cacheing Failed\par
+\b0 - This is the bugger causing crashes on many maps with listen servers who don\rquote t start on Edana. Exactly what the difference between the maps that do and do not cause this is beyond me.\par
+- Internetz searches suggest it has to do with model cacheing during load\'85 But it may also be types of BRUSH models being constructed. Not sure. Something client-side no doubt.\par
+- Even extremely simple maps can cause it (such as the weather test tutorial)\par
+\cf3\bullet\b\u9674? \cf0 4k Character Size Limit\par
+\b0 - Good luck. ^_^ - but by the gods, would that solve a lot of problems. >_>\cf2\b\par
+\cf3\b0\bullet\b\u9674? \cf0 No Free Edicts\par
+- \b0 Again, good luck. ^_^ - a start would be to get some sort of edict count thing going.\par
+\cf2\b\bullet\cf1\u9674? \cf0 Bank - Item Type and Limit Filter\par
+\b0 - Restore the old bank system. The only thing it needs to work proper, is to be adjusted not to accept any item where the script contains pack_, sheath_, mana_, health_, or proj_ (basically, no containers, stacked items, or items that are likely to be horde en-mass: potions)\par
+- Limit the number of items the bank can hold to 50 or so. It may place nicer with the character overflow, depending on how it is loaded (we\rquote ll see).\par
+- See \ldblquote storage\rdblquote  in NPCScript.cpp and the script NPCs/base_banker for functionality.\par
+- See \ldblquote reg.container.reject_mask\rdblquote  for info on how to exclude items\par
+\i --MiB: Did this, but there were other bank problems (character corruption and crashes). New banking method needed - possibly use the new fn read/write functions to avoid increasing character size, especially since banks aren't on every map\i0\par
+\cf2\b\bullet\u9674?\cf1  \cf0 Script Command to display image on hud\par
+\b0 - Can be used for status, maps, letters, etc. There is a function for this on the client, just can\rquote t figure how to make it work. Seems it\rquote s a dynamic precache too (can be precached mid game)\par
+- Thinking: hudimage <target> <tga/spritename> <xxx> <yyy>\par
+\cf2\b\bullet\cf3\u9674?\cf2\b0  \cf0\b DirectX support\par
+\b0 - Simply removing the OpenGL requirement that exits the game doesn\rquote t work (tried)\par
+- Must be some way of disabling OpenGL extensions, see client game init functions\par
+- May also help with ATI+Vista compatibility and be kind to older gfx cards\par
+\cf2\b\bullet\cf3\u9674?\cf1  \cf4 s\cf0 etservervar \endash  Client->Server script communication\par
+\b0 - Allow the client to either call a server side event or set a server side var in the current script (lots of possibilities/bug fixes)\par
+- Downside, not even sure if it\rquote s possible, hence the red. It may simply be that client to server communication is very limited.\par
+- One issue is, that there\rquote s no way to get script ID\rquote s from the client side. So callexternal $get(<target>,id) event_name, does not work from client side scripts. \par
+\i --MiB: Currently, client->server communication is based on ServerCmd, but due to security risks, it would be better to find a different way to send messages. If you find a way, let me or Thothie know so we can port some other things to the same system.\i0\par
+\cf1\b\bullet\cf2\u9674?\cf1  \cf0 gl_wireframe\par
+\b0 - Enable gl_wireframe 1/2 in multiplayer to ease map testing\par
+- Seems to be an engine-side protection, but try implementing the var and see what happens.\par
+\cf1\b\bullet\cf2\u9674? \cf1  \cf0 blood 0x0x0 bug\par
+\b0 - A lot of client-side sprite and blood effects either get duplicated or redirected to 0x0x0 on the map.\par
+\i --MiB: I briefly looked into this, and it appears that the blood spurts are based on a basic HL message that is stored in the base HL files, meaning we can't just tell it to not create a spurt if the location is 0x0x0. You might try having the server not SEND if it's 0x0x0, but I've a feeling that the problem isn't with the server, but the client.\i0\par
+\cf1\b\bullet\u9674? \cf0 script event: game_glowshell <duration>\par
+\b0 - When an additive rendered monster gets a glow shell, it becomes invisible when the shell vanishes, this would allow scripts to compensate. Run whenever it gets a effects glow command.\par
+\cf1\b\bullet\u9674? \cf0 Internal glow shell limit\par
+\b0 - Only allow 5 glow shells with durations of less than 10 seconds to be active at any given time. Too many glow shells could cause edict errors, and the damage effects make a lot of temporary ones. Script system doesn\rquote t seem to be limiting them effectively.\par
+\cf1\b\bullet\u9674? \cf0 Overall server-side effect limit\par
+\b0 - The scriptcmd \ldblquote effect\rdblquote  should take into account the duration of each effect, and only allow so many to be active at once. The number should be settable via server-side var.\par
+- This is different than the old system I had which limited client effects, and didn\rquote t seem to help with the edict errors.\par
+\cf4\b\par
+(out of game)\cf0\b0\par
+\cf3\bullet\b\u9674? \cf0 FN Security Improvements\b0  \par
+- Transmit both the current map name, and the SC.DLL date to the FN server (means altering ms.dll too)\par
+\i --MiB: You may also want to send the filesize of the map, too. See $filesize of Script.cpp on how to get the size of a file\i0\par
+- Some sort of Map CRC/MD5 verifier (Counting props in a map for verification is a pain, as it means loading each map in game and checking \endash  better to have a number we can pull out of the bsp with an external program)\par
+\i --MiB: We have something to pull file sizes, which will suffice for now. MD5 failed me, as the numbers I pulled from ingame didn't match the ones I pulled out of game. Thothie suggests creating your/my own hashing algorithm. I'm going to pass on that, personally.\i0\par
+\cf2\b\bullet\cf3\u9674? \cf4 Character Decompiler \par
+\cf0\b0 - Allow dumping of a char files stats and inventory to a text file for easier cheater detection.\par
+\i --MiB: Shurik3n may have something like this already working, but I'm not sure.\cf4\b\i0\par
+\cf2\bullet\cf3\u9674? \cf4 Custom Scriptpacker\par
+\cf0\b0 - Allow mappers make their own scripts, but do not encode lines including skilllevel function. (Too easy to exploit)\par
+- To make this useful, we will need the server to check for a DLL matching the map name when it loads the scripts, and load the scripts therein, if it exists.\par
+- There\rquote s code for an alternative system that allows adding scripts to a script directory without compiling them (developer mode of some sort)\'85 If that can be tweaked to use a script folder for each map, that maybe preferable, as I don\rquote t like passing out the exec with our encryption on it.\par
+\i --MiB: An alternative may be to have scripts be able to execute simple commands from text files that it reads in via $get_fileline() and such.\i0\par
+}
+ 

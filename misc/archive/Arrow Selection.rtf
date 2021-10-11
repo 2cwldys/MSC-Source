@@ -1,0 +1,252 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fnil\fprq1\fcharset0 Courier New;}}
+{\colortbl ;\red0\green128\blue0;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.15.1516;}\viewkind4\uc1\pard\b\f0\fs28 MS.dll\b0\par
+\b\fs20 client.cpp \b0 - Add this amongst the else-if blocks of doom.\par
+\b [BEGIN]\par
+\cf1\b0\f1 //MiB JUN2010_17 - Allow choosing of what arrow to fire\par
+\cf0\tab\cf2 else\cf0  \cf2 if\cf0  ( FStrEq(pcmd, "selectarrow" ) )\par
+\tab\{\par
+\tab\tab\cf2 if\cf0  ( CMD_ARGC() < 2 ) \cf2 return\cf0 ;\par
+\par
+\tab\tab CGenericItem *pArrow;\par
+\tab\tab msstring Param = CMD_ARGV(1);\par
+\tab\tab\cf2 if\cf0  ( Param.starts_with("GENERIC_") )\par
+\tab\tab\tab pArrow = NewGenericItem( Param.ends_with("ARROW") ? "proj_arrow_generic" : "proj_bolt_generic" );\par
+\tab\tab\cf2 else\par
+\cf0\tab\tab\tab pArrow = MSUtil_GetItemByID( atol(CMD_ARGV(1)), pPlayer );\par
+\tab\tab pPlayer->m_ChosenArrow = pArrow;\par
+\tab\tab\par
+\tab\}\b\f0\par
+[END]\par
+\par
+Add to the CBasePlayer definition\par
+\b0\f1 "CGenericItem\tab\tab *m_ChosenArrow;\tab\tab\cf1 //MiB JUN2010 - Arrow selection\cf0 "\par
+\par
+In GIAttack.cpp, search "\cf1 //Skip ammo check if the attack doesn't require ammo\cf0 " and replace the whole block with this:\par
+\b [BEGIN]\par
+\cf1\b0 //Skip ammo check if the attack doesn't require ammo\par
+\cf0\tab\cf2 if\cf0 ( RequiresAmmo )\par
+\tab\{\par
+\par
+\tab\tab\cf1 //Monsters have unlimited ammo for now\par
+\cf0\tab\tab\cf2 if\cf0 ( !m_pPlayer ) \par
+\tab\tab\{\par
+\tab\tab\tab CurrentAttack->sProjectile = 0;\par
+\tab\tab\tab CGenericItem *pGlobalItem = CGenericItemMgr::GetGlobalGenericItemByName("proj_arrow_wooden");\par
+\tab\tab\tab\cf2 if\cf0 ( pGlobalItem ) CurrentAttack->sProjectile = pGlobalItem->ItemName;\par
+\tab\tab\}\par
+\tab\tab\cf2 else\par
+\cf0\tab\tab\{\par
+\tab\tab\tab\cf1 //MiB JUN2010_17 - Oh, the massive changes. Allow players to choose arrows.\par
+\cf0\tab\tab\tab\cf2 bool\cf0  PreSelectedArrow = \cf2 false\cf0 ;\par
+\tab\tab\tab\cf2 if\cf0  ( m_pPlayer->m_ChosenArrow )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab\par
+\tab\tab\tab\tab CGenericItem *pArrow = m_pPlayer->m_ChosenArrow;\par
+\tab\tab\tab\tab\cf2 bool\cf0  GENERIC = msstring(pArrow->m_Name).ends_with("_generic");\par
+\tab\tab\tab\tab\cf1 //Make sure I have the right type of arrow/bolt!\par
+\cf0\tab\tab\tab\tab\cf2 bool\cf0  REQUIRE_ARROW = msstring(CurrentAttack->sProjectileType).contains("arrow");\par
+\tab\tab\tab\tab\cf2 bool\cf0  HAVE_ARROW = msstring(pArrow->m_Name).contains("arrow");\par
+\par
+\tab\tab\tab\tab\cf2 if\cf0  ( ((REQUIRE_ARROW && HAVE_ARROW) || (!REQUIRE_ARROW && !HAVE_ARROW) ) &&\par
+\tab\tab\tab\tab\tab (GENERIC || ((pArrow->iQuantity || iAmt > 1) && pArrow->iQuantity >= iAmt)) )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab CurrentAttack->sProjectile = pArrow->ItemName;\par
+\tab\tab\tab\tab\tab CurrentAttack->iLoadedAmmo = iAmt;\par
+\par
+\tab\tab\tab\tab\tab\cf2 if\cf0  ( !GENERIC )\par
+\tab\tab\tab\tab\tab\{\tab\par
+\tab\tab\tab\tab\tab\tab pArrow->iQuantity -= iAmt;\par
+\tab\tab\tab\tab\tab\tab\cf2 if\cf0  ( pArrow->iQuantity <= 0 ) \par
+\tab\tab\tab\tab\tab\tab\{\par
+\cf2 #ifdef\cf0  VALVE_DLL\par
+\tab\tab\tab\tab\tab\tab\tab\cf2 if\cf0 ( pPack ) pPack->Container_RemoveItem( pArrow );\par
+\tab\tab\tab\tab\tab\tab\tab\cf2 else\cf0  m_pOwner->RemoveItem( pArrow );\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab pArrow->SUB_Remove( );\par
+\tab\tab\tab\tab\tab\tab\tab m_pPlayer->m_ChosenArrow = NULL;\par
+\cf2 #else\par
+\cf0\tab\tab\tab\tab\tab\tab\tab m_pPlayer->SendEventMsg( HUDEVENT_UNABLE, msstring("This is your last ") + pArrow->m_DisplayName );\par
+\tab\tab\tab\tab\tab\tab\tab m_pPlayer->m_ChosenArrow = NULL;\par
+\cf2 #endif\par
+\cf0\tab\tab\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab\tab PreSelectedArrow = \cf2 true\cf0 ;\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\par
+\tab\tab\tab\cf2 if\cf0  ( !PreSelectedArrow )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf1 //Find iAmt projectiles from any worn pack\par
+\cf0\tab\tab\tab\tab pProjInPack = m_pOwner->GetItem( CurrentAttack->sProjectileType, &pPack );\par
+\par
+\tab\tab\tab\tab\cf2 if\cf0 ( pProjInPack )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\cf1 //Successfully found ammo\par
+\cf0\tab\tab\tab\tab\tab\cf1 //Decrement ammo by iAmt\par
+\cf0\tab\tab\tab\tab\tab\cf2 if\cf0 ( FBitSet( pProjInPack->MSProperties(), ITEM_GROUPABLE ) )\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\cf2 if\cf0 ( (pProjInPack->iQuantity || iAmt > 1) && pProjInPack->iQuantity >= iAmt ) \{\par
+\par
+\tab\tab\tab\tab\tab\tab\tab CurrentAttack->sProjectile = pProjInPack->ItemName;\par
+\tab\tab\tab\tab\tab\tab\tab CurrentAttack->iLoadedAmmo = iAmt;\par
+\par
+\tab\tab\tab\tab\tab\tab\tab pProjInPack->iQuantity -= iAmt;\par
+\tab\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab\tab\cf2 #ifdef\cf0  VALVE_DLL\par
+\tab\tab\tab\tab\tab\cf1 //Remove the item after it has been depleted\par
+\cf0\tab\tab\tab\tab\tab\tab\cf2 if\cf0 ( pProjInPack->iQuantity <= 0 )\par
+\tab\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\tab\cf2 if\cf0 ( pPack ) pPack->Container_RemoveItem( pProjInPack );\par
+\tab\tab\tab\tab\tab\tab\tab\cf2 else\cf0  m_pOwner->RemoveItem( pProjInPack );\par
+\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab pProjInPack->SUB_Remove( );\par
+\tab\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab\cf2 #endif\par
+\cf0\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\cf2 else\par
+\cf0\tab\tab\tab\tab\{\tab\par
+\tab\tab\tab\tab\tab\cf1 //Player not carrying any of the required ammo\par
+\cf0\tab\tab\tab\tab\tab\cf2 if\cf0 ( !stricmp(CurrentAttack->sProjectileType,"arrow") )\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\cf1 //New! Give free 'blunt' arrows\par
+\cf0\tab\tab\tab\tab\tab\tab CurrentAttack->sProjectile = "";\par
+\tab\tab\tab\tab\tab\tab CGenericItem *pGlobalItem = CGenericItemMgr::GetGlobalGenericItemByName("proj_arrow_generic");\par
+\tab\tab\tab\tab\tab\tab\cf2 if\cf0 ( pGlobalItem ) CurrentAttack->sProjectile = pGlobalItem->ItemName;\par
+\par
+\tab\tab\tab\tab\tab\tab CurrentAttack->iLoadedAmmo = iAmt;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab\cf2 else\cf0  \cf2 if\cf0 ( !stricmp(CurrentAttack->sProjectileType,"bolt") ) \par
+\tab\tab\tab\tab\tab\{ \par
+\tab\tab\tab\tab\tab\tab CurrentAttack->sProjectile = "";  \par
+\tab\tab\tab\tab\tab\tab CGenericItem *pGlobalItem = CGenericItemMgr::GetGlobalGenericItemByName("proj_bolt_generic"); \par
+\tab\tab\tab\tab\tab\tab\cf2 if\cf0 ( pGlobalItem ) CurrentAttack->sProjectile = pGlobalItem->ItemName; \par
+\tab\tab\tab\tab\tab\tab CurrentAttack->iLoadedAmmo = iAmt;  \par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab\cf2 else\par
+\cf0\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\cf1 //Player not carrying any ammo and no free ammo is specified for this ammo type... can't attack\par
+\cf0\tab\tab\tab\tab\tab\tab\cf2 if\cf0 ( m_pPlayer )\par
+\tab\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\tab\cf2 #ifndef\cf0  VALVE_DLL\par
+\tab\tab\tab\tab\tab\tab\tab\tab CallScriptEvent( CurrentAttack->CallbackName + "_noammo" );\par
+\tab\tab\tab\tab\tab\tab\tab\tab m_pPlayer->SendEventMsg( HUDEVENT_UNABLE, msstring("You don't have any ") + CurrentAttack->sProjectileType.c_str() );\par
+\tab\tab\tab\tab\tab\tab\tab\cf2 #endif\par
+\cf0\tab\tab\tab\tab\tab\tab\tab m_pPlayer->BlockButton( IN_ATTACK );\par
+\tab\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab\tab\cf2 return\cf0  \cf2 false\cf0 ;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\}\b\par
+[END]\par
+\par
+\b0 Add to "\cf2 void\cf0  CBasePlayer::InitialSpawn( \cf2 void\cf0  )" (Approx ln 219 of PlayerShared.cpp)\par
+Somewhere AFTER the "\cf2 if\cf0 ( m_Initialized )" ;-)\par
+\b [BEGIN]\par
+\cf1\b0 //MiB JUN2010_17 - Reset the chosen arrow for the client\par
+\cf2 #ifndef\cf0  VALVE_DLL\par
+\tab player.m_ChosenArrow = NULL;\par
+\cf2 #endif\cf0\b\par
+[END]\par
+\par
+\par
+\par
+\fs28 client.cpp\par
+\b0\fs20 Search and destroy "\cf2 enum\cf0  quickslottype_e" ...... and replace it with this >_>\par
+\b [BEGIN]\par
+\cf2\b0 enum\cf0  quickslottype_e\par
+\{\par
+\tab QS_ITEM,\par
+\tab QS_SPELL,\par
+\tab QS_ARROW,\par
+\};\b\par
+[END]\par
+\par
+\b0 In MSMonster.h, redefine:\par
+\cf2 virtual\cf0  CGenericItem *GetItemInInventory( uint StartID, \cf2 bool\cf0  WeaponOnly, \cf2 bool\cf0  CheckHands, \cf2 bool\cf0  CheckWorn, msstring SearchName = "" );\b\par
+\par
+\b0 In MSMonsterShared.cpp\b\par
+[BEGIN]\par
+\cf1\b0 //\par
+// GetItemInInventory - Finds the first weapon in inventory after the specified ID.\par
+// \'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af\'af   If no start item is found, then the first valid item is returned\par
+//\tab\tab\tab\tab\tab\tab If an item is returned and pPack is NULL, the item is being worn (bows)\par
+//\tab\tab\tab\tab\tab\tab MiB JUN2010_16 - Added a SearchName property. Defaults to "", uses .starts_with(SearchName) to determine if it should return or not\par
+\cf0 CGenericItem *CMSMonster::GetItemInInventory( uint StartID, \cf2 bool\cf0  WeaponOnly, \cf2 bool\cf0  CheckHands, \cf2 bool\cf0  CheckWorn, msstring SearchName )\par
+\{\par
+\tab\cf2 static\cf0  mslist<CGenericItem *> Items;\par
+\tab Items.clearitems( );\par
+\par
+\tab\cf1 //Check hands first\par
+\cf0\tab\cf2 if\cf0 ( CheckHands )\par
+\tab\tab foreach( i, MAX_NPC_HANDS )\par
+\tab\tab\{\par
+\tab\tab\tab CGenericItem *pItem = Hand( i );\par
+\tab\tab\tab\cf2 if\cf0 ( pItem ) \par
+\tab\tab\tab\tab\cf2 if\cf0  ( !SearchName.len() || msstring(pItem->m_Name).starts_with( SearchName ) )\par
+\tab\tab\tab\tab\tab Items.add( pItem );\par
+\tab\tab\}\par
+\par
+\tab\cf1 //Check inside each pack\par
+\cf0\tab foreach( i, Gear.size() )\par
+\tab\{\par
+\tab\tab CGenericItem *pPack = Gear[i];\par
+\par
+\tab\tab\cf2 if\cf0 ( pPack->m_Location == ITEMPOS_HANDS && !CheckHands )\par
+\tab\tab\tab\cf2 continue\cf0 ;\par
+\par
+\tab\tab\cf2 if\cf0 ( pPack->m_Location > ITEMPOS_HANDS && !CheckWorn )\par
+\tab\tab\tab\cf2 continue\cf0 ;\par
+\par
+\tab\tab\cf2 if\cf0  ( !SearchName.len() || msstring(pPack->m_Name).starts_with( SearchName ) )\par
+\tab\tab\tab Items.add( pPack );\par
+\par
+\tab\tab\cf2 if\cf0 ( !FBitSet(pPack->MSProperties(),ITEM_CONTAINER) )\par
+\tab\tab\tab\cf2 continue\cf0 ;\par
+\par
+\tab\tab foreach( n, pPack->Container_ItemCount() )\par
+\tab\tab\{\par
+\tab\tab\tab CGenericItem *pItem = pPack->Container_GetItem( n );\par
+\tab\tab\tab\cf2 if\cf0  ( !SearchName.len() || msstring(pItem->m_Name).starts_with( SearchName ) )\par
+\tab\tab\tab\tab Items.add( pItem );\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab\cf1 //Remove items that aren't weapons\par
+\cf0\tab\cf2 if\cf0 ( WeaponOnly )\par
+\tab\tab foreach( i, Items.size() )\par
+\tab\tab\{\par
+\tab\tab\tab CGenericItem *pItem = Items[i];\par
+\par
+\tab\tab\tab\cf2 if\cf0 ( !pItem->m_Attacks.size() )\par
+\tab\tab\tab\tab Items.erase( i-- );\par
+\tab\tab\}\par
+\par
+\tab\cf2 bool\cf0  UseNextItem = \cf2 false\cf0 ;\par
+\tab foreach( i, Items.size() )\par
+\tab\{\par
+\tab\tab CGenericItem *pItem = Items[i];\par
+\par
+\tab\tab\cf2 if\cf0 ( !UseNextItem )\par
+\tab\tab\{\tab\tab\tab\tab\tab\tab\tab\tab\tab\cf1 //Need Braces for logic\par
+\cf0\tab\tab\tab\cf2 if\cf0 ( pItem->m_iId == StartID )\tab\cf1 //Found start item, return the next valid item\par
+\cf0\tab\tab\tab\tab UseNextItem = \cf2 true\cf0 ;\par
+\tab\tab\}\par
+\tab\tab\cf2 else\par
+\cf0\tab\tab\tab\cf2 return\cf0  pItem;\tab\tab\tab\tab\tab\cf1 //This is the first item after the start item\par
+\cf0\tab\}\par
+\par
+\tab\cf2 if\cf0 ( Items.size() )\tab\tab\cf1 //Item with StartID wasn't found, use the first valid item found\par
+\cf0\tab\tab\cf2 return\cf0  Items[0];\par
+\par
+\tab\cf2 return\cf0  NULL;\par
+\}\b\par
+[END]\b0\f0\fs28\par
+}
+ 

@@ -1,0 +1,462 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fnil\fprq1\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue255;\red0\green128\blue0;\red0\green0\blue0;}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\f0\fs20 MSMonsterServer.cpp, replace your function with mine\b\par
+[BEGIN]\par
+\cf1\b0\f1 void\cf0  CMSMonster::Attacked( CBaseEntity *pAttacker, damage_t &Damage )\par
+\{\par
+\tab msstringlist Parameters;\par
+\tab Parameters.add( EntToString(pAttacker) );\par
+\tab Parameters.add( UTIL_VarArgs("%f",Damage.flDamage) );\par
+\tab Parameters.add( Damage.sDamageType );\par
+\tab CallScriptEvent( "game_attacked", &Parameters );\par
+\}\par
+\par
+\cf1 float\cf0  CMSMonster::TraceAttack( damage_t &Damage )\par
+\{\par
+\tab startdbg;\par
+\par
+\tab\cf2 //CBaseMonster::TraceAttack( pevAttacker, flDamage, vecDir, ptr, bitsDamageType );\par
+\par
+\cf0\tab\cf2 // Handle parrying\par
+\cf0\tab\cf2 // Attacker - Rolls from [AccuracyRoll - 130       ]\par
+\cf0\tab\cf2 // Defender - Rolls from [0            - ParryValue] \par
+\cf0\tab\cf2 // Attacker gets that extra 30 so attacks will get through more often\par
+\cf0\tab dbg( "Begin" );\par
+\par
+\tab\cf2 //This is a last-chance check, to make sure that somebody doesn't find an obscure way to hurt another player\par
+\cf0\tab\cf2 //The relationship status is first checked in DoDamage()\par
+\cf0\tab\cf2 //---UNDONE: This check should be done before hand.  If TraceAttack is called, we have to accept the damage regardless of who caused it\par
+\cf0\tab\cf2 //if( Damage.pevAttacker && CBaseEntity::Instance(Damage.pevAttacker)->CanDamage( this ) )\par
+\cf0\tab\cf2 //\tab return 0;\par
+\par
+\cf0\tab\cf1 bool\cf0  thoth_did_parry = \cf1 false\cf0 ;\par
+\par
+\tab CBaseEntity *pAttacker = Damage.pAttacker;\par
+\tab\cf1 if\cf0 ( IsAlive( ) && pAttacker && pAttacker->IsMSMonster() )\par
+\tab\{\par
+\tab\tab CMSMonster *pMonster = (CMSMonster *)pAttacker;\par
+\par
+\tab\tab\cf2 //PROBLEM: Players get INSANE XP bonus when monsters parry,\par
+\cf0\tab\tab\cf2 //- maybe internalize Parry for monsters?\par
+\cf0\tab\tab\cf2 //- Thothie note of FEB2008a\par
+\par
+\cf0\tab\tab\cf1 int\cf0  ParryValue = GetSkillStat( "parry", STATPROP_SKILL );\par
+\par
+\tab\tab\cf1 int\cf0  AccRoll = RANDOM_LONG(Damage.AccuracyRoll,100), ParryRoll = RANDOM_LONG(0,ParryValue);\par
+\par
+\tab\tab\cf2 //Using a weapon that can parry (shield, some swords) gives a parry bonus\par
+\cf0\tab\tab\cf1 int\cf0  iAttackNum = 0, iHand = 0;;\par
+\tab\tab CGenericItem *pHandItem = FindParryWeapon( \cf1 this\cf0 , iHand, iAttackNum );\par
+\tab\tab\cf1 if\cf0 ( pHandItem )\par
+\tab\tab\{\par
+\tab\tab\tab attackdata_t *pAttack = &pHandItem->m_Attacks[iAttackNum];\par
+\tab\tab\tab ParryRoll *= 1 + (pAttack->flAccuracyDefault / 100.f);\tab\tab\cf2 //If 100% bonus, the roll gets multiplied by 2\par
+\cf0\tab\tab\}\par
+\par
+\tab\tab\cf2 //Awareness gives a small parry bonus\par
+\cf0\tab\tab ParryRoll += GetNatStat( NATURAL_AWR );\par
+\par
+\tab\tab\cf2 //Thothie - do not parry certain damage types\par
+\cf0\tab\tab msstring thoth_dmgtype = Damage.sDamageType;\par
+\tab\tab\cf1 if\cf0  ( thoth_dmgtype.starts_with("target") ) ParryRoll = 0;\par
+\tab\tab\cf1 if\cf0  ( thoth_dmgtype.starts_with("fire") ) ParryRoll = 0;\par
+\tab\tab\cf1 if\cf0  ( thoth_dmgtype.starts_with("poison") ) ParryRoll = 0;\par
+\tab\tab\cf1 if\cf0  ( thoth_dmgtype.starts_with("lightning") ) ParryRoll = 0;\par
+\tab\tab\cf1 if\cf0  ( thoth_dmgtype.starts_with("cold") ) ParryRoll = 0;\par
+\tab\tab\cf1 if\cf0  ( thoth_dmgtype.starts_with("magic") ) ParryRoll = 0;\par
+\tab\tab\cf1 if\cf0  ( Damage.flDamage == 0 ) ParryRoll = 0; \cf2 //do not parry 0 damage atks\par
+\cf0\tab\tab\cf1 if\cf0  ( ParryRoll > 90 ) ParryRoll = 90; \cf2 //always allow at least 10% chance to be hit\par
+\par
+\cf0\tab\tab\cf1 if\cf0 ( ParryRoll > AccRoll )\par
+\tab\tab\{\par
+\tab\tab\tab\cf2 //thothie attemptig to pass parry vars\par
+\cf0\tab\tab\tab msstringlist ParametersB;\par
+\tab\tab\tab ParametersB.add( pAttacker ? EntToString( pAttacker ) : "none" );\par
+\tab\tab\tab ParametersB.add( UTIL_VarArgs("%f",Damage.flDamage) );\par
+\tab\tab\tab ParametersB.add( Damage.sDamageType );\par
+\tab\tab\tab ParametersB.add( UTIL_VarArgs("%i",ParryRoll) );\par
+\tab\tab\tab ParametersB.add( UTIL_VarArgs("%i",AccRoll) );\par
+\tab\tab\tab CallScriptEvent( "game_parry", &ParametersB );\par
+\tab\tab\tab\cf1 if\cf0 ( pHandItem ) pHandItem->CallScriptEvent( "game_parry", &ParametersB );\par
+\tab\tab\tab Damage.flDamage = -1; \cf2 // -1 means the monster dodged the attack\par
+\cf0\tab\tab\tab ClearMultiDamage( );\par
+\tab\tab\tab thoth_did_parry = \cf1 true\cf0 ;\par
+\tab\tab\tab\cf2 //Learn parry skill from  a successful parry\par
+\cf0\tab\tab\tab\cf1 if\cf0 ( !pAttacker->IsPlayer() )  \cf2 //Can't learn from being attacked by players\par
+\cf0\tab\tab\tab\tab\cf1 if\cf0  (pMonster->m_SkillLevel * 2 > 0)\par
+\tab\tab\tab\tab\tab LearnSkill (SKILL_PARRY, STATPROP_SKILL, pMonster->m_SkillLevel * 2 );\par
+\tab\tab\tab\tab\cf1 else\par
+\cf0\tab\tab\tab\tab\tab LearnSkill (SKILL_PARRY, STATPROP_SKILL, 0 );\par
+\tab\tab\tab\tab\cf2 //LearnSkill( SKILL_PARRY, STATPROP_SKILL, max(pAttacker->m_SkillLevel * 2,0) );\par
+\cf0\tab\tab\}\par
+\tab\}\par
+\par
+\tab\cf2 //this was moved to where experience is calculated in GIAttack\par
+\cf0\tab\cf2 //Damage Modifiers ( takedmg xxx )\par
+\cf0\tab dbg( "Damage Modifiers" );\par
+\tab Damage.flDamage *= m.GenericTDM;\par
+\tab\cf1 if\cf0 ( Damage.sDamageType )\par
+\tab\tab foreach( i, m.TakeDamageModifiers.size() )\par
+\tab\tab\{\par
+\tab\tab\tab takedamagemodifier_t &TDM = m.TakeDamageModifiers[i];\par
+\tab\tab\tab msstring thoth_inc_dmgtype = TDM.DamageType;\par
+\tab\tab\tab\cf1 if\cf0 ( thoth_inc_dmgtype.starts_with(Damage.sDamageType) )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf2 //ALERT( at_console, "Damage modified!");// %.2f --> %.2f ( %s )\\n", Damage.flDamage, Damage.flDamage * TDM.modifier, Damage.sDamageType );\par
+\cf0\tab\tab\tab\tab Damage.flDamage *= TDM.modifier;\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\par
+\par
+\tab\cf2 //Allow scripts to affect the damage\par
+\cf0\tab msstringlist Parameters;\par
+\tab Parameters.add( pAttacker ? EntToString( pAttacker ) : "none" );\par
+\tab Parameters.add( UTIL_VarArgs("%f",Damage.flDamage) );\par
+\tab Parameters.add( Damage.sDamageType ); \cf2 //Thothie attempting to add damage type to game_damaged\par
+\cf0\tab Parameters.add( UTIL_VarArgs("%i",Damage.AccuracyRoll) );\par
+\tab CallScriptEvent( "game_damaged", &Parameters );\par
+\par
+\tab\cf1 if\cf0 ( m_ReturnData.len() )\par
+\tab\{\par
+\tab\tab\cf2 //Each script sets a ratio of damage you should take.  Factor each one into the damage\par
+\cf0\tab\tab msstringlist DamageRatios;\par
+\tab\tab TokenizeString( m_ReturnData, DamageRatios );\par
+\tab\tab foreach( i, DamageRatios.size() )\par
+\tab\tab\tab Damage.flDamage *= atof( DamageRatios[i] );\tab\cf2 //Script can reject the damage with "returndata"\par
+\cf0\tab\}\par
+\par
+\tab Parameters.clearitems( );\par
+\tab Parameters.add( pAttacker ? EntToString( pAttacker ) : "none" );\par
+\tab Parameters.add( UTIL_VarArgs("%f",Damage.flDamage) );\par
+\tab CallScriptEvent( "game_damaged_end", &Parameters );\tab\cf2 //Allow post-parsing of damage, after all the scripts have messed with it\par
+\par
+\cf0\tab dbg( "StruckSound/Bleed" );\par
+\tab\cf1 if\cf0 ( Damage.flDamage > 0 )\par
+\tab\{\par
+\tab\tab\cf2 //if( IsAlive() ) StruckSound( CBaseEntity::Instance(Damage.pevInflictor), CBaseEntity::Instance(Damage.pevAttacker), Damage.flDamage, &Damage.outTraceResult, Damage.iDamageType );\par
+\par
+\cf0\tab\tab\cf1 if\cf0 ( pev->health > 0 && pev->takedamage && !FBitSet( pev->flags, FL_GODMODE ) )\par
+\tab\tab\{\par
+\tab\tab\tab SpawnBlood( Damage.outTraceResult.vecEndPos, BloodColor(), Damage.flDamage );\cf2 // a little surface blood.\par
+\cf0\tab\tab\tab TraceBleed( Damage.flDamage, (Damage.vecEnd-Damage.vecSrc).Normalize(), &Damage.outTraceResult, Damage.iDamageType );\par
+\tab\tab\}\par
+\tab\}\par
+\tab\par
+\tab dbg( "AddMultiDamage" );\par
+\tab\cf1 if\cf0  ( !thoth_did_parry ) AddMultiDamage( Damage.pAttacker ? Damage.pAttacker->pev : NULL, \cf1 this\cf0 , Damage.flDamage, Damage.iDamageType );\par
+\par
+\tab\cf1 return\cf0  Damage.flDamage;\par
+\par
+\tab enddbg;\par
+\par
+\tab\cf1 return\cf0  0;\par
+\}\b\f0\par
+[END]\b0\par
+\par
+statdefs.h - in the definition of "\cf1\f1 struct\cf0  playerdamage_t\f0 ", define this below the only other variable\par
+\b [BEGIN]\b0\par
+\cf1\f1 float\cf0  dmgInTotal; \cf2 //MiB Mar2008a - For keeping track of all damage a player has done, regardless of what skill it was\par
+\cf3\b [END]\cf0\b0\f0\par
+\par
+(This goes to the end of the file, so ctrl+shift+end is suggested)\par
+Overwrite your function in GIAttack.cpp with this\b\par
+[BEGIN]\par
+\b0\f1 CBaseEntity *DoDamage( damage_t &Damage, CBaseEntity *pTarget )\par
+\{\par
+\tab startdbg;\par
+\tab dbg( "Hit Target" );\par
+\par
+\tab\cf1 if\cf0 ( FBitSet(Damage.iDamageType,DMG_NONE) )\par
+\tab\tab\cf1 return\cf0  pTarget;\tab\tab\tab\tab\tab\tab\tab\cf2 //Don't do any damage, but target the ent\par
+\par
+\cf0\tab CBaseEntity *pEntityAttacker = Damage.pAttacker;\par
+\tab CBaseEntity *pEntityInflictor = Damage.pInflictor;\par
+\tab\par
+\tab\cf1 char\cf0  sz[256] = "";\par
+\par
+\tab\cf1 if\cf0 ( !pEntityAttacker )\par
+\tab\tab\cf1 return\cf0  NULL;  \cf2 //This happens with arrows sometimes... for some reason....\par
+\par
+\cf0\tab CMSMonster *pAttMonster = pEntityAttacker->IsMSMonster() ? (CMSMonster *)pEntityAttacker : NULL;\tab\tab\cf2 //Attacking Monster\tab (Can be NULL)\par
+\cf0\tab CBasePlayer *pPlayerAttacker = pEntityAttacker->IsPlayer() ? (CBasePlayer *)pEntityAttacker : NULL;\tab\tab\cf2 //Attacking Player\tab (Can be NULL)\par
+\cf0\tab CGenericItem *pItemInflictor = pEntityInflictor ? (pEntityInflictor->IsMSItem() ? (CGenericItem *)pEntityInflictor : NULL) : NULL;\par
+\par
+\tab\cf2 //This might be a summon, or other effect that is doing damage for the player...\par
+\cf0\tab\cf1 if\cf0 ( pAttMonster && !pPlayerAttacker )\par
+\tab\{\tab\cf2 //if so, assign the player pointer correctly\par
+\cf0\tab\tab CBaseEntity *pExpOwner = pAttMonster->RetrieveEntity( ENT_EXPOWNER );\par
+\tab\tab\cf1 if\cf0 ( pExpOwner && pExpOwner->IsPlayer() ) \par
+\tab\tab\tab pPlayerAttacker = (CBasePlayer *)pExpOwner;\par
+\tab\}\par
+\par
+\tab\cf2 //bActualHit: Did the combination of luck&skill produce a hit?\par
+\cf0\tab\cf2 //bool fDidHit = FALSE, fHitWorld = TRUE, bActualHit = FALSE, \par
+\cf0\tab\cf2 //\tab fReportHit = FALSE, fDodged = FALSE;\par
+\par
+\cf0\tab SetDebugProgress( ItemThinkProgress, "DoDamage - Check hit" );\par
+\tab\cf1 bool\cf0  fReportHit = \cf1 false\cf0 ;\par
+\tab Damage.AttackHit = \cf1 false\cf0 ;\par
+\par
+\tab CMSMonster *pVictim = NULL;\par
+\par
+\tab\cf1 int\cf0  iAccuracyRoll = 0;\par
+\tab\cf1 if\cf0 ( pTarget )\par
+\tab\{\par
+\tab\tab SetDebugProgress( ItemThinkProgress, "DoDamage - Entity hit" );\par
+\tab\tab\cf2 //Hit an entity\par
+\cf0\tab\tab\cf2 //Check if I can damage it\par
+\cf0\tab\tab Damage.AttackHit = pEntityAttacker->CanDamage( pTarget );\par
+\tab\tab fReportHit = \cf1 false\cf0 ;\par
+\par
+\tab\tab\cf1 if\cf0 ( pAttMonster && Damage.AttackHit )\par
+\tab\tab\{\par
+\tab\tab\tab\cf2 //Hit a monster...\par
+\cf0\tab\tab\tab fReportHit = \cf1 true\cf0 ;\par
+\par
+\tab\tab\tab pVictim = pTarget->IsMSMonster() ? (CMSMonster *)pTarget : NULL;\par
+\par
+\tab\tab\tab\cf1 if\cf0 ( pVictim && pVictim->IsAlive() )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf2 //If player is attacking himself, don't report\par
+\cf0\tab\tab\tab\tab\cf1 if\cf0 ( pPlayerAttacker == pVictim ) \par
+\tab\tab\tab\tab\tab fReportHit = \cf1 false\cf0 ;\par
+\par
+\tab\tab\tab\tab\cf2 //Check if your horrid skill or bad luck made you miss:\par
+\cf0\tab\tab\tab\tab iAccuracyRoll = RANDOM_LONG( 0, 99 );\par
+\tab\tab\tab\tab\cf1 if\cf0 ( iAccuracyRoll > Damage.flHitPercentage ) \{ Damage.AttackHit = \cf1 false\cf0 ; Damage.AttackHit = \cf1 false\cf0 ; \}\par
+\tab\tab\tab\}\par
+\tab\tab\tab\cf1 else\par
+\cf0\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf2 // Always hit world entities or dead bodies\par
+\par
+\cf0\tab\tab\tab\tab Damage.AttackHit = \cf1 true\cf0 ;\par
+\tab\tab\tab\tab fReportHit = \cf1 false\cf0 ;\par
+\tab\tab\tab\}\par
+\par
+\tab\tab\}\par
+\tab\tab\par
+\tab\tab SetDebugProgress( ItemThinkProgress, "DoDamage - Check if damage is dealt" );\par
+\tab\tab\cf1 bool\cf0  fDodged = \cf1 false\cf0 ;\par
+\tab\tab\cf1 if\cf0 ( Damage.AttackHit ) \cf2 //check again, because it might have been canceled in game_damaged_other\par
+\cf0\tab\tab\{\par
+\tab\tab\tab\cf2 //Hit sounds are now played from TraceAttack\par
+\cf0\tab\tab\tab ClearMultiDamage( );\par
+\tab\tab\tab Damage.AccuracyRoll = (Damage.flHitPercentage - iAccuracyRoll);\par
+\tab\tab\tab\par
+\tab\tab\tab\cf1 if\cf0 ( pEntityInflictor ) pEntityInflictor->StoreEntity( pTarget, ENT_LASTSTRUCKBYME );\par
+\tab\tab\tab\cf1 if\cf0 ( pAttMonster )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab pAttMonster->StoreEntity( pTarget, ENT_LASTSTRUCKBYME );\par
+\tab\tab\tab\tab\cf1 static\cf0  msstringlist Params;\par
+\tab\tab\tab\tab Params.clearitems( );\par
+\par
+\tab\tab\tab\tab Params.add( EntToString(pTarget) );\par
+\tab\tab\tab\tab Params.add( UTIL_VarArgs("%f",Damage.flDamage) );\par
+\tab\tab\tab\tab pAttMonster->CallScriptEvent( "game_damaged_other", &Params );\par
+\par
+\tab\tab\tab\tab\cf1 if\cf0 ( pItemInflictor )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab msstring CallbackName = "game_damaged_other";\par
+\tab\tab\tab\tab\tab\cf1 if\cf0 ( Damage.ItemCallBackPrefix ) CallbackName = *Damage.ItemCallBackPrefix + "_damaged_other";\par
+\tab\tab\tab\tab\tab pItemInflictor->m_CurrentDamage = &Damage;\tab\tab\tab\tab\tab\tab\cf2 //m_CurrentDamage used by script commands to change damage\par
+\cf0\tab\tab\tab\tab\tab pItemInflictor->CallScriptEvent( CallbackName, &Params );\par
+\tab\tab\tab\tab\tab pItemInflictor->m_CurrentDamage = NULL;\par
+\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab\cf2 //Script decided to change or cancel damage from within game_damaged_other\par
+\cf0\tab\tab\tab\tab\cf1 if\cf0 ( pAttMonster->m_ReturnData.len( ) )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\cf2 //Each script either sets a ratio of damage to be dealt or cancels the damage\par
+\cf0\tab\tab\tab\tab\tab msstringlist DamageRatios;\par
+\tab\tab\tab\tab\tab TokenizeString( pAttMonster->m_ReturnData, DamageRatios );\par
+\tab\tab\tab\tab\tab foreach( i, DamageRatios.size() )\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\cf1 if\cf0 ( DamageRatios[i] == "canceldamage" )\par
+\tab\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\tab Damage.AttackHit = \cf1 false\cf0 ; fReportHit = \cf1 false\cf0 ; pTarget = NULL;\par
+\tab\tab\tab\tab\tab\tab\tab\cf1 goto\cf0  EndDamage;  \cf2 //Script canceled, skip the rest\par
+\cf0\tab\tab\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab\tab\tab Damage.flDamage *= atof( DamageRatios[i] );\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\par
+\tab\tab\tab\cf2 //Deal Damage\par
+\cf0\tab\tab\tab\cf2 //===========\par
+\cf0\tab\tab\tab dbg( "Deal Damage->entvars_t" );\par
+\tab\tab\tab entvars_t *pevInflictor = Damage.pInflictor ? Damage.pInflictor->pev : NULL;\par
+\tab\tab\tab entvars_t *pevAttacker = Damage.pAttacker ? Damage.pAttacker->pev : NULL;\par
+\tab\tab\tab\cf1 float\cf0  flDamage = Damage.flDamage;\par
+\tab\tab\tab\cf2 //Non-ranged attack\par
+\cf0\tab\tab\tab dbg( "Deal Damage->pTarget" );\par
+\tab\tab\tab\cf1 if\cf0 ( !pTarget->IsMSMonster( ) )\par
+\tab\tab\tab\tab flDamage = pTarget->TraceAttack( pevInflictor, pevAttacker, Damage.flDamage, gpGlobals->v_forward, &Damage.outTraceResult, Damage.iDamageType, Damage.AccuracyRoll ); \par
+\tab\tab\tab\cf1 else\par
+\cf0\tab\tab\tab\tab flDamage = ((CMSMonster *)pTarget)->TraceAttack( Damage );\par
+\par
+\tab\tab\tab SetDebugProgress( ItemThinkProgress, "DoDamage - Apply damage" );\par
+\tab\tab\tab\cf1 if\cf0 ( flDamage > 0 )  \cf2 // flDamage < 0 means monster dodged it\par
+\cf0\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf2 //MiB Mar2008a - Relocated exp assigning here so that armor and other\par
+\cf0\tab\tab\tab\tab\cf2 //damage recalculations could be done (stops exp from parry and things\par
+\cf0\tab\tab\tab\tab\cf2 //of that sort)\par
+\cf0\tab\tab\tab\tab dbg( "Store XP for Attack" );\par
+\tab\tab\tab\tab\cf1 if\cf0 ( pPlayerAttacker &&\tab\tab\tab\tab\tab\cf2 //Only if player is attacking...\par
+\cf0\tab\tab\tab\tab\tab pVictim && !pVictim->IsPlayer( ) )\tab\cf2 //Only when attacking monsters...\par
+\cf0\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\cf2 //Advance your skill based on monster difficulty and num of swings\par
+\cf0\tab\tab\tab\tab\tab\cf2 //Find the stat that increases from this attack\par
+\cf0\tab\tab\tab\tab\tab dbg( "StoreXP->Enter Conditional" );\par
+\tab\tab\tab\tab\tab\cf1 int\cf0  ExpStat = -1,  ExpProp = -1;\par
+\tab\tab\tab\tab\tab\cf2 //MiB DEC2007a Pass XPSkill via DoDamage (replaced above comment block)\par
+\cf0\tab\tab\tab\tab\tab dbg( "StoreXP->Check_Item" );\par
+\tab\tab\tab\tab\tab\cf1 if\cf0 ( Damage.ExpUseProps )  \par
+\tab\tab\tab\tab\tab\{ \par
+\tab\tab\tab\tab\tab\tab ExpStat = Damage.ExpStat;  \par
+\tab\tab\tab\tab\tab\tab ExpProp = Damage.ExpProp; \par
+\tab\tab\tab\tab\tab\} \par
+\tab\tab\tab\tab\tab\cf1 else\cf0  \cf1 if\cf0  ( pPlayerAttacker->ActiveItem( ) )  \par
+\tab\tab\tab\tab\tab\{ \par
+\tab\tab\tab\tab\tab\tab CGenericItem *pItem = pPlayerAttacker->ActiveItem( );  \par
+\tab\tab\tab\tab\tab\tab\cf1 if\cf0 ( pItem->CurrentAttack )  \par
+\tab\tab\tab\tab\tab\tab\{ \par
+\tab\tab\tab\tab\tab\tab\tab ExpStat = pItem->CurrentAttack->StatExp; \par
+\tab\tab\tab\tab\tab\tab\tab ExpProp = pItem->CurrentAttack->PropExp;  \par
+\tab\tab\tab\tab\tab\tab\} \par
+\tab\tab\tab\tab\tab\} \par
+\par
+\tab\tab\tab\tab\tab\cf1 if\cf0 ( ExpStat > -1 )\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\cf2 //float flActualDamage = min(Damage.flDamage,pVictim->m_HP); MiB Mar2008a - This shouldn't be needed anymore\par
+\par
+\cf0\tab\tab\tab\tab\tab\tab\cf1 if\cf0 ( ExpProp < 0 ) \cf2 //If ExpProp is negative, give the exp to a random property within ExpStat\par
+\cf0\tab\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\tab dbg( "StoreXP->FindStat" );\par
+\tab\tab\tab\tab\tab\tab\tab ExpProp = 0;\tab\cf2 //Default 0, in case the ExpStat is invalid\par
+\cf0\tab\tab\tab\tab\tab\tab\tab CStat *pStat = pPlayerAttacker->FindStat( ExpStat );\par
+\tab\tab\tab\tab\tab\tab\tab\cf1 if\cf0 ( pStat ) ExpProp = RANDOM_LONG( 0, pStat->m_SubStats.size()-1 );\par
+\tab\tab\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab\tab\tab\cf2 //MiB Mar2008a\par
+\cf0\tab\tab\tab\tab\tab\tab\cf2 //Keep track of the amount of total damage a player has done\par
+\cf0\tab\tab\tab\tab\tab\tab\cf2 //So as to stop uber exp from regenerating monsters\par
+\cf0\tab\tab\tab\tab\tab\tab dbg( "MiB->Get Correct Exp Value" );\par
+\tab\tab\tab\tab\tab\tab\cf1 float\cf0  tmpTotalDmg = pVictim->m_PlayerDamage[(pPlayerAttacker->entindex()-1)].dmgInTotal;\par
+\tab\tab\tab\tab\tab\tab\cf1 if\cf0 ( tmpTotalDmg + flDamage > pVictim->m_MaxHP )\par
+\tab\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab\tab flDamage = pVictim->m_MaxHP - tmpTotalDmg;\par
+\tab\tab\tab\tab\tab\tab\tab pVictim->m_PlayerDamage[(pPlayerAttacker->entindex()-1)].dmgInTotal = pVictim->m_MaxHP;\par
+\tab\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\tab\tab\cf1 else\par
+\cf0\tab\tab\tab\tab\tab\tab\tab pVictim->m_PlayerDamage[(pPlayerAttacker->entindex()-1)].dmgInTotal += flDamage;\par
+\par
+\tab\tab\tab\tab\tab\tab dbg( "StoreXP->AddXP" );\par
+\tab\tab\tab\tab\tab\tab pVictim->m_PlayerDamage[(pPlayerAttacker->entindex()-1)].dmg[ExpStat][ExpProp] += flDamage;\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab dbg( "ApplyMultiDamage" );\par
+\tab\tab\tab\tab ApplyMultiDamage( pevInflictor, pevAttacker );\par
+\tab\tab\tab\}\par
+\tab\tab\tab\cf1 else\cf0  \cf1 if\cf0 ( !flDamage && !Damage.pAttacker->IsPlayer() )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf2 //If monsters do 0 damage, just consider it not hitting\par
+\cf0\tab\tab\tab\tab\cf2 //This also prevents orc archers arrows from sticking into\par
+\cf0\tab\tab\tab\tab\cf2 //other orcs\par
+\cf0\tab\tab\tab\tab dbg( "EndDamage" );\par
+\tab\tab\tab\tab\cf1 goto\cf0  EndDamage;\par
+\tab\tab\tab\}\par
+\tab\tab\tab\cf1 else\cf0  \cf1 if\cf0 ( flDamage == -1 )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab dbg( "NoDamage" );\par
+\tab\tab\tab\tab ClearMultiDamage( );\par
+\tab\tab\tab\tab fDodged = \cf1 true\cf0 ;\par
+\tab\tab\tab\tab Damage.AttackHit = \cf1 false\cf0 ;\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\tab\cf1 if\cf0 ( pVictim ) pVictim->Attacked( pEntityAttacker, Damage );\par
+\par
+\tab\tab\cf2 //Report Damage\par
+\cf0\tab\tab\cf2 //=============\par
+\par
+\cf0\tab\tab SetDebugProgress( ItemThinkProgress, "DoDamage - Report damage" );\par
+\tab\tab\cf1 if\cf0 ( fReportHit )\par
+\tab\tab\{\par
+\tab\tab\tab\cf1 if\cf0  ( Damage.flDamage > 0 )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf1 char\cf0  szStats[32], szDamage[32], szHitMiss[32];\par
+\tab\tab\tab\tab strcpy( szDamage, Damage.AttackHit ? UTIL_VarArgs( " %.1f damage.", Damage.flDamage ) : "" );\par
+\tab\tab\tab\tab strcpy( szHitMiss, Damage.AttackHit ? "HIT!" : (fDodged ? "PARRIED!" : "MISS!") );\par
+\tab\tab\tab\tab sprintf( szStats, "(%i/%i)", (100-iAccuracyRoll), \cf1 int\cf0 (100-Damage.flHitPercentage) );\par
+\tab\tab\tab\tab\par
+\tab\tab\tab\tab\cf1 if\cf0 ( pPlayerAttacker )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab sprintf( sz, "You attack %s %s. %s %s%s",\par
+\tab\tab\tab\tab\tab\tab pTarget->DisplayPrefix.c_str(), \cf2 //Thothie AUG2007b - display name prefix when attacking - thought it already did?\par
+\cf0\tab\tab\tab\tab\tab\tab pTarget->DisplayName(),\par
+\tab\tab\tab\tab\tab\tab szStats, szHitMiss, szDamage );\par
+\tab\tab\tab\tab\tab pPlayerAttacker->SendEventMsg( HUDEVENT_ATTACK, sz );\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\cf1 if\cf0 ( pVictim && pVictim->IsPlayer() && pEntityAttacker && pVictim != pEntityAttacker )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab CMSMonster *pMonster = (CMSMonster *)pEntityAttacker;\par
+\tab\tab\tab\tab\tab CBasePlayer *pPlayer = (CBasePlayer *)pTarget;\par
+\tab\tab\tab\tab\tab sprintf( sz, "%s attacks you. %s %s%s",\par
+\tab\tab\tab\tab\tab\tab SPEECH::NPCName( pMonster, \cf1 true\cf0  ),\par
+\tab\tab\tab\tab\tab\tab\cf2 //pEntityAttacker->DisplayName(),\par
+\cf0\tab\tab\tab\tab\tab\tab szStats, szHitMiss, szDamage );\par
+\tab\tab\tab\tab\tab pPlayer->SendEventMsg( HUDEVENT_ATTACKED, sz );\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\} \cf2 //endif Damage.flDamage > 0\par
+\cf0\tab\tab\}\par
+\par
+\tab\tab SetDebugProgress( ItemThinkProgress, "DoDamage - Countereffect" );\par
+\tab\tab pTarget->CounterEffect( pEntityInflictor, 0, (\cf1 void\cf0  *)&Damage.flDamage );\par
+\tab\tab\cf2 //if( fHitWorld )\par
+\cf0\tab\tab\cf2 //\{\par
+\cf0\tab\tab\cf2 //\tab if( pTarget->MSProperties()&ITEM_SHIELD )\tab\par
+\cf0\tab\tab\cf2 //\tab\tab pTarget->CounterEffect( MSInstance(ENT(pInflictor)), ITEM_SHIELD, (void *)&flDamage );\par
+\cf0\tab\tab\cf2 //\}\par
+\par
+\cf0\tab\tab\cf2 // Make a decal\par
+\cf0\tab\tab DecalGunshot( &Damage.outTraceResult, BULLET_PLAYER_CROWBAR );\par
+\par
+\tab\tab\cf1 if\cf0 ( pEntityAttacker )\par
+\tab\tab\{\par
+\tab\tab\tab\cf1 float\cf0  Range = 128 + Damage.flDamage * 90;\tab\cf2 //Min 128 units, and add 90 units for each dmg pt\par
+\cf0\tab\tab\tab CSoundEnt::InsertSound( pEntityAttacker, "combat", Damage.outTraceResult.vecEndPos, Range, 0.3f, 0 );\par
+\tab\tab\}\par
+\tab\}\par
+\par
+EndDamage:\par
+\par
+\tab\cf2 //Set some script variables\par
+\cf0\tab dbg( "Set post damage variables" );\par
+\tab\cf1 if\cf0 ( pAttMonster )\par
+\tab\{\par
+\tab\tab Vector &EndPos = Damage.AttackHit ? Damage.outTraceResult.vecEndPos : Damage.vecEnd;\par
+\par
+\tab\tab\cf1 static\cf0  msstringlist Parameters;\par
+\tab\tab Parameters.clearitems( );\par
+\tab\tab Parameters.add( Damage.AttackHit ? "1" : "0" );\par
+\tab\tab Parameters.add( pTarget ? EntToString(pTarget) : "none" );\par
+\tab\tab Parameters.add( VecToString(Damage.vecSrc) );\par
+\tab\tab Parameters.add( VecToString(EndPos) );\par
+\tab\tab pAttMonster->CallScriptEvent( "game_dodamage", &Parameters );\par
+\par
+\tab\tab\cf1 if\cf0 ( pItemInflictor )\par
+\tab\tab\{\par
+\tab\tab\tab msstring CallbackName = "game_dodamage";\par
+\tab\tab\tab\cf1 if\cf0 ( Damage.ItemCallBackPrefix ) CallbackName = *Damage.ItemCallBackPrefix + "_dodamage";\par
+\tab\tab\tab pItemInflictor->CallScriptEvent( "game_dodamage", &Parameters );\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab\cf1 return\cf0  pTarget;\par
+\tab enddbg;\par
+\tab\cf1 return\cf0  NULL;\par
+\}\par
+\b [END]\b0\f0\par
+}
+ 

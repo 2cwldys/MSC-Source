@@ -1,0 +1,188 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fnil\fprq1\fcharset0 Courier New;}}
+{\colortbl ;\red0\green128\blue0;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.15.1516;}\viewkind4\uc1\pard\f0\fs20 (You'll notice in 'class WoundTracker' there's a bool named DISABLE - Mark that true when you're done testing until you implement it)\par
+\par
+\par
+\par
+Put this above CBasePlayer in Player.h\b\par
+[BEGIN]\par
+\cf1\b0\f1 // MiB JUN2010_12 - Making healing give exp\par
+\cf2 #ifdef\cf0  VALVE_DLL\par
+\cf2 struct\cf0  inflictor_t\par
+\{\par
+\tab msstring Inflictor;\par
+\tab\cf2 float\cf0  monsterValue, damageDealt, expGained;\par
+\par
+\tab\cf2 float\cf0  expRemaining()\par
+\tab\{\par
+\tab\tab\cf2 return\cf0  max( monsterValue - expGained, 0 );\par
+\tab\}\par
+\par
+\tab\cf2 bool\cf0  CanBeRemoved()\par
+\tab\{\par
+\tab\tab\cf1 // For keeping memory in check, we remove monsters from the list if they are "useless"\par
+\cf0\tab\tab\cf1 // NOTE: If we were to just look at expRemaining() to remove them, monsters would get removed,\par
+\cf0\tab\tab\cf1 //\tab\tab\tab then could do more damage and be reinserted into the array anew. We must make sure\par
+\cf0\tab\tab\cf1 //\tab\tab\tab that this can't happen. Also note that if a monster is dead, their exp can still be gained.\par
+\cf0\tab\tab\par
+\tab\tab\cf1 // A monster is done when more Exp cannot be gained AND the monster is dead.\par
+\par
+\cf0\tab\tab CBaseEntity *pInflictor = StringToEnt( Inflictor );\par
+\par
+\tab\tab\cf2 if\cf0  ( pInflictor && pInflictor->IsAlive() ) \cf1 //So long as the monster is alive it cannot be removed.\par
+\cf0\tab\tab\tab\cf2 return\cf0  \cf2 false\cf0 ;\par
+\par
+\par
+\tab\tab\cf2 bool\cf0  ExpRemaining = expRemaining() > 0;\par
+\tab\tab\cf2 bool\cf0  DamageRemaining = damageDealt > 0;\par
+\par
+\tab\tab\cf1 // Monster is dead. The only reason we need the monster around is if there is Exp AND Damage remaining.\par
+\cf0\tab\tab\cf2 return\cf0  ( !( ExpRemaining && DamageRemaining ) );\par
+\par
+\tab\}\par
+\};\par
+\par
+\cf2 class\cf0  WoundTracker\par
+\{\par
+\cf2 private\cf0 :\par
+\tab mslist<inflictor_t> woundArray;\par
+\tab\cf2 const static\cf0  \cf2 bool\cf0  DISABLE = \cf2 false\cf0 ; \cf1 //DELETE THIS AN ALL REFERENCES BEFORE IMPLEMENTING!\par
+\cf2 public\cf0 :\par
+\tab WoundTracker( )\par
+\tab\{\par
+\tab\tab woundArray.clearitems();\par
+\tab\}\par
+\tab\cf1 //We've been healed! Verify it and put it in the array.\par
+\cf0\tab\cf1 //NOTE: Assumes pHealer is NULL if the player is healing himself. Do your own checks if you use this elsewhere!\par
+\cf0\tab\cf2 void\cf0  ProcessHeal ( \cf2 float\cf0  amt, CBaseEntity *pHealer )\par
+\tab\{\par
+\tab\tab\cf2 if\cf0  ( DISABLE ) \cf2 return\cf0 ;\par
+\tab\tab\cf2 if\cf0  ( amt <= 0 ) \cf2 return\cf0 ;\par
+\par
+\tab\tab\cf2 bool\cf0  GiveExp = \cf2 true\cf0 ;\par
+\tab\tab\cf2 if\cf0  ( !pHealer || !pHealer->IsPlayer() ) GiveExp = \cf2 false\cf0 ;\par
+\tab\tab CMSMonster *pMHealer = GiveExp ? (CMSMonster *) pHealer : NULL; \cf1 //Can't use CBasePlayer, as it's mean to me. CMSMonster has LearnSkill, though, and it passes on\par
+\cf0\tab\tab\par
+\tab\tab\cf2 unsigned\cf0  \cf2 int\cf0  i = 0;\par
+\tab\tab\cf2 while\cf0  ( amt > 0 && i < woundArray.size() )\par
+\tab\tab\{\par
+\tab\tab\tab inflictor_t *cur = &woundArray[i];\par
+\tab\tab\tab\cf2 float\cf0  healed = amt;\par
+\tab\tab\tab cur->damageDealt -= amt;\par
+\tab\tab\tab\cf2 if\cf0  ( cur->damageDealt < 0 )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab healed += cur->damageDealt;\par
+\tab\tab\tab\tab cur->damageDealt = 0;\par
+\tab\tab\tab\}\par
+\par
+\tab\tab\tab\cf2 float\cf0  exp = min( cur->expRemaining(), healed );\par
+\tab\tab\tab cur->expGained += exp;\par
+\par
+\tab\tab\tab\cf2 if\cf0  ( GiveExp ) pMHealer->LearnSkill( SKILL_SPELLCASTING , STAT_MAGIC_DIVINATION, exp );\par
+\tab\tab\tab amt -= healed;\par
+\par
+\tab\tab\tab\cf2 if\cf0  ( cur->CanBeRemoved() )\par
+\tab\tab\tab\tab woundArray.erase( i );\par
+\tab\tab\tab\cf2 else\par
+\cf0\tab\tab\tab\tab ++i;\par
+\tab\tab\}\par
+\tab\}\par
+\tab\par
+\tab\cf1 //We've been hurt! Let's verify it and put it in the array.\par
+\cf0\tab\cf2 void\cf0  ProcessDamage( \cf2 float\cf0  amt, CBaseEntity *pInflictor )\par
+\tab\{\par
+\tab\tab\cf2 if\cf0  ( DISABLE ) \cf2 return\cf0 ;\par
+\tab\tab\cf2 if\cf0  ( amt <= 0 ) \cf2 return\cf0 ;\tab\tab\tab\tab\tab\tab\cf1 //If there was no damage..\par
+\cf0\tab\tab\cf2 if\cf0  ( !pInflictor ) \cf2 return\cf0 ;\tab\tab\tab\tab\tab\cf1 //If there was no source..\par
+\cf0\tab\tab\cf2 if\cf0  ( !pInflictor->IsMSMonster() ) \cf2 return\cf0 ;\tab\cf1 //If it's not a monster..\par
+\cf0\tab\tab\cf2 if\cf0  ( pInflictor->IsPlayer() ) \cf2 return\cf0 ;\tab\tab\cf1 //If source is a player (exploit)..\par
+\par
+\cf0\tab\tab CMSMonster *pMInflictor = (CMSMonster *) pInflictor;\par
+\tab\tab msstring InflictorString = EntToString( pMInflictor );\par
+\par
+\tab\tab\cf1 //Search the array to see if we have a tab for the monster already.\par
+\cf0\tab\tab\cf2 int\cf0  idx = -1;\par
+\tab\tab foreach( i , woundArray.size() )\par
+\tab\tab\{\par
+\tab\tab\tab\cf2 if\cf0  ( woundArray[i].Inflictor == InflictorString )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab idx = i;\par
+\tab\tab\tab\tab\cf2 break\cf0 ;\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\par
+\tab\tab\cf1 //Nope. Gotta create it\par
+\cf0\tab\tab\cf2 if\cf0  ( idx == -1 )\par
+\tab\tab\{\par
+\tab\tab\tab idx = woundArray.size();\par
+\tab\tab\tab inflictor_t tmp;\par
+\tab\tab\tab tmp.Inflictor\tab\tab = InflictorString;\par
+\tab\tab\tab tmp.monsterValue\tab = pMInflictor->m_SkillLevel;\par
+\tab\tab\tab tmp.expGained\tab\tab = 0;\par
+\tab\tab\tab tmp.damageDealt\tab\tab = 0;\par
+\tab\tab\tab woundArray.add( tmp );\par
+\tab\tab\}\par
+\par
+\tab\tab woundArray[idx].damageDealt += amt; \cf1 //Add the damage dealt to the monster's tab.\par
+\cf0\tab\}\par
+\par
+\tab\cf1 //Remove all the damage from monsters. Happens on death. Would be exploitable (and weird) otherwise.\par
+\cf0\tab\cf2 void\cf0  ClearDamage( )\par
+\tab\{\par
+\tab\tab foreach( i , woundArray.size() )\par
+\tab\tab\tab woundArray[i].damageDealt = 0;\par
+\tab\}\par
+\par
+\tab\cf2 void\cf0  Debug( )\par
+\tab\{\par
+\tab\tab\cf2 if\cf0  ( woundArray.size() )\par
+\tab\tab\{\par
+\tab\tab\tab foreach( i , woundArray.size() )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab inflictor_t cur = woundArray[i];\par
+\tab\tab\tab\tab\cf2 if\cf0  ( cur.CanBeRemoved() )\par
+\tab\tab\tab\tab\tab Print("* ");\par
+\tab\tab\tab\tab Print( "\\nEnt String: %s\\nValue: %f\\nDamage Dealt: %f\\nExp Gained: %f\\n", cur.Inflictor.c_str(), cur.monsterValue, cur.damageDealt, cur.expGained );\par
+\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\tab\cf2 else\par
+\cf0\tab\tab\tab Print( "Monster list is empty!\\n" );\par
+\tab\}\par
+\};\par
+\cf2 #endif\par
+\cf1 //END MiB JUN2010_12\cf0\b\f0\par
+[END]\par
+\par
+\b0 Add to CBasePlayer\b\par
+[BEGIN]\par
+\cf2\b0\f1 #ifdef\cf0  VALVE_DLL\par
+\tab WoundTracker\tab\tab m_WoundTracker;\tab\tab\cf1 //MiB JUN2010 - For giving healing exp\par
+\cf2 #endif\cf0\b\f0\par
+[END]\par
+\par
+\b0 Search "\f1 dbg( "Call game_death" );\f0 " and put below it:\b\par
+[BEGIN]\par
+\b0\f1 m_WoundTracker.ClearDamage();\b\f0\par
+[END]\par
+\par
+\b0 Search "\f1 GiveHP( -flDamage );\f0 " \b There will be 2! \b0 Below both of them, put\par
+\b [BEGIN]\par
+\cf2\b0\f1 if\cf0  ( IsPlayer() ) ((CBasePlayer *)\cf2 this\cf0 )->m_WoundTracker.ProcessDamage( flDamage, pAttacker? (pAttacker->IsPlayer() ? NULL : pAttacker) : NULL );\b\f0\par
+[END]\par
+\par
+\b0 Search "\f1 pTarget->Give( givehp ? GIVE_HP : GIVE_MP, atof(Amt) ); \f0 " and put below it\par
+\b [BEGIN]\par
+\cf2\b0\f1\tab\tab\tab\tab if\cf0  ( givehp && pTarget->IsPlayer() )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab CBasePlayer *pPlayer = (CBasePlayer *)pTarget;\par
+\tab\tab\tab\tab\tab pPlayer->m_WoundTracker.ProcessHeal( atof(Amt), pTarget != m.pScriptedEnt ? m.pScriptedEnt : NULL );\par
+\tab\tab\tab\tab\}\b\f0\par
+[END]\par
+\par
+\b0 I've provided a debug function already for you to test. If you want to put it in a script function, you'll do (with proper "#ifdef VALVE_DLL"s in place)\par
+\b [BEGIN]\par
+\b0\f1\tab\tab CBasePlayer *pPlayer = (CBasePlayer *)RetrieveEntity( Params[0] );\par
+\tab\tab pPlayer->m_WoundTracker.Debug();\b\f0\par
+[END]\b0\par
+}
+ 

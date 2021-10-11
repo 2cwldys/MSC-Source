@@ -1,0 +1,245 @@
+
+NEW FILES:
+vgui_Status.h:
+
+class VGUI_Status;
+class VGUI_StatusIcon;
+
+static VGUI_Status *StatusIcons;
+static COLOR DurColor( 0, 255, 0, 128);
+
+#define ICON_W		XRES(64 * 0.625) //Width
+#define ICON_H		YRES(75 * 0.625) //Height
+#define ICONIMG_W	XRES(64 * 0.625) //Width
+#define ICONIMG_H	YRES(64 * 0.625) //Height
+
+
+class VGUI_StatusIcon : public Panel
+{
+public:
+	//VGUI_Image3D m_Img; //Icon
+	CImageDelayed m_Img;  //Icon
+
+	CStatusBar	 *m_pBar; //Duration Bar
+	float m_Time;		 //Start Time
+	float m_Dur;		 //Duration
+
+	VGUI_StatusIcon( Panel *pParent, const char* Icon, float Dur, int x, int y, bool bSprite=false ) : Panel( x, y, ICON_W, ICON_H )
+	{
+		setParent( pParent );
+		setBgColor( 0, 0, 0, 255 );
+
+		m_Time = gpGlobals->time;
+		m_Dur = Dur;
+		
+		m_Img.setParent( this );
+		m_Img.LoadImg( Icon, bSprite, false );
+		m_Img.setFgColor( 255, 255, 255, 255 );
+		m_Img.setSize( ICONIMG_W, ICONIMG_H );
+
+		m_pBar = new CStatusBar( this, 0, ICONIMG_H, ICON_W, ICON_H-ICONIMG_H );
+		m_pBar->m_fBorder = false;
+		m_pBar->Set( 100.0 );
+		m_pBar->setVisible( true );
+	}
+
+	void Update( void )
+	{	
+		float flPercent = 1.0 - (gpGlobals->time-m_Time)/m_Dur;
+		m_pBar->Set( flPercent * 100.0f ); 
+		m_pBar->SetFGColorRGB( DurColor );
+		
+		/*
+		// Use Different Colors for % left
+		if( flPercent < 0.15 ) 
+			m_pBar->SetFGColorRGB( LowColor ); 
+		else if( flPercent <= 0.85f ) 
+			m_pBar->SetFGColorRGB( MedColor ); 
+		else 
+			m_pBar->SetFGColorRGB( HighColor ); 
+		*/
+	}
+
+	bool IsActive( void )
+	{
+		return gpGlobals->time < (m_Time + m_Dur);
+	}
+
+	void Kill( void )
+	{
+		m_Time = 0;
+		m_Dur = 0;
+		m_Img.setFgColor( 0, 0, 0, 0 );
+		m_Img.ClearImg();		
+		m_pBar->Set( 0 );
+		m_pBar->setVisible( false );
+	}
+
+	~VGUI_StatusIcon()
+	{
+		Kill();
+		delete m_pBar;
+	}
+
+};
+
+class VGUI_Status : public Panel, public IHUD_Interface
+{
+public:
+	mslist<VGUI_StatusIcon*> m_Status;
+
+	VGUI_Status( Panel *pParent ) : Panel( 0, 0, ScreenWidth, ScreenHeight )
+	{
+		StatusIcons = this;
+		startdbg;
+		dbg( "Begin" );
+		setParent( pParent );
+		SetBGColorRGB( Color_Transparent );
+		enddbg;
+	}
+
+	void Update( ) 
+	{ 
+		//Update Status Icons
+		size_t i = 0;
+		while( i < m_Status.size() ) 
+		{
+			if( !m_Status[i]->IsActive() )// Kill Status
+			{
+				//m_Status[i]->Kill();
+				m_Status.erase( i );
+			}
+
+			else
+			{
+				m_Status[i]->setPos( (ICON_W*(i/5))+10, (ICON_H*(i%5))+10 );
+				m_Status[i]->Update();
+				i++;
+			}
+		}
+	}
+};
+
+static void AddStatus( const char* Icon, float Dur, bool bSprite=false )
+{
+	StatusIcons->m_Status.add( new VGUI_StatusIcon(StatusIcons,Icon,Dur,0,0,bSprite) );
+}
+
+int __MsgFunc_StatusIcons( const char *pszName, int iSize, void *pbuf )
+{
+	startdbg;
+	BEGIN_READ( pbuf, iSize );
+		dbg( "Reading.." );
+		char* Icon = READ_STRING();
+		float Dur = READ_FLOAT();
+		bool isTGA = (READ_BYTE()==1);
+		
+		AddStatus( Icon, Dur, isTGA );
+		Icon = 0;
+	enddbg;
+	return 0;
+}
+
+
+
+
+CHANGES:
+in Player.h:
+
+	enum netmsg_e
+
+	.
+	.
+	.
+	NETMSG_STATUSICONS, //Drigien APR2008
+
+in Player.cpp:
+
+	const char *g_PlayerMsgs[NETMSG_NUM] =
+	.
+	.
+	.	
+	( "StatusIcons" ), //Drigien APR2008 - Status Icons
+
+
+in SrciptCmds.cpp:
+
+	CScript::Script_Setup( )
+	.
+	.
+	.
+	m_GlobalCmds.add( scriptcmdname_t( "addstatusicon" ) ); //Drigien APR2008
+
+
+	--- AND ---
+
+	CScript::Script_ExecuteCmd(
+	.
+	.
+	.
+	//***************************** ADDSTATUSICON *************************
+	//setviewmodelprop <target> <icon> <duration> [isTGA]
+	//Drigien APR2008
+	else if( Cmd.Name() == "addstatusicon" ) 
+	{
+	#ifdef VALVE_DLL
+		if( Params.size( ) >= 3 )
+		{
+			CBaseEntity *pEnt = m.pScriptedEnt->RetrieveEntity( Params[0] );
+			CBasePlayer *pPlayer = pEnt->IsPlayer() ? (CBasePlayer *)pEnt : NULL;
+			bool isTGA = false;
+			if( Params.size() >= 4 )
+				isTGA = (Params[3] == "true");
+
+			if( pPlayer )
+			{
+				MESSAGE_BEGIN( MSG_ONE, g_netmsg[NETMSG_STATUSICONS], NULL, pPlayer->pev ); 
+					WRITE_STRING( Params[1].c_str() );  //Icon
+					WRITE_FLOAT( atof(Params[2].c_str()) );	//Duration
+					WRITE_BYTE( isTGA );				//isTGA
+				MESSAGE_END(); 
+			}
+		}
+		else ERROR_MISSING_PARMS;
+	#endif
+	}
+
+
+in Hud.cpp:
+
+	int __MsgFunc_StatusIcons( const char *pszName, int iSize, void *pbuf ); //Drigien APR2008
+
+	--- AND ---
+
+	CHud :: Init( void )
+	.
+	.
+	.
+	HOOK_MESSAGE( StatusIcons ); //Drigien ARP2008
+
+in vgui_Hud.cpp:
+
+
+	#include "vgui_Status.h" //Drigien APR2008
+
+	--- AND ---
+
+	class CHUDPanel : public VGUI_MainPanel
+	{
+	public:
+	.
+	.
+	.
+	//Status Icons ----------------------
+	VGUI_Status *m_Status;
+
+	--- AND ---
+
+	CHUDPanel::CHUDPanel( Panel *pParent ):
+	.
+	.
+	.
+	//Status Icons
+	dbg( "Create StatusIcons" );
+	m_HUDElements.add( m_Status = new VGUI_Status( this ) );
+	

@@ -1,0 +1,203 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fprq1\fcharset0 Courier New;}{\f1\fswiss\fcharset0 Arial;}}
+{\colortbl ;\red0\green0\blue255;\red0\green128\blue0;}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\b\f0\fs30 ms.dll\par
+MSCentralTransaction_DLL.cpp\fs20\par
+\par
+\b0 Under "mslist<pendingupd_t> g_PendingUpdates;" add\par
+\b [BEGIN]\b0\par
+\cf1 int\cf0  FNMapSynch;\par
+msstring LastSentMap;\par
+\b [END]\b0\par
+\par
+Under the line "strncpy( MsgPassword.Password, thoth_fnpass.c_str(), \cf1 sizeof\cf0 (MsgPassword.Password) );" add\par
+\b [BEGIN]\cf2\b0\par
+\tab\tab\tab //Reset our synch-level on map change.\par
+\cf0\tab\tab\tab\cf1 if\cf0  ( LastSentMap != MSGlobals::MapName )\par
+\tab\tab\tab\tab FNMapSynch = 0;\par
+\par
+\tab\tab\tab\cf1 if\cf0 ( FNMapSynch == 0 )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab LastSentMap = MSGlobals::MapName;\par
+\tab\tab\tab\tab\cf2 //strcpy( MsgPassword.mapName , MSGlobals::MapName.c_str() );\par
+\cf0\tab\tab\tab\tab sprintf( MsgPassword.mapName , "%s.bsp" , MSGlobals::MapName.c_str() );\par
+\tab\tab\tab\tab\cf1 char\cf0  cfileName[MAX_PATH];\par
+\tab\tab\tab\tab GET_GAME_DIR( cfileName );\par
+\tab\tab\tab\tab msstring fileName = (msstring(cfileName) + "/maps/") + MSGlobals::MapName + ".bsp";\par
+\tab\tab\tab\tab ifstream file;\par
+\tab\tab\tab\tab file.open( fileName.c_str(), ios_base::in );\par
+\tab\tab\tab\tab file.seekg( 0 , ios_base::end );\par
+\tab\tab\tab\tab MsgPassword.mapSize = file.tellg();\par
+\tab\tab\tab\tab file.close();\par
+\par
+\tab\tab\tab\tab FNMapSynch = 1;\tab\par
+\tab\tab\tab\}\par
+\tab\tab\tab\cf2 //Attempting some optimization here. Stops FN from reading through the map file every few seconds per server.\par
+\cf0\tab\tab\tab\cf1 else\cf0  \cf1 if\cf0  ( FNMapSynch == 1 ) \cf2 //FN Told us our map was good.\par
+\cf0\tab\tab\tab\tab strcpy( MsgPassword.mapName, "MAP_VERIFIED" );\par
+\tab\tab\tab\cf1 else\cf0  \cf1 if\cf0  ( FNMapSynch == -1 ) \cf2 //FN Told us our map was bad.\par
+\cf0\tab\tab\tab\tab strcpy( MsgPassword.mapName, "BAD_MAP" );\par
+\b [END]\par
+\par
+\b0 In the function "\cf1 void\cf0  CTransaction_DLL::HandleMsg( msg_t &Msg )" add this to the end of the Case statements\b\par
+\f1 [BEGIN]\par
+\cf1\b0\f0\tab\tab case\cf0  MSG_ERROR:\par
+\tab\tab\{\par
+\tab\tab\tab error_t &e = (error_t &)Msg;\par
+\par
+\tab\tab\tab\cf1 if\cf0  ( e.flags & ERR_BADMAP )\par
+\tab\tab\tab\tab FNMapSynch = -1;\par
+\par
+\tab\tab\tab\cf1 if\cf0  ( e.flags & ERR_POPUP )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab MessageBox(NULL, e.error_msg , "Error from Central Server",MB_OK|MB_ICONEXCLAMATION);\par
+\tab\tab\tab\}\par
+\par
+\par
+\tab\tab\tab\cf2 //Always make this the last one!\par
+\cf0\tab\tab\tab\cf1 if\cf0  ( e.flags & ERR_CRASH ) \par
+\tab\tab\tab\tab exit( -1 );\par
+\tab\tab\tab\cf1 break\cf0 ;\par
+\tab\tab\}\b\f1\par
+[END]\par
+\par
+\b0\par
+\b\fs30 mscentraltransaction.h\fs20\par
+\par
+\b0 Below the struct "\cf1\f0 struct\cf0  disconnect_t : msg_t" add\b\f1\par
+[BEGIN]\par
+\cf1\b0\f0 #define\cf0\tab ERR_POPUP\tab (1<<0)\tab\cf2 //Pop up a message (provide with message)\par
+\cf1 #define\cf0  ERR_CRASH\tab (1<<1)\tab\cf2 //Cause the server to crash\par
+\cf1 #define\cf0  ERR_BADMAP\tab (1<<2)\tab\cf2 //Specifically changes a variable on the server\par
+\cf1 struct\cf0  error_t : msg_t\par
+\{\par
+\tab\cf1 int\cf0  flags;\par
+\tab\cf1 char\cf0  error_msg[512];\par
+\};\b\f1\par
+[END]\par
+\par
+\b0 In the enum "\cf1\f0 enum\cf0  msg_e" add this to the bottom\b\f1\par
+[BEGIN]\par
+\b0\f0 MSG_ERROR,\tab\tab\tab\tab\cf2 //FN Needs to inform the client of some error\cf0\b\f1\par
+[END]\par
+\par
+\b0 Replace the password_t struct with this one\b\par
+[BEGIN]\par
+\cf1\b0\f0 struct\cf0  password_t : msg_t\par
+\{\par
+\tab\cf1 char\cf0  Password[128];\par
+\tab\cf1 char\cf0  mapName[128];\par
+\tab\cf1 long\cf0  mapSize;\par
+\};\b\f1\par
+[END]\par
+\par
+\fs30 MSCentral.exe\par
+MSCentralTransaction.cpp\par
+\par
+\b0\fs20 Above the function "\cf1\f0 void\cf0  CTransaction_CENTRAL::HandleMsg( msg_t &Msg )" add\b\f1\fs30\par
+\fs20 [BEGIN]\par
+\cf1\b0\f0 int\cf0  VerifyMap( \cf1 char\cf0  * smap , \cf1 long\cf0  ssize )\par
+\{\par
+\tab\cf2 //Save FN a bit of work if the server already knows it has a good/bad map\par
+\cf0\tab\cf1 if\cf0  ( !strcmp( smap, "MAP_VERIFIED" ) )\par
+\tab\tab\cf1 return\cf0  \cf1 true\cf0 ;\par
+\tab\cf1 else\cf0  \cf1 if\cf0  ( !strcmp( smap, "BAD_MAP" ) )\par
+\tab\tab\cf1 return\cf0  \cf1 false\cf0 ;\par
+\par
+\tab string fileloc = MSCentral.m_SaveDir;\par
+\tab fileloc += "\\\\";\par
+\tab fileloc += "mapsizes.txt";\par
+\par
+\tab\cf1 bool\cf0  FoundAMap = \cf1 false\cf0 ;\par
+\par
+\tab ifstream file( fileloc.c_str() );\par
+\tab\cf1 if\cf0  ( file.is_open() )\par
+\tab\{\par
+\tab\tab\cf1 while\cf0  ( !file.eof() )\par
+\tab\tab\{\par
+\tab\tab\tab\cf1 char\cf0  fmap[512];\par
+\tab\tab\tab\cf1 long\cf0  fsize;\par
+\tab\tab\tab file >> fmap >> fsize;\par
+\tab\tab\tab\cf2 //-1 on FN lets the map go no matter what\par
+\cf0\tab\tab\tab\cf2 //Don't return false on mismatched sizes, as there may be more than one\par
+\cf0\tab\tab\tab\cf2 //size per map (allowing people to update). Returns false later.\par
+\cf0\tab\tab\tab\cf1 if\cf0  ( !stricmp( fmap, smap ) )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf1 if\cf0  ( fsize == ssize || fsize == -1 ) \par
+\tab\tab\tab\tab\tab\cf1 return\cf0  1;\par
+\par
+\tab\tab\tab\tab FoundAMap = \cf1 true\cf0 ; \cf2 //We found a map with the right name but wrong size\par
+\cf0\tab\tab\tab\tab\tab\tab\tab\tab   \cf2 //For error notification - Wrong Size vs Illegal Map\par
+\cf0\tab\tab\tab\}\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab\cf1 return\cf0  FoundAMap ? -1 : -2;\par
+\}\b\f1\par
+[END]\par
+\par
+\b0 In the function "\cf1\f0 void\cf0  CTransaction_CENTRAL::HandleMsg( msg_t &Msg )\f1 " overwrite the "\cf1\f0 case\cf0  MSG_PASSWORD" with this (Old one is commented)\b\f1\par
+[BEGIN]\par
+\cf1\b0\f0\tab\tab case\cf0  MSG_PASSWORD:\par
+\tab\tab\{\par
+\tab\tab\tab password_t &MsgPass = (password_t &)Msg;\par
+\par
+\tab\tab\tab\cf1 int\cf0  map_ver = VerifyMap( MsgPass.mapName , MsgPass.mapSize );\par
+\tab\tab\tab\cf1 bool\cf0  CMap = map_ver == 1;\par
+\tab\tab\tab\cf1 bool\cf0  CPass = MSCentral.m_Password == MsgPass.Password;\par
+\tab\tab\tab\cf1 if\cf0  ( CMap && CPass )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab DbgPrint( 4, "Password and Map Validated" );\par
+\tab\tab\tab\tab m_Validated = \cf1 true\cf0 ;\par
+\tab\tab\tab\}\par
+\tab\tab\tab\cf1 else\par
+\cf0\tab\tab\tab\{\par
+\tab\tab\tab\tab\cf1 if\cf0  ( !CMap )\par
+\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\cf2 //Only send this until the server "knows" the map is bad\par
+\cf0\tab\tab\tab\tab\tab\cf1 if\cf0  ( strcmp( MsgPass.mapName , "BAD_MAP" ) )\par
+\tab\tab\tab\tab\tab\{\par
+\tab\tab\tab\tab\tab\tab error_t e;\par
+\tab\tab\tab\tab\tab\tab e.Msg = MSG_ERROR;\par
+\tab\tab\tab\tab\tab\tab e.flags = ( ERR_POPUP | ERR_BADMAP );\par
+\tab\tab\tab\tab\tab\tab e.Length = \cf1 sizeof\cf0 ( e );\par
+\tab\tab\tab\tab\tab\tab sprintf( e.error_msg, ( map_ver == -1 ? "Your map differs from %s's" : "This map is not approved by %s" ), MSCentral.m_NetWorkName.c_str() );\par
+\tab\tab\tab\tab\tab\tab send( m_Socket, (\cf1 const\cf0  \cf1 char\cf0  *)&e, e.Length, 0 );\par
+\tab\tab\tab\tab\tab\tab\cf1 if\cf0  ( map_ver == -1 ) DbgPrint( 0, "Wrong map size: %s %i", MsgPass.mapName, MsgPass.mapSize );\par
+\tab\tab\tab\tab\tab\tab\cf1 else\cf0  DbgPrint( 0, "Illegal Map: %s", MsgPass.mapName );\par
+\tab\tab\tab\tab\tab\}\par
+\tab\tab\tab\tab\}\par
+\par
+\tab\tab\tab\tab ValidationFailed(!CPass);\par
+\tab\tab\tab\}\par
+\tab\tab\tab\cf2 //Old way\par
+\cf0\tab\tab\tab\cf2 /*if( MSCentral.m_Password == MsgPass.Password )\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab DbgPrint( 4, "Password Validated" );\par
+\tab\tab\tab\tab m_Validated = true;\par
+\tab\tab\tab\}\par
+\tab\tab\tab else\par
+\tab\tab\tab\{\par
+\tab\tab\tab\tab ValidationFailed( );\par
+\tab\tab\tab\}*/\par
+\cf0\tab\tab\tab\cf1 break\cf0 ;\par
+\tab\tab\}\b\f1\par
+[END]\par
+\par
+\b0 At the top of the file, overwrite the original ValidationFailed function with this in "\cf1\f0 class\cf0  CTransaction_CENTRAL : \cf1 public\cf0  CTransaction"\b\f1\par
+[BEGIN]\par
+\cf1\b0\f0 virtual\cf0  \cf1 void\cf0  ValidationFailed( \cf1 bool\cf0  disp = \cf1 true\cf0  );\b\f1\par
+[END]\par
+\par
+\b0 Above the function "\cf1\f0 void\cf0  CTransaction_CENTRAL::ReceivedChar" is the original definition of "\cf1 void\cf0  CTransaction_CENTRAL::ValidationFailed( \cf1 bool\cf0  disp )"\par
+Replace with this:\b\f1\par
+[BEGIN]\par
+\cf1\b0\f0 void\cf0  CTransaction_CENTRAL::ValidationFailed( \cf1 bool\cf0  disp )\par
+\{\par
+\tab\cf1 if\cf0 ( !m_Disconnected && disp )\par
+\tab\tab DbgPrint( 0, "Bad Password" );\par
+\tab SendDisconnect( );\par
+\}\b\f1\par
+[END]\par
+\b0\par
+}
+ 

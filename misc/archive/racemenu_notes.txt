@@ -1,0 +1,3 @@
+MIB:
+And if you want to mess around, it mostly supports the elf race. Just turn RACEPANEL_MAINBTNS up to 3, add an elf/reference and appropriate precache. Menu isn't going to look terribly pretty, but it's enough for you to mess around with when you want to start working on that race. I'll adjust how it looks if you get there 
+
