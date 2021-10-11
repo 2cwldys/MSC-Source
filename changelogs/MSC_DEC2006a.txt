@@ -1,0 +1,110 @@
+Re: List of changelogs
+
+December 1st 2006 Public Changelog
+- Major SC.DLL Changes: -
+New Stuffz
+Potion of Forgetfulness - FINALLY - you can forget how to summon rats. It works, but is a tad buggy in that spells wont actually be gone until you reconnect or try to memorize a new tome.
+Overpowered warnings when opponents have more than 10x your HP.
+Warnings about boss regeneration
+Helm of Fire Resistance - this helm's effectiveness is dependant on your Fire Magic skill
+Helm of Cold Resistance - this helm's effectiveness is dependant on your Ice Magic skill
+- note each of these helms will make you vulnerable to the opposing element next month - didn't have time to test that bit month
+Vial of Demon Blood - kamakazie maneuver from hell, literally
+
+New Beasties
+monsters/swamp_ogre - still a bit beta (not quite ready for prime time), but good enough to figure a placement. This critter has a passive regen, moves fast, hits hard, and hops all over the place.
+
+New Mapper Toys
+ms_npcscript event "npc_suicide" - good if you need a monster or NPC to mysteriously die. If creature/npc is invulnerable, you will need to use "make_vulnerable" first (split second before). Plays death anim/sound, and is captured by msarea_monsterspawn and killtarget counters.
+some new fog weahter effects -spawn an ms_npc with scriptname:
+weather/make_fog_green - green swampy fog
+weather/make_fog_brown - v. think brownish fog
+I can make any color/density you may require, these were just setup for Gaz as examples. I'll try to get a full set when I have more time.
+
+BugZ Squashed + Odder stuffz
+Fixed bug with orcs unable to attack people standing on their heads (SOMEONE MENTION THESE THINGS DAMNIT!) ><
+Fixed bugs related to Rebuke Undead/G.Holy Arrows and undead death registry
+Improved new AI reaction time
+Fixed bug causing catapults to crash on Helena (result of Nov1st media consolidation)
+Fixed merchants overcharging for rat scrolls (couldn't find any overcharging for glow)
+Fixed summons attacking owners (WTF did no one mention this?)
+Semi-fixes for frozen solid issues (greater ice blade / frozen sphere)
+Semi-Fixes for death by divination and skeletons
+temporarily disabled anti-stuck system (re-working eta. 2007)
+redid stuck-on-spawn system (works)
+Increased xbow firing rate
+Improved xbow accuracy (sadly at cost of bolt speed)
+Improved edict overflow protection
+Hip-hop Orcs! Just cuz! (testing)
+Improved navigation and anti-stuck
+Stuck on spawn teleport system is now universal to both AI's, as is frustration sys
+Removed need for no-clip anti-stuck (for the most part)
+Fixed bug preventing sack/sheath item limits registering proper. Limits are now:
+- Snakeskin sheaths: 4 weapons (there are now snakeskin sheaths for each weapon type)
+- Regular Sheaths: 1 weapon
+- Weapon Strap: 16 weapons
+- Big Sack: 32 Items (stacks = 1 item ea)
+- Heavy Back Pack: 32 Items or Weapons (stacks = 1 item ea)
+- Small Sack: 8 Items (stacks = 1 item ea)
+- Quiver of Arrows: 8 arrow stacks
+- Quiver of Bolts: 8 bolt stacks
+- Quiver of the Archer: 16 arrow types, bolt types, or weapons (stacks = 1 item ea)
+- Spellbook: 32 scrolls (there are 21 types)
+
+- Major MS.DLL Changes: -
+XP Penalty now applies as follows:
+- XP loss comes from highest skill
+- If highest skill is less than 10, you will lose 20% progress in that skill
+- If highest skill is between 10 and 20, you will lose 10% progress in that skill
+- If highest skill is between 20 and 30, you will lose 5% progress in that skill
+- If highest skill is 30 or above, you will lose 2% progress in that skill
+- You cannot actually drop levels in skills (penalty stops at 0%)
+- In addition you will lose 1% of gold on hand (0 if you have less than 100 gold)
+....and to compensate you:
+XP Penalty no longer applies to death by hazards (falling, lava, etc.)
+Monsters now regen 25% of their health per victory max. (as opposed to 50%)
+- EXCEPTIONS:
+- Greater Ice Elemental and Ice Reaver are not affected by this, they have no regen per victory
+- Calrian and Soul Eaters still regenerate based on the max HP of their victims
+- Ice Lord at level 3 still gains 100% HP after kill (25% at levels 1 and 2)
+- Vampyric Poisoners still regenerate health per strike
+Wipespells script command (allows Potion of Forgetfulness above.)
+Gauntlet map flag prevents players from joining gauntlet and boss maps out of order (no more free DA)
+Some improved FN security (more to come)
+No more 0.0 damage reports
+Server browser notice of version the server is running
+MUCH better CPU optimizations (Especially for Pentium 4 and above)
+
+- AMX Changes -
+Added features for map activated changemap and vote systems
+Vote now removes itself from client screen after map load
+More flexible voting features for those who are interested (contact via PM)
+(case they used the standard trans while vote message was still up)
+known bug: vote maps triggered by trans end with ")" (still works though)
+
+- MAP Updates -
+Calruin2
+- Minor fix where ghoul wall was breakable by non-trigger event
+
+...and the usual 10,000 minor changes I'm not bothering to list...
+
+KNOWN ISSUES
+- Skeletons that die from Holy Circle or other large blasts of divine energy sometimes keep walking then fade away. (This doesn't seem to affect the monster spawn though, it registers as dead.)
+- Skeletons feigning death are impassible. (This is a result of removing the no-clip abilities from the anti-stuck system - they do not stay down nearly as long though).
+
++++++++++++++++++
+MOVED TO 2007 TO MAKE RELEASE DATE:
+Redo skeleton base to use 500hp buffer (did some bug fixing, but still...)
+Anti-cheatmap system
+More Model consolidation
+Ice gauntlets/lightning gauntlets - overdue, but require model consolidation
+Cheatmap system
+make bludgeons useful (types) overdue
+Flask of Fire
+Envemomer
+Healer kit potion replacement
+Improve FN security yet more
+Fix Chain Lightning (overdue)
+Helena2/Old_helena (will include easier access forgetfulness pot)
+Overall Item limit
++++++++++++++++++

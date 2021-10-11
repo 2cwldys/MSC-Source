@@ -1,0 +1,56 @@
+Re: List of changelogs
+
+APR2007b PUBLIC CHANGELOG:
+
+• No more XP loss for PvP kills (hopefully)
+• Some semi-effective attempts at fixing the XP system
+• Bloodrose Script Fixes
+- Atholo death
+- HP trigger roaming
+- Rebalance Atholo, some AI enhancement, dynamic step size (makes him fly a bit)
+- Elemental Crystal Triggers re-write (now uses crystal model, affected by all valid spells)
+- Flesh Eater Premature Pre-Death Bug
+- Findlebind Chat bugs
+- Standard rattlers are back to wildanimal faction so they don't eat boars (larger ones on the other hand...)
+- Stone trap 'play everywhere' enhancement
+- Better range capping on Venevus spells
+= (he can still cast damn far, and through walls, but this is deliberate)
+- Added Cheerleader Ryza to help deal with Atholo sploitz
+- Treasure boost
+• Thornlands has bloodrose transition
+- Traditionalists may not wish to add Bloodrose to the custommap list due to this
+- Also swapped Heras/Mscave transitions pending expansion + match world map
+• Some AI changes
+- Better awareness when a monster is swinging but still can't hit you
+- Should no longer attack firewalls / poison clouds
+• Map Nazi Fixes (partly MS.DLL change, eliminates case sensitivity issues for maps/transitions)
+- Transitioning to and from gauntlet/boss maps should no longer be a problem
+- If you crash on a gauntlet map, you should still be considered valid on rejoin, if you came from a valid map
+- (Technically, you'll be considered valid so long as you don't touch a transition on another map)
+• Skycastle Chest Fix #2329
+- Once again, works fine for me, this all new method should *hopefully* be more dependable
+- If the chests don't show up on your server, check the modified date on the BSP
+- if it isn't recent, you have issues. Please contact so we can see why map is not updating
+• Map Fix for Keledrosruins
+- No more getting stuck around those library pillars
+• Improved Keledros responsiveness while 'waiting for visitors'
+- Also set it up so he doesn't go non-solid while faking death and get peeps stuck inside of him
+- Keledros no longer uses death magic, instead, his spells have priority over players, in the event of spam flood
+- Can we go one patch without having to fix Keledros?
+• New bandit: monsters/bandit_mage
+- Weakest of the bandit mages. This one casts Ice Shield on allies and throws fire-darts.
+- May appear randomly in Keledrosprelude2 or during Helena raids (or with use of monsters/bandit random gen)
+• Fixed rock-throwing goblins throwing fire darts
+• Revamped Lightning Storm
+- Lightning Storm is now a sustained spell that slowly drains mana
+- It will reposition itself where you are looking whenever you fire, it will damage anything its beams strike
+- XP passing is improved, but still not perfect
+• Enhanced the hud based health feedback
+- show_health 1 is still not a real cvar, as I didn't want to mess with the client.dll until next month (prefer "B" patches to be server side, if at all possible)
+- Color coded bars included in feedback. Can also be used if you get the 'colorless' hud bug (new version of the scrolling negative)
+- Gives feedback while resting + alert on full heal.
+
+KNOWN ISSUES:
+- Your character may turn transparent, or even invisible, on your client, when dawning new armor. Other players may see you as "animated Armor" - death fixes
+= ( This is due to me playing with possible armor fixes )
+- Bandit mage sometimes goes BD

@@ -1,0 +1,73 @@
+Re: List of changelogs
+
+MAR2008a PUBLIC CHANGELOG:
+
+spiderz.gif
+
+New Stuffz
+• console/chat command: listpoints
+- List damage points of all players present in order from most to least
+- Figure this maybe more useful than /roll when fighting over treasure
+• Bludgeon Hammer
+- The most redundantly named blunt evah, has the soul of its original owner sealed within
+- Right-click to tap into its powah for the bludgeon demon rage (req prof: 20)
+- One hand for them, two hands for you, the weapon has four charges per map run at twenty seconds each. Use them wisely as "retry" will not restore them
+
+New Monsters
+• monsters/eagle
+- Nasty lil bugger flies all over the place, attacks from above, probably suitable for 200-400hp range, lest you use them in groups, wildanimal faction
+- additional parameter: start_perched- use this and the eagle will stay perched and idle until someone comes within 384 units and in its field of vision, or it is attacked
+- Variants in order from weakest to meanest (est. level 300-800hp, all demon faction):
+- monsters/eagle_plague - disease spreading, some knock back
+- monsters/eagle_demon - fire effects, some knock back
+- monsters/eagle_ice - ice effects, some knock back
+- monsters/eagle_stone - damage reduct, lots of knock back
+- monsters/eagle_metal - heavy damage reduct, lots of knock back, stun attacks
+• monsters/fire_reaver
+- Level 40+ miniboss
+- This walking volcano packs a wallop and has guided explosive balls o' fire to boot
+
+Mappper toys
+• Lures now accept critical_npc param, and use the hpmulti property
+• additional parameters: make_sleeper and make_deep_sleeper
+- Works on most skeletons, make_sleeper skeletons play dead until someone comes near
+- make_deep_sleeper require ms_npcscript event skeleton_wakeup_call or spawning of monsters/skels_wakeup to arise from slumber
+- stone skeletons act like statues instead of sleeping on their faces
+- see skeleton_wakeup_call in previous changelog entries for further usage
+• additional parameter: make_fade_in
+- Makes monster fade in on spawn - good for a less jarring spawn effect, when you have to spawn the monster near the player
+• other/trigger_burn - trigger brush scriptname
+- Same as other/burn_1000, but you can determine the exact damage by setting the target property (eg. target 100 for 100dmg/sec)
+
+Map Updates
+• Lodagond-1 (Recompile)
+- Edict optimization, new boss chamber (easier in some ways, harder in others), and several minor tweaks, plus a link to Lodagond-2
+• Chapel (ripent)
+- Fixed light sequence
+• Calruin2 (hlcsg/ripent)
+- Fixed bit with bats getting stuck in rotating chains
+• mscaves (Recompile)
+- Fixed bit where Fire Reaver would spawn regardless of HP present (req. 3000hp)
+- Also gave him some headroom
+
+Bug Fixes, and Such
+• Fixed unselectable character with scroll bars bug (Thank Shurik3n!)
+• Fixed "that annoying seizure-when-crouching-on-entities bug" (Thank MiB!)
+• System for altering viewmodel skins/submodelbody/render in place (Bow down and worship Shurik3n!)
+• Slight improvements to the fish AI
+• Demonclaws: Soul Fist attack no longer drain on miss, nor when striking a player outside of PVP
+- They also drain a max of 50% mana, but do x3 damage, instead of x2
+• Fixed some issues with scriptname brush trigger: other/totalhp_trigger
+- This trigger goes off only once now, and responds proper
+- If it is touched by someone not meeting the HP req's, it'll still remove itself
+• Massive edict improvements for lodagond/maldora and lodagond/maldora_fragment
+• Fixed Alpha Winter Wolf Boss using wrong skin / glow colors
+• Fixed some bugs with some projectile throwers (stone skeletons, ice lobbers)
+• monsters/ice_mage - Will now use monsters/sorc_telepointX, if present, to get closer to an opponent (see monsters/sorc_chief1 entry)
+• Some edict optimization on the scroll system
+• Edict optimization on some lightning throwing monsters
+• Support for Lodagond-2, 3, and 4
+• Support for Gertenheld_Forest
+• New Elemental resistance system
+- Resistances stack, even those for the same element, and across potions, armors, weapons, items, etc.
+- If you resist an elemental effect, that resistance carries over against subsequent attacks of the same element for 10 seconds

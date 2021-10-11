@@ -1,0 +1,74 @@
+Re: List of changelogs
+
+January 1st 2007 Public Changelog
+Public Changelog JAN2007a:
+- Major SC.DLL Changes: -
+New Stuffz
+Anti-cheat map system to filter maps and prevent unauth alteration of current maps
+Integrated the rest of Orochi's Model Pack
+Gave Kale and the old maid a make-over
+Stun resistance reports when struck (roll%/resistance%)
+Parry success reports (parry_roll / attacker_roll) - helps gauge shield effectiveness
+You may now click +use on any npc that uses base_chat (ie. most of them) to bring up the NPC interaction menu (some quests still need work though)
+Keyhole menus activate with +use (still got those buggy hitboxes, but this helps some)
+Volcano Blade - A firey wicked blade (viewmodel is buggy - spec attack needs work)
+Flame Lick - A dagger forged from the tounge of an efreeti (viewmodel is buggy)
+Urdulian Shield - A massive shield forged from the gates of a fallen Temple of Urdual
+New scarey voices for the ice queen
+New bank armor/weapon storage system
+Bank Limitations
+- Items/Tickets must be in your hands to be stored/redeemed (banker will remind you of this)
+- If you have two of a storable item, you'll need to drop one to store it (even if it's not in your hands)
+- If you have two of the same ticket type, you'll need to drop one to redeem it (even if it's not in your hands)
+- Due to naming conventions, tickets will go into the same type of container/sheath of the type of item replaced
+- Bank requires map updates to function
+
+New Beasties
+monsters/anim_warrior_hard_fire - meaner, infernal animated armor
+monsters/anim_warrior_hard_thunder - mean animated armor with lightning effects
+monsters/anim_warrior_hard_frost - mean animated armor with frost effects
+monsters/anim_warrior_hard_random - one of the above three selected at random
+monsters/fallen_armor - new mega-boss "Armor of The Fallen"
+
+New Mapper Toys
+ms_npcscript event "make_hopper" - turns any melee orc into a jumping type
+
+BugZ Squashed + Odder stuffz
+Improved hip-hop orcs hip-hopping and their cpu usage during said, added animations, and staggered to avoid syncing
+...and then disabled hip-hop orcs by popular demand ;)
+Ice shield and rejuvenate *should* work on players, even if they are "known murderers"
+Helm stun resistance now registers without having to remove/reapply
+Fixed issue with keledros not greeting visitors
+Dwarven Zombies now ignore stupid monsterclips in gatecity caves (XP value raised a bit accordingly)
+Various navigation improvements to both new and old AI's (new AI should be more aggressive now)
+Fixes for short monsters unable to hit people standing on their heads
+Beware Experimental step size and slope size changes may cause issues
+Armor display fix (beta'ish - has some bugs of its own to work out)
+- Known Issue: Old Armor view bug shows up on character selection display
+- Known Issue: Character's bodies will be invisible first time you select
+- Known Issue: Body will show through armor for a few seconds after spawn
+- Known Issue: Glow shells not appearing on players
+Fixed Sumdale<->Urduaf quest interaction (still works best through menu)
+Fixed cave bats (firebats may need fixin' too, I've not checked yet...)
+Improved Horror flight AI a tad (still sux arse)
+Fixed issues with spitting spiders not acquiring targets
+
+- Major MS.DLL Changes: -
+Damage types can now be declared in dodamage lines, allowing for more dynamic damage resistance/vulnerabilities
+Improved parry system
+Parry no longer responds to: poison, fire, lightning (except direct attack), freeze damage, 0 damage attacks, or target acquisitions
+Shields, ditto (except deflect, which we'll work on later)
+New remote removeitem function for new banking system
+XP penalty is selected from a random skill
+
+- AMX Changes -
+Fixed minor display bug in vote system
+
+- MAP Updates -
+Added Galat's storage to Edana (It won't work inside that room, so he has to stand outside)
+Added Galat's storage to Deralia
+Added Galat's storage to Gatecity
+Added Galat's storage to Helena
+Made Helena raids a bit more interesting
+
+...and the usual 10,000 minor changes I'm not bothering to list...

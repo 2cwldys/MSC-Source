@@ -1,0 +1,143 @@
+Re: List of changelogs
+
+MAY2007a PUBLIC CHANGELOG:
+
+MAY2007a_pic1.gif
+pic of the month - entitled: "Holy crap, I'm color coordinated!"
+
+Most of this month's stuff is scripts for new maps. This bumped pretty much everything else over to next month.
+
+New Stuffz (all in game)
+• Envenomed Shortsword - Nice, poisoned sword for the low end folk. Used by Voldar's crew.
+• Envenomed Battleaxe - Nice, poisoned axe for the low to mid range folk. Used by Voldar's crew.
+• Deadly Envenomed Arrows - Next step up from the old poison arrows. This poison disorients players. Also used among Voldar's crew.
+• Fire Lizard Armor - This vest provides 75% damage reduction vs. fire, v. light
+• Pheonix Armor - This platemail armor feeds on fire, healing the owner
+• Orion Bow - This bow fires large spheres of pure mana
+• Novablade - Features various fire effects, if the owner has the appropriate skills, including volcano and flaming skull
+• Some boss monsters now drop bags of gold so as to better spread the wealth among multiple players
+• Boosted Salamander Vest, and renamed "Cobra Skin Vest", for Thothie forgot what planet he was on
+- Cobra Skin vest offers 75% damage reduction from poison, and 75% chance of resisting poison effects (such as drunk)
+• Summon Fangtooth Scroll
+- Meaner, faster, poisonous rat for the mid-levelers
+• Summon Undead Guardian Scroll
+- Slow, but extraordinarily tough undead guardian with double shields to hold back the beasts
+
+New Beasties
+• ms_wicardoven/maldora - Fragment of Maldora
+- Boss can handle small groups of Level 25-30 characters
+- Summons images, minions, lesser rock storms (1 rock per player, up to 4), multiple lightning attacks, punch w/stun attack, dodge, erratic movement, protective repulsion shield (hoping to get Orochi to put a weapon in his hand).
+- sets off the map trigger maldora_seal when ready to begin combat - use this to seal the room
+- sets off the map trigger multilava every 20-40 seconds (intended for map trap)
+- Maldora is immune to all magical attacks, although is still *somewhat* affected by holy weapons, and is affected normally by conventional weapons
+- Spawns two orcs and has a conversation with them before beginning combat
+• ms_wicardoven/maldora_image
+- Summoned by the fragment, can *theoretically* be placed by themselves. 200hp, stun attacks, non-solid. No immunities. Silent. Goes down fairly easily
+• monsters/maldora_minion_ice - nasty, fast moving skeletal maldora minion, elemental attacks
+• monsters/maldora_minion_lightning - same thing, but different
+• monsters/maldora_minion_fire - ditto
+• monsters/maldora_minion_venom - xerox
+• monsters/maldora_minion_random - one of the above four at random
+- Each maldora minion above glows a color appropriate to its element and is extremely vulnerable to its opposing element, in addition to being immune to its own.
+• dq/voldaraxer - Beefier version of the old dq/voldarwarrior, with an envenomed axe
+• dq/voldararcher - On par with the monsters/orc_sniper, but has v. nasty poison arrows
+• dq/voldararcher_turret - non-roaming version of same
+• dq/voldarshaman - Voldar's Shaman's enchanted by Malodra (read: possessed by horrors)
+• dq/voldar - severe beefing, lots of tricks (acid cloud, acid bolts, stun, eggs), still in the level 20-25 mini-boss range
+- comes up as Orc Poisoner on maps where he is not featured (for generic deployment)
+• monsters/bandit_elite - series of 1337 bandits, each with its own magic weapon and/or special abilities, similar to those of players.
+=• monsters/bandit_elite_unarmed - bandit martial artist, with multiple kick attacks with stun and knockback
+=• monsters/bandit_elite_sword - fast attacking bandit with a greater ice blade
+=• monsters/bandit_elite_mace - dark maul wielding bandit with AOE stun attack
+=• monsters/bandit_elite_dagger - boneblade weilding bandit with turbo-speed special attack
+=• monsters/bandit_elite_axe - bandit wielding a large ornate axe with bull-rush attack
+=• monsters/bandit_elite_archer - bandit archer with frost arrows and special multi-poison arrow attack
+• monsters/bandit_boss - ye bandit boss series, levels 25-30, da big guys
+- all bandit bosses appear as "Bandit Leader" outside of "The_Keep" (this can be undone as requested)
+- all can use up to 3 healing potions, 3 elemental resistance potions, and 2 of 3 special potions
+- all have special magical attacks and multiple kick attacks
+- they also have a move they learned from playing too much Mortal Kombat (except Xaron, who needed quarters for laundry)
+- this script randomly generates one of these six:
+=• monsters/bandit_boss_dagger - Plevmus of the Hidden Knife
+-- Armed with a flamelick, features flame burst, turbo attack, and leap attack.
+=• monsters/bandit_boss_mace - Golgar the Hammer
+-- Slow, but if you do get hit, you know it. AOE stun attacks, lots of hp.
+=• monsters/bandit_boss_axe - Vultekh of the Runes
+-- Rune axe, and makes proper use of it. Charge/leap stun attacks, lots of hp.
+=• monsters/bandit_boss_sword - Kryoh of the Frozen Blade
+-- Ice boy has blizzard and freezing sphere, in addition to what you'd expect him to have with the weapon on hand.
+=• monsters/bandit_boss_archer - Xaron of the Orion Bow
+-- Fires magical bolts of various types and sizes, also has a devastating scatter shot with random nasty arrows.
+=• monsters/bandit_boss_nova - Demonicus of the Burning Blade
+-- This flamer casts Flame Burst, Skull of Flame, Volcano, meteor, Firewall, and can parry attacks.
+• monsters/fallen_armor
+- This is actually an old script, but P|Barnum has officially abandoned his map project, thus this level 30'ish boss is now open to anyone who wants to use it. Large, rusty spartan-style, animated armor with dark sword, urdulian shield, and it's own model. Has no good counter for gang-bang, atm, but can easily be tossed in.
+• monsters/fallen_armor_triggered
+- This variant stays sitting until the event " enter_combat " is run on it via ms_npcscript.
+• monsters/ice_troll_lobber
+- Throws balls of ice that burst into massively damaging spikes, upon hitting the ground. Designed to soften up level 40+ characters
+• monsters/ice_troll_turret
+- Same thing, don't move
+
+New Mapper Toys
+• mstrig_music - event driven music
+- This point entity functions like msarea_music, but plays music to all players when triggered.
+- Target an mstrig_music with no songs listed to make the music fade.
+- mstrig_music will be ignored by players standing in msarea_music brushes (side effect of how they work)
+And... OLD mapper toys!...
+• game_text
+- Now goes through MSC pop-up system. Text color, etc, cannot be set.
+• ambient_generic
+- At long last, the return of ambient generic.
+- Use only for looping ambient sounds, as it is server CPU intensive compared to env_message!
+- Sometimes "sticks" to a player if triggered - avoid the 'starts silent' flag to prevent this.
+- Players will note a some new sounds in existing maps due to the restoration of this entity.
+
+BugZ Squashed + Odder stuffz
+• No longer will you question your character's sexual preference based on the color of his sleaves (thank Belmont)
+• Fixed one sploit so insanely heinous I refuse to even name it. ;)
+• Hopefully fixed elemental damage type multipliers stacking with each application.
+• Resistance items (such as the Cobra Skin Vest) now give a %chance of resisting effects (such as drunk poison / freeze solid)
+• Tickets for Bronze Helm and Nova Blade now available
+• Scripts now have FN awareness and insphere functions
+• Fixed bit where Keledros skele would crash when struck by too much damage. (Gave it some armor while I was there)
+• Fenrin the Crest Keeper will not appear if you are not connected to FN
+• Quazi-armor display fix attempt #13482:
+- If you remove and replace your armor, it should appear correct to other players
+- however, you will not be visible to yourself in third person
+- You may use the console command 'vis' to remedy this, but your armor will suffer the old bug on other clients
+• Wearable elemental resistance Items (such as helms / armor ) now apply their resistance without being re-equipped.
+• By popular demand, level caps have been added to certain weapons
+
+- AMX Changes -
+(bumped to next month, yet again)
+
+- MAP Updates -
+• Keledrosprelude2: Transition to The Bandit's Keep
+• Keledrosprelude2: Attempted to fix the monster clips near steal boar
+- tempted not to, so entertaining to play toro-toro with him
+• Challs: Transition to Wicard Oven
+• Helena: Bandit/orc raid music triggers (mental note: killtarget msarea_music's on raid)
+
+- Installer Changes -
+• Updates to FN readme
+
+...and the usual 10,000 minor changes I'm not bothering to list...
+
+Show_Health 1: :( Unfortunately I was NOT able to make show_health 1 a Cvar, due to the fact that the scripts have no function to read client-side vars, and I've yet to figure out how to implement such a function. (Basically, you'd have to have the server force everyone to have the hud based health read-outs.)
+
+Bumped to next month (in order of priority):
+- Crow's skycastle2 scripts (almost done!)
+- AMX vote re-write
+- Helena NPC post invasion award (complicated, and likely made pointless by Helena2)
+- Chain Lighting Aesthetics (bumped for second month in a row)
+- Yet "more better" PVP awareness
+- Shadahar revamp (bumped for fourth month in a row)
+- Health Bars
+- Implement new flight/swim AI
+- Giant Bat re-write (officially being bumped for one year now)
+- Mining System (didn't look as though Vomica was going to be done anytime soon)
+- GvG map system
+- Single Player Mode (adjust for single player + not on central server)
+
+* Known bug: If you remove your armor, and replace it, you will be invisible in third person. Type 'vis' to remedy. If you do not type vis, your armor should appear correctly to other players.

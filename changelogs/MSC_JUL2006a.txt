@@ -1,0 +1,11 @@
+Re: List of changelogs
+
+July 07th 2006 Public Changelog
+
+monsters/dwarf_zombie_unarmed - 150hp 20dmg/sec
+monsters/dwarf_zombie_smallaxe - 200hp 30dmg/sec
+monsters/dwarf_zombie_bigaxe - 300hp 40dmg/sec + 25% stunatk
+monsters/dwarf_zombie_sword- 400hp 55dmg/sec + 15% stunatk
+monsters/dwarf_zombie_random - spawns one of the four above, randomly
+
+Added DATE console command, returns beta date being used by server - TYPE THIS BEFORE LOADING YOUR CHARACTER ON UNFAMILIAR SERVERS! (lest you lose beta-equipment due to outdated server)

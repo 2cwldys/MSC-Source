@@ -1,0 +1,35 @@
+Re: List of changelogs
+
+July 14th 2006 Public Changelog
+
+The Marogar Ice Orc Tribe
+monsters/morc_warrior - standard Marogar Warrior
+monsters/morc_archer - standard Marogar Archer
+monsters/morc_ranger - Marogar Ice Archer with Ice Bow
+monsters/morc_icewarrior - Marogar Ice Warrior with Ice Sword
+monsters/morc_chief - Talnorgah, Chief of Clan Marogar
+
+And food for tribe:
+monsters/snowboar1 - small snowboar
+monsters/snowboar2 - medium snowboar
+monsters/snowboar3 - omfg huge snowboar
+
+Complete key set: (finally)
+Generic keyholes:
+other/keyhole - generic keyhole - takes key in, makes map event of name of key taken in, in addition to "ustart" ( so if you put in key_red - it fires "key_red" and "ustart" )
+other/keyhole_return - same as generic keyhole, but returns keys used
+
+Specific Keyholes:
+other/keyhole_red - takes key_red ("crimson key"), fires "key_red", and "ustart"
+other/keyhole_red - takes key_blue ("sapphire key"), as above
+other/keyhole_green - takes key_green ("jade key"), as above
+other/keyhole_gold - takes key_gold as above
+other/keyhole_brass - takes key_brass as above
+other/keyhole_skeleton - takes key_skeleton as above
+other/keyhole_rusty - takes item_key_rusty, as above
+other/ keyhole_storageroomkey - takes item_storageroomkey, as above
+
+monsters/lure - a 32x32 invisible monster you can use to attract any agro monsters to a specific location (they will percieve it as an enemy and attack it). It fires the event " lure_died " when it is slain, but you can also tie killtarget ("target when killed") to it as you would any other monster. You canNOT place it *inside* breakables to make monsters break them - as the monster can't see it inside a solid entity - but you can place this just outside and the monster will go for it - then simply trigger the breakable when it dies.
+
+Example usage of monsters/lure in this map with source:
+http://www.thothie.com/msc/weather_tower_b.rar

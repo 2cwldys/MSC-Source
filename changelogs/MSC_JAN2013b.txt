@@ -1,0 +1,99 @@
+Since Prodigalist got 5000 internets - I bring ye...
+
+JAN2013 SUPER SPOILER
+(close your eyes, if you hate spoilers...)
+
+JAN2013a_super_spoiler_centerfold.jpg
+That's right, dar be dragons here. (But this one's just a statue - really it is!)
+
+• nashalrath/dragon_green_img - Jaminporlants (Image of) [invulnerable]
+- This is the image of Jaminporlants left behind in the Lost stronghold of Nashalrath, where he was hiding out from Lor Malgoriand, during the Age of Blood
+- He manages the various storm hazards and some other elements of the event.
+- Some of these events are vector-specific, so he likely can't be used on another map - not that I'd recommend it, lore wise. Be odd to have a duplicate of this encounter. Not that we aren't planning to see him again, among others of his kind.
+
+• nashalrath/dragon_green_mini - Aspect of Jaminporlants [very hard - boss]
+- The aspect has a series of AOE attacks, and a nasty breath attack, that applies greater poison, acid, and pummels you with rocks, all at the same time. Beyond this, a boatload HP, and his shear size, however, he's pretty straight forward.
+
+• nashalrath/lift_check_left, nashalrath/lift_check_right - [utility, hidden, invincible]
+- These are special NPCs that tell the image of Jaminporlants that you are trying to hide behind one of the pillars in the boss chamber. He'll check with these periodically, and if you are found near one, he'll lift the pillar to make it easier for the Aspect to attack you.
+- The Apect's AOE attacks actually make hiding behind these pillars a fairly pointless effort - although they do mess with his navigation some. Still, it was a nifty little move, and gave Jaminporlants some more personality.
+
+• nashalrath/brush_storm_cold, nashalrath/brush_storm_fire, nashalrath/brush_storm_lightning1, nashalrath/brush_storm_lightning2 - [Brush Scripts]
+- These are special brush scripts the image uses to fade various storm effects in and out of existence.
+
+• other/metal_cave [effect utility]
+- This is the NPC that handles the "reality tear" earlier in the map. The effect can be achieved with just the model, but it's much more difficult, and doesn't offer the dynamic color cycling and the like.
+
+• monsters/dragon_guard - Dragon Guards [hard to very hard]
+- The end result of yet more experiments with humanoids and dragon DNA mixing of Kharaztorant's (never ask what that green stuff in Kfortress really is!) Jaminporlants encountered these, in his incorporeal wanderings, and imitated the process accordingly...
+- These are a bit complicated...
+- If used with no addparams, the Dragon Guard will be green, and select randomly from various weapons, breath attacks, potions, and armors. Each weapon type features its own behavior.
+- Available settings (via addparams concated with semi-colons) are as follows:
+- Potions:
+- dg_potd - Demon Blood Pot (+750 Base XP)
+- dg_potp - Protection Pot (+200 Base XP)
+- dg_potf - Fire Aura Pot (+100 Base XP)
+- dg_pots - Speed Pot (+500 Base XP)
+- ^ These potions are used when first encountering an enemy. It maybe *possible* to interrupt the Dragon Guard before he can swallow them, but not likely.
+- There is also a 20% chance that a Dragon Guard will a have a health potion, which he will drink when he reaches 50% health - these are much easier to interrupt - though still a challenge.
+- If you want to ensure that individual dragon guards do not have any potions, use: dg_npot
+- Breath Weapons:
+- These alter the Dragon Guard's name and elemental resistances:
+- dg_bfir - Fire Breath Prefix:"Infernal" (+100 Base XP) +50% fire, -75% cold
+- dg_bice - Ice Breath Prefix:"Freezing" (+200 Base XP) +50 cold, -75% fire
+- dg_bpoi - Poison Breath Prefix:"Noxious" (+100 Base XP) +50% acid/poison, -75% lighting
+- dg_bacd - Acid Bolt Breath Prefix:"Caustic" (+100 Base XP) +50% acid, -50% lighting
+- dg_blgt - Lighting Bolt Breath "Thunderguard" (+100 Base XP) +50% lightning, -75% acid, -50% poison
+- Unless specified, there is a 25% chance that a Dragon Guard will have a randomly selected breath weapon.
+- If you want to ensure that individual dragon guards do not have a breath weapon, use: dg_nbrt
+- Weapon Types:
+- dg_wice - Greater Ice Blade "Iceblade" (+200 Base XP)
+-- Greater Ice Blade with chance to freeze.
+- dg_wbow - Cross Bow "Bowman" (-250 Base XP)
+-- A Steam Crossbow - every third shot will be a Dwarven Bolt. Less HP, runs a lot.
+- dg_wpol - Lance "Pikeman" (+150 Base XP)
+-- A Golden Glaive, with very long reach, and the typical damage falloff, associated with Polearms.
+- dg_wham - Big ol Hammer "Mauler" (+400 Base XP)
+-- Hammer wielders have a lot of HP and AOE stun attacks.
+- dg_wcre - Envenomed Crescent Blades "Ravager" (+200 Base XP)
+-- Rapid attacks, and ranged crescent projectiles.
+- dg_wdbl - Vampyric Katanas "Bladesman" (+250 Base XP)
+-- Dual vampyric Blood Blades,
+- dg_wfrb - Red Rune Blade + Shield "Flameblade" (+150 Base XP), +50% fire resist
+-- Fiery Red Rune Blade, and a shield for bashing opponents (stun attack)
+- dg_wgrb - Green Rune Blade + Shield "Plaguebringer" (+200 Base XP), +50% poison resist
+-- Venomous Green Rune Blade, and a shield for bashing opponents (stun attack)
+- Most Dragon Guards have a kick attack, with the exception of the Mauler (weapon too heavy), the Pikeman (weapon too unwieldy), and the shield wielding variants (prefer to rely on shield bash). The Bowman is also much more prone to the "kick you in the balls and run" strategy.
+- And last, but not least:
+- dg_armr - Armored (+350 Base XP) (50% damage reduct + 50% stun resist)
+- Barring this addparam, 20% of Dragon Guards will randomly be armored.
+- If you want to ensure that individual dragon guards do not have armor, use: dg_narm
+- ...additionally...
+- Dragon Guards have +25% resistance to all elements, and 25% resistance to stun attacks.
+- Green Dragon Guards, in addition to this base have:
+- +25% resistance to acid and poison
+- -25% resistance to Lightning
+- Red Dragon Guards get:
+- +100% resistance to fire
+- -50% resistance to cold
+- Black Dragons Guards (whose skin is still pending), get:
+- +50% resistance, to all elements
+- +100% to stun resistance
+- 200% vulnerability to Holy (Rhudeanlorat has been a very bad dragon...)
+- Set Dragon Guards to Red/Black with: dg_red or dg_black, respectively
+- All elemental resistances combined cap at +100% (immune), and 300% vulnerability.
+- Selecting multiple weapon types, breath types, or potion types, will generate an error - these DO NOT STACK - though it possible for a Dragon Guard to have both a healing potion, and a special potion.
+- This combination is never randomly generated, as it is insane-hard:
+- Armor + Speed Potion + Vamp Blades
+- The regeneration rate, coupled with armor and speed, makes it neigh impossible to do enough damage to even dent the bastard before he regens it all back.
+- If you want this combination, you can set it manually with the addparams above ("dg_armr; dg_wdbl; dg_pots")
+- All Dragon Guards are very agile and capable of jumping to opponents out of reach (exception being bowmen, but they usually don't have to.)
+- The power of these things varies rather drastically, when generated randomly, so beware of this, if you have a narrow level range in mind.
+- *whew*
+
+Known Bugs:
+• It is possible to get stuck inside the Aspect during the final battle, despite all my efforts at monster clipping the teleport destinations. There's several teleport points, however, so, beyond that initial annoyance, it should be possible to get around it. I suppose it does have the advantage that it discourages the repetitive teleportation tactic, that the, rather kind, boss chamber makes possible.
+• Some of the dragon's animations are "a bit off", and the head tracking is stiff, due to limitations in the engine's ability to fine-tune controllers. We will improve the animations of future dragon encounters.
+• Some of Armored Dragon Guards go "limp wristed gay" from time to time - though this is just an aesthetic issue with the converted animations.
+• There are some "holes" in the Reality Tear where you can see through to the map - that sh*t ain't easy, yo.
+• If you are interested in adding a Reality Tear to your own map, I can provide the source of this map section. I may also be capable of providing Reality Tears of different shapes. Beware, however, these things are really hard to work with. I kinda suggest putting the whole thing on its side, and removing the water, so players don't have to drown. (Wasn't room to do that here.)

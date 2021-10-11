@@ -1,0 +1,13 @@
+Re: List of changelogs
+
+July 30th 2006 Public Changelog
+
+- Secondary effects damage will pass XP proper, more often
+- Less likely to crash from 'overlapping damage'
+- Some lag reduction.
+
+This affects:
+- Poison (et. al: spell, fangtooth, arrows)
+- Ice Spells that do continuous damage (ie. Blizzard, Ice Blade spec atk)
+- Fire Spells and Arrows (though volcano & firewall still do not pass to proper skill)
+- Lightning Storm

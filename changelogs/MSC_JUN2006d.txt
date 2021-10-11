@@ -1,0 +1,23 @@
+Re: List of changelogs
+
+June 12th 2006 Public Changelog
+
+For those of you running AMX and Keledrosprelude2. here's the change to the AMX voting system to allow voting for that:
+http://www.thothie.com/ms/adminvote.amx
+(That goes in msc/addons/amx/plugins , overwrite original)
+
+That now is included with the Keledrosprelude2 map, which has had a minor bug fix or two:
+http://www.thothie.com/ms/keledrosprelude2.rar
+self installer: http://www.thothie.com/ms/keledrosprelu ... taller.zip
+
+Finally the SC.dll has had a v. minor update:
+- Fixed summoning cap (again)
+- Longsword player anims
+- Djinn should no longer get stuck on own summons
+- Djinn should summon ice trolls 15-30 secs apart
+- Djinn a little less 'pushy' - but instead does a major launch once in awhile.
+- Djinn no longer freezing people he did not hit.
+- Orochi's Scimitar viewmodel now inside the dll package
+- Several other minor fixes
+
+Still working on balancing the rejuv - but dun worry... Tis not the 1hp/second I had on my server for a bit. Current system is 10+Divination Skill HP healed / Strike @ 5 mana ea. Tis still a little over-nerfed, but on the plus side, it's lag-free, so should encourage healing other players more.

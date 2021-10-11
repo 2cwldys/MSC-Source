@@ -1,0 +1,518 @@
+Re: List of changelogs
+
+JUN2010a PUBLIC CHANGELOG:
+
+JAN2010_centerfold.jpg
+Thuldahr says, "Kneel before the majesty of JAN2010!"
+
+New stuff:
+• Enhanced Day/Night transition system
+• 8 Tome limit removed. Theoretically, you can learn any number of spells. Spells may start to cause overflows if you learn too many, though. They are less dangerous than items, but better safe than sorry.
+• New Galat's Wondrous Chest of Storage (see below)
+• New individual inventoried chests (see below)
+• You can access inventory while sitting again! (Yay!)
+• Typing 'day' 'dusk' 'night' or 'clearsky' now only affects YOUR client
+- It does not affect the global time of day, and your TOD effects will be locked in the mode you select until map change or you use settime.
+• New voice acting by SquareSoftKnight!
+- Go visit your favorite actor in MSCave for your first piece of entertainment!
+- The words don't quite match up, and he's still a bit out of sync, but that's why we call it ACTING! (will fix)
+- (We've actually got quite a bit more of this stuff, but didn't want to delay the patch further sorting it out.)
+
+Know Your Chests
+knowyourchests1.jpg
+• Standard Chest
+- In most cases...
+- Increases inventory with number of players
+- Increases quality of items with number of players
+- If both strong and weak players are on the map, chest may "hide" certain items until the stronger players get a look at them (in order to get first pick).
+
+knowyourchests2.jpg
+• Artifact Chest
+- Appears, floats, and magically gives items to players
+- Player with the most Damage Points (listpoints in chat) gets first pick, the second the next, and so on.
+- The number of players directly affects the chest's chance to dish out a particular item.
+
+knowyourchests3.jpg
+• Individualized Chest
+- Has a separate inventory it displays to each player
+- Each player has his own reward based on his own strength and damage points
+- Increases yield with the number of players present
+- Increases quality of items with the number of player present
+- May offer one or more bonus items based on player's Damage Points.
+
+knowyourchests4.jpg
+• Galat's Wondrous Chest of Storage
+- The latest in magical banking technology allows you to store your items in a magical chest, which can then be summoned anywhere in the world, via a (very expensive) magic scroll.
+- Once summoned, the chest can be accessed by all players present. It contains a separate inventory for each player.
+- Each Galat outlet has a Wondrous Chest of Storage, and its usage at such outlets is free of charge. The local Galat representative can also sell you the aforementioned Wondrous Scroll, which summons the chest anywhere you and your friends may happen to be at the time.
+- At the moment, the Galat chest holds about a dozen items (will vary by script name). If the chest proves faithful, it may be expanded to two or three dozen.
+- Galat's Wondrous Chest of Storage cannot store packs, sheaths, multi-use potions, or ammo, and will not allow you to screw yourself by attempting to do so.
+- Ask your local Galat representative for more details!
+(Tech info: Depositing items in a Galat chests shift your items from inventory data to quest data, making overflows less likely.)
+
+Cheater Tracking
+• All player stats are now tracked in server logs.
+• Cheaters, are recorded in server logs, and reported to all connecting players, after they are kicked from the server, for several days. (Hosts can simply search their chat log for "CHEATER" for more detailed information on individual cheaters.)
+• There are two types of cheaters:
+• Type I: Any player with a stat significantly above the level cap, or with any illegal item, will be kicked from the server, logged, and reported and ridiculed to all clients connecting to the server in question for days.
+• Type II: Any cheater attempting to use console exploits will be kicked, logged, and reported and ridiculed until the server resets. Console exploits used by clients will no longer crash the server in the process.
+• If you see a cheater report, please post the supplied ID on the FN forums for expedient removal. Their character will be examined and dealt with accordingly.
+
+Bugs n' Stuff:
+• Voldar now spawns proper on ms_wicardoven
+• Fixed some possible map voting issues
+• Armor Bug #1 fixed. No longer shall you stick through your armor.
+• Armor Bug #2 fixed. No longer shall your gladiator armor appear as Orochi's jacket.
+• Armor/Gear Bug #4 fixed. All of your worn gear will appear when you spawn. You won't have to re-equip anything to make it visible. (What was #3?)
+• "Sticky Client Variables" (Tomes, Gold, Player kills) should be fixed.
+• Putting a bow away while a bow is on your back causes the bow to be put into the "best" pack. The same is true of all other worn items.
+• Fixed various sticky weather bugs
+• Store prices over 32k now register correctly
+• Reduced lag caused by Rain/Storm weather
+- (Makes Storm more of a trickle, but no more ent floods in Thornlands.)
+• Attempts to fix Lightning Storm strangeness
+• You are not diseased… It's worse… You're poisoned! (Message fix)
+• Some optimizations and various bug fixes for both the new and old AI systems.
+• Some optimizations and various bug fixes for the NPC anti-stuck system.
+• Various efforts to cut down on server crashes.
+• Msg '91' error should be no more
+• Vote bugs fixed (cross fingers)
+• Felewyn light script simplified and should behave now - although it no longer glows when not worn.
+• Everything should be ticket'able (likely only useful if you fill your Galat chest, at this point.)
+- Note you can put tickets in the Galat chest, but tickets have longer script names than most things, so it is likely wiser to turn them in first, then put the item in question inside.
+• Fixed bug where some randomized NPC's would not accept title ("Change name to") property from msmonster_xxx/ms_npc. (Thank Replica for bug report.)
+• You can't sit while stunned or otherwise unable to attack. (Boo!)
+- Alternative fix method for disappearing thrown stuff, but as a result, you can once again access your inventory while sitting, so not so bad.
+• Parry over global skill limit report taken care of.
+• Fixed TOD effects appearing on some underground maps, despite being flagged
+• About a billion other less exciting bug fixes... Hopefully with minimal generation of "new and more interesting bugs".
+
+Balance (aka. Nerflog 2.0)
+• Bows react to non-proficiency with erratic firing and damage reduction
+• Armor has min strength requirements, or owner will be slowed
+- Gold Armor: STR 25
+- Venomed Plate: STR 25
+- Phoenix Armor: STR 40
+- Armor of Bravery: STR 40
+- Fire Aura: STR 30
+- Acid Plate: STR 30
+- All others: 0
+- (Yes, I realize logic fails, as Gold is heavier than any other, but this is more anti-twinkage, and the Gold Armor's shear weight already covers that fairly well)
+- The alternative to the two things above is Twinker Gnomes - so be thankful. ^_^
+• Damage and DOT increases for Lightning Storm, Volcano, and Blizzard
+• Greater Ice Blade has a chance of doing slow-freeze DOT on normal strikes
+• Some strategic guards and allies flagged as invulnerable to player damage (eg. Foutpost)
+• You can no longer sell things for higher than you bought them. Someone didn't understand math between scripts and code when basic functions were written. A cap has been placed so any shops we missed will still work properly.
+• Tomes no longer have a chance of spell failure.
+• Various helm/stun/elemental resistance exploits fixed.
+• All charms upgraded to next type, and type I added to global list
+• Much updated treasure and global list shuffling
+• New global random magic arrow and bolt list
+• Level cap @ 40 (probably soon to be 50, depending on release of: The Wall, Derwintwater, and Sorc_Villa)
+
+Fuznet Changes
+• Various security updates. One that you may notice right away is that FN will be monitoring for differences in maps. Make sure your maps are fully updated. This also means we will be able to release maps without having to release patches.
+• When disconnected from FN, you will have an indicator in the upper left of your screen, thusly:
+fn_disconnect.jpg <- The mystic MSC symbol of "Screwed"
+- It will vanish when the connection to FN is restored.
+
+New Maps
+• Thanatos (thanatos) by J (Hard, connected via Sfor)
+- Stories tell of an elder earth elemental that lives atop this mountain, where the Loreldians once met in council.
+• Kharaztorant Fotress (kfortress) by AmIAnnoyingNow (Hard, Disconnected)
+- A more elaborate, and more dangerous, dwelling of the Kharaztorant dragon cult.
+• Gertenheld Caves (gertenheld_cave) by Dridje (Hard, Disconnected)
+- Ancient tribes of goblins from the Age of Blood lie hidden within these darkened caves.
+• Shahaddar Palace (shad_palace) by Rickler (Very Hard, connected via aluhandra2)
+- Once the palace of a great wizard, now the home of the mightiest tribe of Orcs in the land, the Shahaddar, who have been seduced by and imbued with its immense power.
+• Nashalrath (nashalrath) - By J, Little Frodo, and Little G (Hard, Disconnected)
+- An ancient holding of The Lost that, unlike its occupants, survived The War of Fate, is now haunted by the ancient spirits of the bludgeon slaves and elementals that once served under its roof.
+- (That's my take on it at least, TBH, I've no idea what's going on here.)
+- This is the "demo" version of the final map, which despite utterly breaking all lore consistency, is actually quite fun to play. It maybe less so if/when we switch it up for Torkies though, so enjoy while you can.
+- Little-G can give you the story behind the final map.
+
+Recompiled/Rebuilt maps:
+• Ara (Medium, NPC Transition) - Minor alterations by J
+• b_castle (Medium, via Sfor) - Minor alterations and fixes by P|Barnum
+• Chapel (Low, via Edanasewers) - Minor revisions, plus a path to Isle by CSS
+• Isle (Low, via Chapel) - Various bug fixes plus connection to Chapel by CSS
+• Gertenheld_Cape (Low, via NPC in Deralia) - Various mods and re-texturing by Dridje
+• Gertenheld_Forest (Low, via Gert. Cape) - Various mods, optimizations, and re-texturing by Dridje
+• Isleofdread1 (Medium, via NPC in OC) - Much expanded with greater rewards by J
+• Isleofdread2 (Hard, via Islesofdread1) - Complete remake and expansion of ye old Isleofdread2 by J-M v2.5.5
+- If your client or server cannot handle the map, you can still play the old version under isleofdread2_old (Disconnected)
+
+Updated maps:
+• Aleyesu (Medium-Hard)
+- Hopefully fixed Potential bug where doors would vanish (recompile)
+- Added minotaurs to maze ;)
+- Updated treasure
+• WW3d (Medium, Gauntlet) - Moar spawns
+
+• All updated maps are included in this update in full BSP form, so if you've had trouble with the map-patching process in the past, it should not be an issue... This time.
+
+(SPOILER SECTION)
+By popular demand, masking spoilers... :D
+
+New Items:
+• The Neck Hunter (Smallarms 30/32)
+- This wickedly thorned dagger casts projections of itself at nearby targets.
+- Secondary ability causes the projection to explode on impact for massive damage
+• Dragon Axe (Axe 20/22, Fire 20)
+- While wielding this, you can right click, and BREATH F*CKING FIRE! ;] Dragon Breath effect sets enemies on fire, and repels most opponents. It also drains manna rather rapidly.
+• Venom Plate (STR 30, affliction 20)
+- Enchanted plate offers 50% basic protection, 50% poison resistance, and poisons those who strike you
+• Acid Plate (STR 30, affliction 20)
+- Enchanted plate offers 40% basic protection, 50% poison resistance, 80% acid resistance, and generates a passive poisonous cloud that poisons all nearby enemies.
+• Fire Aura (STR 30, fire 20)
+- Enchanted plate offers 40% basic protection, 30% fire resistance, 25% cold resistance, and burns nearby enemies with a circle of flame.
+• Phoenix Bow (Archery 30)
+- This anti-siege weapon creates a burst of flame that increases in size and power the further the arrow lands from the player
+• Frost Bow (Archery 25)
+- Provides 75% frost resistance 10 seconds after being drawn.
+- Freezes/slows opponents on strike (via limitless pre-generated magic arrows, freeze costs mana, but slowing cold causes no drain)
+
+Two new charms
+(hp/dmg ranges are based on pet's XP)
+• Pet Shadow Wolf Charm
+- hp 500-3000, dmg 15-80, immune fire, 25% damage resist, stun/burn howl
+• Pet Winter Wolf Charm
+- hp 1000-4000, dmg 30-125, immune cold, 50% damage resist, freezing howl (upgrades to 50% freeze solid howl @ 3000hp)
+(Note that you can only have 1 wolf pet at a time.)
+
+New Monsters:
+Goblins - Surviving experiments of Lor Mal that didn't quite make it into the war.
+
+• Blood Goblins: Nasty, agile, fast moving goblins with a burning thirst for blood:
+• monsters/bgoblin (25) - Blood Goblin Fodder comes in three very acrobatic varieties
+• monsters/bgoblin_skirmisher (25) - Blood Goblin Skirmisher: V. Fast and agile skirmisher with a burning saber
+• monsters/bgoblin_guard (30) - Blood Goblin Guard: Beefier, although not as agile, comes in 2 varieties, one with a flaming axe
+• monsters/bgoblin_shaman (30) - Blood Goblin Evoker: Fire galore: balls, walls, and elementals. Dies to reveal the greater fire elemental trapped within.
+• monsters/bgoblin_chief (30) - Blood Goblin Chieftain: bigger hobgoblin with a big fiery axe, fire breath, stun attacks, armor, and all the agility of the wee ones.
+
+• Vile Goblins: Venomous beasts of similar bent to their Blood Goblin brethren:
+• monsters/vgoblin (25) - Vile Goblin Fodder: three flavors, slightly weaker than the Blood's fodder, but annoying in their own way
+• monsters/vgoblin_archer (25) - Vile Goblin Needler: rains down tiny poisoned arrows
+• monsters/vgoblin_guard (30) - Vile Goblin Guard: Slower moving and tougher in their leather armor, they wield deadly poisoned blades
+• monsters/vgoblin_shaman (30) - Vile Goblin Poisoner: Summons bad things, has a nasty smoking habit coupled with a poisonous blast, possessed by an elder horror
+• monsters/vgoblin_chief (35) - Vile Goblin Chieftain: Speaks softly, but carries a big stick - studded with cursed skulls, which launch forth to chew your face off!
+
+• Some Blood Goblins can periodically throw Greek fire, while some Vile Goblins can toss poisonous bile at you. Such goblins keep these unstable materials stored in a quiver on their backs.
+
+Other Goblins
+• monsters/hobgoblin (20) - A goblin, all growed up
+• monsters/hobgoblin_archer (20) - A goblin, all growed up, with a bow and jagged arrows
+• monsters/hobgoblin_berserker (25) - A goblin, all growed up, and on crack
+- Hobgoblins don't jump around as much as their tinier counterparts - but they can easily leap at targets perched above them, if need be. (More lore info available when wiki is resurrected.)
+• monsters/sgoblin (25) - Shadow goblins - these annoying little buggers vanish at will
+
+• Older goblins use the new model but demonstrate same old behavior (although hit range was a bit nerfed.)
+
+New Kharaztorant Culists
+• monsters/k_larva_black (30) - Black Kharaztorant Larva
+- About double the strength of the red larva, more affliction oriented, cold resistant
+- Pukes up blinding poison all over nearby opponents
+• monsters/k_childre_black (35) - Black Kharaztorant Childre
+- About double the strength of red childre, more affliction oriented, cold resistant
+- Fires spore clouds and has a repelling poisonous burst attack
+• monsters/k_childre_boss (35) - Black Kharaztorant Hierophant (aka. Kruxus the Corrupting Shadow)
+- Elder black childre, much stronger, capable of raining down storms of poison spores, much improved ethereal shift.
+- Requires a fair amount of headroom for optimum functionality.
+
+• monsters/k_elder (25)
+- Elder Kharaztorant Cultists with nasty, although specialized, powers
+- Comes in fire, lightning, poison, and cold variants
+- These monsters are designed to keep a single player in check, but not be as much of a threat to a group of players. They tend to focus one player to the exclusion of all others, then use cheap magic effects to inhibit his movement and/or pin him in place.
+- Suggest avoiding using more than one lightning variant in the same location, as the tempent spam would be heavy. Also beware that lightning variants may send players flying upward into places you do not want them to be able to reach.
+- To define variants, use the "Additional Parameters" (params) property:
+- " type_fire ", " type_poison ", " type_cold ", or " type_lightning ", accordingly
+
+• monsters/k_hollow_one (35)
+- This is the apex of Kharaztorant evolution, should they avoid mutating into one sort of beast or another. The Hollow Ones have access to a massive array of spells and abilities.
+- Give these guys some head room, as they can fly.
+- You cannot have more than one alive at the same time due to the way the client effects are designed. (Use dmgmulti or hpmulti, if ye must)
+- They are intensive tempent users, but designed to hold their own against small groups of players without escort.
+- Offensive abilities include... (in order of deployment)
+? Spawn Corpse Light
+- Corpse light's are ethereal beings that slowly drain mana from targets until they die
+- They appear as very slow moving translucent blue flames
+- They are absolutely indestructible, although they do expire over time, or when their target dies
+- (These beasts are entirely client side and inclusive to the Hollow One's script, so they cannot be produced individually. The Hollow One may maintain up to 8 at any given time - although with the expire time and frequency he deploys them, one is unlikely to see more than 4.)
+? Guided Fire Ball - slow moving, client side AOE fire ball
+? Guided Ice Ball - slow moving, client side AOE ice ball
+? Fire Breath* (duckable) - Breaths fire in a 360 arc
+? Ice Spiral - Raises ice spikes from the ground in an outward moving spiral
+? Poison Breath* (duckable) - Blinding poison, in a 360 arc
+? Magic Cage (projectile) - Immobilizes (although does not paralyze) a single target for 30 seconds.
+? * Skips these parts of his cycle while in flight
+- Defensive abilities include...
+? Static Field - approaching too close to the Hollow One will result in a repulsive shock
+(Trick is to get close enough to do melee damage, but not so close as to get zapped.)
+? Shadow Shift - The Hollow One will occasionally dodge blows by teleporting short distances ( He will not do this while using either of the next two defensive abilities: )
+? Mirror Image - The Hollow One can vanish and create multiple decoy images of himself.
+? Flight - The Hollow One can choose to fly through the air and rain death down on opponents from above.
+- Forms a pattern of sprites in the vague image of a dragon on death
+
+Mummies
+
+• monsters/mummy_fodder [25] - Crypt Fiend
+- Basic, slow moving mummy. May rise up from the dead again, much like the skeletons do, but he's a bit less obvious about it.
+- Beware that, like skeletons, mummies that get up again will trigger any fireallperish events when they die the first time. So if you have a gauntlet going, some mummies left behind may get up again to join the battle in the next section.
+
+• monsters/mummy_slave [30] - Mummified Slave
+- Slightly faster, slightly stronger. If you get too close, it may bite your head off. Like the Crypt Fiend, these have a habit of not staying down. (It's just these two actually, all the following are 1 shot wonders.)
+
+• monsters/mummy_cursed [30] - Cursed Crypt Fiend
+- This crypt fiend has a red glowing aura around it that prevents players from getting near, and a stretchy-arm Dhalsim style attack that reaches just beyond it. This forces players, more or less, to take out the beast with projectile weaponry. It is recommend that you avoid using more than one of these per encounter (maybe two, in a very large room). Additionally, these guys will periodically puke up blinding bile.
+
+• monsters/mummy_warrior1 [30] - Mummified Slave Driver
+- Faster, tougher, and armed with a random weapon, these guys will run up to you and give you the beat down.
+
+• monsters/mummy_warrior1b [30] - Mummified Swordsman
+- Similar to the Slave Driver, but a bit meaner, faster, and with a two prong sword
+
+• monsters/mummy_warrior1c [30] - Mummified Legionnaire
+- As above, but this time with a spear he can throw
+
+• monsters/mummy_cleric [35] - Mummified High Priest
+- These monsters will attempt to stay at the back of the battle lines and heal other mummies. They will not heal other types of undead or allies. While this guy lives, other mummies will be neigh impossible to kill.
+- Do not use more than one Mummified High Priest per encounter. While they will not heal themselves, they will heal one another, and it'd take quite a gang bang to take down two of them healing one another.
+- Note also that High Priests can heal other mummies as far away as 1024 units - and ignore walls when they do. While it is possible to have a cleric healing mummies from a separate chamber, I wouldn't recommend it, as it is not exactly intuitive.
+
+• monsters/mummy_ice [35] - Mummified Ice Lord
+- Has a blue glowing aura that will freeze anyone who gets near, and freezing ice breath that'll harm and slow players at a fair distance. If a player is frozen within their aura, the mummy will attempt to bite his head off before he escapes (not that there's much hope of this, even with strong cold resistance.)
+
+• monsters/mummy_necro [35] - Mummified Necromonger
+- This necromancer has a really weird looking aura that damages anyone nearby for about the same rate of damage as the golden skeleton's Circle of Death.
+- Additionally, he can summon a number wraiths equal to the number of players on the server (minimum 2). For a description of these, see entry for monsters/wraith.
+
+• monsters/mummy_warrior2 [40] - Mummified Warrior
+- Similar to the Slave Drivers but with cleaner bandages, and much stronger.
+
+• monsters/mummy_warrior2b [40] - Mummified Flameguard
+- As the Warrior, but with a magic flaming sword. Also, unlike all the other mummies, this one is flame resistant and cold vulnerable.
+
+• monsters/mummy_warrior2c [40] - Mummified Warlord
+- He works similarly to the Legionnaire, but he's a LOT stronger, and his pike is magical. It's a bit easier to dodge, but if he hits you with it, you're frozen in place inside a magical cage for at least 10 seconds. You can still attack while inside this cage - but this guy will easily out reach you with his pike and poke you to death very quickly. This makes him neigh impossible to solo, but a gang bang of like level characters should be able to do him in, as he can only freeze one player every 20 seconds or so, and, like most monsters, tends to retaliate on the nearest opponent.
+
+• monsters/mummy_storm_pharaoh [40] - Pharaoh of Storms
+- This royal bastard has a lightning shield that prevents attackers from getting near, a big pike to poke players with, and lightning breath and beams with which to bring the pain to those out of reach.
+
+Note that all the breath weapons and auras work through walls (it'd be rough on the server to combine them with a traceline - and neigh impossible in the pharaoh's case.)
+
+Mummy Additional Parameters:
+Mummies all share two optional additional parameters you can add via the property of the same name in their msmonster_xxx:
+• spawn_squatting
+- Mummies with this parameter will spawn in a sort of meditative squatting position. They will not attack until players come near, and within their FOV - or they are attacked. When they slay all the players around, they'll resume squatting, a few seconds later, near where the last player fell.
+• spawn_eating
+- Mummies with this parameter will spawn eating off the floor, as if ravaging a fallen corpse. Feel free to add a corpse and blood decals if you wish. They will not be disturbed from their meal unless a player gets VERY close (from the front) or strikes them. Once they've killed a player, if there are no more around, they will resume their munching activities on the resulting corpse.
+
+I don't recommend using spawn_squatting or spawn_eating on any mummy with an aura (ie. mummy_cursed / mummy_ice) as it may cause odd visual effects. These parameters are likely best used with fodder, slave, and warrior types. It could also be used as a "trap" in a lower level dungeon - ie. a mummy you have to sneak past - although if the first player who encounters it manages to live long enough to drag it to where it's blocking a corridor, it could be the end of the line for him and any like-leveled friends.
+
+Mummies using spawn_squatting or spawn_eating will not respond unless the described conditions are met - even if their allies nearby are in combat. This behavior maybe altered on request.
+
+You can force a squatting or munching mummy to rise on que by using the ms_npcscript event "mummy_getup_now".
+
+You can force ALL mummies on the map, squatting or eating, to get up at once by spawning an NPC with the scriptname: monsters/mummies_getup. This NPC is temporary, so you can use it for subsequent groups of mummies (for instance, in multiple rooms). An example usage of this would be to have all the squatting mummies get up when a player nears a sacred object.
+
+• setup_mummy_mace, setup_mummy_axe, setup_mummy_sword
+- Any one of these additional params can be used on lesser warrior types (monsters/mummy_warrior1 and monsters/mummy_warrior2) to force a particular weapon, rather than choosing one at random.
+- Mace wielding mummies have a chance of stunning enemies.
+- Axe wielding mummies have a bit more HP.
+- Sword wielding mummies are a bit weaker, but hit harder.
+
+• set_no_fake_death
+- Makes mummies that might get up again after death, not do so.
+
+Skeletal Archers:
+• monsters/skeleton_archer1 [20]
+- Roughly Calruin'd leveled basic skeleton archer.
+- Skeleton may fake death (a bit subtler than the default skeleton's method).
+• monsters/skeleton_archer2 [25]
+- Bit meaner, along the power of an Orc Sniper.
+- Skeleton may fake death (a bit subtler than the default skeleton's method).
+• monsters/skeleton_archer3 [30]
+- Nastier armored archer, arrows have some knock-back.
+- All the following archers also have arrows with knock-back of varying degrees.
+• monsters/skeleton_archer_fire1 [25] - Magic fire arrows.
+• monsters/skeleton_archer_fire2 [35] - AOE Magic fire arrows.
+• monsters/skeleton_archer_ice1 [25] - Magic ice arrows.
+• monsters/skeleton_archer_ice2 [35] - AOE Magic ice arrows (Freezes solid on direct hit)
+• monsters/skeleton_archer_lightning1 [25] - Magic lightning arrows.
+• monsters/skeleton_archer_lightning2 [35] - AOE Magic lightning arrows.
+• monsters/skeleton_archer_poison1 [25] - Nasty poisoned arrows.
+• monsters/skeleton_archer_poison2 [38] - AOE Magic poisoned arrows.
+• monsters/skeleton_archer_stone1 [30] - Statue of a skeleton with a bow.
+• monsters/skeleton_archer_stone2 [40] - Nastier version of the same thing.
+
+Additional Parameters for Skeleton Archers:
+• set_turret - Don't move and don't chase targets.
+• set_no_fake_death - Don't get up again after death.
+• set_rebirths - Get back up the following token times (eg. "set_rebirths;10")
+• make_sleeper.
+- Spawn playing dead until a player comes near (invulnerable while sleeping)
+- Stone skeletons will attempt to look like statues instead.
+• make_sitter - Spawn sitting until a player comes near and in FOV (or attacks).
+• make_deep_sleeper
+- Spawn playing dead and do not get up until receives event skeleton_wake_up or the NPC monsters/skels_wakeup is spawned.
+• Skeleton archers are affected by monsters/skels_wakeup, monsters/skels_sleep, monsters/skells_deep_sleep, and monsters/skels_normal scripts in the same way normal skeletons are (see MAR2008a changelog).
+• REMINDER: You can combine additional parameters by separating them with semi-colons. For example: "make_sitter;set_rebirths;5;set_turret" (sans-quotes) would make a skeleton archer spawn sitting, fake death 5 times, and act as a turret.
+
+Undead Orcs:
+Zombie Orcs have a messload of HP, but move and attack very slowly...
+• monsters/zorc_warrior1 [25]
+• monsters/zorc_warrior2 [30]
+• monsters/zorc_warrior3 [33]
+• monsters/zorc_archer1 [30] - Pulls so strong the arrows have some knock-back.
+• monsters/zorc_archer2 [35] - Both archers accept the additional parameter "set_turret".
+
+More of the Shahaddar Army
+• monsters/djinn_lightning_lesser [35] - Lesser Lightning Djinn
+- A lightnng Djinn ogre, similar to the Cleicert Boss (no summons)
+• monsters/djinn_lightning_lesser_alt [38] - Lesser Lightning Djinn
+- Alternate behavioral model of same, but better at operating with allies (no summons)
+• monsters/djinn_lightning_troll [35] - Shahaddar Lightning Djinn
+- Troll-based Lightning Djinn - throws AOE lighting balls summons guided lightning spheres
+• monsters/sorc_shaman_elder [30] - Elder Shahaddar Lightning Shaman
+- Nastier variant of the ye old dreaded lightning tosser
+(Thuldahr still pending)
+
+Torkalath Elves
+• monsters/telf_warrior_bow [35] - Torkalath Shadowarcher
+- Fires spiraling elemental mists from her magical bow
+• monsters/telf_warrior_esword [35] - Torkalath Blademistress
+- Angry gal with a Torkalath Not-so-Short Sword
+• monsters/telf_warrior_fmace_dshield [35] - Torkalath Warrior
+- Torkalath elven warriorsess with a fire mace and shield
+• monsters/telf_warrior_idagger [40] - Torkalath Frostmistress
+- Female Torkalath elf with a Lich Tongue
+• monsters/telf_warrior_laxe [40] - Torkalath Slasher
+- Female Torkalath elf with a unique lightning axe
+• monsters/telf_warrior_pdagger [30] - Torkalath Assassin
+- Female Torkalath elf with a poisoned throwing knife
+- All Torkalath warrior types are 50% resistant to all elements
+• monsters/telf_wizard_xbow [30] - Torkalath Apprentice
+- This male Torkalath Sorcerer in training relies on his heavy cross bow and explosive bolts
+(Torkalath Novice and Necromancer still pending...)
+
+Others
+• monsters/snake_gcobra (20) - Has been updated for full functionality. The beast also now has a blinding poison gas spray, and his XP has been updated accordingly.
+• monsters/scorpion5_stone(25) - Stone Scorpion (Big)
+• monsters/scorpion6_stone(30) - Obsidian Scorpion (Huge)
+• minibosses/titan & monsters/elemental_earth3 (35 - Boss) - The Titan: This huge boss requires 1150+ units of headroom, and the players must be trapped near where he spawns, as all his summons and treasure drops appear within a 512 unit circle of this placement.
+• monsters/snake_cobra_boss (35 - Boss) - The Gargantuan Cobra: This mythic beast requires 250 units of headroom and is over 300 units wide. Comes in _turret variant, which doesn't move, but spits at anything it sees, and bites a breaths at what is in reach.
+• mscave/shadahar2 (25 - Boss) - This new version of the remains of Shadahar only functions on mscave, and requires support scripts ( mscave/shad_teleX )
+• nashalrath/kayrath (35 - Boss) - Big ugly tenticle plant-like mini-boss for Nashalrath
+
+• monsters/lost_soul (15) - Think Doom.
+• traps/splodie_skull (15) - A skull that drops down, bounces about, and 'splodes a few seconds later, poisoning all around.
+- Best deployed as a trap due to it's limited life span and lack of homing instinct.
+
+• monsters/wraith [20] - Wraith
+- This creature is immune to all but holy weapons, and dark magic. He's also *slightly* vulnerable to lightning.
+- He can float through walls and chase you just about anywhere.
+- When near you, he'll hit you with a beam that drains your mana. If he drains all your mana - you die.
+- He'll also teleport around if you get too close to him. This looks like an effort to dodge blows - but it's actually an effort not to get players stuck inside him. We would have liked to make him no-clip, so you could simply walk through him, but then you wouldn't be able to hit him with traceline damage or projectiles.
+- Generally, they will not hunt for players more than 1024 units away from the spot where they are summoned/spawned - but they will chase them any distance, once they lock on. When they have no target, they'll roam a fair distance around their spawn point. They can also attack enemy NPC's (eg. pets) for hitpoint damage.
+
+• monsters/cold_one [35]
+- A nasty frozen necromancer mini-boss that decays throughout the battle
+
+• monsters/guardian_iron [35-40] - Iron Guardian
+- Huge and slow lightning golem with a huge sword and nasty attacks
+• monsters/guardian_iron_charger - (Utility)
+- If you spawn this before the Iron Guardian, it will serve as his recharge point
+- Without a recharge point, the Iron Guardian never runs out of charge, and is thus a lot more dangerous
+
+• monsters/bludgeon_gaz1_corrupt [30] - Corrupted Bludgeon
+• monsters/bludgeon_gaz1_corrupt_mini [30] - Young Corrupted Bludgeon
+- Affliction enchanted variants of the demon bludgeon.
+
+Misc NPCs
+• tutorial/prisoner - Kyra NPC for Tutorial Map
+• tutorial/rat [1] - Hostile rat for Tutorial Map
+• tutorial/slave - Tutorial Slave for Tutorial Map
+• tutorial/slavemaster - Special weak bandit script for Tutorial Map (no XP)
+
+New Mapper Toys
+• weather/vapors - This ms_npc can be placed on your map to make a pulsing cloud of fog or mist, with a color and size of your choosing, with the additional option of damaging players
+- Requires "params" (Additional Properties) property be set in tokens. Format is: <(RRR,GGG,BBB)>;<radius>;[type:fire|cold|poison];[dmg/sec] - explained in detail:
+? (RRR,GGG,BBB) - the color (same format you use to make lights in Hammer, figure it out)
+? (radius) - Up to 1024 units - although sizes above 512 are not recommended.
+? [type:fire|cold|poison] (optional) required for damaging clouds only
+? [dmg/sec] damage delt to players per second, keep low, as it will cause XP loss if they die to it.
+- Note also that these clouds damage only players, not NPCs
+- example: "(0,255,0);128" - 12 foot wide bright green cloud (sans quotes, mind ye)
+- example: "(255,0,0);64;fire;10" - 5 foot wide bright red cloud that causes 10/sec fire damage
+- Weather vapors can be removed with an ms_npcscript event "npc_suicide"
+- Don't go crazy with these - they eat tempents. Best to have them spawn with some nearby monster, and vanish along with him via ms_npcscript.
+
+New Entities:
+• ms_monsterspawn
+- This is the same as msarea_monsterspawn, except it works as a point entity without Hammer flipping out.
+- Yes, now you can add monster spawns with only_ents compiles, and without adding more brushes to your map.
+- This entity, obviously, lacks the "spawn within box" option. (Although if you manually set it, monsters will spawn directly at the entity's location.)
+• ms_counter
+- Same concept, except with trigger_counter
+
+New FGD
+• New FGD's not only provide access to the new entities above, as well as a various bug fixes, but also offer a global "note" property for all entities, where you can enter information about each individual entity (very handy for multi-mapper projects and complicated entity chains). Remember not to put quotes (") in this, or any other entity property though, or the map will fail to compile.
+
+New Dev Command:
+- devcmd tospawn [spawn_name] (eg. devcmd tospawn from_mscave)
+- If you have access to the alpha dev commands, you can use this to teleport to a random ms_player_spawn, or any random ms_player_spawn with a message property matching the [spawn_name] you enter. Very handy for testing maps with multiple transition points.
+
+New trigger scripts:
+- triggers/glow_block - Stick this "scriptname" property on a trigger_multi and any player who crosses it will have their glow snuffed out. They'll be unable to use glow again until they cross another trigger brush with the script "triggers/glow_unblock" (or the map changes).
+- triggers/trigger_zap - This does direct lightning damage to the target. This is not an applyeffect - meaning if the target is not entirely immune to lighting, it will still take some damage, rather than having a %chance to resist the effect. Targetname is the name to use in the damage report (eg. "An|electrified floor"). Target is the amount of HP damage to do each time the brush is touched. This brush will also affect monsters.
+
+Old trigger scripts
+- The following trigger scripts have been aliased here. We shall mention them for sake of review:
+• triggers/totalhp_trigger - Trigger "target" if total server hp in range.
+- "targetname" represents the HP range. Format: "minhp;maxhp"
+- eg. targetname "1000" would fire target if the total hp of players on the server equal or greater than 1000
+- eg. targetname "250;500" would fire target if the total hp of players was between 250 and 500
+• triggers/trigger_avghp - same as above, but works by average hp, instead of total
+• triggers/trigger_burn - Resistible fire damage on touch
+- "targetname" property shows the name to displayed on evthud, eg. "some|hot lava"
+- "target" can be used to redefine the amount fire damage (default is 1000, if not defined)
+• triggers/trigger_cannon
+- Triggers if a cannonball flies through the brush (map specific trick for ocean_crossing)
+• triggers/trigger_if_evil
+- Fires target only if touched by a non-human allied NPC (non-dwarf, non-elf, non-hguard)
+• triggers/trigger_poison
+- As trigger_burn, but does poison damage.
+- You can vary the time poison lasts by adding a semi-colon and time, following the damage.
+- eg. target "10;60" - would do 10pts damage/sec for 60 seconds.
+• triggers/trigger_web
+- Intended for use with func_wall_toggle, paralyzes players who touch it for 10 seconds, and fires the targetname (with the intent of removing the wall - so it should target itself)
+• triggers/undamael_break
+- Fires "target" event when touched by Undamael, once. (ie. sfor/msc_undamael)
+• triggers/undamael_hurt
+- Acts as lava. If Undamael is present, anything that dies in this lava adds to Undmael's HP.
+• triggers/undamael_pitedge
+- When touched by Undamael, it tells him that he's reached the edge of his pit, and should float back towards his spawn point for a bit (due to the complex way in which Undamael is handled, he cannot be blocked by monsterclips - or even walls for that matter, so these are the only way to contain him.)
+
+New Global Additional Parameters:
+All monster scripts accept these as Additional Parameters.
+• ext_reduct_xp;<ratio>
+- If you have monster you feel is in an unusually exploitable situation, you can use this add param to reduce its experience value by the inputted ratio. eg. "ext_reduct_xp;0.25" = 25% XP value. You cannot use values greater than 1 to increase XP value - but we can handle that for you with special scripts if we feel your monster is in a situation that makes him more difficult to defeat than usual and/or is being used as an end-of-map boss.
+• ext_no_drops
+- Useful for the same situations that ext_reduct_xp is, this is used to prevent the monster from dropping gold or items. A *few* monsters, however, will still drop their items due to having older scripting conventions. These can be dealt with on an individual basis, script side, if need be.
+
+
+(/SPOILER SECTION)
+
+Known Issues:
+• Under the new Day/Night fx system, the map starts at night (always has I guess) - but with the fade-in sequence this is particularly jarring (lest, the server time is already night). Not sure what to do about this. It also makes the birds chirp in twice as the map switches to day for the first time, for some odd reason.
+• clearsky doesn't stop some server-side effects (lightning may continue if you use it during storm). (But hey, at least those who enjoy the rain can do so without you :p.)
+• Blinding poison attack lags like hell when it first loads
+
+Download ye epically sized update: 168MB
+http://www.msremake.com/download.php
+
+(If you downloaded the patch recently, clear your net caches, as file is under the same name as the last patch (msc_beta_package.exe). If it comes down under 160MB, it ain't the right patch.)
+
+UPDATE:
+I've only updated the download page, I'm in the process of updating the other pages.
+I also need to make rounds under a JUN2008 install and clear people from the servers before FN goes down for them.

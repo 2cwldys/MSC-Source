@@ -1,0 +1,102 @@
+Re: List of changelogs
+
+NOV2011a PUBLIC CHANGELOG:
+NOV2011a_centerfold.jpg
+"Boo! ... Whaddya mean it's too late for Halloween?"
+
+New Map
+• Bloodshrine by Joe! (Very Hard, Disconnected)
+- Yet more ancient ruins to explore... But what's this, a surprise?
+
+Updated Maps
+• The_Wall2 - Once he hits the staircase, Forsuth will follow you, even if he has to cheat to do it.
+• Aleyesu - Various sploit fixes, post-boss spawn teleporter, and various optimizations
+• gertenheld_cave - Various fixes
+
+New Stuff
+
+status_icons2.gif
+• Status Icons (With Timer Bars)
+- We've finally dared to implement these. In order to assure they are not causing any new issues, we're currently implementing just two: Ice Shield and Stun - most of the other effects are visually indicated (either in the event hud, or otherwise), or last until death, so these two seemed the most critical.
+- They can be disabled with the client cvar: ms_status_icons 0
+status_icon_irl.jpg
+
+• liblist.gam is now included with the betapack installer - this provides a default client edict count of 1500, to help keep modified -num_edict servers in sync with clients.
+
+Nerf Log
+• Heavy Crossbow Reload Time reduced 25% (now 3 seconds)
+• Steam Crossbow Reload Time reduced by half (now 5.8 seconds)
+• Volcano no longer provides fire DOT for all weapons (oops)
+• Lots and lots of various exploit and cheat fixes
+
+New Mapper Toys
+• test_scripts/player_externals and test_scripts/game_master
+- These two test scripts can be used to add additional externals or systems to the game_master or players accordingly
+- Remember, any trigger script event prefixed with "gm_" is called against the game_mater, rather than the character that crosses it. Also remember, that only triggers with the "Monsters" spawnflag checked affect NPCs other than the game_master.
+
+Other Stuff
+• Fire Staff aimer now ignores NPC collision boxes for easier aiming - but the aimer will also go through solid map entities - such as func_walls - though the spell itself will not
+• Fixed various chests/bank issues (including reports when inventory full)
+• Some fixes and optimizations for Maldora
+• Cleaned up pet teleport system a bit (less likely to go into walls)
+• If you die, your pet will automatically "egg" - preventing him from following you into a pit
+• Teleporters now select from destinations sequentially, instead of randomly, reducing likelihood of players getting stuck in one another, so long as there are multiple destinations provided.
+• Fixed BoU crest ^_^
+• Lots of misc optimizations
+• The usual 100,000 minor tweaks and changes I'm not bothering to list
+
+Mind you, we've not fixed every reported exploit, even among those we can fix, but we got most of the recently reported ones. Those of you who reported exploits can collect your rewards from Sembelbin at any time. (Jeeze, so many in that list now - gonna have to make it an array, instead of a token set).
+
+New Items
+• Lance of Affliction (Req. Polearms: 35+, Affliction: 30)
+- Abilities: Charged_Thrust, Block, Push, Backhand, Power Throw
+- The Lance of Affliction does heavy Acid damage coupled with Poison DOT effects.
+- Throwing the lance, and landing it at sufficient angle, causes the projectile to emit a spiral of poisonous gas, for fifteen seconds. This gas does 75% of your affliction skill per second for 5/seconds.
+- It is also capable of emitting a poison burst with a large radius.
+
+• Potion of Swift Blade
+- Increases speed of primary melee attacks by 50%
+- (This does not affect bows, spells, or secondary charged attacks)
+- Lasts until death.
+
+• Lesser Potion of Swift Blade
+- As the Potion of Swift Blade, but increase is 25%
+- Note that the effects of these potions do not stack! (Indeed, drinking one will cancel the effects of the other.)
+
+New Beasties / Scripts
+• monsters/burning_one - Burning One [very hard]
+- Whipped this up in a bit of a hurry - works, more or less, like the Cold One / Hollow One, except has a golden mask and is fire themed.
+
+• monsters/lumbering_dead - Lumbering Dead [hard]
+- Big hulking skeleton. Can jump. Multiple slashing attacks. Throws skullcrabs (see below). If two or more skullcrabs are already deployed, it will instead toss gobs of acid at distant targets (favoring hugs, if possible).
+- Note that the Lumbering Dead on Bloodshrine have an XP reduction, as they spawn infinitely. (Actual default value is 1000xp)
+
+• monsters/skullcrab - Skull Crab [medium]
+- This operates, more or less, identically to the Half-Life Head Crab - save that it'll crawl over and bite you for a few moments before flying off.
+
+• monsters/shadowform_boss - Ancient Shadowform [very hard]
+- This is a stationary boss made up of a dark cloud with whips of electricity dancing throughout its mass. It'll strike opponents within 700 units with either lightning or dark energy (alternating randomly).
+- If an enemy nears within 384 units, it will manifest its eye. It is only vulnerable when its eye is manifest - and even then, only to Holy or Dark energy. Once manifested, it will attempt to seal a single enemy in a magic shell, slowly damaging him, and neutralizing him, for 15 seconds. It will then de-manifest 5 seconds later, and be once again rendered invulnerable, making solo'ing difficult.
+- Since it isn't vulnerable unless a target is in attack range, it doesn't require some of the usual exploitation prevention seen with other bosses, however, as it is also stationary, it will require some sort of permanent escort.
+- Externals: gm_bloodshrine_boss_fx - triggers with this script event update the monster's client fx (through the game master). As the cloud FX only update every 30 seconds, it is recommend to have such a trigger near entrance(s) leading to the monster - though there is always a field of lightning, helping to indicate the monster's position. (This system will not work if there is more than one ancient shadowform present.)
+
+• monsters/snake_gcobra_metal [medium]
+- Giant Cobra, made of metal. As per usual with the metal subtype critters, has major damage reduction, with a slight vulnerability to holy magics and a severe vulnerability to lightning.
+- Note that the one debuting on Bloodshrine has very high multipliers, the metal cobra's stats are actually identical to the regular giant cobra's, save for the damage reduction and vulnerabilities.
+
+• joe/bartifact [n/a] - A Bloodshrine Artifact
+- Special script for opening the Bloodshrine entrance.
+
+• bloodshrine/sorc_warrior_friendly
+• bloodshrine/sorc_warrior2_friendly
+• bloodshrine/sorc_shaman_friendly
+- Special scripts for the friendly Sorcs on Bloodshrine
+
+Additional Bloodshrine Notes:
+• A group of friendly Shadahar orcs will aid you towards the end of the map, if you have a Blood Drinker as proof of your aiding Chief Runegahr. If you lack such proof, however, they will be hostile.
+• The allied orcs are MUCH stronger than your average Shadahar warriors.
+• (Bug) Don't let the shaman wander off the cliff in the room with the large crystal. Unlike the warriors, he cannot jump - you'll have a very hard time getting him back out.
+• The allied orcs will usually attempt to follow the nearest player at a respectful distance, but they are quite large. If they accidentally "trap" you, merely push up against them - they should move aside.
+• The Shaman has banishing magics, and thus, unlike the warriors, he can affect Shadow Forms.
+• Successfully completing the map will result in minor rewards from the warriors, should they survive. The Shaman, additionally, can increase a skill of your choice by 5,000-10,000xp (+25% per player present). He will do this once for every player in the top 75% damage point tier.
+• The orcs will NOT reward you, if you did not let them fight. They will feel that witnessing their humiliation, as they sat by helpless during a battle, was reward enough for you. They must have each done a fair amount of damage, and have each been damaged by the final boss.

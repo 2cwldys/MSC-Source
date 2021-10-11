@@ -1,0 +1,156 @@
+Re: List of changelogs
+
+SEP2011a PUBLIC CHANGELOG:
+msc_tower2.jpg
+Betapack SEP2011_11 - Never forget...
+
+HOT AND COLD RUNNING MAPS
+• Phlame's Fortress (phames) by Caluminium [Very Hard, Disconnected]
+- A cabal of evil pyromancers has built up a lair in these caves.
+
+• Tundra (tundra) by Joe! [Hard to Very Hard, from Oceancrossing or The Frozen Summit (ms_snow)]
+- Brave hunters once traveled to these frozen lands seeking their fortunes, but alas, far too few have returned.
+
+Updated Maps
+• Cleicert (cleicert) by Dridje (recompile)
+- Added some monster counters to make the various stages more reliable.
+- (May have messed up the lighting in the process though.)
+- Also tell the ghost priest to STFU for me, please....
+
+• The Frozen Summit (ms_snow) by Avazool and P|Barnum
+- Added/Enabled transitions to Tundra
+
+• Deralia Sewers (deraliasewers) by Dridje
+- Fixed bug where boss would not spawn from 2001 to 2500hp
+
+New Stuff
+• ms_reconnect_delay (cvar)
+- You can now (somewhat) control the delay before you reconnect to the server after a map change. This defaults to 5, can be set as low as 2, or to, however high you want. What exactly 2, 5, and whatnot are in terms of time varies from machine to machine, and how much time you'll need to be "safe" varies from server to server. So this is kind of a "guess"/expert mode switch.
+
+Nerf Log
+• Steam Bow +50% damage
+• Running The_Wall2 a second time, without first returning to The_Wall1, will result in Forsuth not spawning.
+• Volcano Changes
+- From a gameplay perspective, this is a bit of a mixed bag. Projectiles, and the volcano itself, now both do direct damage, in addition to DOT, though the DOT has been significantly reduced.
+- However, the entire thing is now client side, in that there are no server projectiles, at all. Rather, the client reports where the fireballs land back to the server-player. This should make for a much less laggy beast, and help test this methodology for the spell system remake.
+- This applies to both the standard volcano spell, and the weapon generated volcanos. It does not apply to NPC volcanos or volcano traps, which will take some more doing.
+• Fixed a bug that would sometimes cause the Ice Typhoon to consecutively freeze targets it should not.
+• Fixed North Maul's first charge
+• Fixed Axes' first charge
+• Malodra Tomahwaks and Kruxus Neck Hunters are now reserved for player with the highest damage points when they spawn
+• Exploit Reporter's Club - Exploit reporters can receive special items and services from Sembelbin in Edana.
+- List to be adjusted and expanded upon as we go.
+- More on this drama in some other post, no doubt.
+
+New Mapper Toys
+• New Trigger Properties: reqhp, reqavghp, reqplayers, reqelsetarget
+(in the FGD as: "Req. Total HP (min;max)" "Req. Avg HP (min;max)" "Req. #Players (min;max)" and "Req. Else Target")
+- These options appear on most triggers, including trigger_once, trigger_multiple, and trigger_counter/ms_counter. They can be used to require a range of hit points or players before activation.
+- By default, the setting indicates minimum hp/player requirement. Formatting can be used to restrict the range, eg. "100;500" indicating from 100 to 500. Floats can also be used (save on reqplayers, as you can't really have half-players.)
+- reqelsetarget ("Req. Else Target") provides an option to fire an alternate target, if the trigger is touched, but, but the requirements are not met.
+- These properties *may* work on some other trigger types that they are not attached to in the FGD, but you'd have to manually add them to find out. (No promises.)
+- Triggers with these properties obey all the usual trigger laws. (Unlike the old scripted variant of this.)
+
+• func_door "unblockable" flag
+- Check this flag to prevent the usual exploit of a player suiciding to force a door to stay open. It'll crush him and keep right on going. Mind you, if the door does no damage, it'll just freeze the player inside of it - which might have its own uses.
+
+• func_conveyor "toggle" flag
+- func_conveyors with this flag will start and stop when triggered, instead of changing direction. Note that they will also start "off" by default.
+
+• New Add Params
+- setfx_sprite_in and setfx_sprite_inx
+-- Causes the monster to fade in with a sprite and sound effect
+-- The first requires that c-tele1.spr be located somewhere on the map, as it is not normally precached. The setfx_sprite_inx does not have this requirement. (Sry, h4x)
+- set_fadein_delayed - Same as set_fade_in, but with longer invisible time, in case the monster spawns from a particularly high ceiling, and you want to mask the falling effect better.
+- set_dosr - This is a short alias for the addparam "set_die_on_spawn_removed" - as there's a limit to how long the addparam string can be. Using either causes monster to die or delete/fade if it's spawn is removed via killtarget.
+
+Bug Fixes and Other stuffs
+• MASSIVE script optimization, partly due to a change in compile method.
+- This patch's sc.dll is actually around a megabyte smaller than last patch's, despite having another three dozen lengthy scripts in it.
+• As mentioned above: Fixed bug on Deraliasewers where boss would not spawn from 2001 and 2500hp
+• As mentioned above: Fixed Cleicert spawn chains (hopefully)
+• The Oceancrossing cannon now works proper (Hallelujah!)
+• Fixed some potential bugger ups with indestructible Shadow Goblins (hopefully)
+• Dragoon caves shouldn't have any load issues now
+• And the usual 10,000 fixes and tweaks I'm not bothering to list.
+
+New Weapons:
+• Phlame's Staff (35+ Fire)
+- This magic staff has an aim indicator, showing where the spell will land. (I should warn that this recticle is still a bit buggy - it will look odd on some surfaces, vanish in water, and sometimes be fooled by flying NPC's and large NPC's, as it'll "rub" against their collision boxes.)
+- Primary Attack: Cause a burst of flames to errupt at the target point (no MP cost)
+- First Charge [75MP]: Summons a Meteor from the sky, to blast a large area (aiming recticle must be under skybrush - this bit may bugger up on certain maps due to improper skybrush design - working on that).
+- Second Charge [100MP]: Volcano (Fixed damage, ala. Novablade)
+- Right Click [50MP/5sec]: Fancy fire burst burns and repells monsters with 2000hp or less (or up to 3x your maxhp, whichever is greater).
+- At close range the weapon may switch to a melee attack, which is more damaging than the standard fire attack and has the same DOT.
+
+• Ice Staff (25+ Ice)
+- Primary Attack: An industrial strength ice bolt that does both direct damage and DOT
+- Charge One: ???
+- Charge Two: Ice Lance [30mp] (50% chance to freeze solid - similar to Hoarfrost Shard's, but affects monsters from 2000hp to 3x your max hp)
+- Right Click: Ice Glide [2mp] - propels you rapidly forward on a sheet of ice (Ice may not render proper if you have r_decals disabled). You can only travel in the direction you started the ice slide in, and cannot jump, but you can still attack, and this is much faster than even the Raven Mace.
+- Though we've added some "deceleration features" to help make this non-sploitie, don't be surprised if we wind up nerfing it.
+- At close range the weapon may switch to a melee attack, which is more damaging than the standard ice bolt attack and has the same DOT.
+
+New Critters:
+• monsters/vine_fire - Lava Root [Medium]
+- This flaming vine will grow out of the ground and slash at creatures it hears or that attack it.
+- It's not worth much XP, as it is immobile, but if you set it up in a way where it can't be avoided, we can raise it. Best as a trap or escort.
+
+• monsters/gbear_polar - Greater Polar Bear [Hard]
+- New fancy model, and a few new tricks, including a brief freezing breath attack and a larger AOE stun.
+- This bear can also swim (is aware when it hits water, and has a swim anim)
+- external: ext_bear_swim - setup a trigger_multiple with this script event and a short delay near your monsterclip'ed water, and the bear will walk through said clips. Allowing you to let G.Polar Bears into the water, without drenching your other mobs.
+- external: ext_bear_unswim - Put another trigger_multiple with this script event, further from your water, to restore normal monster clip behavior on the bear.
+- (Remember to check the "Monsters" flags on your triggers)
+
+• monsters/swamp_reaver - Vitriolic Reaver [Hard]
+- This is a venom/acid variant of the Fire Reaver
+- Fires guided poison bolts, acid bombs, and spews blinding acid from the appendage on its back.
+- Note that the Fire Reaver (monster/fire_reaver) has also had some changes. It can now shoot meteors, and the laggy volcano projectiles have been replaced with a spewing fire aura that merely burns nearby targets.
+
+• monsters/corrupted_reaver - Corrupted Reaver [Hard]
+-- Some wizard wanted to find out what happened if you dipped a Fire Reaver in magical acid for awhile... And this is what he got. --
+- This is a sort of hybrid of the Fire and Vitriolic Reavers, alternating between elemental attack types with a slightly stronger punch
+
+• phlames/corrupted_reaver - Vitriox the Corrupted [Hard]
+- This is a larger Corrupted reaver, made specially for Phlames. Note that the one there has been beefed up quite a bit. The only real difference, on the script side, however, is the model change to a larger variant. (As ext_scale was behaving even worse than usual with this model.)
+
+
+-- Ice Guardians: Left over war machines from the Crystal Eon that often stood on the forefront of Felewyn's armies. --
+
+• monsters/elemental_ice_guardian - Lesser Ice Guardian [Medium-Hard]
+- Also debuting as: Lady of Nanuk, Sila's Lady in Waiting, and Sedna's Lady in Waiting
+- This flying lady will beat you soundly with her frozen stick, but has no projectile attacks. She has frost DOT, and can do stunning bursts, when flying close enough to the ground.
+
+• monsters/elemental_ice_guardian2 - Ice Guardian [Hard]
+- Debuting as: Sila Nerrivik
+- You can tell these apart from the lesser ones by the distinctive dress of perpetually falling ice sprites, and the wider range of tricks - including ice spikes and freezing circles. Unlike her younger sister, she's somewhat fire resistant, rather than vulnerable.
+- Ice Guardians will try to stay in the back unless directly attacked, so they work best with escorts, such as the more aggressive Lesser Ice Guardian above.
+
+• monsters/elemental_ice_guardian3 - Elder Ice Guardian [Very Hard]
+- Debuting as: Sedna Nuliajuk
+- Set apart by being not only twice the size of the other two guardians, but also wielding a staff sheathed in lightning.
+- She has all the tricks of her two younger sisters and can, additionally, shock players, either by striking them, or by creating streams of lightning that reach out to strike all her foes. She can fire hails of ice spikes that have a chance of freezing targets solid. Like all elder elementals, she's immune to her opposing element (fire), and her staff renders her immune to lightning as well. As she also has blood made of ice, this leaves few magical options one can use against her effectively.
+- PS. Sorry if I offended any Eskimos by stealing their ice god's names. ;]
+
+• phlames/phlame - Phlame the Ever Burning [Very Hard]
+- This boss is very dependant on map triggers and summons, so I strongly suggest not using him without access to the map source.
+
+• phlames/phlame_bird - Phlame Transformed [Hard]
+- This is the Demon Wing Phame transforms into twice during the battle. It *may* work as an independent monster, but I think it may need a tweak or two first. Unlike the other Demon Wing, this one will not start attached to the ceiling (would look odd with a bird this large anyways). If you really want to, however, the addparam stick_ceiling may force it to do so.
+
+• monsters/fw_alcolyte - Phlame Acolyte [Medium]
+- These operate pretty much identically to the Khaz fire acolytes. Different model and soundset, and slight tweak in that their blade projectiles do piercing damage, in addition to fire DOT.
+
+• monsters/fw_elder - Phlame Elder [Hard]
+- Similar to the Khaz fire elder, this guy graduated Phlame's training program, and alternates between guided fire balls and guided venom bolts. He also wields an envenomed knife.
+
+• monsters/boar_lava3 [Medium] - Great Lava Boar
+- This huge magically forged boar leaves a trail of flames as he charges down opponents.
+
+• monsters/scorpion7_fire [Hard] - Blistering Scorpion
+- This is a huge metallic flaming scorpion. Nuff said.
+- Though I should also mention that there have been several minor tweaks on all the giant scorpions.
+
+Generic Spoilers
+• Beware, that on Tundra, to get any unique item, you must defeat Nanuk (and his protectorates), put the dwarves to rest, and unlock the hut. Which order you complete these tasks in, however, in unimportant, only that you complete all three.

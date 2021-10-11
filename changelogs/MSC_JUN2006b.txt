@@ -1,0 +1,23 @@
+Re: List of changelogs
+
+June 03rd 2006 Public Changelog
+
+[CRASH FIX FOR KELEDROS] I've a fix for this... Not sure if you sploiters will like it though.
+
+Seems you found a safe zone to snipe Keledros behind those pillars, and that's what uncovered this odd bug.
+
+If Keledros spots you up there (or is up there and spots you on the floor) - he will do one of two things:
+1) Throw a really nasty fireball up at you - which if yer lucky, might miss you.
+2) Throw a really nasty lightning bolt up at you - which if yer lucky, you might surive. (That one, won't miss)
+
+As a further experiment, probably a foolish one, I've given him back his summoned archers. They don't add to his threat rating much, but they do add another minor aspect to the battle. Be very careful if you go up there to take them out, lest Keledros pull out the killazap gun.
+
+He's getting farmed so much, and has the potental to drop so many more nice things, I think it's time for an slight upgrade.
+
+Main reason why his old summons would cause brain death so often, is because the January script system that kept them in check always let him summon at least 1 extra... And that added up after awhile.
+
+But, if these three extra archers generate too much lag, or he does get the BD again, I'll take em out, so this is just experimental.
+
+(On a side note, the archers work on a seperate system from the Infernal Armors - he can summon more archers before they all die - but there will never be more than three, total.)
+
+The patch is on the beta server, and will take effect when next it restarts. It's crowded right now, so I dun wanna reset it atm... I've not uploaded this patch yet for the same reason - but it's strictly a server side update. Only people who might need it are those also running ultra-beta servers.

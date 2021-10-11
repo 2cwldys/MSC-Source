@@ -1,0 +1,129 @@
+Re: List of changelogs
+
+MAY2008a PUBLIC CHANGELOG:
+
+New Stuffs
+• Felewyn Shard 1-5
+- Base level req 30 giant holy sword of dewm
+- Right click and the blade will glow for holy damage (instead of slash)
+- Increases passive regen rate (doubly so in holy mode)
+- At level 34 offers divine shield for 10 seconds (no mana cost, repeatable every 20 seconds)
+- Divine shield blocks 90% of all incoming damage, stacks with all shield types, but slows the user, and makes unable to attack
+- If Felewyn shard is in holy mode, Divine Shield will also repel any attackers with less than twice the player's maxhp
+- Gather all five shards between five players to form Voltron *cough* I mean, for future Felewyn Blade quest...
+• Fire Tomahawk - throwable axe o' flame
+• Ice Tomahawk - throwable axe o' ice
+• Lightning Tomahawk - throwable axe o' lightning
+• Venemous Tomahawk - throwable axe o' poison
+• Dark Tomahawk - throwable axe o' darkness
+- Hint on the Tomahawks: you can't get BD and a Tomahawk on the same run
+• TRAINABLE PETS! (very beta)
+- First available pet will be a wolf. For more info on pets, see below.
+
+New Map Support / Map Fixes
+• Map support for Islesofdread1 by J (connects via oceancrossing)
+• Support for Isleofdread2 and Dridje (connects via islesofdread1)
+- Thanks to the delay in the betapack release, Isles of Dread 2 is fully ready and downloadable seperately: HERE
+• Support for Aluhandra2 by Rickler (connects through Aleyesu)
+- Similarly, Aluhandra2 is available: HERE
+• Reduced-sized recompile of Old_Helena (consistancy for servers still crashing)
+• Reduced the size of sfor in betapack by changing build method on tunnels
+- Also updated with the five wizards, so you can actually do the undamael quest proper now
+- nm_sfor is STILL pending (sorry...)
+• Recompile of Ara
+- I'm not sure what's actually changed here. >_>
+• Recompile of Oceancrossing
+- Fixed boats from turning / intersecting
+- Added a goblins boarding from a raft for the lower levels when traveling to deralia.
+• Recompile of Aleyesu
+- Re-Optimized monsters numbers
+- Fixed issues with Keledros spawning
+• Recompile of Smugglers Cove
+- Fixed a chest from being exploited.
+
+
+NOTE:
+• WE WILL NO LONGER INCLUDE RECOMPILES OF NON-CORE MAPS IN THE BETAPACK
+- 80% of the betapack size is now maps as, it just makes it grow too fast
+- I will include ripent/-onlyents patches, however, as they are tiny
+
+
+New Beasties
+• monsters/scorpion6 - Dread Scorpion
+- First of the 'really fooking huge' scorpion series (needs a lot of room to operate at 196x196 base size) (30+ miniboss)
+- Strong poison, AOE stun + knockabout
+• monsters/eagle_giant_thunder - Thunderbird
+- Really big bird with various thunder/lightning/tornado attacks (30+ Miniboss, 0 to 60 in 5.7 seconds, 6 MPG highway)
+• monsters/sorc_juggernaut - Shahaddar Juggernaut
+- Really, really big orc, with a really, really big axe (35+ miniboss), these form the backbone of the Shahaddar Armies
+• monsters/sorc_brawler - Shahaddar Thunderfist
+- The Shahaddar answer to the blackhand’s brawler can teleport short distances
+• monsters/sorc_guard - Shahaddar Guard
+- Next step up from recruit
+• monsters/sorc_warrior - Shahaddar Warrior
+- A slightly stronger Shahaddar Warrior with thunderaxe
+• monsters/gloam1 - The standard, jumpy, flesh eating, tropical/swamp/wetlands gloam (level 30 minion, or 25 mini-boss)
+• monsters/gloam_ether - Ethereal variant (level 30+ mini-boss)
+- See the wiki for more info on Gloams.
+
+Fixes/Changes:
+• Fixed some crashes with the newer AI optimizations
+• Consolidated axes (frees some edicts)
+• Switched up how the Felewyn Ring works a bit (still need a quest for it)
+• Framework for Status Icons and books in place (Thank Drigien!)
+• Another possible mscave sploit
+• Updated MS Tutor sprites
+• Fixed bit where ice shielding NPC's would ice shield things they shouldn't
+• Fixed some weirdness with blooddrinker and of future thrown weapons
+- Downside to this fix is that it also means that you can no longer draw inventory while sitting :(
+- It also means you cannot use fists while blood drinker is dancing :( x2
+- Hopefully put an end to vanishing thrown weapons though :)
+
+Known issues:
+• 1h axes viewmodels sometimes have odd effects in the off hand
+- Also true of some other consolidated models in some situations
+• 2h axe viewmodel swing anim sweeps wrong direction
+• Tomahawks do not use proper skin in third person (cept for fire)
+
+=============
+
+TRAINABLE PETS
+
+Go me for figuring how to merge the giant rat and wolf models. ;)
+
+Go Shurik3n for determining that character overflow is caused by inventory size, rather than file size.
+
+Thus I thought we might take a stab at trainable pets.
+
+To get a pet, you’ll need a "charm" of the appropriate type. Some pet types may need to be weakened before the charm can be used on them, and some charms may require a certain SC level. (Neither of these things is a factor with wolves)
+
+At the moment the only pet type is the wolf (non-alpha) type.
+
+Few differences between pets and summons:
+• Pets gain experience over time, and become more powerful.
+- They slowly gain experience for the damage they do. Be aware that the power of the opponent isn’t a factor.
+• Pets follow you from map to map and never expire
+- They retain their experience between maps, just like you do
+• Pets will teleport to you if they get separated by more than a short distance
+- Unless you tell them to "stay" and guard a specific area
+- You'll want to use this to avoid getting your pet into dangerous areas or lost to hazards
+• Pets slowly regenerate health when not attacking or being attacked (10% health/15 seconds)
+• Pets cannot be harmed by players
+- This includes PVP, but they can’t harm players either, so it shouldn’t be an issue
+• If your pet dies, it is gone
+- You’ll have to go get another one and start training all over again.
+• You'll be alerted if your pet comes under attack while you are away from it, or if it is low on health
+• You can only have one major pet at a time
+- You can abandon your major pet in favor of another through menu interaction, but once you abandon a pet, you cannot charm it again.
+
+Other than all that, pets work basically like summons, they respond to summon commands, and count against your summon count.
+
+When not training your pet, it is advisable to have it guard a safe place, so it doesn’t get killed. I’ll have to come up with a way to “store” pets (probably in the same crystals you use to charm them), but at the moment, I’ve no system to deal with this.
+
+I should warn that, once you have a wolf charm, Gert forest is probably not the best place to pick up a wolf, despite being an obvious locale. Reason being is that there are so many wolves in Gert forest, and they’ll all turn on the one you charm. Wherever you charm your wolf, be sure to get him out of harms way fast. Trained wolves are quite a bit stronger than their wild counterparts, but they aren’t invulnerable.
+
+If this all works well, I’ll try to get more wolves and other types of pets in over time, plus it opens up some other possibilities. I’m still worried about this somehow corrupting characters, as the pet data is saved with yours, but thus far it seems to be behaving. Use at your own risk.
+
+Pet resurrection charms and a naming system are also pending.
+
+PS. Be especially careful with your pet in SFOR! (Use the stay/follow command!)

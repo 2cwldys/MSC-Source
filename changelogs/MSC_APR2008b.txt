@@ -1,0 +1,21 @@
+Re: List of changelogs
+
+APR2008b MANDATORY SERVER SIDE PATCH CHANGELOG:
+
+• New chat/console command: /stuck
+- Use this if you get stuck at a spawn, it'll move you to another spawn point (if any exist)
+- Only works within 128 units of initial spawn
+• Fixed treasure sploit in mscave
+- Hence the mandatoryness
+• Fixed boss damage resistances
+• Altered AI and movement type on sharks for smoother swimming
+- They will also TRY to stay in the water, if placed without a monsterclip, but the monsterclip is still recommended
+- Placing a monsters/fish_shark outside of water will result in brain death - don't do it. ;)
+• Switched Arti-Chests to offer one random duplicate to players who already have all items
+• Fixed some issues with Blood Drinker [some of which is client side]
+• Moar CPU optimization on the newer AI and anti-stuck function
+• Oceancrossing can be reached through Captain Charon at Deralia's port
+• Oceancrossing: fixed bit where players sometimes spawned in middle of boat
+• Fixed bug with mscvote_map_type "root"
+• Fixed bug where transitions didn't take you to proper spawn points
+- via mega-h4x, so may need testing

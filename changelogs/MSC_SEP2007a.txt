@@ -1,0 +1,36 @@
+Re: List of changelogs
+
+SEP2007a BETA PUBLIC CHANGELOG:
+
+SEP2007a_centerfold.gif
+
+New Stuff (All in game)
+• Lighting Arrows - Arrows enchanted with lightning
+• Armor of Bravery - This armor negates death penalties and provides a fair amount of protection from death to boot (Thank Belmont)
+• Gladiator Armor - Nearly the protection of Knights for half the weight Plate, plus nifty spikes to boot. (Thank Gaz!)
+• Helm of the Dead - First person to figure out what this does gets a cookie! (Thank Cerix)
+
+New Mapper Toys
+• New msmonster_XXXX/ms_npc property: hpmulti
+- Multiplies the monsters base HP by this amount (if > 1)
+• New msmonster_XXXX/ms_npc property: dmgmulti
+- Multiplies the monster DMG by this amount (if > 1)
+- These two combined with title allow you to more or less make your own l337 monsters
+- XP can be increased after FN approval
+• monsters/sorc_intro
+- Something for Crow, will PM with a map demonstrating its use.
+
+BugZ Squashed + Odder stuffz
+• More tweakage to the rampage and level requirement systems
+• Weapons you don't make the level requirement can still be swung, but damage/tohit% is reduced
+• Blood Axe realigned (Thank Shuriken/Orochi)
+• Urdual Shield on proper joint (Thank Shuriken/Orochi)
+• Wild and untested stab at the overflow bug by MiB.
+
+New Supported Maps
+• Ara - Use the Deralia boat to travel to the port town of Ara, which is having a slight orc invasion problem. (Mid level map by J): LINKY
+• Chapel - Winding wilderness conceals a fallen temple of an unknown god. Very low level map, save for a hidden giant bat, but has enough secrets to keep the veterans exploring it for awhile too. (Chapel will eventually connect to Edana Sewers) LINKY
+
+...and about 10,000 other minor fixes I'm not bothering to mention.
+
+Shortest changelog, evah, for the biggest patch ever: 40MB! :oldshock: - We REALLY need an installer. :\

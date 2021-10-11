@@ -1,0 +1,287 @@
+JAN2013a PUBLIC CHANGELOG:
+
+msc_JAN2013_centerfold.jpg
+Friggen fraggin delays...
+
+New Stuff
+
+• You can now name your pets, via "petname" command, in console
+• ARROW CLIMBING RETURNS! ("Hooked Iron Arrow")
+- New improved climbing arrows, without the *other* related sploits!
+- Stuck by an arrow? Click +use on it, and it'll vanish - but mind ye, it won't go to your inventory - so use em wisely.
+- Arrows touched by NPC's will vanish
+- (Hopefully helps compensate ya for the lack of pet stacking...)
+• Adjustable Glow
+- When casting glow, hold the button until the light reaches the desired level
+- (As per usual, max brightness requires SC 10)
+• Boss Mobs Identified
+- Boss monsters are tagged 'Elite' in their relationship indicator
+• Shields have a chance to block push attacks and stun when blocking. Chance varies by type:
+- Training Shield: 25%
+- Wooden Shield: 25%
+- Iron Shield: 50%
+- Rune Shield (Ice): 75%
+- Urdulian Shield: 75%
+- Demon Shield: 75%
+- Large Iron Shield: 100%
+• Crashed in a gauntlet map? Back in Edana? As long as you've not touched another transition, you can still votemap for it!
+• Timed status icons added for Demon and Vampire blood
+• Stamina Potion - Provides rapid Stamina regeneration until death or map change
+- Normally I put items in the spoiler section, but this new expendable is in the global list. So...
+
+New Maps:
+
+• Shender East (shender_east) by Lockdown (disconnected, hard to very hard)
+- The shenders are a series of desolate lands running along the edge of The Wall, accessible from Melanion and parts north of The Wall.
+- Here you will find new friends, and new foes...
+
+• Sorccerbal (ms_soccer) by Caluminium (disconnected, PVP)
+- Play a game of fütball, with your friends, or your favorite Shadahar Orcs! (Or both!)
+- Ball can be adjusted to various weights by clicking +use on it.
+- Spawn red or blue team sorcs with the buttons on one side of the field.
+- Watch the game through special tracking cameras in the spectator/DJ booth!
+- (Red Goal Cam, Blue Goal Cam, and Dizzy as F*ck Cam!)
+- You can make various adjustments to the Orc players by clicking +use on them.
+- Including: speeding them up, slowing them down, or removing individual orcs.
+- (Troll Goalkeepers are neigh invincible, but you might try slowing them down before removing them.)
+- NPC players regenerate HP fairly quickly to prevent accidental kills with stray kicks.
+- Need to pause the game, but can't get at the ball? Type ballmenu in chat.
+- First team to score five points wins!
+- (Finven pending as sports commentator.)
+
+Bug Fixes:
+• Bloodrose Flesheater adds scroll/tome to be dropped at spawn, rather than death (may fix crash)
+• Fixed Vampire Potion (Beware that drinking another vampire potion does not reset the timer)
+• Hopfully fixed invincible Shadow Goblins
+• Fixed boss flag on Clethin (Fire Guardian of Phobia forest)
+• "Ring of Electrical Resistance" -> "Ring of Grounding" due to string length issues
+• Weapon Strap description shortened, due to string length issues
+• Fixed Felewyn's Elemental Guardians stunning/pushing folks they didn't actually hit
+• Fixed bug where some monsters with an hp requirement range would spawn when they didn't actually qualify
+• Fixed some mobs bypassing push resistances (Petrified Warriors, Ihotor)
+• Fixed a potentially nasty bug with the Galat Storage Chest
+• Fixed bugger up on Hunderswamp boss, and the Hunderswamp final chest
+- also drastically increased chances for uniques - But you will have to work harder for them ^_^
+• VOTEPVP should be working!
+
+Nerf Log:
+• Orc_for spiders ramp up to full XP value 30 minutes after map start
+• Max HP for all player companion pets doubled
+• Companion Pets will automatically egg before being damaged by powerful trigger_hurt's (bottomless pits/lava)
+
+Minor Map Updates
+• Kharaztorant Fotress (Kfortress)
+- Khaz hired a new exterior decorator
+• Hunderswamp North (hunderswamp_north)
+- Changed the way access to the final boss works (forces exploring remainder of map)
+- fixed some sploits
+
+Other Changes:
+• Healing others now heals a minimum of 10% of target's MaxHP (be they players or NPCs).
+• Added bsp name to transition pop-up messages
+• Various AI optimizations
+• Monster check stuck on spawn system change/optimizations
+• Tweaked the gold system on multi-inv chests, so you don't have to repeatedly withdraw packs of gold (also made it a bit more dynamic)
+• Gold in multi-inv chests increases by 25% per player present beyond the first. (on FN only)
+• Boss XP bonus now functions only on FN
+• +200% XP when on FN, +50% XP per non-AFK player beyond the first.
+
+New Mapper Toys:
+• Addparam: set_xp_tr;<minutes> - XP time ramp
+- Mob will not be worth its full XP until map has been running xx minutes
+- Useful if you have an easy to reach high XP mob near the map start, and you want to prevent repeated restart exploits
+• reqhp, reqplayers, reqelsetarget, and scriptevent functions now work on trigger_teleport
+- aborts teleport for those not qualifying - calls scriptevent on those teleported
+- add scriptevent ext_teleportfx1 for automagical teleporter fx on the destination end
+• scriptevent now available on trigger_relay
+- Usually saves need for otherwise confusing ms_npcscript ents
+- Note that these usually have to be gm_ events, as trigger_relay usually can't tell who the original activator was
+• scriptevent now available on func_breakable
+- Runs the event on the player/mob who broke it
+• killtarget now available on func_breakable (saves a relay)
+• Changed Smart Edit "Target Script Event" to "Scripted Event" in FGD (less confusing set next to "Trigger Script")
+- Remember events prefixed with "gm_" go to the game_master, not the player.
+- Game_master recieves triggering player/ent as first PARAM, anything after the semi-colon as second
+• Dynamic musak system!
+- You can have combat music spin up when monsters spot or attack players, and switch back to idle music when not in combat
+- You can change the combat and idle music on an area by area basis with scriptevent triggers, as follows:
+- Only affects the player that crosses the trigger
+- set_music;<idle_music_mp3>;<idle_music_length>;<combat_music_mp3>;<combat_music_length>;[play_idle_music_now:0|1]
+- eg. set_music;d2-cav.mp3;4.5;d2-cav.mp3;4.5;1
+- set_idle_music;<idle_music_mp3>;<idle_music_length>;[play_idle_music_now:0|1]
+- set_combat_music;<combat_music_mp3>;<combat_music_length>
+- There's no "play combat music now" option, as the system will not know when to stop it, however, monsters will play the player's current combat music when they spot or hit them
+- You can also set the global default combat/idle music for all players via the gm events, by prefixing any set_music event with "gm_"
+- If a player dies, their music will be restored to the global defaults
+- When play_idle_music_now flag is set, it should clear the combat music when the player crosses the trigger
+- But wait... There's more!
+- You can also give specific NPC's specific music scores! Use the following Addparam:
+- set_cbm_file;<combat_music_mp3>;set_cbm_length;<combat_music_mp3>
+- eg. set_cbm_file;kk_edgen_battle.mp3;set_cbm_length;3.0
+- And this mob will play this combat music whenever targeting or damaging a player, fading away after he dies
+- So far only shender_east is using this, and it's probably using more variety of music than is sane, as a result, but the system seems to be working *fairly* well
+- Though I've seen it get stuck in combat mode a few times - still diagnosing this
+- (ToDo: Simplify this by making it a trigger entity.)
+• New World Spawn (map) properties (also for the new dynamic music system):
+- map_music_idle_file("Idle Music MP3") - default "none"
+- map_music_idle_length("Idle Music Length (float)") - default "0"
+- map_music_combat_file("Combat Music MP3") - default "none"
+- map_music_combat_length("Combat Music Length (float)") - default "0"
+- Like msarea_music / mstrig_music, lengths are floats, so 1.5 = 1 minute 30 seconds
+• weatherchange_<weather_name> triggered during weather changes, so you can capture weather events
+- (eg. weatherchange_rain)
+- For say, only spawning certain mobs during rain, or what not
+- Remember, as always, mstime_XX goes off every "hour", as well "time_counter". Dawn is at mstime_6, Dusk at mstime_17, and Evening falls at mstime_20
+
+Known Bugs:
+• If a lot of NPCs get stuck inside one of the goals on ms_soccer, it may prevent the goal from going off when the ball enters
+• Sometimes Orcs that have their speed increased will get stuck inside goals or in the air, when they jump.
+• Making the soccer ball "bouncier" usually makes it slide, but can sometimes have unpredictable effects.
+• Sometimes ball will retain its momentum after returning from game-winning goal.
+• Dynamic music system occasionally gets stuck in combat mode
+• (Some other spoiler related bugs, in the spoiler section.)
+
+New Loots:
+
+• Crescent Blades [30,32 Smallarms] - Matched Set
+- Crescent blades can throw a shadow of themselves that flies in a boomerang-ish pattern, damaging monsters as it goes.
+- If have a matching set of Crescent Blades equipped, you'll take no dual-weild penalty.
+- Additionally, you can block by holding +use. While blocking, you abosrb 75% damage from frontal melee attacks, and are immune to push attacks.
+- Crescent Blades can be found with various elemental DOT's. Crescent blades with differing elements are still considered matching sets.
+
+• Blood Blades [30,32 Swordsmanship] - Matched Set
+- Blood blades have vampyric properties, and can absorb health from enemies not immune to such effects.
+- If you have a matching set of Blood Blades equipped, you'll take no dual-weild penalty.
+- Additionally, you can cross the blades and block by holding +use. This blocks 75% of melee damage from frontal assaults, but, unlike the crescents, has no affect on push attacks.
+
+• Demonshield [heavy,30 Fire]
+- Provides 100% fire resistance when blocking
+- At fire 30, if you hold +use while blocking, it will breath f*cking fire (similar to dragon axe)
+- Parry_Multi: 1.5 Dmg_Absorb: 50% Deflect_Chance: 10%
+
+• Fire Breaker [35-37 bluntarms, 20 fire]
+- This massive maul can generate a burst of fire, striking the ground so hard it causes a fissure of fire to crack open in the earth, traveling forward and setting everything in its path ablaze.
+- Like the Earth Breaker, this also stuns all targets in the immediate area of effect.
+
+• Thunder Breaker [35-37 bluntarms, 20 lightning]
+- This thunderous beast shocks all targets within a large area of effect, and each time, generates "snake lightning" that lazily jumps from target to target, as many as six times, causing yet more electrical mayhem over a prolonged period of time - often jumping back to a target, just as its previous lightning DOT has expired.
+- Like the Earth Breaker, this also stuns all targets in the immediate area of effect.
+
+New Beasties:
+
+• monsters/ant_red_warrior - Giant Ant [medium]
+- A giant ant (about 3' long), capable of getting into those tight nooks and crannies. Should scale well. Slow and weak, but bites pretty hard. Larger than normal alert radius aids in swarming behavior - though they are liable to crawl over one another in their eagerness.
+
+• monsters/demonwing_ice - Icewing [medium]
+- Ice variant of the of the Demonwing (actually slightly weaker, though it has frost attacks)
+- Addparams: set_no_ceiling_idle ( do not stick to ceiling - same as described in monsters/demonwing_venom )
+
+• monsters/demonwing_giant_ice - Gigantic Icewing [hard]
+- Larger variant of the above
+- Addparams: set_telebird;<radius> - This causes the bird to teleport away when there are no players within this radius from its spawn point (as determined from the ground level beneath the NPC's placement). Upon teleporting away, the bird will spawn 2-4 Icewings, depending on the number of players nearby. (This requires an additional 64 units of room beneath the NPC.) These Icewings will suicide one minute later, or when the Gigantic Icewing dies.
+- Unlike the Demowing and the Icewing, the Gigantic Icewing does not stick to ceiling. (It maybe we can tweak the script to arrange it, but it'd require a lot of room.)
+
+• monsters/giant_frost - Frost Giant Construct [hard]
+- A giant automaton from some previous age - possibly as far back as The War of Fate - though they could be harnessed by others, with the proper magic...
+- First appearing as a highly scaled "Greater Frost Giant" in shender_east.
+- (Oddly has no cold attacks nor DOT, despite name and wielding a North Maul)
+- Addparam: set_patrol;<radius> - causes the giant to only agro on players who attack him or wander into this radius from his spawn point, and not wander beyond it. Giant will calm down and return to his spawn point, should the offending player cease attacking, flee his reach, and stay outside his patrol area. Also causes monster to regen 1% of its maxhp every 10 seconds, when not attacking. (The patrol feature can be added to other monsters by request.)
+
+• monsters/giant_fire - Fire Giant Construct [very hard]
+- Meaner version of the above, with an array of weapons. First appearing as a slightly scaled "Greater Fire Giant" in shender_east.
+- Addparams: set_patrol;<radius> (as above)
+- set_weapon_dblud - Set weapon to Demon Bludgeon (fire damage + fire&stun burst)
+- set_weapon_earthbreak - Set weapon to Earth Breaker (higher melee damage + longer stun burst)
+- set_weapon_firebreak - Set weapon to Fire Breaker (higher fire damage + fire&stun burst)
+- set_weapon_shockbreak - Set weapon to Thunder Breaker (shock dot + shock&stun burst)
+- (If no weapon is set, the Fire Giant will pick one at random on spawn.)
+
+• monsters/spider_crystal - Crystal Phase Spider [medium]
+- Ethereal spider constructs, sometimes used by Seekers as hunting dogs.
+- The Crystal Spider's default behavior is to cling to the ceiling and to toss down balls of lightning.
+- Periodically, they will teleport to victims, in order slash them from close range (they also have a poison bite, should they get close enough). Should this flurry of blows fail to incapacitate their prey, they'll teleport back to their ceiling position, in hopes of getting in more blows from afar. (Rinse and repeat)
+- Addparams: set_start_ground (causes spider to start on ground, instead of ceiling) set_stay_ground (no ceiling crawling at all)
+
+• monsters/ogre_cave - Cave Ogre [medium]
+- Bit weaker than the classic ogre, but also more aggressive.
+
+• monsters/ogre_cave_welp - Cave Ogre Welp [medium]
+- Youngin version of the above - weaker, but more maneuverable.
+- Both these ogres are designed for easy scaling (set_self_adj, or dmg/hpmulti)
+
+• monsters/morc_sniper - Elite Marogar Archer [medium]
+- Similar to the Elite Blackhand Archer, knock back + freeze + melee attacks.
+
+• monsters/fish_killie - Orca [medium]
+- Big ass killer whale ('nuff said).
+
+• shender_east/fish_killie - Nightmare Orca [invulnerable]
+- This is a variant of the killer whale from Fedrosh's nightmare. If it bites you, and you survive the bite, you will be teleported back to spawn (no XP loss).
+
+• shender_east/elemental_guard_ice - Lesser Nightmare of Ice [medium]
+• shender_east/elemental_guard_ice2 - Nightmare of Ice [medium]
+• shender_east/elemental_guard_ice3 - Fell Nightmare of Ice [hard]
+• shender_east/elemental_guard_fire - Lesser Nightmare of Fire [medium]
+• shender_east/elemental_guard_fire2 - Nightmare of Fire [medium]
+• shender_east/elemental_guard_fire3 - Fell Nightmare of Flame [hard]
+- These are all half strength variants of the elemental guardians normally prefixed with monster/, described elsewhere in the changelog.
+- (Both this set, and the original elemental guardians, have been tweaked a bit. Mostly to fix issues with pushing and stunning players they've not actually hit.)
+
+• shender_east/burning_one - Lesser Burning One [hard]
+- Half strength variant of monsters/burning_one
+
+• shender_east/telf_sleeping, shender_east/telf_quest, shender_east/telf_win - Fedrosh the Rammata
+- Various stages of the Rammata dream quest elf.
+
+• ms_soccer/sorc1 - Soccer Orc [non-hostile]
+- Shadahar Orcs for Sorcerball
+- Addparms:
+- setsoc_blue - Sets team to Blue
+- setsoc_red - Sets team to Red
+- setsoc_leader - <Team> Leader - Kicks a bit harder, has double hp
+- setsoc_def - <Team> Defender - Won't (normally) leave his team's side of the field
+- (assumes red team is east of ball spawn, and blue team is west)
+- If not set to leader or defender, Sorc defaults to "Wingman"
+- Passive regen (5%hp/sec [base 400hp])
+
+• ms_soccer/troll1 - <team> Goalkeeper [non-hostile]
+- Goalies for Sorcerball
+- setsoc_blue - Sets team to Blue
+- setsoc_red - Sets team to Red
+- setsorc_goalrad;<rad> - Sets radius of goal box (rarely will the troll move beyond)
+- Troll can pick up the ball, if it is between him and the goal
+- Passive regen (5%hp/sec [base 1000hp])
+
+• ms_soccer/goal_blue_ref - Lets NPC's know where the blue goal is
+• ms_soccer/goal_red_ref - Lets NPC's know where the blue red is
+
+• ms_soccer/push_goalie_blue - Brush with this "scriptname" added as a property removed when blue team is summoned
+• ms_soccer/push_goalie_red - Ditto, for red
+
+• ms_soccer/soccer_ball - Soccer Ball [invincible, non-hostile]
+- Das Soccer Ball
+
+Other Spoilers
+• Shender_East tips:
+- You'll need push attack weapons and tough summons to complete the dream sequence.
+- (Thunder Breakers, Dragon Axes, and bears come highly recommended.)
+- The Demon Icewing will vanish if you leave the bridge, leaving more of his baby spawns behind. Additionally, he'll regenerate while he's out. So, to defeat him, stay on the bridge!
+- The Fire Giant Construct is inaccessible if you don't first kill the Frost Giant Construct.
+- Killing the Frost Giant Construct sooner, rather than later, yields less XP. (Full XP @ 20 mins - which is about as much time as it takes to complete the Dream Battle.)
+- The Morc Chests will reduce their rewards with repeated runs. This is a timed function, so this is true even if you switch to another map.
+- The Eyes of Death are worth reduced XP, the more they spawn, so don't hesitate in killing their master too long.
+
+Known (Spoiler) Bugs:
+
+• Crescent Blades and Blood Blades sometimes get out of sync when blocking - resulting in odd view animations.
+- Shouldn't affect game play though.
+• Matching sets of Crescent Blades and Blood Blades can still be used to block while frozen, sitting, paralyzed, or under heavy stun.
+- Opted not to fix this - makes them more useful for some situations, though it looks a bit odd.
+• Fire Breaker fissure has trouble traveling up hill, and doesn't always acquire burn targets well, though all targets in the immediate AOE, should burn reliably.
+• Thunder Breaker snake lightning is fairly unpredictable (though repeated applications can counter this problem).
+
+Sorta...
+
+There is one more REALLY BIG SPOILER - so BIG, indeed, I'm not even posting it here. YOU'LL KNOW IT WHEN YOU FIND IT! (If you can find it...)
+
+First person who finds the big spoiler, WITH A SCREEN SHOT, who is NOT part of the development team or otherwise already privy too it, gets 5000 Internets! (And yes, all this >greentext is a hint.) ...At which time I'll post the rest of the related changelog.

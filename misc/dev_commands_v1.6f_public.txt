@@ -1,0 +1,126 @@
+MS:C DEVELOPER COMMANDS, list compiled by J-M
+Please don't share these commands.
+v1.6f
+
+
+
+Level 1 developer commands: these commands work on and off [FN]. The commands are harmless.
+Your character will not be deleted or banned if you use these commands on [FN].
+
+lplayers hp						list HP of in-game players
+lplayers mp						list Mana of in-game players
+lplayers skill.swordsmanship				list Swordsmanship of in-game players
+lplayers skill.martialarts				list Martial Arts of in-game players
+lplayers skill.smallarms				list Small Arms of in-game players
+lplayers skill.axehandling				list Axe Handling of in-game players
+lplayers skill.bluntarms				list Blunt Arms of in-game players
+lplayers skill.polearms					list Polearms of in-game players
+lplayers skill.archery					list Archery of in-game players
+lplayers skill.spellcasting				list Spell Casting of in-game players
+lplayers skill.parry					list Parry of in-game players
+lplayers stat.strength					list Strength of in-game players
+lplayers stat.agility					list Agility of in-game players
+lplayers stat.concentration				list Concentration of in-game players
+lplayers stat.awareness					list Awareness of in-game players
+lplayers stat.fitness					list Fitness of in-game players
+lplayers stat.wisdom					list Wisdom of in-game players
+xyz							get your current coordinates
+lplayers scriptvar PL_TIME				show the time players are in-game
+lplayers scriptvar IMMUNE_COLD				show cold immunity of in-game players
+. quest a						Shadahar Village Achievement medal level info
+. quest d						previous transition entity visited debug info
+. quest f						Felewyn shard quest debug info
+. quest h						is 1 if your HP/Mana shows in the Event HUD (type show_health to toggle this)
+. quest l						lighthouse (gertenheld_cape) debug info: is crystal | grave | food | spider
+. quest m						next map transition debug info
+. quest n						name change debug info
+. quest r						Bloodstone ring quest debug info: is 1, 2, 3, ... 12
+. quest s						unknown debug info (pet?)
+. quest sy						Sylphiel soup quest info (is 0, 1, ... 5)
+
+Level 2 developer commands: these commands don't work on [FN], but they always work off of [FN].
+
+devcmd pass coolDECis					enable all 'devcmd' commands
+devcmd ferismurder					spawn a Quarterstaff
+devcmd slayall						kill all NPCs (except some NPCs that are magically immortal)
+devcmd slayall evil					kill all hostile NPCs
+devcmd usetrig [name]					trigger all entities called "name"
+devcmd tele x y z					teleport to coordinates (x,y,z)
+devcmd tospawn [name]					teleports you to an ms_player_spawn entity with "message" = "name"
+fakehp [number]						simulates [number] worth of HP in-game
+dev_on argg						enable developer mode to be able to use level 3 developer commands
+dev_off							disable developer mode
+
+Level 3 developer commands: these commands work only off of [FN] when Developer Mode is enabled.
+
+createnpc [scriptname]					spawn an NPC (precached NPCs only, i.e. default ones or those from ms_dynamicnpc)
+								WARNING 1: spawning a non-precached monster instantly crashes the server
+								WARNING 2: trying to spawn a non-existant script will lock (but not crash) the server
+createitem [scriptname]					create an item
+remv							kill single targetted NPC
+. fakehp [number]					simulates [number] worth of HP in-game
+. fplayers [number]					simulates [number] worth of players in-game; DOES NOT WORK AT THE MOMENT
+. faketime						sets your time in-game to 999 minutes; DOES NOT WORK AT THE MOMENT
+. hp [value]						restore "value" HP
+. mp [value]						restore "value" Mana
+. setgold [value]					sets your amount of gold coins to "value"
+. sorc_villa friendly					sets the Shadahar village quest data to "friendly"
+. clfb							create a 200.0 base damage client-side fireball
+. nh							create a Neck Hunter along with spawn FX
+. jump							jump really high (doesn't work if you drank a leadfoot potion)
+. skele							spawn a Skeleton Warrior
+. rat							spawn a Giant Rat
+. bd							disable AI of all active NPCs
+. setstat swordsmanship [x1] [x2] [x3]			set Swordsmanship to (x1,x2,x3)
+. setstat martialarts [x1] [x2] [x3]			set Martial Arts to (x1,x2,x3)
+. setstat smallarms [x1] [x2] [x3]			set Small Arms to (x1,x2,x3)
+. setstat axehandling [x1] [x2] [x3]			set Axe Handling to (x1,x2,x3)
+. setstat bluntarms [x1] [x2] [x3]			set Blunt Arms to (x1,x2,x3)
+. setstat polearms [x1] [x2] [x3]			set Polearms to (x1,x2,x3)
+. setstat archery [x1] [x2] [x3]			set Archery to (x1,x2,x3)
+. setstat spellcasting [x1] [x2] [x3] [x4] [x5]		set Spell Casting to (x1,x2,x3,0,0,x4,x5)
+. setstat spellcasting.divination [x]			set Spell Casting Divination to x, to be used AFTER the above command (capped at 100)
+. setstat spellcasting.affliction [x]			set Spell Casting Affliction to x, to be used AFTER the command two lines above this one (capped at 100)
+								NOTE: setting any stat higher than 255 is not recommended
+. blamb [radius] [damage] [type]			does [damage] [type] damage to all monsters that are [radius] units away from you or closer (in line of sight)
+							XP is passed to archery and damage points are awarded
+. tpoke [damage]					fires a pink laser that does [damage] fire damage
+							XP is passed to spell casting fire and damage points are awarded
+. eventme ext_update_score [x]				gives you 1000*[x] damage points
+. setquest [flag] [value]				alters quest data, example: . setquest f 0 <--- clears symbol/shard data
+
+createnpc chests/black_chest "smallarms_eth;swords_ub" "50;100" "1;1" "Ethie;Unholie" 90 400
+		This fairly long command creates an artifact chest with an ethereal dagger (spawn chance 50%) and an unholy blade (100%).
+		Requirements: 400 HP, 90 minutes of playtime. You can name the items yourself, as is shown.
+		Last two values don't appear to work
+
+========================================================================================================
+
+HOW TO SPAWN NPCs THAT AREN'T PRECACHED BY DEFAULT:
+
+Set the following variable in listenserver.cfg or server.cfg to precache NPCs:
+
+		ms_dynamicnpc "scriptname1;scriptname2;scriptname3;scriptname4;scriptname5;"
+
+Example:
+
+		ms_dynamicnpc "monsters/sgoblin;monsters/k_hollow_one;monsters/beetle_fire_giant;"
+
+NOTE 1: The input must end with a semi-colon!
+NOTE 2: If you precache a lot of NPCs and attempt to type ms_dynamicnpc in-game, in the console,
+        hl.exe will freeze because the input is too long. However, there are no other side effects
+        and you can still spawn monsters.
+
+After setting the variable, go in-game and type:
+
+		createdyn "[integer]"
+
+Example:
+
+		createdyn 0				spawn a shadow goblin
+		createdyn 1				spawn a Kharaztorant hollow one
+		createdyn 2				spawn a giant fire beetle
+
+NOTE 3: The amount of NPCs you can precache depends on the total length of the input and therefore
+        on the lengths of the scriptnames.
+NOTE 4: Some maps won't load if you precache too many monsters.

@@ -1,0 +1,107 @@
+Re: List of changelogs
+
+APR2007a PUBLIC CHANGELOG:
+
+New Stuffz
+• Die Rolling and Coin Flippin'
+- Type "flip" in chat or console to flip a coin and announce the result.
+- Type "roll xx" in chat or console to roll a die with xx sides and announce the result.
+- ( "roll" with no number defaults to a 20 sided die )
+• Ye Edana Tutorial Panels are Back!
+- Updated for MSC
+- Type 'help' in console or chat to turn them on or off. They are off by default.
+- They will turn on automatically, if a character with less than 20hp spawns
+- Mappers note: On any map, any sprite with the targetname "help_spr" will behave this same way
+• Map Descriptions (yet more n00b friendliness)
+- For most maps. Include intended levels, and a warning if you are far too weak for the area*
+• Rune Blade of Affliction
+- The first of the Rune Blade Series offers three levels of alternate attacks, for those with sufficient affliction skill, and resistance to poison
+• Bronze Helm
+- New, light, mid-level helm
+• Helm of Stability
+- Offers 70% stun resistance (gotta do something with that gray helm, as Odin pointed out.)
+• Magical Fire Wood
+- "Don't ask. Don't tell." is the only sound policy here. Sinister squirrels ask for weird stuff...
+• Salamander Vest (lesser) - 25% poison resistance, 40 dmg reduct, v. light
+• New medium-size spider skin by FER
+• New, stunning, models for Greater and Lesser Ice Blades - thank Gaz (also Vomica and Drigien)
+- Also additified the texture on the middle ice blade for consistency
+- May use Cerix's old giceblade model for the mid-range model in the future
+• Player model now has a kick animation, and less 'highwater' pants - thank Orochi
+
+New Beasties
+• Nadda, although framework for Ice Reaver Patriarch, Ice Mages, Cold Lady, Crystal Skeletons, Maldora, and Borch Orc Chief are in place
+
+New Mapper Toys
+• monsters/skels_normal
+- This temporary monster spawns and orders any monsters/skels_sleep and/or monsters/skels_deep_sleep to commit suicide, then removes itself. Use this in case the killtarget method is not being dependable for some reason. Downside is, once you use this, you cannot order skeletons to sleep again (this is likely true of the killtarget method as well, I think I'd have to come up some new central controller method to get around that.)
+• other/hp_trigger_300 - when a player with 300 hp walks within 256 units of this entity, it fires the map event " found_300 " and removes itself (good for locking off high level areas)
+- note to Foamy: You may want to use this at the ms_snow entrance on Bloodrose until we get our elves
+• other/hp_trigger_200 - same thing but only requires 200hp and fire event " found_200 " (other variants can be made easily)
+- note to Foamy: You may want to use this at the ruins entrance on Bloodrose until we get our elves
+• Bunch of map specific stuff for Foamy.
+
+BugZ Squashed + Odder stuffz
+• Fixed issue with XP loss reporting wrong
+• Fixed a lot of lingering scripts, which may help some with the 'lag' reported this last month
+- also may fix the mysterious non-item related 'overflow' reported on some servers
+• Frostbolts now use proper submodel
+• Ice Storm should always render
+- Provided ms_fxlimit isnt reached
+- On a few maps (Foutpost), just the shards appear and no flakes :\
+• Lesser stone masons no longer leave their rocks floating around when they die
+• Fixed remnant of the 0x0x0 bug applying to helms
+• Fixed all sorts of nutty stuff going on with Keledros
+- also some revamping
+• Scroll FX and return time fixed
+• Fixed issues with purchasing/removing dwarven bolts
+• Reduced decorative armor to plate mail weight, renamed "Banded Mail" (10% less protection than platemail)
+- Was tempted to go back to ye old "Mongol armor" but figured better not for cultural reasons: namely, a lack of Mongols.
+• Fixed helms turning into other things when dropped into the world
+- Cleaned up resistance report spam from helms some
+• Some minor improvements to the newer AI
+• Attempted but unconfirmed fixes (just know they work for me): g.iceblade tickets, skycastle chests
+• Restored OpenGL awareness on client.dll (it'll still TRY to go in D3D, but give you a big screen of bitch first)
+- Hopefully in the future we can support D3D, which is much faster on some older cards, also more Vista friendly
+• Some FN security improvements
+• Some gauntlet map anti-cheat improvements
+• Buncha sploitz fixed
+• Fixed texture skew on some p_weapon models
+- but, also added more to others, cuz I forgotz to ask the Orochi to add the ice blades to p_weapons1 ><
+• Reduced some of the annoying client-side debug spam
+- Will reduce more in future, rest is disabled by typing 'developer 0' in console
+- Some debug spam can be restored by typing 'developer 5' in console
+• Trolls vulnerable to bows and e.lightning again (some peeps got this fix early)
+• Bows now in proper hands (thank Orochi)
+• Max item count reduced to 75 (too many people overflowing in the 60's)
+- Also made the warning's wording a little stronger
+
+- AMX Changes -
+• Nadda, but a total reconstruction of the votemap system is in progress, and maybe released before next month
+
+- MAP Updates -
+• Heras - Undid 'blindness' generated to all players via env_fade when teleporter used.
+• Skycastle - Yet another attempt to make chests spawn more dependably
+• ms_snow- Bloodrose transition active
+
+- Installer Changes -
+• Installer shows [FN] rules upon completion (so no one pleades ignorance)
+
+...and the usual 10,000 minor changes I'm not bothering to list...
+
+Bumped to next month:
+- game_text bug (going to be a major project)
+- Entity-in-Sphere script awareness
+- Yet "more better" PVP awareness
+- Crow's skycastle2 scripts (got bumped by Bloodrose)
+- Mining System (didn't look as though Vomica was going to be done anytime soon)
+- Script side FN awareness
+- Single Player Mode (adjust for single player + not on central server)
+- Implement new flight/swim AI
+- Helena NPC post invasion award (complicated, and likely made pointless by Helena2)
+- Chain Lighting Aesthetics (bumped for second month in a row)
+- Shadahar revamp (bumped for third month in a row)
+- Giant Bat re-write (almost a year of being bumped now)
+- April Fools Changelog ^_^ (barely managed to resist doing that to ya guys)
+
+* Known bug: sometimes you'll get the 'low level' warning from the map description even though your character meets the HP requisite. This is due to a minor bug where it checks your current HP, instead of your max. Was so minor I didn't feel it was worth it to re-upload the package, but fixed on the next.

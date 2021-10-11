@@ -1,0 +1,141 @@
+Re: List of changelogs
+
+AMX_WARNING said:
+WARNING TO SERVER HOSTS USING AMX
+You MUST remove adminvote.amx from your msc/addons/amx/config/plugins.ini or bad things will happen!
+
+- We’re still allowing AMX for now, as we’ve yet to add some new features to the MSC replacement (such as MOTD) – but the current vote systems are not compatible with AMX nor MODX installs
+
+Also setup your admins.txt and the new cvars as desired; described below:
+
+FEB2008a / MSC 1.11 PUBLIC CHANGELOG:
+
+• FULL RELEASE!
+
+New Server Cvars
+msvote_farm_all_day 0 - Allow voting for the map the players are on
+msvote_map_type "all" - (all|root) - allow voting for all maps (save hidden/gauntlet/maze) or restrict to only root towns
+msvote_map_enable 1 - allow voting for maps
+msvote_kick_enable 1 - allow votekick from chat
+msvote_ban_enable 1 - allow voteban from chat
+msvote_ban_time 60 - time to ban person voted banned (0 = permanent)
+msvote_pvp_enable 1 - allow vote for pvp (pvp mode will engage/end 10/60 seconds after vote)
+ms_chatlog 1 - log chat and various server events to monthly chat log
+ms_admin_contact "[none given]" - Place e-mail contact here, it will appear to kicked/banned players or when players type 'contact' in console
+ms_ban_to_cfg 1 - Write permanent bans to server.cfg/listenserver.cfg so they stay permanent
+- if this is set 0, the bans will only be written to ms_bans.cfg, which you can add to your server config via "exec ms_bans.cfg"
+
+Server reset system:
+ms_timelimit 0 - (Old cvar, modified) changes map to Edana this many minutes after the last player leaves, if server is still empty (also writes crashed.cfg)
+ms_reset_if_empty 0 - If set to 1, instead of switching to Edana, write edana to the crashed.cfg and restart (quit) the server. (Helps keep server fresh)
+
+Admin System
+Add steam ID's to msc/admins.txt to setup your admins
+Loopback IP always has admin access
+Commands:
+• admin_help - list commands (more or less shows this text:)
+• admin_listbans - list permanent bans
+• admin_unban - <steamid|playername> - removes ban line from .cfgs and banlist
+• admin_ban - <playername|steamid|#statusidx> [minutes] [reason]
+• admin_kick - <playername|steamid|#statusidx> [reason]
+• admin_map - changelevel (any map)
+• admin_say - "yourmessage" speech infomsg through the Game Master – use "quotes"
+• admin_vote "option1;option2;option3" "Vote,Title "Vote,Description"
+- general vote, use "quotes", use semi-colons (;) to separate options
+• admin_votemap - Votemap (any map)
+
+Note: “playername” can be partial. #statusidx, refers to the # reported on the left when you type “status” in console.
+
+Extended admin commands:
+• admin_cvar <variable> <setting>
+- Only admins.txt with “cvar” or “rcon” after their Steam ID admins.txt have access to this command
+• admin_rcon "<commands>" (use quotes)
+- Only admins.txt with “rcon” after their Steam ID in admins.txt have access to this command
+
+Player Initiate Votes
+• Ye Votemap system has been enhanced
+• votekick <playername|steamid|#statusidx>
+- in console or chat (although you’ll have to toggle off the console to actually vote)
+• voteban <playername|steamid|#statusidx>
+- in console or chat ( " " )
+- Duration for player initiated votebans is determined by msvote_ban_time
+• votepvp
+- Toggles PVP mode (untested)
+- Should work in the same map, has a countdown timer.
+- Does not change the ms_pklevel cvar, so it will reset after map change.
+
+Map Changes
+• Mscave (recompile)
+- Optimized map spawn sequences, added new Shaddarh spawn sequence and place holders for his new hide-and-seek game.
+- Added hpreq monsters and more treasure to go with them.
+- Added new transitions (one placeholder, one for sewerrride)
+• Helena (recompile)
+- Fixed a few v.minor glitches
+- Added transition to Demontemple
+- Some edict reduction efforts
+• Old Helena
+- Active monster reduction efforts
+- Spawn counter fixes
+- Monsters should just keep spawning forever, and you’ll be cued for a new wave when a bunch of orcs mysteriously “vanish”
+• Demontemple
+- Connected to Helena
+- Placeholder for hidden Kharaztorant Title quest
+• Daragoth (recompile)
+- Fixed bug where trolls couldn’t see you in huts (although now they have no qualms about punching you straight through them – but hey, they’re hay).
+- Fixed bug where some monsters couldn’t climb the lip of the entrance to the huts
+- Fixed bug where goblins and keeper couldn’t see you if you ducked in the water
+- Fixed all buggy textures in Daragoth.wad (think most all of them were there)
+- Few other minor changes
+• Chapel (recompile)
+- Fixed sploits involving waterfall
+- Fixed church sequence not running through and tweaked it up a bit
+- New treasure layout
+- Added some new hidden areas (thanks CSS!)
+• Gertenheld_Cape
+- Re-added original music sound track
+• ms_wicardoven (recompile)
+- All new, virtually sprite free, entity reduced lighting system (should help with edicts)
+- Some aesthetic changes
+• calruin2 (recompile)
+- All new, virtually sprite free, entity reduced lighting system (should help with edicts)
+- Some aesthetic changes
+
+New Beasties
+• monsters/wolf_ice (now works, thank MiB)- Winter wolf
+- Winter wolf minions (30+) with freezing howl
+• monsters/wolf_ice_alpha (now works, thank MiB) - Winter Alpha Wolf
+- Ice wolf boss (40+)
+- Summons uber blizzard (800 radius) at monster location or at the location of other/summon_point1 - if the script is present
+- Also casts ice shield
+
+New Mapper Toys
+• Additional monster param: start_running
+- Monster will spawn using it’s running animation, and be fully “cycled up”
+- (Useful when you know the monster is going to spawn right next to the player or needs to run forward a bit to immediately join a battle)
+
+Bug Fixes, and Such
+• Some projectiles having more gravity that they should
+• Ice Shield taking mana even with target shielded
+• Toned town the votemap graphic spam (reports to combat hud instead of popups)
+- Ditto on the party leave/join
+• Animated armors resistances
+• Massive changes in XP on bosses in certain situations
+• Potions of stability crashing server (cross fingers)
+• Lesser ice shield not being so lesser
+• Demon claws give martial arts XP for speed and soul drain attacks, and will not play anim when out of mana
+- Also no more "No target", thing - if ye miss, ye miss
+• Some reduction of lag when choosing a character
+• Various efforts to fix crashes via scripts on both Helena’s
+• Some edict reduction attempts (<- We need to get serious about this!)
+• New lightning system means lights stay bright in the dark
+- PS. No, that is NOT the new lighting system you’ve been seeing on the ultra-beta server, it requires this client patch to get the full effect
+- We may need to tweak this some yet ^_^
+• Potion of Forgetfulness now lets you forget individual spells
+- It's no longer Torwhodoc's job (or he forgot it was) - ya gotta find/purchase the pot
+- Fixed a bug where certain spells could not be forgotten
+• Fixed some potential issues with the gauntlet system
+• HP/MAXHP now appears on Scoreboard and Serverinfo screens (Thank Shuriken!)
+• Yet moar anti-cheat security (Thank MIB!)
+• More robust FN communication potential (experimental, Thank MiB!)
+
+And the usually 100,000 changes I’m not bothering to list (actually, more like 200,000 this time.)

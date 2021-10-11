@@ -1,0 +1,67 @@
+Re: List of changelogs
+
+APR2008a PUBLIC CHANGELOG:
+
+New Stuffs:
+• The Wolve's Bane
+- A special light silver shortsword enchanted with wolvesbane
+- Double damage vs. wolves
+• Blood Drinker
+- Is now in game. Sword uses basically the same script Runeghar's uses, so expect similar targeting/wallh4x behavior.
+- You can use your fists while the sword is dancing (can't kick, but will work on that).
+- Right click to make the sword return sooner.
+- Level Requirements - base: 30, x2_dmg_stab: 32, throw: 34
+[Would have added Fire Tomahawk and Dark Bone Blade, but model consolidation is not complete - Shard of Felewyn is complete, but not in game, yet]
+
+Map Changes
+• Sfor has been expanded on
+- Didn't want to make nightmare_sfor without doing something for the mid-level folk too, so there's a whole new wing on Sfor, just for them
+- Undamael area also available for examination (you can play with him, but the quest is not complete, he cannot be defeated - note the mirror damage)
+- This was a rush job, I hope to come back and polish it later
+• B_Castle is now connected to Sfor
+- There are also two new open transitions in Sfor
+
+New Map Support For Soon TBR's:
+• Ocean Crossing
+• Smuggler's Cove
+• Verath
+• Nightmare Sfor
+
+New Beasties:
+• monsters/fire_spider_spitting - Fire Spider
+- Big shiny red spider, shoots bolts of fire
+• monsters/fire_spider_turret
+- Ditto, but doesn't move
+• monsters/fire_spider_mini - Fire spider hatchling
+- Only has 10hp but is guaranteed to be the most annoying beast since the Horror
+- Latches onto your body or face at random locations, biting, and hindering your movement - must be "scraped off"
+• monsters/fire_reaver_mini- Fire Reaver Hatchling
+- A small fire reaver whose little volcano isn't old enough to be active, but it still has a taste for burning flesh.
+• monsters/slime_green - Lesser green slime
+- Bugger's hit and run projectile tactics make him hard to catch, he may yet chew on your poisoned corpse
+
+Mapper Toys:
+• other/cannon_manned
+- This cannon can be aimed in a 45 degree arc and fires a single 1000hp cannon ball every 30 seconds
+• other/cannon_manned_fixed
+- This cannon cannot be aimed and requires it be loaded with item_cannon_ball before fireing
+• other/trigger_poison
+- Brush scriptname poisons players that touch it. Targetname becomes the name of the attacker, target: <dmg>;<time>;[no_monsters]
+• other/trigger_burn
+- Convention alias for burn_1000, adjustable, same params as trigger_poison
+• other/trigger_web
+- Convention alias for web, no params, just targets itself.
+• other/undamael_hurt, other/undamael_break, other/undamael_pitedge
+- These are for Undamael operations - see Undamael documentation [pending]
+
+Fixes/Changes:
+• All corpses now fade properly, and within 20 seconds, instead of two minutes
+- Should save a mess load of edicts in swarm situations, such as old_helena
+• Some viewmodel consolidation (bows, 2h swords, shields, potions)
+- Should also free up some edicts
+- Also optimized them a bit to save some epoly's
+• Fixed map sploit where dmgmulti would sometimes work when set to less than 1
+• Fixed client 255 msg bug
+- Or at least got it to the point where I can't duplicate it anymore. >_>
+
+...and the usual 100,000 changes I'm not bothering to list.

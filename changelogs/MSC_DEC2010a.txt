@@ -1,0 +1,281 @@
+Re: List of changelogs
+
+DEC2010a PUBLIC CHANGELOG:
+
+DEC2010_centerfold.jpg
+Nothing worse than lazy devs...
+
+Looooooong overdue patch doesn't contain as nearly enough changes to justify the delay, but a lot of what we've done is to prepare for subsequent patches, and thus is not immediately visible. Still... There is some fairly sweeping stuff here...
+
+HOSTING NOTES: Starting an HLDS or listenserver with the -num_edicts flag may lead to crashes on some maps. Also, BOTH the Full Installer and the Patch will replace your listlib.gam file, which will remove any metamod you are using until you edit it again.
+
+
+New Stuff
+
+• Bloom - The poor man's HDR. Yes, we now have our own internal bloom mod that should not trip VAC. It needs some work though, as it is downright blinding on several maps.
+- Under the full installer and config, you should be able to tap "B" to toggle it.
+- (Otherwise, the bind is "toggle_bloom" if you have the extras.cfg executed in your userconfig.cfg)
+- ms_bloom_level 0 should also remove it (default level is 4)
+- You can also access it in Advanced Game Options.
+
+• Polearms - That's right, a whole new weapon array.
+- Specific Polearms are in the spoiler section below, however, we figure folks need to at least know how to use them, so here's the basics...
+- All Polearms do the most damage when you strike an opponent at the maximum possible range. So with polearms, the trick to dealing the most damage is to keep your opponent at bay.
+- Charged_Thrust - Polearms with this ability will do double damage on the first charge level.
+- Block - Polearms with the Block ability have it activated by holding right click. Blocking will reduce damage and the chance to be stunned by creatures attacking from in front of you.
+- Spin_Block - On some polearms, entering block while backpedaling will initiate a Spin Block a few seconds later. Spin Block reduces damage even further than normal block, and can deflect most projectiles. Spin Block can only be maintained for so long, and using it repeatedly reduces the length at which it can be sustained.
+- Push - Polearms with this ability can push opponents away by using Block+Forward. This does no damage, but places opponents in a better position to be attacked, or allows the wielder to escape from a tricky situation.
+- Backhand - When backpedaling and holding the +use button, polearms with this ability will thrust with the butt-end of the weapon. This may stun or repel a single opponent who is very near the player, or offer an alternative damage type. This is useful when pinned by a single fast opponent or surprised by an otherwise damage resistant one.
+- Swipe - Polearms with this ability will swipe, instead of stab, if you attack while strafing. This usually does less damage, but the damage is consistent, regardless of distance. In some cases this may also offer an alternative damage type.
+- Throwing - Some polearms can be thrown by holding then releasing right click. The longer you hold the right click in preparing the throw, the further the spear will go and the more damage it will do. Creatures that are too close, however, will receive less damage from such a throw.
+- Charged_Throw - Polearms with this ability can be thrown at a specific charge level. Unlike a normal throwing spear, the amount of damage they do and the distance the projectile will travel is fixed.
+- Polearms are complicated, and also do not train HP very well, as such, they are not recommended as a starter weapon - though they are available on the starter weapon selection screen.
+
+• New Parry System
+- Your Parry Value is equal to your skill with your equipped weapon.
+- If you have two different weapons, then each skill is added to your total Parry Value.
+- Shields multiply the Parry Value by x1.5-x3.0, depending on the type.
+- Double handed weapons also gain a x1.25 multiplier.
+- This will likely be more fine-tuned by weapon or weapon type down the road.
+- Parry no longer affects any stats, but various other stats have been raised to compensate (and then some).
+
+• The console command 'clearsky' now only affects your client. The sky will remain clear, until you change maps or use setweather (which also now only affects your client).
+
+• The Galat Storage chest now has about three times the capacity!
+
+• New sexy female leathers. ;)
+
+New Map
+• Shadahar Village (sorc_villa) by Rickler
+- The villa watched over by Shadahar Palace offers many opportunities to friends and foes alike.
+
+Map Updates
+• Thanatos - some changes to the "bird madness".
+• The_Wall - various stabs at various bugs, optimization, stability, and blockage issues.
+• Umulak - various exploits and optimization flaws addressed.
+
+Mapper Toys
+• ms_dev_mode 1
+- Setting this in your server.cfg or listenserver.cfg will allow you to make your own scripts for testing with!
+- While in dev mode you cannot save your character, nor will dev mode work on FN.
+- Place your test scripts in the test_scripts folder, and reference them in your monster scripts with test_scripts/<scriptname> (sans the .script extension)
+- Once basic testing is complete, you can submit your custom scripts to the team for use with your map.
+- Documentation package for scripts pending!
+
+• New Additional Parameters (some of these are aliases of old ones)
+• setfx_spawn_sound - Monster will have a magical sound effect on spawn.
+• setfx_summon_circle - Monster will appear in a summon circle on spawn.
+• setfx_fade_in - Monster will fade in on spawn.
+• setfx_tele_in - On spawn, the monster will teleport and fade in with a sprite and sound effect similar to Sorcs.
+• set_no_player_damage - Monster will not take damage from players.
+• set_die_on_spawn_removed - Monster will suicide (or fade) if its monsterspawn is removed via killtarget.
+• set_no_roam - Monster will not roam from its initial placement until it spots a target.
+• set_roam - Forces a monster that doesn't normally wander about to do so.
+• Again, these addparams may not function on some creatures (mostly those without the full AI.)
+
+• Entity Changes
+- Deleting an ms_monsterspawn or msarea_monsterspawn will no longer automatically kill the creatures tied to it, unless the "set_die_on_spawn_removed" addparam is used.
+- mstrig_weather - has a new option to lock the weather to a particular state (preventing access to 'clearsky' 'setweather' etc.)
+- Prefixing scriptevent with "gm_" on a trigger_once or trigger_multiple will cause the event to be called against the Game Master instead of the player/monster crossing the trigger.
+
+Bug Fixes/Other Changes
+• New armor/player model system should put an end to various model scramble issues.
+• Most swords should parry proper on right-click now.
+• Artifact Chests require that you be in the top 75% of damage points to qualify.
+• Damage points should restore properly on reconnect (within 1k).
+• This is now MSC v1.2 (just to screw up your favorites list!) :D
+• 'listresist' command now includes your "Darkness Level"
+- It is increased by using dark energy weapons/attacks, and decreases over time.
+- This currently has no effect, and is just for statistical gathering purposes.
+• Optimized much of the debug overlay, reducing server CPU overhead by 5%-30%
+• Some weather effects (snow/rain tint) will no longer follow you underground (or will fade out shortly after going underground or indoors, and return upon entering open sky again).
+• Massive weather effect optimization (whole new system).
+
+• Massive sprite/model consolidation
+• Fixed allies running from fear effects that cannot damage them
+• Large slimes now pass dmgmulti/hpmulti to offspring
+• Fixed Bearclaw related crash
+• Fixed Lodagond-4 horror crashes
+• Fixed Graxnux double strike bug
+• Fixed Skeleton archer AOE issues
+• Fixed various Freeze Solid issues
+• Fixed various chest/reward bugs
+• Fixed Khaz Childre perpetual retreat bug
+• Fixed Northmaul Charge System
+• Various Projectile/Hitbox issues
+• Issues with weather/vapors (see changelog for usage)
+• Fixed "Potion of Protection from Spiders" bugs
+• Fixed Mummy Hitbox bug
+• All broken {Transparent textures should now be fixed (those in wads, at least)
+• Fixed Corpse light Bugs
+• Revamped newer boar model
+• And the usual 100,000 other fixes and minor balance tweaks that I'm not going to list here...
+
+Nerf Log
+• Your Death will wipe all your hits from any non-boss monsters still alive, as far as XP to be gained by their being slain is concerned. Armor/Bravery status has no affect on this penalty.
+• Fixed monster-flee related bugs
+
+Known Issues
+- Starting an HLDS or listenserver with the -num_edicts flag may lead to crashes on some maps.
+- The first time you select your character on the character selection screen he/she maybe partially invisible. (This will resolve after the first time you spawn in world.)
+- The characters representing the male/female options on the new character gender selection screen are invisible, as new characters will be, before spawning in the world for the first time (to be fixed).
+- Weak skeletons struck by the Holy Lance projectile may get up again (once) - this is due to the fact that you've done so much damage, above and beyond their max, that they die before they can register the Rebuke Undead effect.
+- Monsters are invulnerable for 2 seconds after spawn (to prevent gibbing issues).
+- Using changelevel instead of votemap or admin_map may cause various visual issues.
+
+
+Sorc_Villa - Hostile - Achievement system
+
+Shadahar Village, when hostile, is, essentially, one long run of never-ending pain. If you manage to survive this pain, however, you will be able to acquire unique bragging rights, known as Achievement Medals.
+
+After killing ten creatures, the "Shadahar Village Challenge" begins. At that point, all players who are on the server are locked into the challenge - more players can join to help, but they can't gain achievements unless they were there in the beginning.
+From the point where the challenge begins, you'll be given a medal of Tin status. For every fifty enemies your team kills, consecutively, your medal will be upgraded. However, your team must slay more enemies than you have on any other visit to Shadahar Village each time you play, in order to upgrade your medal. (Meaning, if you enter with a Silver medal, said medal will remain Silver, until the team slays 160 creatures or more.)
+
+Left clicking while the medal is in your hand will project a large image with fan-fair and generate a server-wide message informing all of your mighty achievement. (Beware, if this turns into a troll item, however, I'm going to limit its usage to 3 times per map.)
+
+If you lose your medal (for whatever reason), simply visit Shadahar Village (in hostile mode). Initiate the challenge by slaying 10 creatures, and your medal will be returned to you. It will have the same achievement level as your old one.
+
+You cannot transfer medals to other players. You *can* drop them, but only their original owners can pick them up.
+
+There are seven Shadahar Village Challenge achievement levels:
+
+Tin - 10 kills
+Bronze - 60 kills
+Silver - 110 kills
+Gold - 160 kills
+Platinum - 210 kills
+Diamond - 260 kills
+Loreldian - 310 kills or more
+
+(Note that creatures summoned by enemies [eg. shaman generated horrors/elementals] do not add to the kill count.)
+
+Completing the Shadahar Village Challenge requires some strategy (in addition to some luck, in terms of the server holding on for its dear life). Each area of Shadahar provides a limited number of enemies, so your best bet is to find a defensible locale, without going too deep into the village, and setting up there. Kill everything nearby until the spawns slow down too much to keep the party "fed", then move onto the next location, deeper in, until the village is clear or the challenge is complete.
+
+Getting blinded is a major hazard with all the electricity flying about, so a good defensible position should have a "haven" which you can easily fall back to. You'll have to pay attention to what direction you are from said haven, so you can navigate back to it, blindly, if need be. If one spell caster dedicates himself to maintaining a healing circle, the sound of it makes a good beacon, in addition to providing a place where the blinded warrior can heal.
+
+It would be wise to explore the village in its non-hostile state, in order to learn the layout, and determine defensible positions, while not under the threat of constant attack.
+
+New Items/Weapons:
+• Unholy Blade (Req: 30+ Swordsmanship)
+- This corrupted variant of the Felewyn Shard does huge amounts of Dark damage and provides Vampyric damage effects
+- After holding block for a few moments, it generates a Dark Energy Shield that repels enemies and wreaths them in Dark energy flames for a time. (75MP to produce)
+- It can also be thrown in a straight line for a hefty amount of damage
+
+• Shadowfire Blade (Req: 30+ Swordsmanship)
+- This enhancement of the Novablade does Dark Energy damage on strike and can produce various fire effects.
+- After holding block for a few moments, it produces a ring of flame that repels and burns opponents.
+- It also reduces all fire damage by 50% (75% while in parry), though it provides no additional resistance to fire magiks taking hold.
+
+• Demon Bludgeon Hammer (Req: 30+ Bluntarms)
+- This stronger variant of the Bludgeon Hammer does Dark damage and can produce a wave of fire when struck against the ground with a charge
+- It also provides more and longer lasting Bludgeon Rage charges.
+
+• The Skull Scythe (Req: 30+ Axe Handling, 34 to Throw)
+- This nasty scythe does large amounts of Dark damage with fair accuracy and can be thrown in a wide arc for devastating damage, in addition to providing vampyric regeneration.
+
+• Vorpal Tongue (Req: 30+ Smallarms)
+- The layers of magic sewn into this weapon provide both fire and ice effects. Including fire DOT, and a freezing burst effect.
+
+• Infernal Claws (Req: 30+ Martialarts)
+- This enhancement of the Demon Claws features a fire wave attack and Fire DOT.
+
+• Wintercleaver (Req: 30+ Axe Handling)
+- A well balanced axe of elemental ice that can create freeze weaker opponents solid.
+- (This one may need some rebalancing...)
+
+...and the polearms...
+
+• Quarterstaff - Your basic training polearm
+- Abilities: Charged_Thrust, Swipe, Block, Spin_Block, Push, Backhand
+- (All the Quarterstaff's attacks do Blunt damage)
+
+• Spear (Req: Polearms 3)
+- Abilities: Charged_Thrust, Throwing (Both Piercing)
+- Fair amount of damage when thrown fully prepped at a fair distance
+
+• Bardiche (Req: Polearms 6)
+- Abilities: Charged_Thrust, Swipe, Block, Push, Backhand (Blunt)
+- Save for the Backhand, this crescent bladed polearm does Slashing damage.
+
+• Halberd (Req: Polearms 9)
+- Abilities: Charged_Thrust (Pierce), Swipe (Slash), Block, Push, Backhand (Blunt)
+- This dynamic weapon has quite a reach and offers a few options for dealing with various beasties.
+
+• Trident (Req: Polearms 11)
+- Abilities: Charged_Thrust, Block, Push, Charged_Throw
+- This hefty forked spear can strike pretty hard, while still providing some defensive abilities. All attacks do piercing damage.
+
+• Harpoon (Req: Polearms 15)
+- Abilities: Charged_Thrust, Throwing (Both Piercing)
+- This is the nastiest and heaviest of the throwing spears, really meant for whales.
+
+• Elven Glaive (Req: Polearms 18)
+- Abilities: Charged_Thrust (Slash), Swipe (Slash), Block, Push, Backhand (Blunt)
+- Unlike most polearms, this is designed more for slashing small groups of monsters, rather than keeping individual opponents at bay.
+- It has a heavy metal core, allowing it to heavily stun targets with the Backhand attack.
+
+• Ice Typhoon (Req: Polearms 20)
+- Abilities: Charged_Thrust (Ice), Block, Push, Backhand (Pierce), Charged_Throw
+- First of the magical polearms, this one is tipped with elemental ice, that can slow opponents, or even freeze them, with multiple strikes.
+- This magical polearm reduces all cold damage by 50%, but does not provide any additional resistance to such magiks.
+- Opponents with less than 2k hp will be frozen solid if struck by this polearm four or more times consecutively.
+- The third charge creates an arc of cold that freezes or slows opponents for 75MP.
+- When thrown, the projectile will slow opponents with cold magic. It will also freeze opponents with less than 5x your MaxHP (or 3000hp, whichever is greater), costing a small amount of MP.
+
+• Holy Lance (Req: Polearms 25)
+- Abilities: Charged_Thrust (Holy), Block, Push, Backhand (Pierce), Charged_Throw
+- This holy lance, often used by Felewyn Seekers, is the scourge of the undead.
+- The charged throw will do additional Holy Damage (as a powerful Rebuke Undead spell).
+- The final weapon charge will create a repulsive aura that will follow the user and repel undead for a time. (200MP)
+- While protected by the influence of this aura, most attacks directed against the wielder by the undead or other unholy creatures will have their damage reduced by 50%.
+- This is a holy weapon, and thus useless against many opponents, however, the Backhand attack does a fair amount of piercing damage and repels opponents, giving the wielder the opportunity to change weapons, if need be.
+- This is currently the longest reached of all the Polearms.
+
+• Stormpharaoh's Lance (Req: Polearms 30)
+- Abilities: Charge_Thrust (Lightning), Block, Spin_Block, Push, Backhand, Charged_Throw
+- Currently the penultimate of the Polearms line, this is a weapon commonly wielded by some of the most dreaded of undead creations.
+- Charged_Thrust causes a bolt of lightning to strike out from the weapon, doing a fair amount of damage to opponents at a long distance (cost: 20MP). This is in addition to the usual double strike damage for creatures struck by the lance itself.
+- The Spin_Block function forms a repelling static field, damaging and pushing away most opponents, though it is less effective against those resistant to lightning.
+- The backhand function stuns opponents and does blunt damage, instead of electrical.
+- The Charged_Throw will imprison most humanoid opponents inside a Cage of Force. This inhibits their movement, but not their ability to attack. The Cage of Force effect costs 100MP, but if mana is lacking, or the creature is too large to be trapped within the cage, the projectile will still do shock damage over time. (All such throws cost 10MP.)
+- The weapon also has a chance to shock opponents with every attack.
+
+...and moar pot...
+
+• Venom Claw Potion / Greater Venom Claw Potion (Req: 20/27 Affliction)
+- These potions provide poisonous and acidic auras (respectively), and cause nasty vampyric claws to burst forth from your hands that can inflict massive amounts of damage to your enemies, for a time.
+- "Dropping" the claws cancels the effect.
+- XP goes to Martial Arts and Affliction.
+
+• Potion of Bravery
+- After drinking a dose of this potion, you will take no penalty on your next death
+- Additionally, boss flagged monsters that kill you will gain no defensive advantage from it
+- The last effect stacks with Armor of Bravery
+- Potion contains five doses
+
+• Fire Brand Potion
+- Increases all Fire damage by 50%, and adds Fire DOT to all your attacks.
+- (If the attack already does fire DOT, it's a bit haphazard as to which will be applied first, however.)
+- Like most potion effects, the effect will last until death or map change.
+- Each potion contains three doses.
+
+• Fire Aura Potion
+- Creates a defensive aura of fire around the imbiber, and provides 50% cold resistance.
+- This effect does not stack with the Fire Aura Armor effect. (And donning said armor will cancel the potion's aura effect).
+- Each potion contains three doses.
+
+• Poison Aura Potion
+- Creates a defensive aura of poison around the imbiber, and provides 50% poison resistance.
+- This effect does not stack with the Acid Plate Armor effect. (And donning said armor will cancel the potion's aura effect).
+- Each potion contains three doses.
+
+• Mana Fountain
+- Causes the imbiber's mana pool to refresh at 25MP/second.
+- Like most potion effects, the effect will last until death or map change.
+- Each potion contains but one dose; use it wisely.
+
+New Critters:
+• monsters/slime_bomber [20+] - Plague Spreader by MiB (gets into your face then explodes). Untested.
+• monsters/horror_lightning2 [25+] - Enraged Electrical Horror.
+- Horror with alternate flight model for navigating turns, such as those in Sorc_Villa, better.
+- Easily adapted for other variants.

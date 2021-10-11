@@ -1,0 +1,83 @@
+Re: List of changelogs
+
+September 14th 2006 Public Changelog
+
+NEW ITEMS
+new arrows: holy arrows/greater - slaughter the unholy with enchanted arrows (greaters depend on your divination skill)
+new spell: poison cloud - good damage, large area, long lasting
+new spell: acid bolt - high damage, single target
+new spell: sphere of ice - freeze multiple targets solid
+new swords: Greater/Lesser Ice Blades, Envenomed Blade
+new MA: Fire Gauntlets
+new keys: key_ice, other/keyhole_ice (new model included)
+
+NEW BEASTIES
+monsters/elemental_fire1 - Fire Elemental
+monsters/elemental_ice1 - Ice Elemental
+monsters/elemental_ice2 - Greater Ice Elemental
+(Greater Fire, Earth Series, Air Series, and Elder elemental series are pending)
+monsters/ice_reaver - huge honking beefy beast, these subsists mostly on giant polar bears, supplemented by the occasional wandering adventurer.
+monsters/skeleton_ice - decayed ice bone (frostbolts) (sometimes has a stick)
+monsters/skeleton_ice_warrior - ice bone warrior (sword with perma-freeze + frostbolts)
+monsters/skeleton_ice_enraged - enraged ice bone (axes, frostbolts, + on crack)
+monsters/skeleton_ice_lord - ice bone lord (omfgwtfh4x 3 stage boss)
+- immune to fire and cold (doesn't need a hazard to back him up)
+- stage1: greater circle of frost (plays wid ya)
+- stage2: sphere of ice (torchers ya )
+- stage3: speed^ + clubs of dewm + regen (no more tricks, just opens a raw can of wupass)
+- ...looks so feminine, I'll see if I can find an alien to do the voice for it...
+monsters/orc_shaman_fire_turret - stationary fire shaman, as promised
+monsters/orc_brawler - huge angry orc armed with large fists (lots of stun atks)
+monsters/morc_shaman_ice - Marogar Ice Shaman
+monsters/morc_shaman_ice_turret - Same thang, don't move
+monsters/morc_shaman_ice_noblizz - You can't use the above two in groups, use these if you want multiple ice shamans
+monsters/morc_shaman_ice_turret_noblizz - again, sans the blizzard effect for group therapy.
+mosnters/snow_boar1 &2&3 - (model now standard)
+[all monster/morc_XXX models are standard as well, including morc_chief]
+monsters/troll_fire - Efreet (model now standard)
+monsters/djinn_fire - a fire djinn
+monsters/djinn_ice - an ice djinn ( use kelerosprelude/troll_djinn for Ji-ax variant )
+minibosses/flesheater - BD fix
+mscave/Shadahar - traded his frost bolts in for CIRCLE OF DEATH, and a rare reward
+- also restored his quest to its original intended setup (difference being: it actually works, but you'll have to figure the details out on your own).
+- reads as 'Gold Forged Skeleton' when used on other maps (different reward scheme for generic application)
+improved orc_sniper and bandit_hard_archer aim & tactics (also regular bandit, sans tactics)
+Map specific
+badlands/djinn_fire - Val-Sul the fire djinn (stationary, non-summoning, yet massively overpowered variant on the standard) [map specific triggers]
+NPCs/forsuth - Forsuth, the frosty dwarf! [reusable - shop with some arctic survival gear]
+outpost/super - Outpost supervisor. [map specific triggers and alerts]
+
+NEW POTIONS
+potion of speed - hands-free raven mace effect for 30 mins/1map
+potion of protection/greater - 25%/60% damage reduction for 90 mins/1map (does not stack with ice shield)
+pot fire resistance - 75% elemental damage reduction, lasts 1 map/90 minutes
+pot fire immunity - 100% elemental damage reduction + immunity to effects, lasts 1 map/90 minutes
+pot cold resistance - 75% elemental damage reduction, lasts 1 map/90 minutes
+pot cold immunity - 100% elemental damage reduction + immunity to effects, lasts 1 map/90 minutes
+pot poison antidote - 100% elemental damage reduction, lasts 1 map/90 minutes
+
+New Mapper Toys
+weather/make_snow - spawns (invisible), changes weather to snow, removes self (detects as dead by monster spawner, so repeatable)
+weather/make_clear - as above, changes weather to clear (ie. removes weather effects)
+weather/make_storm - as above, changes weather to storm (ie. rain+lightning)
+weather/make_rain - as above, changes weather to rain (ie. "the omfg turn it off!" FPS killah)
+weather/settime_day - set your map to day (6:00), removes self, detects as dead by monsterspawn, and is thus repeatable
+weather/settime_dusk- as above, but sets map to dusk (ie. sunset 17:00)
+weather/settime_night - as above, but sets map to night (20:00)
+
+Example weather control with source: http://www.thothie.com/msc/weather_tower_b.rar
+
+BugZ Squashed + Odder stuffz
+ALL ORCS -> New AI (no more BD, regardless of numbers!), buffed up some of the less used orcs too.
+(new AI = too many changes to list)
+Buffed basic poison spell a bit
+flinch chance / delay fixed
+Various lure fixes / prevention of death by friendly fire
+Ice shield no longer wastes mana by casting redundantly (mana refund on redundant cast / miss-cast)
+buffed all arctic critters hp/attacks (boars/bears/morcs)
+Goblin town consistancy now included in beta-package (clients should need nothing else for vanilla maps)
+Guards will now defend themselves and come to one anothers aid (try it in Helena - it's fun) - also true of anything on the new AI (orcs, etc)
+worked out last of chinks in improved flee system
+0x0x0 Bug Fix!!!
+
+...and the usual 10,000 minor changes I'm not bothering to list...

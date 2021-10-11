@@ -1,0 +1,11 @@
+Re: List of changelogs
+
+June 11th 2006 Public Changelog
+
+Full Keledrosprelude2 support
+
+Keledrosprelude2 detail: Father Brandon speaks to us from beyond the grave... This expands the original map, includes a new, really nasty boss (think lvl30+), and upgrades of the two stone mini-bosses (15+/20+ respectively), you will need to kill at least one of the two to advance to Keledrosruins.
+
+[rant]Djinn Ji-ax script was originally Father Brandon's work, so don't yell at me - although I did alter it quite a bit. He has his own frost script, which is a tad meaner than the one I developed. I also had to stick in monster spawn triggers manually via Ripent which, I must confess/complain, is a royal pain! Father Brandon apparently never learned how SpawnStart 1 works - he actually had it so the monsters were boxed, until you get near, then the monster clip deleted to set them free... Talk about lagtastic! >< Hopefully the time I spent undoing that pays off enough to make this map less laggy than the original. - I dunno if I can do the same with Daragoth, v. hard without the source. I'll see if Lord K has it.[/rant]
+
+SC.DLL patch detail: includes new monsters, new models, new crest, a new weapon (that yes, is in the game), and the usual plifera of minor fixes.

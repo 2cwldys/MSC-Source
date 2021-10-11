@@ -1,0 +1,147 @@
+Re: List of changelogs
+
+JUN2007a PUBLIC CHANGELOG:
+
+pic of the month
+uber_reaver.gif
+
+Most of this month's stuff is scripts for new maps. This bumped pretty much everything else over to next month.
+
+New Stuffz
+• show_health - settings for show_health now save to character (Vista disease spreaders rejoice)
+• summon_help - forgot your summon commands? Type this in chat or console to list them in console/combat hud
+• Improved shields a bit
+- Shields can now deflect most any incoming attack, even fire, poison spit, etc.
+- They cannot, however, block the DOT from such effects
+- (ie. shield may deflect a fire ball's impact but not the ambient burn damage.)
+gold.gif
+• Seperate gold tiles in chests (finally)
+- When there are multiple players, pouches of gold now appear in groups inside chests (rather than just one huge wad)
+- Like potions, they can stack, so ya might want to check the same chest again after taking one
+- These do not add to your inventory, but add gold directly to your character
+- You must have as double the hp as there is gold in the to pick it up (PL prevention)
+- More players = more gold pouches per chest
+- Only applied to a few chests now, soon to be everywhere
+• Health bars!
+- Health bars appear over players heads
+- Health bars appear over monsters heads, with a special ring
+- Monster health bars scale based on total monster total HP, like so:
+hpbar_small.gif Orc Warrior = 60 total hp
+hpbar_big.gif Djinn Ji'ax = 3000 total hp
+- Known bug: sometimes monster healthbars pop up "inside" monsters due to improper or false height defines
+- This bit also needs some aesthetic work
+- I've made the system dymamic, so we could use a sprite with more frames (up to 100)
+- health_bars 0 in console to disable player health bars (this setting saves to character)
+- To disable monster health bars: put away the ring. ^_^
+• New flight AI
+- Bats move almost realistically, and if you thought Horrors were annoying before...
+- Giant bat got a bit of of a "revamp" too (semi re-write)
+• Ring of the Bloodstone (in game)
+- Allows seeing health bars over the head of monsters when they are struck
+- Result of an insanely complicated 13 step quest...
+
+New Beasties
+• monsters/uber_reaver - Ice Reaver Patriarch
+- A gigantic ice reaver, enhanced by the magics of Maldora, level 40'ish mini-boss
+- AOE stun, lightning attack, massive perpetual blizzard attack, quadruple freeze sphere attack, big ol bag of hp
+• monsters/skeleton_crystal1
+- Invulnerable escort for the uber_reaver, comes and goes
+- Must be tied to the a repeatable monsterspawn named "summon_skels" with 1 life for proper function with uber_reaver
+• monsters/troll_ice_lobber
+- This troll lobber tosses giant snow boulders that break into fields of deadly ice spikes
+- Good for juicing up level 40'ers
+- Demon faction for easy placement (gets along with both undead and orcs)
+• monsters/troll_ice_lobber_turret
+- non-roaming variant of same
+• monsters/sorc_chief1 - Runegahr, Shahaddar Orc Chieften (WIP)
+- Semi-functional, but not quite ready for prime time. Can actually fight, but want a few more abilities.
+- ATM he has various lightning attacks, a vampiric sword, and the ability to teleport
+• monsters/sorc_telepoint1 (monsters/sorc_telepoint2,monsters/sorc_telepoint3,monsters/sorc_telepoint4)
+- Places these on the map with Runegahr, or any other Shahaddar, and they will periodically teleport to them and/or their spawn point
+- Creatures near teleport points will be catapulted away just before the orc arrives
+- Multiply orcs can be used as each teleport point as a built in "cool down" time
+• NPCs: "NPCs/james" and "NPCs/tao" for Dridge's upcoming map
+
+New Mapper Toys
+• Script error reporting - pop-ups tell ya when you spelled a script name wrong
+
+BugZ Squashed + Odder stuffz
+• Fixed bug where Maldora was vulnerable to demon blood and a few other magics
+• Fixed Blacksmith "swinging at air" and similar range issues
+• Fixed a bunch of anim errors
+• Fixed some crashes involved with gold bags spawning
+• Some more no free edict control
+• Eight hours of "doing olypmix" brain death prevention (cross fingers)
+- Also revamped the Ice Djinn a bit while I was at it, as he made a good test subject
+• Better ***mod<->FN detection
+• Fixed dibilitating poison immunities
+- Also reduced poison time on g.poison arrows for mercy's sake
+• Tweaks to the chain lightning effect (still uses wave effect though)
+• Cut down on lag during black slime splits
+• Drastically reduced lag caused by mass monster spawnage
+• Fixed client-side health sprite corruption (possibly... maybe...)
+• Improved ice wall responsiveness and agro trigger
+• Improved poison cloud responsiveness
+• Some improvement to the elemental resistance system
+- Removing a resistant item for one element will no longer cancel the resistance of another
+- Combining two items that resist the same element still causes wierdness though
+• Fixed some more PVP issues
+- including bit with the bone blade not working on players, I hope
+• Guards no longer constantly turn to face players
+- Wasn't a bug so much as an unintended feature, but it had potential issues
+• Fixed bug where bandit archers (first three types) sometimes caused server crash
+• Fixed bug where Voldar and Maldora would sometimes not start convos when players near by
+• Watch yer step on Bloodrose, fall damage is on (by Foamy's request)
+• Fixed up skele dead-by-holy fade effect
+• Holy magics determine valid targets by vulnerability instead of race (new dll function)
+- There were a few creatures who wern't vulnerable and should have been, this should fix that
+• Lots, and lots, and lots of anti-cheat stuff
+- This includes, most importantly, the fact that FN will no longer accept connections from older DLLs, as they are HIGHLY exploitable
+
+- Anti-Whore(/ninja/pirate/cannibal/viking) -
+• Switched gold bags to spawn by x#bags/player present
+• Gold is split into multiple tiles base on players present*
+• Gold multiplies based on #players presnet*
+• Increased rewards for multiple players*
+• Increased spawn chance of rares by # of players present*
+• On some chests, if there more than a certain # of "worthy" players present, extra random items will appear
+• "random bolts" chances increase based on # of players present
+• Some rewards exclusive to multi-player games
+• Chests can only be opened by the same player once every two seconds
+• Some items require a player with certain attributes to appear in chests
+- Meaning, if yer a nub, let the vets get the first pick, and maybe something better will be in there
+• Artifiact Chests appear and determine most worthy players for some high end items
+* = only some chests in some areas, to be applied to all chests in the future
+
+- AMX Changes -
+• AMX Map vote now activates when ANYONE presses [enter] on a transition
+• AMXmodX adaptation pending...
+
+- MAP Updates -
+• The Keep
+- Removed sounds from rotating doors to prevent crashes when they are jammed by monsters
+- Caused fist bandit door to be more dependable (monster spawn there is spawnstart 0 = this is BAD)
+- Addded future transition place holder to prevent sploit
+• Wicard Oven
+- Added monsterclip to prevent Voldar from vaulting over the gate where you can't get to him
+
+- Installer Changes -
+(nadda)
+
+...and the usual 10,000 minor changes I'm not bothering to list...
+
+Bumped to next month (in order of priority):
+- Crow's skycastle2 scripts (almost done! ><)
+- Helena NPC post invasion award (complicated, and likely made pointless by Helena2)
+- AMX vote re-write (now part of the AMXmodX project)
+- Alter chain lighting to work more like, well, chain lightning
+- Shadahar revamp (bumped for fifth month in a row)
+- New Swim AI (really people, just put monster clips on the water, tis how HL1 monsters work)
+- Mining System (doesn't look like Vomica wants to work on his map anymore :( )
+- Single Player Mode (adjust for single player + not on central server)
+
+* Known bug:
+• If you remove your armor, and replace it, you will be invisible in third person.
+- Type 'vis' to remedy. If you do not type vis, your armor should appear correctly to other players.
+• Warning: Unable to open sound/npc/RND_SAYX.wav for transfer
+- Server message, bug with how the "say" script command works in MSC, no worries

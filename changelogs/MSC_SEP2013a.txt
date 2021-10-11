@@ -1,0 +1,171 @@
+LABOR DAY PATCH*
+SEP2013a PUBLIC CHANGELOG:
+centerfold_SEP2013a.png
+Rhudeanlorat not included
+* Okay, somewhat after labor day, due to snafu at Valve, but close enough. ;)
+
+While this patch isn't a whole lot bigger than the last one, it one only took a month to make - while the last one took nearly six, so that's progress, I suppose. Additionally, we *almost* got another map ready in time, but alas, not quite - but that means we may even get two maps in the next patch, with some luck - maybe even more.
+
+Various fixes herein require the client be patched as well, so sadly, this is a mandatory patch this time around - meaning patched servers will boot you, if you've not updated, and non-patched servers will not be able to connect to [FN].
+
+New Map
+• M2 Quest (m2_quest) by Cyax, Low, Disconnected
+- This map by Cyax, intended to replace ms_quest and be part of a new series of maps, is much larger and more aesthetically pleasing than its predecessor. More importantly, there's actually stuff to do here now!
+- Sylphiel's grandmah's house got burgled by goblins! And it's up to you to sate the angry waitress before she considers brewing something other than soup!
+- Scattered throughout the map's many nooks and crannies, are thirteen soup making ingredients, dropped or hidden by those nasty little goblins. But can you find them all for that delicious soup goodness?
+- These special quest items scoop up when touched, and will not clutter your inventory (although, currently, they also won't save, should you leave the map for one reason or another.)
+- While there is a puzzle or two here that requires multiple players, the soup quest can be completed with just one.
+
+Other Changes
+• Bags of Gold now instantly pick up on pressing +use, instead of offering a chest inventory.
+- May lead to more greedy ninjas, but meh, saves some issues.
+• Same for dropped quivers, and said quivers are no longer solid. (Should fix some issues.)
+• Sanitized text inputs (Helps with various chat issues, names, and the like.)
+• Reduced orc's obsession with the word "die!", a bit.
+• Fixed bugs where summons and some mobs would not thaw after being frozen.
+• Fixed bug where combat music system didn't initiate from map properties.
+• Fixed potential bug where combat music system might stick between maps.
+• Increased spin down time of combat music, to prevent going out of combat music prematurely.
+• Fixed the delayed monster reaction when spawning too close to target.
+• Nerfed the Fire Shaman Initiates in mscave a bit more
+• Global treasure lists now randomize every few minutes, hopefully making random treasure a bit more random.
+• Tweaked up and added some bug prevention to the script array system (may fix some odd/stability issues.)
+• Yet another stab and fixing the glow system (which also uses the aforementioned script array system.)
+• Fixed some legacy issue with damage reflection on temporarily invulnerable mobs.
+• Fixed orc_for->bloodrose transition (though not the reverse), and mscave's sticky orcs.
+• Hitting +use on a chest or NPC/interact menu no longer retains the slow down effect after exiting said menu/interact.
+• Double click functionality for worn (gear) items restored.
+• ms_reset_when_empty functionality restored for Steam Pipe HLDS servers
+• Disconnect/reconnect sequence now running on Steam Pipe HLDS servers
+• Fixed Dusk TOD event causing crashes for some users (sadly, by axing the transition effect.)
+
+New Client Side Arrow Tests
+• A new client side arrow system is being tested on the Elven Arrows and the Envenomed Arrows
+- This will not help with hit boxes (as they are, still, always a simple box, center bottom on the monster)
+- But it should help with lag detection and server overhead. If it hits on your client, it should hit on the server.
+- These arrows stick and follow on impact, similar to an old defunct system, but hopefully more aesthetically pleasing (and much less resource intensive)...
+• FOR A LIMITED TIME: Envenomed and Elven arrows do double damage!
+- Is this merely a cynical effort to get these properly tested? Yes, yes it is.
+• Two known bugs:
+- Sometimes, the first arrow that fires just falls flat on the ground (no clue why so far)
+- Firing at close melee range sometimes causes the server side arrow to be used (cl projectile needs a split second to initiate)
+
+New Mapper Toys
+• You can now toggle a func_monsterclip by targeting it.
+• Updated the monster script list.
+
+New Add Params
+• set_die_nt;<delay>
+- If monster has no target nearby, removes self after <delay> seconds.
+- Repeating ms_monsterspawn friendly, and uses suicide command, so players aren't robbed of XP when monster removes.
+
+New Script Commands
+• effect beam follow <sprite> <target> <attach_index> <width> <life> <brightness> <(color)>
+- Creates a beam trail that follows the target/attachment, similar to the hornet/rocket trails in Half-Life
+- Unlike most effect beam's, this one does not create a server side entity, and thus uses less overhead. However, this also means it can't be tracked or updated.
+• $alphanum(<string>,[safelist])
+- Strips non-alphanumerics from a string, with the exception of those listed in [safelist]
+- Recomend using a var for [safelist], especially if a space is among the exceptions.
+• cleffect clientcmd <command>
+- (Client side) Sends commands to client's console directly, bypassing silly server filtering.
+• cleffect tempent set_current_prop collide all [skipentindex]
+- When using collide all, you can now specify an entity index for a tempent to skip during collision checks
+• !startswith and !contains can now be used as string comparitors in conditionals
+• $func(<event>,[params...])
+- Calls <event> and replaces self with the contents of any "return" statement in the event.
+- Kind of a basic custom function feature - doesn't really let you do anything new, but lets you organize differently.
+- Note that this will not suspend execution for any subsequent delayed events in the function event, but it is compatible with "calleventloop" embeds.
+• return <var>
+- For the $func() custom function system described above.
+- Note that, unlike most languages, the return command does not prevent execution of any subsequent code in the event.
+- If multiple return statements are encountered during the same event, the results will be tokenized.
+• monsters/base_chat_array - has a bunch of new features, and I forgot to include the source. >< (need a major update of test_scripts.rar)
+
+New Stuffs
+
+• Sylphiel's Applemead Soup
+- This delicious soup restores full health and provides three minutes of continuos full mana regeneration.
+- Upon completing Sylphiel's soup quest (in m2_quest), you can purchase this soup from Sylphiel in Edana.
+- For each time you complete the soup quest, Sylphiel will increase the stock she has available in a single visit. (To a maximum of five per player.)
+
+New Beasties
+
+• monsters/skeleton_ravager * - Skeletal Ravager (32x72, 4000hp, ~200dps, undead, hard, 500XP)
+- Skeleton Ravagers are large but agile undead warriors, capable of crawling on ceilings and attacking on the move.
+- The Ravagers will only attach to the ceiling if t is within 512 units, and is not a sky brush.
+- If the Ravager comes under a sky brush while crawling on the ceiling, it will drop down and stand.
+- Additional Parameters:
+- set_start_ceiling - spawn crawling on the ceiling.
+- set_start_crawl - spawn crawling on the floor.
+- set_start_stand - spawn standing.
+- set_no_ceiling - never go to the ceiling.
+- Skeletal Ravagers do not respond to most skeleton management scripts.
+
+• monsters/skeleton_ravager_fire *
+• monsters/skeleton_ravager_ice *
+• monsters/skeleton_ravager_venom *
+- Elemental variants of the above, with appropriate DOT claws and periodic AOE projectiles
+
+• monsters/skeleton_mage * - Skeletal Mage (32x72, 5000hp, ~300dps, undead, ranged, hard, 600XP)
+- This is your new go-to guy, should your elemental theming get a little too consistent.
+- By default, the skeletal mage will cycle through four elements, alternating between AOE seals and guided projectiles.
+- The seals have a bit of warning before they take effect, but do more damage than the AOE projectiles which have some fall off.
+- The Skeletal Mage also has a nasty round house kick that can send nearby opponents flying, though the cool down on it is rather long.
+- If you want to restrict a skeletal mage to particular elements, you can do so with the following Additional Paramters:
+- use_fire use_cold use_lightning use_poison
+- For instace, if you want a Skeletal Mage that uses only fire and ice attacks, use "use_fire;use_cold"
+- Or to just use lightning "use_lightning"
+- Note that there is a 10% penalty to the base XP for each element less than four in its repitoir.
+- (so if he only has one element, it's a 30% XP reduction.)
+- Beware that he's a little sprite spammy, though well optimized.
+- Skeletal Mages should respond to most skeletal management scripts, but this functionality is untested.
+- (This includes the add params make_sleeper, make_deep_sleeper, and the monsters/skels_xxx scripts described elsehwere in the changelog.)
+- PS. Might also make a good medium-level boss. (Use make_boss)
+
+• monsters/orc_demonic * - Demonic Blackhand Flayer (32x72, 500hp, ~40dps+50A, orc, semi-ranged, medium, 200XP)
+- Some orcs have been gambling with their souls again...
+- Same as those found in orc_for, but without the self adjustment.
+- (demon skin, Fire DOT, periodic fire balls, fire immune, slightly holy vulnerable)
+
+• monsters/orc_demonic_sword * - Demonic Blackhand Warrior (32x72, 500hp+60A, ~40dps+, orc, semi-ranged, medium, 200XP)
+- Same bit, with sword and shield (better parry).
+
+• monsters/orc_demonic_sniper * - Demonic Blackhand Archer (32x72, 400hp+30A, ~80dps, orc, ranged, hard, 200XP)
+- AOE fire arrows with knockaround (damage falls off), plus the usual annoying sniper stun-and-run extras.
+
+• monsters/orc_demonic_shaman * - Demonic Blackhand Shaman (32x72, 420hp, ~80dps, orc, ranged, hard, 300XP)
+- Guided fire balls, explodes nastily on death.
+
+• desert_temmple/orc_chatter1, desert_temmple/orc_chatter2 * - Blackhand Flayer, Blackhand Warrior
+- A pair of Blackhand orcs, having a long (and easily interrupted) conversation about the precariousness of their situation.
+- Both have the same stats of an orc of the same name, but have been ramped (to hard) up for this appearance.
+
+• desert_temple/thuldahr * - Thuldhar (64x128, 15000hp+50A, ~300dps, player faction)
+- (ZOMG SPOILERS!) Next month, hopefully...
+
+• m2_quest/bgoblin_weak (32x50, ~200hp, ~15dps, goblin, some variants semi-ranged, low, 100XP)
+- Weaker variant of the blood goblin warrior. (Three variants)
+
+• m2_quest/bgoblin_weak (32x50, ~300hp, ~15dps, goblin, some variants semi-ranged, low, 150XP)
+- Weaker variant of the vile goblin warrior. (Three variants) (used as a mini-boss)
+
+• m2_quest/goblin_needler (32x50, 100hp, ~10dps, goblin, ranged, low, 50XP)
+- Weaker variant of the goblin with the oversized arrows
+
+• m2_quest/boar2_weak (32x32, 240hp, ~10dps, wildanimal, low, 75XP)
+- Weaker variant of the great boar
+
+• m2_quest/sylphiel (32x72, invincible, ~0.25dps, non-hostile)
+- Sylphiel at her gram's house.
+
+• m2_quest/pot (prop)
+- Sylphiel's cooking pot.
+
+* Available, tested, but not appearing in this patch.
+
+
+DOWNLOAD AT THE USUAL PLACE
+
+Soup patch said:
+Minor, optional, server side patch, fixes two minor issues with the soup quest, that I shoulda caught sooner (apply after the update):
+http://www.rkszone.com/downloads/msc/SE ... p_fix2.rar

@@ -1,0 +1,48 @@
+Re: List of changelogs
+
+MAR2008b OPTIONAL SERVER SIDE PATCH PUBLIC CHANGELOG:
+
+Squashin' moar bugs!
+
+Fixes/Changes:
+• Support for Aleyesu
+- Aleyesu connects through Bloodrose
+• Elemental Resistance System
+• Support for Gert. Forest and Lodagond
+• Banking of various items
+- but be careful not to go to a MAR2008a server with your new tickets!
+• Potion of Stability
+- Now provides protection against all stun attacks, all drunk attacks, and all push attacks (saved for map brushes)
+• Monster->Look error spam / lag / revenge of the chatbug thingie (Thank MiB!)
+• Adds some FER spiders to the caves in Calruin2
+• Optimizes lightning effects on Lightning Djinn, Venevus, and Air elementals
+• More dependable, better optimized AOE effects (blizzard/lstorm)
+• PVP vote fixed
+- sadly had to do away with team-based PVP in the process
+• Fixed reward system on Gert. Forest
+• New boss regeneration system [WIP]
+- Bosses no longer regain health for killing individual players
+- Bosses regenerate health every minute (1%-10%)
+- Bosses regenerate health if they slay every player on the server (25%-100%)
+- Exceptions for soul-sucking bosses: Ice Queen, Calrian, etc.
+- Bosses more likely to avoid attacks or who rely on health alone have lower regen/recover rates
+• Reduced time dead bodies linger based on monster maxhp
+- Hopefully cut down on edicts on swarm maps
+• More effort to reduce monster gibbing
+- Also to make sure they fire their triggers/report deaths even if they do gib
+- This MAY help with msarea_monsterspawn's fireallperish's older bugs, not sure
+
+New monsters:
+• monsters/scorpion4 – meaner, but slower, giant scorpion
+• monsters/scorpion5 – Gigantic venomous scorpion, lumbering beastie with some push back and heavy poison (more to come)
+• monsters/wizard_normal – Generic variant of Keledros, goes straight into combat, you provide drops (use wizard_died trigger to respond to death event, post ‘reanimation’)
+• monsters/wizard_strong – Generic variant of Venevus, goes straight into combat, normal death sequence, you provide drops
+• monsters/snake_lord – Generic variant of Slithar, goes straight into combat, does not summon skeletons, you provide drops
+• monsters/elemental_air1 - Air Elemental - tad stronger than the summoned variant, and has great bawls o' lightning
+• monsters/elemental_air2 - Greater Air Elemental - multiple guided great balls of lightning, prototype "true-chain" lightning, tornados - what more could an evil wizard ask for?
+• monsters/elemental_fire2 - Greater Fire Elemental - The burning! THE BURNING!
+• monsters/troll_stone - Troll made of stone (Troll Guardian, as seen in WW3d - rename at will)
+• monsters/ogre_stone - Stone Ogre - actually been around awhile, just forgot to mention it (if you've had a lot of folks in MSCave, ye may have seen one already)
+- Unlike the troll_stone, he's a level 30+ beastie
+
+...and the usual 10,000 changes I'm not bothering to list.

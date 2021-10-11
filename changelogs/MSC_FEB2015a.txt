@@ -1,0 +1,416 @@
+FEB2015a PUBLIC CHANGELOG:
+centerfold_FEB2015a.png
+* Was going to make some comment about Black Dragon History month, but thought better of it.
+
+IMPORTANT
+
+If you have trouble with bloom and are installing from the patch, not the full installer (or port old config files afterwards), be sure you have something bound to "choosebloom" (default key: B).
+
+When you first join, you will get this message on your screen:
+graphics_test.png
+
+Bloom will then activate in 10 seconds. If you or your graphics card don't like it, tap B until you both do. This setting will save, and this test will only be done once.
+
+GUILDMASTERS: All crest passwords have changed, and there is a new system for crest acquisition, please contact Thothie for new passwords.
+
+That said, onto the...
+
+Changelog:
+• Rat stacking has returned!
+- Yes, you can once again stack your rats and skeletons... Not bears though... They're not into that. But I suppose you can make rats that ride bears into combat, or something.
+• New Inventory Display Options (thank MiB!)
+- At the bottom of your Inventory Panel, as well as those for shops and chests, you will see three options for changing how the icons and their descriptions are displayed. The option you select will save and remain persistent each time you change it.
+• Typing listmaps in console will now generate a list of maps recomended for your current level.
+- You can use listmaps <low|medium|hard|vhard|epic|all> to list more maps.
+• Some shops now have "Individualized" inventories, and will present a unique shop to each player.
+- This includes Syphiel, The Sorc Alchemist, and Tor'whodoc.
+- Thus, other players will not buy out all the potion stock before you get a chance to shop.
+• Tons of new VO's by SquaresoftKnight and Tentadrilus, including: Forsuth, Findlebind, Smivel, and Maldora.
+• Most mobs now multiply their dropped gold amount by the same amount they multiply XP for FN, self adjust, boss tag, and mapper added abilities.
+• Added lore relevant logos to the available spray paints, prefixed with msc_
+• Some more of the horrors have been moved to the newer flight model, which is now a bit more aggressive. (monsters/horror and monsters/horror2 still use the older glitchy flight model.)
+• All arrows are now client side (except fire and climbing) and thus should be much more accurate.
+• The "time" console command will now return the FN server time and date as well. This will be useful, later.
+• Corrupted Galat Bank? Type "resetbank" in console.
+- This will erase all items in the bank and give you a fresh start. You must type twice to confirm.
+• MASSIVE script processing optimization by MiB.
+• Lots of new music!
+
+New Maps:
+• The Flooded Mines (fmines), by Regorty (connects from rmines, self adjusting high medium to very hard.)
+- A network of very wet dwarven mines, long since abandoned by the dwarves, now occupied by swaths of dangerous beasts.
+• The Ransacked Mines (rmines), by TheOysterHippopotami (connects from fmines or Underpath, self adjusting high medium to very hard.)
+- Another network of dwarven mines, recently occupied by the goblins and their allies.
+
+Bug Fixes:
+• Scaled mobs should have less glitchy hitboxes and reach.
+• Fixed Olof's store menu and some potential quest bugs.
+• Fixed some summoner mobs summoning monsters into players, other monsters, or protruding walls (summons should unstick themselves).
+• Fixed some more DOT/push status bugs.
+• Combat music system should now be 100% fixed (see also mapper toys)
+• Transitions should now update respawn points properly (though this may have consequences on some maps.)
+• Fixed issue with fire aura armor/potion fx continuing to loop after player dies.
+• Bows/Xbows will no longer fire an arrow of the previous ammo type when you select a new type via the ammo selection shortcut.
+- Also gives you a little confirmation message in your event hud.
+• Should have a lot less mobs getting stuck at spawn.
+• Fixed yet more freeze solid effect bugs (eg. freezing sphere).
+• Characters in world with <15 maxhp should not save, hopefully preventing character loss via Valve's new transition glitch.
+- If you spawn into the world in such a state, you should get a warning message to close and reconnect - whether this will fix it, I do not know. (Hard to duplicate.)
+• A million bajillion other things we canna list here...
+
+Balance Tweaks and Nerflog
+• Greater Poison now reduces NPC damage output by 50% while under its effects (but not players - figure the dizzy-drunk effect enough for you guys).
+• Increased velocity (and thus range) on most bows by 20%.
+
+Map Changes:
+• Edana
+- Fixed various shop NPC's locking inventory (also applies to other shops elsewhere.)
+- Fixed a few script bugs
+- Made some NPC's a bit more animated, and less telepathic.
+• m2_quest:
+- Tweaked the crushing trap on m2_quest to allow you to use the button that triggered it to open the lava side door, allowing someone to aid your escape.
+- but also moved the external escape button, so it can't be exploited.
+- Removed the damage point requirements for the individualized chests.
+- Made some of the jumping a tad easier.
+- Fixed Syphiel.
+- Fixed bear fight spawner.
+- Fixed the damned music.
+• ms_soccer
+- Goal trigger will now fire regardless of the number of NPCs within its bounds.
+• shender_east:
+- Fixed potential nightmare spawner bug.
+- Improved aesthetics of nightmare spawn a tad (less bits floating in the sky).
+- Changed the nightmare battle a tad. (Less mobs floating into BFE, or becoming unreachable.)
+- Music fixes.
+• Underpath:
+- Fixed boss scaling/hitbox issue.
+- Fixed spider range issues.
+- Fixed a few more exploits.
+• The_Wall / The_Wall2
+- Fixed transitions to Hunderswamp_North
+- Drastically improved Forsuth's navigation abilities
+
+Damage Point Changes:
+• Damage points now track as quest data.
+• Damage points do not reset between gauntlets maps.
+• Those who join the first gauntlet map in a series within the first three minutes gain 500k bonus.
+• Gauntlet start maps currently include: lowlands, lodagond-1, ww1, the_wall, as well as old_helena and nashalrath.
+• (Mind you, as before, you can lose up to 1000 damage points in a reconnect, due to variable limitations and overhead.)
+• As before, you can gain extra damage points from:
+- Healing/Ice shielding other players or mission critical NPCs.
+- Rescuing other players: such as by freeing them from webs, goblin pouncers, or goblin lightning shamans.
+
+Mapper Toys:
+• msarea_music, mstrig_music, and msarea_music_dynamic (below) now all take either the sensible "Mins:Secs" or the autistic "float.minutes" formats.
+- This is also true of the various musical Scriptevent params.
+- Scripters note this is also true of the "playmp3" script command.
+• msarea_music and mstrig_music both have "song" and "songlength" properties for ease of edit in or out of SmartEdit mode. (Old way still works though.)
+• msarea_music, msarea_transition, and msarea_transition_local (below) now all take "master" properties, and can be locked/unlocked via multisource+trigger_relay.
+• msarea_music_dynamic (new brush entity):
+- Sets or plays music on the player touching, or on all players, when touched.
+-- midle ("Idle MP3") - MP3/midi to use for idle music, use "none" to leave unset, or stop.mp3 for silence.
+-- midlelen ("Idle MP3 Length (Minutes)") - Length of idle music track.
+-- mcombat ("Combat MP3") - MP3/midi to use for combat music, or use "none" to leave unset, or stop.mp3 for silence, wont take affect until new mobs are encountered.
+-- mcombatlen ("Combat MP3 Length (Minutes)") - Length of combat music track.
+-- playall ("All Clients") - Set to 1 to affect all clients on the server when touched.
+-- playnow ("Play Now") - 0=Just set the music, don't play, 1=play idle music immediately [overrides any combat music playing], 2=play combat music immediately [overrides any idle music playing.]
+-- master ("master") - multisource lock - target the multisource with a trigger_relay to enable the trigger.
+- Like msarea_music, if the music requested is already playing, it will merely continue to play.
+• Changes/fixes to combat music system:
+- Mobs 'tag' the player when they first spot him. If any combat music is set, it will play on the client at that point.
+- Combat music will fade to idle music 15 seconds after all mobs that have tagged the player calm down. (Usually via being slain, or having lost sight of all enemies >2mins, or the player dies.)
+- If the player's combat music definition changes, it wont take affect until they are tagged by a new mob.
+- Monsters with the set_cbm;<file> addparam will override the music tags of other mobs with their own. Monsters without said, will not override their music.
+- msarea_music will apply new a idle music definition, but it wont play until the player is out of combat, if he has combat music defined.
+- msarea_music_dynamic will behave similarly, unless one of the "playnow" options is in effect.
+- mstrig_music will still override any and all music in progress globally, clearing all current combat music flags from all players until they are targeted by new mobs.
+- Note the set_cbm addparam is really intended for boss mob music - don't just drop it on every mob you want playing music - use msarea_music_dynamic, or set it in Map Properties, and they'll play whatever combat music the player has set.
+- Use the set_not_musical addparam to tell a mob not to music tag players. This is handy if you have an invulnerable mob who you don't intend to die, but may take awhile to untarget them, such as the Nightmare Orca in Shender East.
+- "set_cbm;<file>" and "set_cbml;<minutes>" are now the short addparam aliases for "set_cbm_file" and "set_cbm_length" respectively, though the older addparams still work.
+• msarea_transition_local (new brush entity):
+- Allows local transition points, within the map.
+- When players touch this brush, they will be given a message with an option to activate it via +use, similar to a regular transition.
+- Properties:
+-- title ("To Dest Description") - Description of destination will be prefixed with "Local transition to..." eg. "The Lair of the Juggernaut... B*tch!"
+--- Prefixing your title with an underscore _ will cause the "Local transition to" prefix to be omitted.
+-- teleport ("Teleport Target") - info_teleport_destination's to warp to - optional. Plz provide a cluster of destinations, to prevent stuckage.
+-- firetarget ("Trigger on Activate") - Fire when activated - optional.
+-- touchtarget ("Trigger when Touched") - Fire when touched by player, each time use message is sent - optional.
+-- spawntotie ("Tie to ms_player_spawn") - Change respawn point to ms_player_spawn with this message property when touched.
+-- rallplayers ("Require All Players") 0|1 - require all players be present, before activation.
+-- master ("master") - multisource lock - target the multisource with a trigger_relay to unlock the transition.
+- Few things you can do with this:
+-- Create a check point within your map (also good if the map crashes, as you can change the respawn point).
+-- Create a point within your map that requires all players be present to proceed.
+-- Create an entry to a sealed boss chamber, without the need for unaesthetic teleporter effects or crazy tunnels.
+- Beware that, like msarea_monsterspawn, all corners should be right angles, so it can properly define its bounds. (Though not as critical, in this case.)
+• trigger_multiple, new property: indivcooldown ("Individualized Cooldowns")
+- Tracks cooldown time on mobs or players that touched the trigger, instead of the trigger itself.
+- Meaning, if five players cross the trigger_multiple, it will affect them all at once, and then again [delay] seconds later, should they touch it again.
+- Three options for "Individualized Cooldowns":
+-- 0 : "None" - ye old standard default behavior
+-- 1 : "Scriptevent Only" - apply scriptevents based on individual cool downs, but do not fire map triggers until the trigger's standard cooldown is complete.
+-- 2 : "Scriptevent and Map Target" - base everything on individual cool downs
+- The standard rules (hp requirements, spawn flags, else target, etc) still apply to each individual cooldown.
+• trigger_once, new property: eventallinbounds : "Event Affects All in Bounds"
+- When set to 1, if this trigger unlocks with multiple players or NPCs within its bounds, it will apply its scriptevent to all of them, rather than just the activator.
+- Mind you "in bounds" means "IN BOUNDS" - not merely touching, so be careful when using this on large, oddly shaped, or multi-brush triggers.
+- You can see the entity's actual bounds by clicking on it in Hammer with the "Ignore Group" option off. (Single brush triggers made up of right angles should be safe.)
+• msmonster_random, new entity:
+- Special monster entity that selects from a random list of monsters, and spawns them, with the assigned multipliers, add params, name changes, and spawn requirements.
+- Properties:
+-- targetname, angles
+-- random_1_scriptfile : "#1 Script File"
+-- random_1_title : "#1 Change Name To"
+-- random_1_nplayers : "#1 Require Players"
+-- random_1_reqhp : "#1 Req. Total HP (min;max)"
+-- random_1_hpmulti : "#1 Multiply HP"
+-- random_1_dmgmulti : "#1 Multiply Damage"
+-- random_1_params : "#1 Additional Params"
+-- ...followed by random_2_xxx, random_3_xxx, etc, etc...
+-- ...and the usual msmonster_xxx properties:
+-- target : "Trigger on Spawn"
+-- killtarget : "Trigger on Death"
+-- perishtarget : "Trigger on Final Death" -- fire when I'm outta lives
+-- spawnarea : "Spawn Area Name" -- ms_monsterspawn to tie to
+-- lives : "Lives (0=Infinite)" : 1
+-- delaylow : "Spawn Delay Low" : 1
+-- delayhigh : "Spawn Delay High" : 2
+-- spawnchance : "Spawn Chance (%)" : "100"
+-- spawnstart : "Start spawning" : 0 |1 - 0=With spawnarea, 1=when triggered
+-- defscriptfile : "Default Script (do not change!)" : "monsters/giantrat"
+- The entity is rigged up for four random mob entries, but you can add more by turning off the Smart Edit, and adding more random_X entries. random_X_scriptfile is the only one that MUST be defined, ya can omit the rest. Best to use sequential indexes (ie. the next would be random_5_scriptfile) and don't use random_0.
+- You can add up to 32 random mobs. You can also supply variants of the same mob, with different names, parameters, multipliers, or what not.
+- Any random_X entry lacking a scriptfile definition will not be added to the list of random monsters to spawn.
+- If a randomly selected mob doesn't meet the spawn requirements, it will not spawn, and be counted as slain. (As per normal msmonster_xxx behavior.)
+- If the msmonster_random has multiple lives, it will pick a new random mob with each spawn.
+- If you want a chance to spawn nothing, I suggest you copy one of the scriptfiles already in use, and set the mob intended to be "blank" player requirement (random_X_nplayers) to 99. (Slightly less resource overhead than using the scriptfile monsters/base_temporary.)
+• ms_monsterspawn / msarea_monsterspawn, new property: resetwhen ("Reset When")
+- Three options for "Reset When":
+-- 0 : "All monsters are depleted" - Ignores re-trigger requests until all mobs are out of lives (ye old standard operation).
+-- 1 : "Any monster is depleted" - If re-triggered, any of the mobs tied to the spawn that are out of lives will be respawned.
+-- 2 : "Whenever triggered" - Spawn a new wave whenever triggered.
+- Careful of option 2, it's a good way to end up with your map flooded with mobs. (Such abuses will have to be undone before release on FN.)
+- Option 1 is a good way to deal with escorts, to prevent incidents where players realize they can kill say, 3 of 4 escorts, and not have to worry about more respawning.
+• ms_text, new properties:
+- sayasnpc ("Say as NPC") - Setting to 1 causes the text to be transmitted through NPC chat text, rather than HUD pop-up.
+- npcname ("NPCs Name") - Sets the name to be used for this message (will also set red title text for HUD messages).
+- Could add a function to send messages to the event HUD (one in the corner), but players are likely to miss those.
+• New Map (worldspawn) Property: map_addparams ("Global Addparams")
+- Any addparams you place here will be added to all monsters globally.
+- To abort this behavior on individual mobs, use the additional parameter "no_global".
+- This only applies to monsters with the AI (and not to chests). It also applies to subsequently summoned monsters with AI. (Though not those summoned by players.)
+- Be careful not to duplicate add params already set in the global add params on individual mobs, without first setting no_global.
+• Added some new msmonster_xxx ents, for easier visual refernce inside Hammer 3.5 (these work like all the others, though with different default scripts):
+- msmonster_goblin (goblin model)
+- msmonster_hobgoblin (hobgoblin model)
+- msmonster_dwarf (dwarf model)
+- msmonster_bigboar (boar2 model)
+- msmonster_giantboar (boar3 model)
+- msmonster_wizard (hollow one model)
+• trigger_push and trigger_hurt now process scriptevent property proper.
+• Other FGD changes:
+- env_sprite now defaults to rendermode 5 (additive) and renderamt 255
+- trigger_relay now has master property
+• Added new utility textures to msc_aaa.wad (bevel, hint, skip, noclip)
+
+New Additional Parameters
+• set_scale_nr;<ratio> - scales the mob with no reach change (use carefully, can result in being unable to attack - doesn't affect projectile mobs).
+• set_scale_nb;<ratio> - scales the mob model with no change to collision box (probably best when scaling less than +/- 50%).
+• set_scale_nbr;<ratio> - scales the mob model with no change to collision box or reach.
+• set_scale;<ratio> - scales the model, tries to alter reach and collision box to match (alias for ext_scale).
+- these can be applied multiple times and scale based on the mob's original properties each time (I dunno, in case you want a shrink ray, or something.)
+• set_mspeed;<ratio> - alters the mobs move speed without changing their attack speed (adjusts XP up or down slightly).
+- Do not use set_mspeed 0 to hold a mob in place - use set_npc_turret.
+- Can be used repeatedly, scales based on the initial application (some mobs have a base speed multiplier and will base their new speed from that instead).
+• set_skin;<idx> - changes the mob model's skin to <idx>, if available (model skins index from 0).
+• set_range;<units> - changes the mob's base attack range. May not properly affect mobs who change ranges for specific attacks.
+• demon_blood;[ratio] - Demon blood's damage multiplier can now be controlled. Default is x5. XP bonus reduced by proportion of [ratio] to 5 (max x2XP).
+• set_tele_hunter;[freq] - In a magical flash, mob teleports to a random yaw near its attack target every [freq] seconds. Modifies XP immensely based on [freq], base 20 secs.
+• set_tele_hunter_random;[freq] - Mob periodically teleports to a random player, in said magical flash (including AFK's). Modifies XP and defaults as above.
+- tele hunters whose primary attack is ranged will attempt to teleport some distance from targets, rather than directly next to them.
+• set_say_spawn;<'text'> - causes the mob to say something when it spawns - be sure to use single quotes (') not doubles ("), or your compiler will crash. Also, be careful of apostrophe contractions and odd characters, there is no sanitation!
+• set_say_spot;<'text'> - causes the mob to say something when it first spots an enemy.
+• set_say_die;<'text'> - causes the mob to say something when it dies.
+• add_dot_poison;[ratio] - gives the mob poison dot (not the potentially insane DOT of set_poisonous, which has also been fixed) - adjusts XP. You can, optionally, increase the damage (and XP) with [ratio].
+• add_dot_cold;[ratio] - Same, with cold DOT
+• add_dot_fire;[ratio] - Same, with fire DOT
+• add_dot_lightning;[ratio] - Same, with lightning DOT
+- Poison has double the duration, but less damage. Cold does less damage, but slows. Fire does the most damage. Lightning DOT has slightly longer duration than the other two, but less than poison, and reduces accuracy.
+- Critters gain appropriate flavor of glow shell - you *can* stack these, but the glow shell will just be the color of which ever you applied last.
+• set_takedmg;<type:ratio> - set_takedmg;lightning:0.25 would make a mob 75% lightning resistant. This currently has no XP adjustment. (Note: colon seperator in the second parametert, not semi-colon)
+• set_notarget;<0|1> - Flags NPC to be ignored by other NPCs, regardless of race or attacks. (alias for ext_invalidate)
+• For elemental_fire_guardian2-3 and elemental_ice_guardian2-3 (shender_east/ or monsters/ variants): set_agro - removes some of the 'stand-offish' defensive features of these boss mobs and escorts, making them more aggressive.
+
+New Developer Commands
+- For those that have access to them, these help with testing scripts:
+• devcmd event <event_name> [params...] - calls a scripted event on the NPC you are targeting.
+• devcmd eventme <event_name> [params...] - calls a scripted event on your player script.
+• devcmd eventall <event_name> [params...] - calls a scripted event on all present NPCs, players, and items.
+• devcmd eventgm <event_name> [params...] - calls a scripted event on the game_master.
+- Replace any parameter with ME or GM, to cause the parameter to be replaced with your player ent ID or the game_master's ent ID, respectively.
+- (So, for instance, "devcmd eventall npcatk_settarget ME" would cause all mobs on the map to attempt to target you.)
+
+Test_Scripts
+• We've added a BOATLOAD of new reference and example scripts to the test_scripts folder, including brush scripts and NPC on NPC interaction scripts, and about half the mobs.
+- Also moved some of the more complex and confusing example scripts to an /advanced/ folder.
+• Updated the various base scripts.
+• Updated/improved some of the documentation.
+• There's a new base in the AI called base_self_adjust.
+- This handles not only the self adjust system, but anything else that may affect mob XP.
+• Moved a bunch of stuff from various includes to base_monser_shared.
+• There's a new base_stripped_ai that handles the "extra" things mobs without AI's need to function proper. (Freezing solid, responding to suicide commands, etc.)
+- Most of the non-AI mobs now include this and base_self_adjust.
+
+New Monsters
+• monsters/horror_fire2 - Flaming Horror (medium demon, 32wx32h, 1000hp, baseXP 400)
+- Flaming horror under the newer flight model. Shoots fire balls + AOE flame burst.
+• monsters/dwarf_zombie_bloat - Bloated Dwarven Zombie (medium undead, 48wx96h, 750hp, baseXP 400)
+- A slow, boated zombie, with blinding puke attacks and sluggish projectiles. Explodes on death.
+- Nearby allied mobs will re-target on slimed players.
+- Beware the death explosion is very nasty, though players will have ample warning - at least, after the first time.
+• monsters/dwarf_zombie_hbow - Dwarven Zombie Bowman (medium undead, 32x48, 300hp, baseXP 150-250)
+- An undead dwarven archer with a heavy crossbow.
+- Addparams: set_ammo;<pierce|fire|poison>
+- fire = Explodie dwarven bolts, poison = Poison gas bolts, pierce = regular bolts
+- If not supplied, will choose randomly (adjusts base XP)
+• monsters/dwarf_zombie_sbow - Dwarven Zombie Bowman (medium undead, 32x48, 300hp, baseXP 200-350)
+- An undead dwarven archer with a repeating Steambow.
+- As above, save with a rapid fire bow.
+- These guys default to pierce, rather than random. You must use the set_ammo addparam to access poison gas or exploding fire bolts.
+- Beware that several poison gas bolt archers in one location (be it heavy or steam), in addition to being cruel, is very rough on the server, due to the gas clouds.
+- Also, as you may have figured, explodie fire bolts may launch your players into unwanted locales, so check those clip brushes.
+• NPCs/dwarf_hbow and NPCs/dwarf_sbow (ally, 32x48, 300hp)
+- As the two above, except not undead, player allied, and immune to player damage.
+- These take the addparam "set_follower" - which will cause them to follow players about as battle allies.
+- (If you're planning on a war between the two sets, beware that NPC poison gas bolts do not affect undead.)
+• monsters/dwarf_zombie_pickaxe - Dwarven Zombie (low undead, 32x48, 300hp, baseXP 175)
+- Dwarven zombie running on the standard set, with a big pickaxe. Bit more prone to stun attempts, also drops a lot more gold.
+- Is now a possibility under monsters/dwarf_zombie_random
+• NPCs/dwarf_pickaxe - Dwarven Miner (ally, 32x48, 400hp)
+- Allied, living version of the Dwarf with the big pickaxe under a separate script. Takes "set_follower".
+• NPCs/dwarf_warrior - Dwarven Warrior (ally, 38x50, 700hp)
+- Beefier warrior with a random weapon. Takes "set_follower" as above. Also takes "set_weapon;<#>" 1=axe 2=bigaxe 3=sword 4=dwarven axe (change is mostly aesthetic though).
+• With the exception of the Zombie Miner and the Bloated, all of the above dwarves, also take the addparam: set_lantern
+- You can trigger the lantern to draw when they cross a brush, via script event. (Just stick set_lantern scriptevent on a monster compatable trigger_once or _multiple.)
+- You can also change the color, if you really want, via set_lantern;(RRR,GGG,BBB). And turn it off, via set_lantern;0. (Updates to colors will take effect on the next CL effect update ~30 secs).
+- Dwarven Zombie Bowmen use spookie colored dim lanterns, by default, when activated.
+- Beware that allied dwarves do not roam by default (use set_roam).
+- Allied dwarf models have a lot of skins, and choose among them at random, so remember ya can set specific ones with set_skin;<#>.
+- Experimental: Allied dwarves also take the addparam "set_leader", this initiates the set_follow function, but instead, they will attempt to lead by going to where the player is facing.
+- Leaders move a bit faster, but this navigation, can be glitchy.
+• NPCs/dwarf_lantern - Dwarf (ally, 32x48, 100hp)
+- Civilian dwarf with a lantern. This is an older script that now works as intended, with the added behavior/addparams of the allied dwarves above.
+- He can attack with the lantern, but it isn't very effective.
+• monsters/dwarf_bomber - Mad Dwarven Bomber (medium evil, 32x48, 300hp, baseXP 300)
+- Fast moving maniacal bomber tosses bundles of TNT at enemies.
+- Not actually undead - just insane enough that the undead don't consider him to be alive anymore.
+- Both he and his allies are somewhat vulnerable to his explosives.
+• monsters/guardian_fire - Molten Guardian (vhard demon, 75x200, 10000hp+50%armor, baseXP 5000)
+- Similar to Shad Palace's Iron Guardian, but fire themed.
+• monsters/worm_abyssal - The Abyssal Worm (hard demon, 128x700, 8000hp, baseXP 3000)
+- This is a special giant worm monster, that requires various map ents to operate properly.
+- Intent is to move about a platform in the center of his chamber, and attack players standing thereon.
+- Requires the following entities:
+- info_target's with targetnames: worm_telepoint1 worm_telepoint2 worm_telepoint3 and worm_telepoint4
+-- The worm will periodically submerge and re-emerge at these points in sequence.
+-- He will do this every ~60 seconds, and when first damaged below 75%, 50%, and 25% of his maximum HP
+- info_target with targetname: worm_telepoint_final
+-- Upon falling below 25% health, the worm will submerge, and re-emerge at this point. He will not teleport nor submerge again.
+-- In this case, the point is at the center of the platform, allowing him to use his stronger, close range attacks, against all targets on the platform.
+-- He will fire brk_worm as he re-emerges, breaking the stone in the center of the platform, and produce a repulsive field, to prevent players from falling in the resulting hole.
+-- (In this case, the hole is invisibly sealed, so this can't actually happen, but it prevents the otherwise odd results of walking on air and floating through him - the actual worm is not solid.)
+- info_target with targetname: worm_repel_point
+-- This marks the loc from which to generate the aforementioned repulsive field.
+- trigger_multiple with scriptevent: gm_map_rmines_dinnerbell, with 10 second reset delay, flagged to only work on clients
+-- This trigger causes the Game Master to alert the worm that there is a player on his platform
+-- If no player is on the platform for at least 15 seconds, the worm will submerge (is invulnerable while submerged), until new meat is placed on his table.
+- light with targetname: light_worm (start dark) [optional]
+-- Triggered on when in final position - in this case, the monster model is popping up through a clip brush, so needs this not to be a black silhouette.
+-- In this instance, the light is turned off again on death, map side.
+- Known issues: The worm is kinda setup like Undamael, and can be difficult to strike, but improvements to the system mitigate this to a great degree.
+- Additionally, unlike Undamael, DOT effects used against his "hitbox npc" will pass to the actual mob.
+- The worm can only be struck about the head area, not the body or arms.
+- Worm has several different attacks for dealing with targets at various ranges, some of which are AOE.
+- He will usually favor the closest target. The closer attacks are stronger, but the longer ranged ones are AOE and apply Dark Damage DOT.
+- Additionally, he has eye beam with an AOE effect - though it also a fair amount of warning.
+- Dark energy will actually heal the Abyssal Worm. His Dark Energy DOT also adds Darkness contamination to players.
+- This mob uses name_unique for management, thus only one can exist at a time.
+• other/qitem_barrel - Barrel of [Stuff] (utility NPC, 32x72)
+- The quest item barrel is designed to be filled with certain number of special quest items, and then fire a map trigger.
+- It requires an additional parameter to function, in the format of:
+- <qitem_code>;<#required>;<trigger_to_fire>;[repeat]
+- Currently, it only accepts "tnt" (Barrel of Explosives). So example valid usage: tnt;5;brk_barrel_explode
+- When the quest item is "tnt", the barrel will light a fuse and explode a few seconds after being filled - with the intent of opening a trigger-only breakable.
+- repeat is not a valid option for tnt, but for other qitem types, it will cause the barrel to fire its trigger each time it is filled, then open again to accept more items. Otherwise, normal behavior is to close, fire its trigger, and accept no more items.
+• other/qitem - Quest Item (utility NPC)
+- These are special quest items (spawned via ms_npc) that pick up when touched, as those in m2_quest. They require an addparam to determine the item type. Current valid definitions are as follows:
+- ap ("a|Golden Apple")
+- bs ("a|Bag of Salt")
+- bp ("a|Bag of Pepper")
+- km ("a|Barrel of Mead")
+- la ("Sylphiel's Ladel")
+- tnt ("a stick of|Dwarven Explosives")
+- Note that the tnt is normally dropped randomly from dwarven bombers on rmines, and designed to bounce around in the process. When spawned manually, if there's any room for the item to fall, it may bounce into another location.
+• regorty/fmines_merchant - Nothing in all of creation can save you from the hugs of this dark beast.
+
+New Items:
+• Poison Gas Bolt
+- These bolts explode into a small cloud of heavy poison on impact. This cloud persists for 15 seconds.
+- Enemies exposed to the cloud take your affliction level in greater poison damage for 10 seconds.
+• Originally had added several others items ready based on Echo117's skins, but alas, running into a texture limit issue that I don't have time to squeegee out just now.
+• Felewyn Shard Quest Drama
+- You may complete the Felewyn Shard Quest one time per character, and are notified as to such.
+- This remains true whether or not you've completed it before this patch, or acquired one already.
+- The quest is completed when you (and not some other player who is present) acquire a Felewyn Shard by defeating Undamael.
+- To qualify, the character also requires a minimum of 700 hp
+- Acquiring Felewyn Symbols from chests requires that you meet the Circle of Five wizards to begin this one time quest. (You must be present, anywhere on the map, when they begin their chat dialogue.)
+- The winner of the sword is given to player with the most damage points, who has not completed the quest, at the end of the event.
+- If all players present have completed the quest or fail to qualify, no sword will spawn, but XP will be distributed normally.
+- Acquiring a Felewyn Shard or Felewyn symbol from another player will not affect your status for this quest.
+- By popular demand, Shards are retaining their appearance, name, and basic functionality, though they've been boosted a bit.
+- Activating Divine Shield mode requires that you hold +use, thus allowing you to use the parry feature without risking being accidentally locked into shield mode.
+- The Unholy Blade has recieved a similar boost (more damage, doubled throw damage, longer repulse shield duration at reduced mana cost).
+
+Known Issues:
+• [Mappers only]: Some mobs that spawn spells or summons may not always precache properly with msmonster_random.
+- If you get a precache crash and suspect this to be the problem, use ms_npc to place the same monster script on the map with a bogus spawnarea name to prevent it from spawning - should fix it.
+- (May fix in future, but suspect may add overhead by creating a persitant duplicate script.)
+• Some known, but resolvable, bugs/exploits from SEP2013 remain, see bug report list.
+
+DOWNLOAD AT THE USUAL PLACE
+Thothie said:
+FEB2015d PUBLIC CHANGELOG:
+centerfold_FEB2015d.png
+* Sage advice from the Descartes Troll.
+
+This optional patch has all the goodness of FEB2015a plus:
+
+Bugfixes:
+• Shield buggery. *
+• Scriptflag issues causing push resistance not to register and the like.
+• Various monster DOT/AOE registration issues.
+• Multi-map global quest tracker issues (Shadahar and Lodagond, among others.)
+• Boss tag FN XP multipliers failing.
+• Rune Blade issues.
+• Tomahawk issues.
+• Bunch of other minor stuffs.
+
+Map Fixes:
+• Bloodrose:
+- Flesheater Crash (Possibly)
+• Fmines:
+- Musak (Recompile pending for some new chests)
+• Rmines:
+- Vanishing mob issues
+- Abyssal Worm teleport issues
+- Abyssal Worm chest issues
+- Abyssal Worm resource issues (now suspends all spawns while present).
+- Blood Goblin Chieftain boss recurrence chance and chest
+- Slime boss now appears
+• The_Wall: *
+- Insta-death on spawn. (Go hug Forsuth for us, he's been lonely!)
+
+* Requires client have patch.
+
+Should be the last patch of the month. Beware, again, come MAR2015, or whenever the next patch is ready, Rmines, Fmines, and Underpath will be hidden-flagged maps, as per Oyster's demands. (Assuming I can get this darn Gatecity source to behave.)

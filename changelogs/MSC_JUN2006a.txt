@@ -1,0 +1,9 @@
+Re: List of changelogs
+
+June 02nd 2006 Public Changelog
+
+Minor update to the server today, it only affects those of you who summong rats, and have Spell Casting above 7.
+
+The giant rats you l337 casters summon were causing server crashes due to a boffo screw up on my part (again, why this patch is not on the main downloads page).
+
+You *may* need to update your own sc.dll to be able to summon giant rats again without making either you or the server go *poof*.

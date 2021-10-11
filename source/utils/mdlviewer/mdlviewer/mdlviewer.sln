@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mdlviewer", "mdlviewer.vcproj", "{641352F0-B0FE-403C-8C06-6E77A47C9430}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{641352F0-B0FE-403C-8C06-6E77A47C9430}.Debug.ActiveCfg = Debug|Win32
+		{641352F0-B0FE-403C-8C06-6E77A47C9430}.Debug.Build.0 = Debug|Win32
+		{641352F0-B0FE-403C-8C06-6E77A47C9430}.Release.ActiveCfg = Release|Win32
+		{641352F0-B0FE-403C-8C06-6E77A47C9430}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

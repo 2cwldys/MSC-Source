@@ -1,0 +1,44 @@
+FEB2013a PUBLIC CHANGELOG:
+FEB2013a_centerfold.jpg
+That's a patch, on his ass... Sorry, troll ass is not my specialty...
+
+This is an optional patch - you can currently both play and host with this or JAN2013a on FN
+(Though we of course recommend the patch for both clients and servers.)
+
+Fixes
+• Fixed bug where several maps were bjorked due to new anti-stuck system
+• Reduced Decibelants mighty woofers **
+• Fixed a bug where some voiced NPC's were having their sound files cut off
+• Jerdid speaks! (Gertenheld_Forest) - Thanks to Roghan **
+• Vadrel speaks! (Foutpost) - Thanks to Roghan **
+• Fixed Thunder Breaker using Fire as default element
+• Removed the pvp by default for ms_soccer - but you can still vote for it
+• Added damage types to damage reports
+- (Brace for massive wave of incoming monster/weapon using wrong element bug reports)
+- Note that most older monsters use the "generic" damage type, which does not report.
+• Fixed bug where ms_dev_mode forced test scripters to load a map twice
+• Fixed Healing Circle and Rejuv not adding damage points.
+• Fixed frequency of Hooked Iron Arrows
+
+New Map (sorta)
+• test_scripts (utility) **
+- This is a new map for aiding people interested in exploring the MSC script system.
+- To use this, ms_dev_mode must be set to 1 in your server.cfg/listenserver.cfg
+- Additionally, any scripts you want to test must be in the msc/test_scripts folder
+- These must be itemized in the ms_dynamicnpc cvar, also in your server.cfg/listenserver.cfg
+- Multiple scripts can be loaded into the map by parsing ms_dynamicnpc with semi-colons, for example:
+- ms_dynamicnpc "test_scripts/test_spider;test_scripts/edrin"
+- The Dungeon Master's assistant can then spawn these scripts for you, and aid in testing.
+- If the monster #includes monsters/base_fish2, he will also automatically open special water ways, and sink the monster, so it can swim.
+- Intend to expand this map to include more testing areas, for oversized monster scripts, etc.
+- ...As well as more example scripts, and more documentation, as they become available and are cleaned for spoilers.
+- BEWARE THAT CHARACTERS WILL NOT SAVE WHILE ms_dev_mode IS ACTIVE! (Not even server side nor LAN.)
+- test_scripts cannot be voted for on FN (as it requires ms_dev_mode) [untested - though it'll boot you off FN, should you manage to load it, or force it via admin_map/changelevel]
+• There be additional scripting information, examples, and other materials msc/test_scripts/test_scripts_info.rar
+- Much more pending...
+
+Minor Map Fixes
+• Hunderswamp_North **
+- Abomonation seal system changed a bit
+
+** These additions/fixes only work if you have the patch on your client

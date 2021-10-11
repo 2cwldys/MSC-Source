@@ -1,0 +1,27 @@
+Re: List of changelogs
+
+May 22nd 2006 Public Changelog
+
+Major changes:
+
+The biggest change is the difference to the spell system. These defeat the eight spell limit and allow me much more freedom to add the upcoming spells...
+
+There are now two types of spell items you can get, plus a special container called "SpellBook"
+
+Type One: is Spell Page Scroll. These can be activated, and doing so instantly summons an effect that grants you the proper spell, if you have sufficient Spell Casting skills. Once the spell expires, the scroll returns to your inventory, and it maybe used again afer a short recharge period. Each spell sphere (ie. affliction,fire,lighting,divination,etc) has its own effect. (The fire sphere effect, maybe a little frightening)
+
+Spell pages can be stacked in a SpellBook for easy reference. These are available at reasonable prices at most magic shops. The basic spells are also available in this form in such places - and others - at not so reasonable prices.
+
+Type Two: Is the old style spell scroll, now called a Tome. A Tome allows you to permanently memorize the spell to your Slot #2 list, as per the old style spell system. You are still limited to eight slot #2 spells, however, you can have as many Spell Scroll Pages as you wish.
+
+In the future, I may introduce 'one shot scrolls' (or 'expendable scrolls') which will be spell scrolls of various spells, that only allow you to cast once, and then vanish, never to return. These will, however, lack level restrictions.
+
+There's lots of other changes, too numberous to list, but that's the big one that may need adjusting too, hopefully not too confusing... I'm open to changes/suggestions,etcs, as always.
+
+Other minor things of interest to look at:
+- Glow changes color and radius with SC level
+- Increase mana consumption and healing rate of Rejuv to help reduce 'Rejuv lag'
+- Fixed some problems with skeles getting stuck (at least partially)
+- Icewall is almost a legitimate spell now (doesn't trap players, monsters attack it)
+- Longsword/bastardsword animations more or less fixed, need to make them parry still
+- You can find a dwarven axe for sale, rather easily... Bet ya can't guess where.

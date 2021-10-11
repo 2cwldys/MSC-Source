@@ -1,0 +1,97 @@
+JUL2013a PUBLIC CHANGELOG:
+centerfold_JUL2013a.jpg
+First tagline choice: "Huge wait... Tiny patch..."
+Second tagline choice: "A patch so minor, pedobear would approve."
+
+This patch is pretty pathetic, given the delay involved, but hopefully it'll clean the current Steamtastic situation up, fix a few critical issues, and lead to bigger, better, more frequent things.
+
+New Map
+• Nightmare Edana (nightmare_edana) by Furion, Self Adjusting (Moderate-Hard), Disconnected
+- Humorous little map. Post-apocalyptic "Edeadna"
+- Custom scripts and models by Furion, and voice overs by SquareSoftKnight
+
+Other Changes
+• Double click fix now integrated.
+• Recompile/resource optimization for Shender_East.
+• Various efforts to ensure Hunderswamp_North behaves.
+• Increased most Lightning DOT durations 200% and reduced damage by 25%
+- Increases the accuracy debuff advantage (true for NPCs as well) [May undo, we'll see how it goes]
+• Yet another stab at ensuring Bloodrose will not crash at Flesheater.
+• Blood Blades now use Swordsmanship skill proper.
+• Thunder Breaker's secondary now using Lightning damage proper.
+• Some efforts made to ensure Glow doesn't fail.
+• Pharaoh of Storms properly boss flagged.
+• Various monster spawn stuck check related issues.
+• Major applyeffect DOT optimization.
+• Updated FN readme with current servers.
+• A thousand or so other minor bug fixes and optimizations...
+
+• RKS servers will be moving to the Steam Pipe version and should show up on the Server Browser
+- (Hopefully no other issues crop up with that.)
+
+Mapper Toys
+• trigger_teleport's "delay" property now works like a trigger_multiple in that it disables the trigger for <delay> seconds before reset.
+• Scriptevent ext_teleportfx1 now works for monsters as well
+• ext_teleportfx2 - works as ext_teleportfx1 but without the visual effect and a more dramatic audio effect
+• Monsters using base_jumper now take "set_no_jump" / "set_jump" as addparams and scriptevents. (Includes newer goblins, among others.)
+
+[SPOILER SECTION BEGIN]
+
+New Lewts
+
+• The Corrodinator
+- First of the contest reskins to finally appear, this helm increases acid/poison DOT duration by 50%
+- (rare misc epic)
+
+• Icy Crescent Blade
+• Flaming Crescent Blade
+• Electrified Crescent Blade
+• Envenomed Crescent Blade
+- (Req: Smallarms 30)
+- Various elemental flavors of the Crescent Blade with DOT's based on the associated magic skill.
+- As mentioned before, any combination of Crescent Blades (elemental or otherwise) counts as a Matched Set, and thus receives no dual-wield penalty.
+
+New Beasties
+
+• monsters/bat_large - Large Bat* (32x32, 100hp, ~10dps, vermin, low)
+- Larger, meaner version of the classic bat.
+
+• monsters/bat_large_vampire - Vampire Bat (32x32, 200hp, ~25-50dps, vermin, medium)
+- Vampryic bat with very aggressive and evasive flight model.
+- Regenerates 10% maxhp per strike.
+- Greater Poison DOT on every 5th consecutive strike.
+
+• monsters/bat_large_shreaker - Shreaker Bat* (32x32, 300hp, ~50dps, vermin, medium)
+- This bat generates a stunning sonic blast every 5 seconds.
+
+• monsters/ogre_cave_thug - Cave Ogre Thug* (32x96, 4000hp, ~200dps, orc, hard)
+- Large brutish beast with a chain of combo attacks, knock back, and slamming stun.
+- More sluggish than most of the cave ogres, and unable to jump.
+- Rapid passive regen scales with any hp adjustment (base 20hp/sec).
+
+• monsters/ant_fire_warrior - Fire Ant Warrior* (32x16, 500hp, ~60dps, ant_red, medium)
+- Giant red ant, periodically breaths fire.
+- "ant_red" faction agros against pretty much any race other than its own.
+
+• monsters/ant_fire_flyer - Elite Fire Ant Warrior* (32x64, 500hp, ~60dps, ant_red, medium)
+- Flying variant of the same model. Hovers. Breath has push back and is used more frequently.
+
+• Workers and black ants pending.
+
+* Available and tested, but not appearing in this release.
+
+
+DOWNLOAD AT THE USUAL PLACE
+
+Thothie said:
+JUL2013b Optional Server-Side Quick Patch:
+
+- Fixed votemap system.
+- Fixed healing issues.
+- Fixied viewmodel animations with DOT Gauntlets (may require client be patched).
+- Fixed potential exploit allowing thievery from another player's Galat chest.
+- Votepvp requires >50% to pass. (Cuz)
+- (Fixed some NPCs getting stuck in chat loops.)
+
+Quick patch (Manual Install ~2MB):
+http://www.rkszone.com/downloads/msc/ms ... 013b_3.rar

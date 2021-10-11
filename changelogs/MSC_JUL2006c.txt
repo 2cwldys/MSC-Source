@@ -1,0 +1,16 @@
+Re: List of changelogs
+
+July 16th 2006 Public Changelog
+
+monsters/lure_25hp
+monsters/lure_100hp
+monsters/lure_500hp
+monsters/lure_1000hp
+
+- these, although untested, *should* be fairly dependable.
+
+in addition, standard monsters/lure now responds to the following ms_npcscript events:
+add_10_health
+add_100_health
+add_500_health
+add_1000_health

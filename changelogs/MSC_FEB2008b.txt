@@ -1,0 +1,52 @@
+Re: List of changelogs
+
+FEB2008b OPTIONAL SERVER SIDE PATCH:
+• admins.txt reads proper
+- You can use comments, but best that they not be on the same line as the Steam ID
+• All admin commands seem to be working proper
+• Votekick/voteban seems to be working proper
+- both require 3 players present, and that more than half the voters vote yes
+- fixed bit where canceled or failed votes would prevent future voting
+• votepvp seems to be working proper
+- this ones hard to test, but the function reports proper, and the vote goes off right
+• Strobe effect on connect has been axed
+• Players are now disconnected during map changes (ala amx)
+- stops memory deallocation errors
+• Potion of stability fixed
+- It still may not due to client difference - but it at least shouldn't crash the server
+• FN recognition of pvp_canyons
+- If ye have canyons_pvp, you'll have to rename it - the pvp_xxx prefix lets the system know to set pvp
+• Fire shaman optimizations / anti-crash
+• admin_gag command to mute players
+- this does not appear in admin_help, and may not always work
+• ms_reset_if_empty
+- This now simply kills the server 60 seconds after the first person leaves, ignoring the ms_timelimit, for simplicity
+- (still writes edana to the crashed.cfg first, so you don't get stuck with your server coming back on a gauntlet map)
+• Toned down the orion bow fx
+- may not work for clients without the patch
+• Moved more damage point tracking to the player
+- GM will only attempt to restore damage points, rather than track them independently
+• Some stabs at the monster gibbing bug
+- No promises, this is very hard to reproduce
+
+Mappper toys
+• brush scriptname: other/burn_1000
+- Add the element "scriptname" with the property "other/burn_1000" to any trigger brush and it will burn anyone who touches it for 1000hp/second via fire effect
+- Player will see the targetname of the trigger when they are burned as if attacked, typical uses would be: "Some|Hot Lava", "A|Fire", "Dragon's breath"
+- This is useful if you have a lava area or similar trap that you want fire resistant people to be able to pass (ie. isn't at the bottom of a pit)
+- Only physics excuse I have is that "phoenix armor fails if you are completely submerged in lava because it is not hermetically sealed". ;)
+- Spawnflags have no affect on this scripts functionality - it'll always burn everything (if ye need that changed, I can make customized variants)
+- (this actually dates back to FEB2007a - just forgot to mention it)
+• brush scriptname: other/trigger_if_evil
+- Add the element "scriptname" with the property "other/trigger_if_evil" to any trigger brush
+- This will cause the trigger to fire it's target property whenever any non-human (or non-hguard) creature touches it
+- Only fires once (variants can be made), like other/burn_1000 all spawnflags are ignored
+- This is how the bandits and orcs break the storefronts on helena (again, another oldie I forgot to catalog - dates to DEC2007a)
+• brush scriptname: other/totalhp_trigger
+- Yet another scriptname for use with trigger_ entities - this one designed to fire an event if the max hp on the server is at a certain amount when a player touches it
+- Set targetname to determine the range, format is minhp;maxhp. eg. 1000;2000 - fires target if total hp on server is between 1000 and 2000.
+- this one is untested
+• ms_npc: other/spawn_point
+- Place this on your map and the game will randomly teleport players to one of these ms_npc's when they spawn
+- Place them on the ground as you would any other npc (players actually spawn 38 units above them to compensate for the "middle measurement" thing)
+- max limit on these is 71 - but I've not tested beyond 14 yet (maybe issues with how they count up)

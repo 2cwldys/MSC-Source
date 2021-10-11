@@ -1,0 +1,113 @@
+Re: List of changelogs
+
+FEB2011a PUBLIC CHANGELOG:
+
+FEB2011_centerfold.jpg
+Cave Dentist - the latest MSC character class
+
+New Stuff
+
+• Darken Bloom (Simulated Auto-exposure fix)
+- MSC will "nerf" it's bloom effect with a secondary filter layer that will vary in strength from map to map, and in some cases, from map area to map area.
+- You can force this filter to a desired level by setting the cvar ms_bloom_darken to any number higher than 0. Setting it to -1 lets MSC manage the exposure itself.
+
+• choosebloom command
+- bind b "choosebloom"
+- You can bind b to the choosebloom command, instead of bloom_toggle, allowing you to cycle through several levels of bloom and darkening, including the auto-setting and off. By default, this command now replaces "toggle_bloom", although it will not overwrite your current bind.
+- (note that both ms_bloom_level and ms_bloom_darken cvars are affected by this, and should stick properly now.)
+
+• votelock command
+- Typing votelock at chat or console with three or more players initiates a vote to temporarily lock the server.
+- Upon being locked, the server will gain a special password, and each client will have his password set to match.
+- Typing votelock on a server that is already locked will return the current password (which you can give to someone who disconnected, and forgot to write it down, and is now hounding you over the Steam messenger.)
+- The lock will end when the player who started the votelock leaves or the map changes.
+
+• Changes to Ammo Stacking System
+- Ammo will not stack until you open the container holding the items
+- This prevents crashes from withdrawing items from chests and various exploits
+- Beware, when drawing a lot of arrows/bolts from a chest, you may need to "shake" your quiver a few times to get all the stacks to form up, by opening and closing it, or you may hit the item limit sooner than expected.
+
+New Maps
+• CATacombs by Cat [25-40+]
+- This necormancer's cache appears to be abandoned, but the cult's minions and creations live on inside
+- Lots of self-adjusting monsters and triggers allow this map to adjust itself for a fairly wide range of power levels. The more players you have, and the more powerful they are, the meaner the creatures, and the better the treasure.
+
+Map Updates
+• Demontemple - moar spawns
+• Lodagond-4 - various attempts to deal with various crash issues
+• Helena - f*ck if I can remember. :\
+
+Mapper Toys
+• Full developer commands are now open to non-FN servers
+- PM the dev staff for details
+• Trigger scriptevent can now have parameters sent to them with parsing semi-colons (eg. trigger_burn;50)
+- (When using "gm_" events, the first parameter is always the ID of the touching target)
+- Remember that, unlike trigger scripts, trigger scriptevents obey touch rules, reset delays, and flags.
+
+• New add params:
+• set_poisonous - Creatures with this add param gain a green glow shell, and gives them 10% of their max hp poison DOT for 10 seconds with every attack that hits. (Best for creatures that only have a bite attack.)
+• set_no_auto_activate - Normally, creatures that spawn near players automatically cycle up and attack - this overrides that behavior (useful in some situations). They'll still attack as normal, but won't interrupt their normal cycle up routine, so it'll be a bit slower.
+• set_self_adj;[adjust down level]
+- This will cause the monster to self-adjust upwards, multiplying damage and hitpoints, to deal with more powerful parties based on the total hp on the server. At the moment, there are six tiers, and the multipliers range from x1 to x5. (I'd go into details save for fear that folks would try to exploit them.)
+- If the monster is already quite powerful, and a x5 multiplier would, for instance, go far above and beyond anything you could possibly want to throw at the players, you can "nerf" this effect, by following set_self_adj with a semicolon and a number 1-6 (eg. set_self_adj;3). This will cause the monster to adjust itself is if the players strength was several tiers lower, thus effectively capping it's self adjustment.
+- When not on FN, you can simulate larger parties of powerful players, by using the "fakehp <xxx>" command. "fakehp 9999" will put all self-adjusting creatures at their maximum allowed tier. (This command will also affect any hpreq properties on msmonster/ms_npc entities.)
+
+• New trigger script events:
+• trig_damage;<name>;<dmg>;<dmg_type>
+- Similar in behavior to the trigger/trigger_hurt scripts, except this obeys all trigger conventions (eg. "clients only" flag) and does immediate damage, instead of DOT. Beware, however, that death by such a trigger brings with it full death penalties.
+- You can use the trigger's reset delay to simulate DOT.
+- If the name has spaces in it, encase it 'in single quotes'. Double quotes cannot be used (your map won't compile.)
+- examples:
+- trig_damage;'Some green slime';10;poison
+- trig_damage;'Some hot lava';50;fire
+- trig_damage;FUUUUU;100;dark
+• ext_darkenbloom;<level>
+- This changes the darken bloom filter to the desired level. Very useful if you have maps with bright and dark areas. Find the preferred level using the ms_bloom_darken command.
+- Note that the auto-exposure defaults to 1 for most maps, so you can actually brighten your map, by adding a trigger with a scriptvent "ext_darkenbloom;0" property. Note that this has no affect on players with boom disabled, or their ms_bloom_darken set to a level other than -1 (auto). It is also wise to make triggers with this client-only, to save on server resources when monsters cross them. (Has no effect on monsters.)
+• ext_dmgpoint_bonus;<amt>
+- You can use this to add a damage point bonus to a player that crosses the trigger (presumably a trigger_once).
+- It is normally used for aiding events, but can also be employed as a map trigger, in case you want a race, or some such, or give a bonus to players who take a more dangerous route, or reward them for crossing hazards they may have otherwise avoided.
+
+Bug Fixes/Other Changes
+• Fixed: ms_bloom_level cvar not sticking
+• Fixed: Pets deleting on completion of sorc_villa
+• Fixed: eagles DOT doing push (fairly old lack-of-flag issue)
+• Fixed: Pharaoh lance leaving creatures immune to stun afterwards
+• Fixed: Still snowing in Edana after December. :\
+• Fixed: When first created, new characters are invisible on char selection screen.
+• Fixed: Both character models are invisible on the character selection screen.
+• Fixed: Weather sticking between maps, if next map has no weather defined
+• Fixed: Bearclaws crash
+• Fixed: monsters/lost_soul_ice DOT
+• Fixed: wrong item scriptnames / obsolete scriptnames in some chests
+• Fixed: Various screwyness with Pharaoh Lance, Ice Typhoon, Holy Lance
+• Fixed: Cannon on oceancrossing (I hope)
+• Fixed: Various force cage issues
+• Fixed: Necro note (also consolidated into 2hblunt view)
+• Fixed: Captain Ron being as unholy as his namesake
+• Fixed: Range issues on some creatures (eg. troll lobbers)
+• Fixed: Various poison gas attack crashes (hopefully)
+• Fixed: Spam being written out to client error log, causing instability
+• Various re-balancing issues, centering mostly among the polearms and forge weapons
+• The usual 10,000 bug fixes and balancing tweaks I'm not bothering to write about.
+
+New Items/Weapons:
+• Morning Star [Req: Bluntarms: 10/15/20]
+- Comes in three flavors: Rusty, Vanilla, and Fine
+- Originally intended for Orc_For (and it'll still be there eventually), this weapon is provided as part of mapper clamor for a new low to mid level weapon.
+
+• All spells have tomes now - though some can be a bit hard to find still
+
+New Critters:
+• monsters/shadow_form [30] - Shadow From (aka. Eldritch Vapor)
+- This black mass of black shadow, a variant from of horror, fires lightning bolts and is immune to all but dark and holy weapons
+
+• monsters/spider_snow [15] - Wooly Spider
+- This poisonous spider can fire webs that will slow and eventually cocoon opponents.
+- Opponents so cocooned will be unable to attack. They may require a pet or other player to rescue them.
+- Players rescuing cocoon victims receive a 1000 damage point bonus for the assist.
+- Webs slowly fall away over time, but cocoons are permanent until destroyed.
+- Wooly Spider takes the following additional parameters:
+- set_start_burrowed - begin burrowed under the ground, and pop up when attacked or when players get near (note, the model is under the ground, but not the actual monster).
+- set_start_ceiling - Monster starts out crawling on the ceiling. (Do not combine with set_start_burrowed - will look quite odd, as I was too lazy to setup a borrow-in-from ceiling anim.)
+- set_can_flip - The spider can periodically flip from the ground to the ceiling or visa versa - use only in a low-ceiling environment. (Works fine with set_start_ceiling)

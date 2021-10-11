@@ -1,0 +1,65 @@
+Re: List of changelogs
+
+OCT2007a BETA PUBLIC CHANGELOG:
+
+OCT2007a_centerfold.gif
+
+New Stuffs
+• Hoarfrost Shard (req sword 20)
+- Fires lances of ice that both freeze and slow opponents (10 mana)
+- Creates circles of ice on right click (10 second delay, 30 mana)
+- Has a chance of slowing anything it hits
+• Kharaztorant Fire Blade (req smallarms 15, 17 to throw)
+- Our first throwing knife!
+- Magically returns after being thrown; and no, yer buddies can't steel it.
+
+New Mapper Toys
+• world_spawn properties (In Hammer: Map->Map Properties)
+- maptitle: The name of your map that appears via pop-up 10 seconds after player joins (eg. "The Homlet of Edana")
+- mapdesc: The title that appears below the description (eg. "This village grew around the temple of Urdual of the southern frontier")
+- hpwarn: The minimum recommended HP a player can have before getting the "HP too low, you will get pwned" warning message
+- weather: (Untested) Selects random weather from this list every ms-world hour. Entries seperated by semi-colons.
+-- example weather types: clear;rain;storm;snow;fog_black;fog_white;fog_thick;fog_blue;fog_green;fog_red;fog_brown
+-- (fog_black is a night effect, fog_thick is very thick white fog, fog_brown is thick swamp fog)
+• other/idle_lure (untested)
+- This is an invulnerable, non-solid, unmovable lure that calls on all idle monsters to move (walk) towards it every 10 seconds
+- Monsters who target players will ignore the lure until they "calm down"
+- "calming down" FYI, occurs around 10 seconds after not seeing, nor hearing, nor being struck by the player, nor hearing any of their allies in distress. Also just after slaying a player, if it sees no others about.
+- you can trigger_relay killtarget this to end the effect (hopefully doesn't generate studio frame advance error)
+
+- MAP Updates -
+• Daragoth Remake (complete recompile!)
+- Less lag, better FPS, quicker battles, and two new transitions (one to lowlands, one open)
+• Lowlands
+- Transition to Daragoth Underground River
+• Skycastle (Replica Remake)
+- Increased time between bear guardian spawns
+- Fixed dated .res file
+• Helena
+- Nerfed bandit raids (multiple bandit_hard's are too difficult for the intended level range)
+- Added a hack that *may* make shop keepers return home and offer discounts, as they should, following successful repulsion of bandit/orc raid
+
+BugZ Squashed + Odder stuffz
+• Moved Lighting Storm fx clientside
+- Has some unintended affects on the aesthetics, but decided to keep
+- Will attempt to make look like the old lstorm if enough peeps complain
+- There is a 10 mana cost for moving the storm (more to cut down on beams, than to nerf it.)
+• Removed null map events during monster spawns
+- Should save some CPU during monster and map spawns
+• Script fixes/adjustments for Lodagond-1
+- Lots (delayed patch 2 days), mostly anti-crash/anti-wallhack
+
+Near Future
+This laid the groundwork for a lot of anti-cheat stuff (may have actually undone some cheats even VAC fails to detect). Needs more thorough testing before we make the dicey bits public, so more of that will be integrated next month.
+
+Helena2 will also, hopefully, be ready by next month. It will have a mid-level dungeon integrated into it, in addition to more sophisticated orc raids, and the portal to old_helena.
+
+Been working on the AMX some, in hopes to get us an official, verifiable, AMXmodX package. I'm thinking we MAY be able to move a lot of the AMX functions to the game itself, but I'm still uncertain.
+
+I also intend at least two new items for Lodagond-1 chests, pending soon. (Nevermind those I need for the upcoming Lodagond-2)
+
+I was going to add a new mega-hammah this month, but Little-G says Bludgeonland is nearly complete, so I kinda wanted to save the new huge bludgeon-bludgeon for that. (If it is not complete next month, however, we’ll add it to one of the Lodagonds.)
+
+Also STILL need to add new, level dependant monsters, to all maps. This is time consuming, and something I can't do away from home. (Blarg, time for new laptop me thinks)
+
+And yes, I realize the betapack is TOO EFFING HUGE (42mb), and we really, really need a new installer. I think we may wind up seperating some of the maps into a map pack to expidite this. It's just that the new installer should include a recompile of several vanilla maps, which means there'll be one last REALLY HUGE betapackage, and then we'll back to <5MB betapackages.

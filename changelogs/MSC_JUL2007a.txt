@@ -1,0 +1,110 @@
+Re: List of changelogs
+
+JUL2007a PUBLIC CHANGELOG:
+
+pic of the month
+k_cult.gif
+
+New Stuffz (in game)
+• Leather Gauntlets- Gauntlets for N00bs, available in stores
+• Serpent Gloves - These gauntlets have bite
+• Demon Claws - These sinister gloves grow into demon scale clawed gauntlets that have two abilities:
+- Soul Drain Attack: Red-bar charge attack converts all your remaining mana into HP damage
+- Speed Attack: Right click for super-fast attacks (about as often as you can click), these do slightly less damage, cannot be charged, and drain 10 mana per attack.
+• Blood Axe - This grotesque axe, bathed in the blood of demons and vampires, offers life draining magic to the wielder
+
+New Beasties
+- Bear God Series -
+• monsters/bear_god_polar - Bear God of the Frozen Tundra
+- Godzilla sized bear with perpetual blizzard
+• monsters/bear_god_brown - Bear God of the Thundering Plains
+- Godzilla sized bear with perpetual thunderstorm
+• monsters/bear_god_black - Bear God of the Black Forest
+- Godzilla sized bear that sprouts trees of dewm
+• monsters/bear_god_random - One of the above four at random
+• monsters/bear_guard1 - Bear Guardian
+- Fast moving angry bear wants your picnic baskets
+
+- Kharaztorant Cult Series-
+• monsters/k_alcolyte_random - Kharaztorant Acolytes (also aliased under: monsters/k_alcolyte )
+- An introductory member of the Kharaztorant cult, bent on doing the will of the mysterious ancient dragon Kharaztorant. Each has a ritual knife that he can throw or use in melee combat. This script spawns one of the following four flavors randomly:
+• monsters/k_alcolyte_red - Red Robed Kharaztorant Acolyte
+- The Fire Adept has a blade that can set you ablaze.
+• monsters/k_alcolyte_green - Green Robed Kharaztorant Acolyte
+- The Afliction Adept has a blade with long lasting poison. He throws it very frequently, and thus is the ranger of the acolyte types.
+• monsters/k_alcolyte_blue - Blue Robed Kharaztorant Acolyte
+- The Ice Adept has a blade that can freeze and slow opponents.
+• monsters/k_alcolyte_gray - Gray Robed Kharaztorant Acolyte
+- The Phsyical Adept has a mundane knife, but moves about more than the other Acolytes, can parry, and has some damage reduction.
+• monsters/k_alcolyte_ambush - Kharaztorant Acolyte (ambush variant)
+- This version of the random Kharaztorant Acolyte will stay crouched still until a player comes within 256 units and in his field of vision. He'll also attack if notices he has been spotted, or is damaged.
+• monsters/k_alcolyte_blue_turret - Turret variant of blue robed Kharaztorant Acolyte
+• monsters/k_alcolyte_green_turret - Turret variant of green robed Kharaztorant Acolyte (both turret variants stay crouched, do not move, and throw knives like mad - there are no turret variants for the other two robe types at the moment, didn't see much point.)
+- Kharaztorant Spawn -
+• monsters/k_larva - Kharaztorant Larva
+- Those of the cult who fail to make it past the rank of Acolyte when given "The blessing of Kharaztorant" degenerate into these twisted larval demons. This is the first of several stages that, say the believers of Kharaztorant, will eventually lead to the return of their master.
+• monsters/k_childre - Kharaztorant Childre
+- This, much more terrifying beast, is what the Larva will grow into, given enough time. This fast moving armored bundle of claws can throw fireballs and turn invisible. The ethereal shift, while invisible, renders it partly invulnerable to magic. Thankfully, it apparently can't attack while invisible, but instead likes to creep up behind its unsuspecting opponent and rake with its gigantic claws while manifesting with a roar. Rumor also has it that Kharaztorant Childre can also fly short distances. It is believed the next stage beyond this is the dreaded Fire Lizard.
+• (see Wiki Entry for more info on the Kharaztorant Cult) [Lanethan inspired & approved]
+
+-other- (Little Frodo Requests)
+• monsters/horror2 - Elder Horror
+- Meaner, nastier, armored horror with spore cloud
+• monsters/bludgeon1 - Standard bludgeon, sans insane holy multiplier and Rox0rz comment
+• monsters/bludgeon2 - Bludgeon Warrior
+- Meaner, nastier, bludgeon, same old craptastic model, brand new craptastic sounds! ;)
+
+New Mapper Toys
+• other/summon_point1 - summon point (to be expanded on)
+- Use this and the fire djinn will spawn his Efreets at this point instead of on himself (and all the buginess that entails). Usually best to spawn it with the monster.
+- Intend to expand this to work for all djinn, and some other creatures who summon stuff, and allow multiple points to be used for random locations
+
+BugZ Squashed + Odder stuffz
+• Tweaked Giant Bat AI to be a bit more responsive
+• Gave dragon flies the new flight AI
+• Various chest tweaks
+• Updates for some chests
+• Tweaks to new AI for better navigation, especially when using movement hack
+• You should no longer see your own health bar in first person
+• Chain Lightning, and other AOE targeting devices, should no longer prevent people nearby from using rejuvenate
+• Chain Lightning should no longer appear to be casting from others in first person
+• FN approved map filter when in FN mode
+
+- AMX Changes -
+(Was hoping for AMXmodX this month, apparently didn't happen.)
+
+- MAP Updates -
+• Sfor - slight tweakage
+- added flesh eating dragon fly swarms here and there
+- bats now ignore monster clips to help cut down on hiding inside thereof
+• Mines
+- fixed giant bat spawn location to play nice with the new flight AI
+• WW2b
+- Restored ambient_generic sounds (crickets, etc.)
+- Removed return transitions to avoid invalidation
+• Calruin2
+- BS now responds to your arrival by a six second timer, rather than your approach
+- Switched some looping env_messages to ambient_generic to lower entity count (less crashie)
+• Few other minor updates in WW3d, Edana, and others
+
+- Installer Changes -
+• Added Demontemple to FN approved list (release should be within the next few days)
+• Still need the name of J's map. Since I didn't get it before release, it will require a B patch.
+• Crow's new map will require a B patch for other reasons.
+
+...and the usual 10,000 minor changes I'm not bothering to list...
+
+Bumped to next month (in order of priority):
+- The last of Crow's skycastle2 scripts
+- Helena NPC post invasion award (complicated, and likely made pointless by Helena2)
+- AMX vote re-write (now part of the AMXmodX project)
+- Alter chain lighting to work more like, well, chain lightning
+- Shadahar revamp (bumped for fifth month in a row)
+- New Swim AI (really people, just put monster clips on the water, tis how HL1 monsters work)
+- Mining System (doesn't look like Vomica wants to work on his map anymore :( )
+- Single Player Mode (adjust for single player + not on central server)
+
+* Known bugs:
+• If you remove your armor, and replace it, you will be invisible in third person.
+- Type 'vis' to remedy. If you do not type vis, your armor should appear correctly to other players.
+• Blood axe hits with its broadside in third person

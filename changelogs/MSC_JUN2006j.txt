@@ -1,0 +1,69 @@
+Re: List of changelogs
+
+June 30th 2006 Public Changelog
+
+Full Support for Calruin2
+
+- New Monsters
+monsters/ghoul_lesser - kewt lil ghoul
+monsters/ghoul_greater - not so kewt nor lil (sry for funktastic ghoul models)
+monsters/spider_turret - similar to calruin spitting spider, bit meaner, doesn't roam nor have close range attack issues
+
+New Monster Features:
+calruin/reanimate -
+- Calrian's soul sucking ability is a bit less chaotic - no longer sucks the souls of dieing comrades he accidentally strikes
+- May improve this a bit later to detect opponent death better / not prematurely (ie. I have some idears)
+- Range reduced from insane back to semi-insane due to improved map conditions / aim checking
+calruin/cavetroll -
+- Blacksmith effects/behavior thogoughly revamped
+- Responds to ms_npcscript events: give_clubs, invincible_on, vulnerable
+monsters/troll -
+- revamped all effects (required some model changes)
+monsters/horror - various small improvements for the big flying machine o' death - although still need to figure a way to revamp the flight AI for all flyers.
+
+All skeleton_base users, and the flesheater minion, now have unique submodel sets! (Thank Orochi!)
+
+New Dwarf model! Courtesy of, he who was there at the beginning of time, Lord Lanethan himself! (PS. I notice the wandering dwarves are still using the old model, I shall fix this in the future.)
+
+AI system control:
+other/make_mons_dumb - if you have too many monsters in one place causing advanced AI brain death, spawn this as an NPC. This disables the advanced AI. This has the following effects:
+> less lag reduction - once monsters cycle to high speed checks - they never revert
+> monsters will not go to last spotted location when player goes out of sight
+> monsters will not initiate advanced searches, at all
+> monsters will not change FOV when struck (so some tend to ignore it when struck from behind)
+> monsters will not change FOV when spotting a player (easily lose sight of player running circles around them)
+> basically, other than the anti-stuck system, it reverts to the January 2006 AI
+other/make_mons_smart - You can spawn this after the players leave the area to restore the advanced AI functions globally.
+
+NOTE: Daragoth, orc village, is the ONLY place I've seen with so many mons in one place it requires this. On Daragoth, all monsters are now set dumb by default in the map_startup script.
+
+Streamlined and made various improvements to the new AI. Monsters are far better at navigating around one another than they were. Still getting some hesitation though.
+
+Key system:
+other/keyhole - responds to any key and returns map event of same name as item used + a secondary event called "ustart"
+- available keys:
+- key_red //crimson key
+- key_blue //sapphire key
+- key_green //emerald key
+- key_brass
+- key_gold
+- key_skeleton
+- item_storageroomkey
+- item_key_rusty
+Keyholes that only respond to particular keys are on their way...
+
+Traps:
+traps/volcano - spawns a big nasty volcano (lasts 30 seconds), repeatable
+traps/fire_wall - spawns a big nasty firewall (lasts 15 seconds), repeatable
+
+Reflections: setup the default reflection system for models only. (much less lag) - Go third person on Edana, and take a looksie at the glass temple floors. For mappers: There's a new texture registration called reflect_full that does what the old reflect texture did (actually seems to work a tad better).
+
+Various elemental vulnerabilities/resistances improved
+
+New effects: haste, blind, greater_poison
+
+New items:
+Dark Maul
+Raven Lance
+
+Rejuvenate changes: In an effort to compromise between those **** about having Rejuvenate nerfed, and those **** about it still being far too powerful, I've done two things... ONE) I've made Rejuvenate massively more powerful (even at Divination 0) and TWO) You cannot heal while being attacked (spell fizzles if you are struck).

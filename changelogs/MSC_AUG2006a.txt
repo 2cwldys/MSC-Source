@@ -1,0 +1,54 @@
+Re: List of changelogs
+
+August 04th 2006 Beta-Pack Public Changelog
+
+New Guild Crest for RIP
+
+Changed the way Secondary Damage Effects are passed, this may:
+- Help prevent 'overlapping damage' crashes
+- Help XP pass proper
+- Reduce some effects related lag
+- New system may allow potions/items of various elemental resistances later
+
+Changed Firewall's damage method (may still not pass XP right though)
+- You will get a false message about your fire wall attacking you. It won't do any damage.
+
+Enhanced lure functionality a bit
+
+Added following MS_NPCSCRIPT commands that can be executed on just about any monster (or lure):
+Execute on monster to make immune to element (untested):
+- lightning_immune
+- fire_immune
+- poison_immune
+- cold_immune
+- normal_immune (resets all immunities to normal)
+
+Armor (untesed)
+- fifty_armor 50% damage reduction
+- eighty_armor 80% damage reduction
+- no_armor 0% damage reduction
+
+Invincible Toggle (prefix match may cause issue, untested)
+- make_invulnerable
+- make_vulnerable
+
+Add health (prefix match may cause issue, untested)
+- add_10_health
+- add_100_health
+- add_500_health
+- add_1000_health
+- double_health (also prefixes monsters name with 'strong')
+- quad_health (prefixes monsters name with 'very strong')
+
+Set Faction/Race (This sometimes does strange, unpredictable things, including crash)
+- hated_race - make monster hated by all
+- beloved_race - make monster ally with all (also, likely, can't be attacked)
+- orc_race
+- demon_race - bridge between orcs and undead
+- undead_race - may gain certain elemental resistances
+- human_race - this faction encompases players and dwarves as well
+- XXX_race - etc. etc.
+There are other races, all are available except Goblin, which is identical to Orc (don't ask), and Hguard which is for player-friendly guards (or at least, friendly until attacked); and rogue and vermin - which I just plain forgot (next release). (complete list of factions and relations here ( http://www.thothie.com/msc/factions.txt ). Note that allied creatures usually cannot damage one another.)
+Crash most often seems to come up when a monster kills a former ally. So, we still may not be able to have those 'epic orc clan' battles everyone wanted so. Feel free to experiment though. Works best if faction is set before monsters spots an enemy (or would-be enemy).
+
+LINK FOR MS_NPCSCRIPT TUTORIAL MAP AND SOURCE: http://www.thothie.com/msc/ms_npcscript_tutor2.rar

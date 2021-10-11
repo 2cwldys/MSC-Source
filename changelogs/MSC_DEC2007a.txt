@@ -1,0 +1,177 @@
+Re: List of changelogs
+
+DEC2007a BETA PUBLIC CHANGELOG:
+
+New Maps
+• Helena
+- Helena has been recompiled and re-optimized. It now contains two seperate cave mini-dungeons. May expand further, if the edicts play nice.
+• Old Helena (30+)
+- Find the wizard to send you back in time to this classic MS 1.35 map with some new MSC twists.
+- Old Helena can ONLY be reached via the wizard in Helena
+• Gertenheld_Cape by Dridje
+- This low-level multi-quest lighthouse map can be reached from Deralia
+(LostCaverns by Jon should be available soon, but I do not have the final version)
+
+New Stuffs
+• Light Crystals
+- This quest item can be broken in an emergency. It will blind all nearby players, but also nearby monsters.
+• Heavy Crossbow
+- AKA. "Old Iron Sights" - load up steel or dwarven bolts and send em into oblivion, or setup with some blesseds and lay down the wrath of the divine
+• Healing Circle
+- A stationary magic circle that heals you and your allies so long as you remain within it
+• Ice Dagger (Thank MiB & Sabre)
+- A Dagger... of Ice. (aka. Litch Tongue) - Freezing burst on secondary charge attack
+• Northmaul
+- This mighty hammer of ice can be swiveled and thus the backside used to switch from elemental ice damage to vicious piercing damage
+- This can be handy when dealing with sets of elemental gay rainbow armor and other mixed elemental sets where some may resist cold and others maybe vulnerable to it
+- In addition the Northmaul can summon blizzards and waves of ice via the third and forth stage charges
+• Potion of Stability
+- Three minutes of immunity to both push and stun
+- Give Thothie a heads up if ye find a monster that can push you under the influence of this potion
+• Sembelbin now offers name changing services (thank MiB)
+- Fees start at 100gp and increase exponentially with each use of the service (to prevent abuse).
+
+New Monsters
+• monsters/wolf_ice (untested) - Winter wolf
+- Winter wolf minions (30+) with freezing howl and breath attacks
+• monsters/wolf_ice_alpha (untested) - Winter Alpha Wolf
+- Ice wolf boss (40+)
+- Summons uber blizzard (800 radius) at monster location or at the location of other/summon_point1 - if the script is present
+• monsters/zombie_zygol - Zygoli, The All Seeing (level 25+ boss)
+- This giant zombie is invulnerable so long as at least four of the eyes he summons are present
+- Zygoli summons these at a 64 unit radius from himself on spawn, each is 32x32, the zombie itself is about 200 units high, so this boss needs a lot of room to operate.
+- Zygoli is weakened as each of these eyes is destroyed, becoming increasingly vulnerable to attack, but the zombie grows a new eye every two minutes
+- The Eyes of Zygoli themselves have stunning lightning attacks and use hit and run tactics coupled with partial invisibility
+- Zygoli also has a necro-energy beam that slowly drags you towards him
+• monsters/orc_cata_winder - Orc Catapult Winder - this big guy winds up catapults
+- First entry in "params" becomes the prefix for his events (see New Mapper Toys), this allows multiple catapults to be manned by multiple winders
+- Fires <params>_fire every 7 seconds, unless interrupted.
+- Fires <params>_wind 1 second later, and again, 3 seconds later, to toggle the catapult winding wheel
+- Fires <params>_died on death
+- Kicks players away from time to time, but otherwise concentrates on his job
+• monsters/doom_plant1 - Doom Plant
+- A placable version of the doom plant used by the Bear God of the Forbidden Forest
+- Slowly grows to a new stage every 30 seconds. Has three stages: shrub, bush, and tree, each with increasing health and variety of attacks.
+
+New Mapper Toys
+• new msmonster_XXX property: params ("Additional Paramaters")
+- Allows customizability of monster though params seperated by semi-colons
+- for instance: "race_human;make_invulnerable;glow_white;make_jumper" would set an orc to spawn as human faction, invulnerable, white glowshell, and jump at high targets.
+- Params also have uses for setting special options on some certain scripts
+- Available Params Include:
+Code:
+>Race Options (converts monster faction):
+beloved_race - ally to all
+hated_race - hated by all
+demon_race - plays well with orcs and undead
+evil_race - similar
+good_race - player friendly
+hguard_race - player nuteral, but agro if attacked
+human_race
+orc_race - does not play nice with undead or wild animals
+rogue_race - attacks everything but its own
+spider_race
+undead_race - not fond of the living, but tends to ignore vermin and spiders
+vermin_race
+wildanimal_race
+
+>Glowshell/Render
+glow_red
+glow_green
+glow_blue
+glow_yellow
+glow_purple
+glow_custom - glow_custom the next param MUST be the custom color, formatted: (RRR,GGG,BBB)
+make_ghost - causes an additive render - it may cause the monster to flicker out temporarily when struck by glowshell effects
+
+>Strength, Armor variants
+make_invulnerable - Prefixes name with "Invincible", gives white glow-shell
+add_10_health 
+add_100_health
+add_500_health
+add_1000_health
+double_health - Prefixes name with "Strong"
+quad_health - Prefixes name with "Very Strong"
+fifty_armor - sets armor at 50%
+eighty_armor - sets armor at 80%
+
+>Behavior
+go_roam - Makes a normally stationary NPC roam
+no_roam - Wont wander until enemy heard or spotted
+critical_npc - Initiate siege system and set this as a critical NPC to defend (see Siege map system, below)
+
+>Enhance (more pending)
+demon_blood
+speed_x2
+speed_x3
+speed_x4
+
+>Immunities
+lightning_immune
+fire_immune
+poison_immune
+cold_immune
+
+> There are also several monster-specific params I don't have time to go into just now. >_>
+
+• other/web
+- add the property "scriptname" with the value "other/web" to any func_wall_toggle entity with a targetname
+- it will "web" any player that touches it, vanshing, and slowing them to a crawl for 10 seconds
+- it will also make a sticky noise and give them the hud message "You have been webbed!"
+- If someone wants a variant of this that also stops the player from attacking feel free to request
+• Killtarget->msarea_monsterspawn bugs fixed
+- You may now safely use trigger_relay->killtarget to remove an msarea_monsterspawn
+- All the monsters tied to the spawn will fade away with it
+• Siege map system (as used in old_helena)
+- Giving (most) any NPC the param flag "critical_npc" activates the siege system, each NPC with this flag is critical
+- (Some of the more primitive NPC's do not use the main NPC AI and thus cannot be used with this system, but most any with a store can be used.)
+- When these AI's are struck or die, players will be notified. If they die from friendly fire, the offending player's name will be given.
+- When siege mode is active, 1 in 3 non-human monsters ignore players in favor of NPC's, and will select a random critical NPC to hunt down.
+• console command: fakehp <#>
+- If not on FN, you can use this command to simulate #hp worth of players in the server to test your reqhp monster spawns
+
+Map fixes
+• The Keep
+- Further efforts to ensure doors do not cause problems
+• Calruin2
+- Script based trigger system to replace the suddenly buggy multisource that's stopping the volcano
+• Daragoth (recompile)
+- Buggy ladders, buggy giant bats, buggy textures, hopefully all fixed
+• Ara by J (recompile)
+- Various efforts to further intensify and stabalize the Ara campaign
+
+BugZ Squashed + Odder stuffz
+• Fixed effects (eg. Poison, etc.) sticking on players post mortem (Thank MiB)
+- This, however, includes beneficial effects, such as ice shield, protection, regeneration,etc.
+- The cost of the affected potions have been reduced and the items made more plentiful
+• Fixed some screwiness on the character selection screen (Thank MiB)
+• Framework for new parry system
+• Framework for new title system (Thank MiB)
+• Function for changing names (Thank MiB)
+• Function for altering weapon attacks (Thank MiB)
+• Function for triggering weapon animations from the server side (Thank MiB)
+• Ice Shield Reworked (untied from weapon reg)
+- No more buggy casting
+- No more "the mana returns" weirdness - it just never takes it to begin with
+• XP Bug Fixes!!! ZOMG! (Thank MiB!)
+- XP no longer fubars against resistance nor vulnerabilities
+- XP now passes proper for most dodamage (ie. applyeffect damage, aka. DOT)
+- Pretty much the only thing left to fix XP on is skeles that get back up repeatedly
+• Boosted Orion bow into the anti-siege weapon it was meant to be
+- Also manaballs no longer "burst" on collision with NPCs, and of course, XP passes proper
+- Bugger still jams up during firing sometimes though, trick seems to be not to spam it too fast
+• Crossbolts are now hitscan weapons
+- Dwarven Crossbolts now also have AOE damage - but are less accurate than the others
+- Crossbows now have their own limitless generic bolt
+- Bugger has exposed some issues with civilian, guard, and bandit hitboxes, but otherwise seems to work well
+• Fixed Crest of the Mushroom Kingdom crashing when placed in container (name was too long)
+• Some higher-definition civlian models (Thank Orochi and Little-G)
+• Temporarily nerfed the Pheonix Armor until we get the new parry system in (quit yer bitching!)
+- I've increased the XP value of several bosses, and this makes it far too exploitable
+- It currently returns MP instead of health, in addition to total immunity to fire
+• Knife special attack now increases attack speed as well (as I *think* was originally intended)
+- It's also been reduced to once every 40 seconds to avoid abuse through "chaining"
+• After two years, the "WOrth" bug has finally been fixed! (Thank MiB)
+- Wish I thought of looking in titles.txt :|
+
+• And the usual 10,000 bug fixes I'm not bothering to mention

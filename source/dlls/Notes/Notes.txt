@@ -1,0 +1,18 @@
+Master Sword coded by Dogg - Kenneth Early
+
+-Helpful Functions I put in:
+
+int CBasePlayer::HandFromItem( CBasePlayerItem *pItem )
+(Get a 0 or 1 (or -1 if not found) by specifying an Item)
+
+CBaseEntity *FindEntityForward( CBaseEntity *pMe )
+(I didn't put it in, but it's helpful!)
+
+SpriteEffect( CBaseEntity *pEntity, int Effect, char *cSprite );
+
+
+-New Client Messages
+MaxHP - The Maximum hit points
+
+-Notes
+Setting pev->health < 1 initiates a client-side screen tilt

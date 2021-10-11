@@ -1,0 +1,13 @@
+Re: List of changelogs
+
+June 19th 2006 Public Changelog
+
+I made some drastic lag reduction steps... base_npc_attack.script - which every monster uses - has not one, but two procedures that repeat every 1/10th a second, one of which is rather complex. I consolidated those two under a single routine. Further, I switched it up so that it only repeats once every thee seconds, until they spot a player, at which time it switches back to every 1/10th second - but just for the monster so activated.
+
+This may make monsters a little slower to respond to your presence, but doesn't seem too obnoxious.
+
+Another bit that makes monsters slow to respond sometimes, is that if you go out of sight, they change their hunt method - sometimes they find you, and rub up against you for a second or two before they switch back to attack mode, I've noticed. Probably still worth it for the better hunting ability, but I will try to find away around. Note that monsters can't 'see' through each other - so this is more noticeable in monster hairballs.
+
+Monsters will not change their cycle time for other monsters, only players, so this might help on Daragoth. There is a WHOLE lot of action going on in Daragoth you never see... Seriously, been watching the debug report where I've got monsters reporting what they are doing - it is t3h insane - goblins killing spiders, bears killing spiders, trolls killing boars - there's a full scale war the poor server is keeping track of before you ever even join the map!
+
+Similarly, monsters will not start stuck checks before they see a player. So you *may* still occasionally see two monsters stuck together (usually due to the bjorked monsterspawn system that I've no control over) however - they should unstuck themselves pretty quick upon spotting you.

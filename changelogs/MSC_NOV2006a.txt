@@ -1,0 +1,36 @@
+Re: List of changelogs
+
+November 1st 2006 Public Changelog
+
+Yes, I realize it's only October 30th... But I won't be home the next two or three days, so you guys get your beta-pack early this month - I'm still calling it the Nov 1st update - just to confuse you.
+
+New Stuffz
+Glow can now be toggled, just cast on yourself again, and wait a few seconds.
+New Glow / Summon Scroll / Divine Scroll FX (see note below)
+No Clicky crest in a further effort to cut down on STEAM_ID_PENDING nubs
+Added a few new chests. These require map updates. (See below)
+Crystal of Relocation - defines a new spawn point. After setting a new spawn point, you will continue to respawn at the location you used the crystal until you change maps.
+Crystal of Return - returns you to the default map spawn
+
+Crystal of Return can also be used to override the effects of Crystal of Relocation, so it's often best to have one of each, case you reloc your spawn point some place that turns out to be inconvenient.
+
+Both crystals can be purchased in a certain seaside town for between 500 and 2000gp, depending on the type and the seller's mood
+NOTE: They are expendable - ie. one use per crystal.
+
+New Beasties
+Not much, mostly new aliases:
+monsters/skeleton_soul_eater
+- this is, effectively, a generic version of Calruin, in case you need a creature of similar power, but don't want the title to go with.
+Monsters/spider_mini_poison
+- double the hp of the standard baby spider, but also packing heavy poison - still more of an annoyance than a threat, but good for sneaking up on players fighting bigger beasties, biting them on the ankle, and paralyzing them.
+
+New Mapper Toys
+There is a new mapper toy, but it's tied to the AMX rather than the betapack. See the AMX stuff below.
+
+BugZ Squashed + Odder stuffz
+Various attempts to bypass item limit (ie. free up space for more items through media consolidation) - this ate up the vast majority of dev time.
+Improved helm stun resistance functionality vs. boars (note: you will still get thrown, but you'll be able to attack, note also: Helms do not protect against dizzyness caused by: poison, lightning, or alcohol)
+Fixed new AI archers shooting at things they can't see
+Raised XP value of a few of the meaner crits
+Fixed orc brawler going 'slap happy'
+Some BD issues resolved on some of the creatures still using the old AI.

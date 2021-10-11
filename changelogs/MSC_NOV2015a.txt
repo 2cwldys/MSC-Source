@@ -1,0 +1,190 @@
+NOV2015a PUBLIC CHANGELOG:
+Patch of the Spiders
+centerfold_NOV2015a.png
+Italian Spiderman says, "Respect da women!"
+
+Hopefully not a turkey of a patch, this near Amer-Indian Extermination Day patch (originally slated for Halloween), focuses mainly on bug fixes, but also puts in place yet more of the framework for more fundamental changes down the road, and introduces us to yet another segment of the expanding underworld.
+
+Bug Fixes
+• Fixed the sticky thing with the bludgeon hammer, again.
+• Fixed a bug that could potentially result in some flying mobs becoming invulnerable.
+• Goblin Latchers should no longer prevent you from healing/shielding victim, and damages against the victim should pass to globlin.
+• Yet another stab at the 5hp character delete bug.
+• Self adjusting chests should no longer mess up their names.
+• Lightning Forged Skeleton will no longer acquire targets through walls. Effects moved client side for optimization. (Less lag.)
+• Fixed Golden Axe quest completion and some other potential bugs with item related quests.
+• Abyssal Worm giving arrows a miss chance.
+• Boinking yourself in the head with the unholy blade in PVP (still lots of other PVP issues though.)
+• Sorc Villa Medal now improves itself, if you complete quest with greater achievement level.
+• Orc poisoner / Voldar sending poison cloud to targets he can't see and stunning with it.
+• Crystal Phase Spiders teleporting to targets they can't see.
+• New shield base script (hopefully kills the shield lag).
+• Changed speed effect system for Ravenmace and Urdualian Shield (may port to more later.)
+• Fixed bug where Forsuth would "shortcut" to the wrong point.
+• dmgmulti no longer applies to scaling DOT effects.
+• Fixed bug where skeletons/mummies struck by holy weapons would sometimes get up again.
+• New client side fx arrows should make for more dependable hits, while retaining aesthetics.
+- Projectile is now server side again, though the model is still client side - happy medium.
+• ...and the usual 10,000 others...
+
+New Maps
+• Undercliffs by Fredrikli and TheOysterHippopotami (connects from Bloodrose, self adjusting, hard to v.hard)
+- This hazardous series of underground tunnels may provide an alternate surface root to the Underkeep.
+- Also spiders, spiders everywhere.
+- (By request, this will be flagged hidden next patch.)
+• Gertenhell by Dridge and TheOysterHippopotami (disconnected, hard)
+- This lava filled nightmare variant of Gertenheld Cape offers many a spooky surprise.
+
+Map Fixes and Tweaks
+• b_castle - Body guard room now has multiple destinations.
+• bloodrose - Connection to Undercliffs is at the old ms_snow location - ms_snow moved to higher elevation.
+• deralia - Removed clone of Cathain.
+• deraliasewers - Boss teleport now has multiple destinations.
+• dragooncaves - Boss room now has multiple destinations.
+• Fmines - New spawn system, additional puzzle.
+• gatecity - Connection to Underpath, optimization (beware that the bar has moved), minor tweaks and fixes.
+• mscave - Finally resolved the mystery of the stuck orcs.
+• Nashalrath - Tuned piano.
+• orc_for - Fixed potential fubar with hpreq battle troll spawns. Boss now has xp spin up time (15mins).
+• rmines - New spawn system, more explosions.
+• shender_east - Portal to Fire Giant now opens, regardless of worthiness.
+• thanatos - Glitchy scorps and exploits.
+• the_wall2 - Navigation aids, Forsuth teleport fix, chest fixes, minor aesthetics, expoits, Valend's long term memory.
+• underpath - New spawn system, and some alternate lower-level route options.
+• As promised, Underpath, Rmines, and Fmines are now all flagged hidden.
+- (Underpath is accessible from Gatecity, Rmines from Underpath, and Fmines from Rmines.)
+• Gatecity is no longer flagged hidden.
+
+Misc Changes
+• Mouse wheel now scrolls on inventory/chest/shop UI screens.
+• Demon shield will now use firebreath if you attack with the other hand while the shield is held up.
+
+New Mapper Toys
+• trigger_once/multiple new parameter: reqtouchtime ("Required Touch Time")
+- Requires trigger be consecutively touched for this many seconds before firing.
+- Leaving trigger untouched for >1 second resets timer.
+- All other touch requirements must be met for timer to begin.
+- Do not combine with individualized cooldowns.
+• ms_monsterspawn / msarea_monsterspawn properties
+- New Property: reqhp (require hp, min/max/avg) and nplayers properties, similar to the msmonster_xxx property
+- New property: params ("Pass Parameters").
+-- All these additional parameters are applied to all the monsters tied to it, in addition to any defined on the individual monsters or in the map's global parameters.
+• msmonster_xxx
+- reqhp ("Require HP (min;max)") property can now be set to use the average HP on the server, instead of the total, by converting any token after the first to "avg".
+- eg. 500;avg = require average hp be >500. 250;750;avg = require average hp be between 250 and 750.
+- As with other player-related spawn requirements, only active players are counted.
+- (Sorry for the convention change, rather than a new parameter - lazy - and the dern has way too many parameters as it is.)
+New Add Params
+• For individualized chests only:
+- set_req_pick;[%chance] - set this chest to require a lock pick to be opened - chance defaults to 100%. (the related item name is: item_lockpick )
+- set_trap;[explode|gas] - sets either an exploding fire trap, or a poison cloud trap. Can be disarmed with lockpicks, whether the chest requires them to be opened or not. If no trap type parameter is provided, or is invalid, chest picks randomly. (Trap fires once.)
+- set_chance_trapped;[%chance] - has a chance to be trapped, trap type picked at random.
+- set_chance_haspick;[%chance] - has a chance to have a pick inside. Each chest dishes out a max of one pick. Chance increases by 10% of base chance per player, if there is more than one player (on FN only).
+- set_req_key;<key_name> - require key of this name to open (lockpick has no effect.)
+-- See mapping tutorial's "- Keys -" entry for a list of keys.
+- set_locked - remains locked until receives ext_unlock event (keys and lockpicks have no effect.)
+• monsters/snake_gcobra additional parameter "set_nosleep" - causes cobra to patrol on spawn, instead of acting like a somewhat buggy trap.
+• monsters/dwarf_bomber additional parameter "set_drop_tnt" - causes dwarven bomber to drop acquirable unlit TNT quest item on death.
+New Dev commands
+• devcmd teledest <targetname>
+- Teleport to a specific entity by its targetname.
+- Only works on point entities, and brush entities with origin brushes (intended primarily for use with info_teleport_destination).
+- Beware, depending on entity's position and solidity, you may get stuck (in which case, use "tospawn").
+
+=========================================================================
+BELOW THIS LINE THAR BE SPOILERS
+=========================================================================
+(Not masking spoiler sections anymore, as some folks who should be reading stuff, haven't been.)
+
+New Monsters
+• traps/fire_burst (self-adjusting trap, self-removing)
+- Creates a fire burst that repels targets at ground level of location on spawn, doing a self adjusting amount of damage to all those in the aoe (default 256)
+- takes addparam set_aoe;<radius>
+- Damage can be adjusted upwards with dmgmulti, but beware the base DOT is determined by a percentage of the target's HP (initial blast based on global average HP)
+
+• traps/poison_gas (self-adjusting trap, self-removing)
+- Similar to the above, save it creates a self adjusting poison cloud, applying DOT to all those in the aoe (default 256). Cloud persists for 20 seconds.
+- takes addparam set_aoe;<radius>
+- Damage can be adjusted upwards with dmgmulti, but beware the base DOT is determined by a percentage of the target's HP (unlike the fire trap, there is no initial blast)
+
+• traps/quake (self-adjusting trap / fx event, self-removing)
+- Creates an earthquake at origin 512 units in diameter, doing damage for 10 seconds.
+- Damage can be adjusted via dmgmulti, even below 1, but scales as % of victim's maxhp. Setting this to 0 creates an earthquake "effect" that hampers movement, but does no damage.
+- (Provides quite a bit more FX than simply using env_shake)
+- Takes the following addparams:
+-- set_noslow - no slow effect or damage
+-- set_nodamage - still slows, but does no damage (same as dmgmulti 0)
+-- set_global - affects all players on server
+-- set_aoe;<rad> - change radius (max is 1024, use set_global for larger)
+-- set_dur;<seconds> - change duration
+
+• monsters/djinn_troll_lesser_fire - Lesser Fire Djinn (medium demon, 100x150, 2000hp, baseXP 250)
+- Firey troll throws giant exploding rocks and does fire DOT. Otherwise identical to troll_lobber.
+
+• monsters/horror_fire2_ecaves - Flaming Horror (medium demon, 32wx32h, 1000hp, baseXP 400)
+- Different model, otherwise identical to horror_fire2 (fire balls, fire burst, fairly good navigation/monsterclip obedience, flaming trail effect.)
+
+• monsters/elemental_earth1 - Earth Elemental (medium demon, 32x96, 500hp, baseXP 300)
+- Earth Elementals have several abilities, including:
+- Summon rocks from the sky, that fall with an AOE crash, after a slight delay.
+- Open fissures in the ground that damage and stun targets. These do additional damage to enemies who are push immune.
+- Create a temporary shield that protects them from all forward facing damage, though they cannot attack while in this state.
+- They have a freakish amount of armor and reflect electrical attacks.
+
+• monsters/elemental_earth2 - Greater Elemental (v.hard demon, 32x96, 2500hp, baseXP 1000)
+- In addition to the above, all with greater damage, Greater Earth Elementals can:
+- Create an Earthquake, that will slow all enemies in a wide radius, doing greater damage as they near the source. This does additional damage if you can't be moved by it.
+- Summon a rock storm.
+- Attack while their shield is active.
+- Additionally, their summoned rocks have a push effect, and they actually gain energy from electrical attacks.
+
+• monsters/hydra_fire_lesser - Lesser Fire Hydra (hard demon, 96x96, 5000hp, baseXP 750)
+- So we mixed some dragon essence with an elemental and, whoops...
+- This three headed beast has the following attacks:
+- Fire aura (constant), enemies near the fire hydra are constantly burned.
+- Rapid fire projectile attack (left head).
+- Cone of fire (middle head).
+- Slow, but high damage, guided fire projectile (right head).
+- Plus three long reaching bites, and a nasty tail whip, all of which also apply damage over time.
+- Due to this creature's limited elemental repertoire, one must take care on placement and escort.
+- This is also very high poly monster (over 8k), so you may wish to be careful where you place it and what you escort it with.
+- Other flavors pending (possibly also multi-element variants.)
+- Thank Hush 2.0 for purchasing purty model.
+
+New Stuffs
+• Lockpicks
+- Lockpicks stack, and can be used to disarm certain traps and open certain chests.
+- To use: Equip, point at chest, and hold left click.
+- It takes about 10 seconds to disarm and unlock a chest. Taking damage from enemies will intrerrupt the process, but not expend the pick.
+
+• The Chaos Axe (Axehandling 30, All Magic Skills: 10, MP 100)
+- This weapon choses random element types over time and with each strike, applying related damage over time effects.
+- On right click, it can create a burst that repels enemies while applying random DOT effects.
+- The axe will avoid using elements targets are immune to, determining said after the first strike.
+- Only applies effects to targets not already under a damage over time effect.
+
+• Shadow Lance (Polearms 35, Affliction 15, MP 10,100)
+- From Echo717's media contest entry (finally).
+- This sinious lance does dark damage, and can apply a defile effect that reduces enemy's damage output (50%) while doing damage over time (15 secs).
+- This can be applied with a power attack, by throwing the lance, or by using the third charge, providing a large burst that also repels nearby enemies. (req Affliction 15)
+- (Creature's current health must be less than x4 your maxhp to be repelled.)
+
+• Spider Axe (Axehandling 25, Affliction 5,10, MP 5,200)
+- This web encrusted red amber axe does triple damage to spiders and applies a strong defiling effect on them (75% reduced outgoing damage) for 30 seconds. Additionally, it can ensnare your enemies.
+- Right click fires a weak web projectile (req Affliction 5). Each additional application of webs will slow the target until they are ensnared.
+- Once ensnared, they will remain immobilized for 30 seconds, or until the cocoon of webs is broken.
+- The third attack creates a persistent web trap (req Affliction 10), that applies additional webbing to all enemies crossing its bounds for 30 seconds.
+- Additionally, while the weapon is drawn, the weilder is immune to negative effects applied by spiders, including webs and damage over time.
+- Otherwise, this behaves similarly to the Axe of Balance.
+- (Creature's current health must be less than x3 your maxhp to be webbed, large creatures are immune.)
+
+• Felewyn Shard (Holy Wave, Divination 10, Swordsmanship 34, MP 20)
+- Not a new weapon, obviously, but in addition to having its original model properly restored, the final charge attack now creates a rolling wave of holy light.
+- The holy wave does your double Divination skill in holy effect damage to enemies caught in its wake, and applies a holy DOT effect for 50% of your Divination skill for five clicks, to enemies vulnerable to such.
+- Additionally, allies caught in its wake will be healed for three times your Divination skill (This adds to the caster's damage points when healing players and critical NPCs).
+- Holding +use during the final charge will instead apply the classic Felewyn Shield (severe damage reduction from frontal attacks, plus repels attackers when in holy mode).
+- (Something I intended for FEB2015d, but didn't complete in time.)
+
+DOWNLOAD AT THE USUAL PLACE
+
+Also, sorry if your model donations didn't get in yet - didn't want to put this off until Christmas. Next time! (But you get your Halos now!)

@@ -1,0 +1,41 @@
+Re: List of changelogs
+
+AUG2007b SUPLEMENTAL CHANGELOG:
+
+• Reduced Lightning Skeleton Lag (both in attack and scan)
+• Reduced Air Elemental Lag
+• Fixed maps monster ramping when they shouldn't
+• Changed monster ramp to work by "Party Strength" (ie. total HP of players on server) rather than number of players
+• Fixed bug where some monsters were ramping twice
+• Chest give_chance fixes (not entirely tested)
+• Artifact Chest Fixes
+- In addition to no longer repeatedly giving items to the same guy the AC's now randomly sort their inventory
+- So the most powerful guy does not always get the same item
+• Re-Centered Air Elemental Model for smoother flight (also no longer immune to fire)
+• Re-Centered anim_archer_hard model for smoother flight
+- Fixed subsequent bit with flying archers getting into floors, and improved AI
+• Hack to fix locked chests (if a chest does lock, give it a minute, it may fix itself)
+• Improved chest's player counting
+• Put Evaan's weapon restrictions at full strength
+- Against my better judgement, but hey, you guys voted for it. ;)
+- If you run into someone who has no weapons they can use, remind them that they can sell some weapons to downgrade
+• monsters/bludgeon_gaz1_mini - Young Bludgeon
+- Awww! They iz so kewt! Ow! They hurt!
+- Special request for Little-G's/Frodo's new map
+- Variants include: monsters/bludgeon_gaz2_mini monsters/bludgeon_gaz1_demon_mini monsters/bludgeon_gaz2_demon_mini
+- (basically take any existing gaz bludgeon and stick _mini on the end)
+• Added the missing bludgeon soundset
+
+Mapper Toys
+• other/kill_all_monsters - guess what this does when you spawn it
+- Good for ridding a boss of his left over minions when he dies, without the usual bugs
+• new msmonster_XXX/ms_npc entity property "title"
+- Change a monsters name to whatever ya want
+- May add abilities to change HP, Damage, Race, model, or pass params in future!
+- FGD updated for this
+• Fixed bug with "reqhp" feature (accidentally put in "hpreq")
+• world map event: mstime_XX
+- The event mstime_xx will fire every game world hour
+- ( so mstime_17 goes off at dusk, mstime_20 at eve, and mstime_6 in the morning)
+- In addition hour_counter will fire every game world hour
+- (This makes weather/timer obsolete)

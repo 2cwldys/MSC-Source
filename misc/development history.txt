@@ -1,0 +1,53 @@
+On account of Thothie: https://www.msremake.com/threads/what-is-the-development-history-of-master-sword.6345/post-113376
+
+Fair warning: I'm going to make you regret asking this...
+
+In the beginning, there was Dogg... And Dogg said, "LET THERE BE FIGHTS!", and loe, it was good.
+
+Blasphemies aside, the game was, more or less, started as a hobby project by Dogg, back in 1999, the early days of WON, and was among the first full conversion Half-Life mods to take shape (Wizard Wars being the only other in similar genre, at the time). It was, at best, primitive, and wasn't really ready for a full public release until a few years after, but the framework from that system still remains inside MSC to this day.
+
+Dogg eventually worked out an increasingly elaborate scripting system, which allowed other, less experienced coders, to rapidly expand on the project, which brought in Evaan, and a few of the other early MasterSword creators.
+
+Eventually Lanethan showed up, and gave a soul, to what was before a simple coding curiosity. He created a lore, centering around the struggle behind the balance of powers that wasn't too dissimilar to the MSC world we're familiar with today.
+
+Then Steam came... and killed the whole thing for a few years.
+
+Eventually, under the leadership of Lord K (Kuroneko) - Evaan, DrKill, Ewok, Gaz, and a few others, managed to modify the game to work under Steam, and this eventually attracted the eye of Dogg, who began to modernize the project for use with what, at the time, was the newer Steam SDK. This project eventually led to the first iteration of MSC, providing some new graphical enhancements, the return of magic (somewhat), and about doubled the size of the world.
+
+However, there was a traitor in their midst, who shall not be named, and friction with this individual, and among the remainder of the group, caused the team to, more or less, fall apart, at about the time MSC 1.0 was ready to be released. Additionally, there were horrid memory leaks and other fundamental problems with the initial release. Dogg did stick around long enough to put out a few code side patches, but with the majority of the team fleeing for the hills, Dogg too, eventually, wandered into the sunset, leaving Lord K virtually empty handed.
+
+I, myself, had been "modifying" Mastersword as a third party since its late WON days, mostly doing map fixes and repairs on that side of things (some of which were not entirely approved of by the dev team). During those years, Crow and I had been rigging up increasingly elaborate map side fixes and expansions to work around our lack of access to the scripting system and source code, and each time, Lord K would say, "You know, ya could do XXX with scripts."
+
+Within the first year of MSC 1.0's release in January 2005, Lord K tossed me a few scripts, and basically said, "have at it". Under his tutelage, I was eventually able to fix several problems, and begin to expand the world proper. A lot progress came about in a very short while, as mappers, finally free of constraint, started climbing onto the project from all over.
+
+There were limits to what could be fixed script side, however, and it took nearly another year before we managed to get the code to even compile, and maybe another six months or so beyond that, before we got a coder who was willing to do anything other than develop hacks.
+
+Once we had that, however, we were able to not only fix critical code issues, but rapidly expand the script system itself. Some of The Great Old Ones returned, for a time. Gaz came back, gave us a new Bludgeon model, among a great number of model fixes. Evaan came back, and started scripting again. Soon, the world swiftly expanded and brought in even more mappers and modelers. Crow returned, and made yet another map series. Avzool, AmIAnnoyingNow, Barnum, Dridje and several others continued to increase the sheer size of the game from a handful of maps, to a world the size we barely dared dream of. FER, among others, added greatly to our OC art repertoire, and Orochi helped thoroughly optimize our modeling system through consolidation. Other passerby media content providers, of all sorts, came in on the project in droves just far too numerous to credit here, and MSC truly became a community built mod.
+
+However, community turmoil, lead largely by another who shall not be named, eventually banished all The Great Old Ones. Along with them, several of the newer coders, scripters, modelers, and mappers fled under the constant onslaught. At the same time, most of the team that remained, found themselves tied up in an effort to prevent the various cheats, hacks, and exploits folks of this ilk were spreading in some never ending war, thus, with their hands so tied, and the developer's army rapidly shrinking to boot, the world could not expand. Eventually, tired of seeing everyone I struggled to bring into the project driven away by an angry element of the community, even I resigned.
+
+A few, truly dedicated individuals, lead by The Man in Black, managed to keep the project breathing for during those dark times. The flame wars persisted, but eventually he managed to convince even me to come back, and help apply all the changes he'd been quietly making during the painful interim.
+
+This brought us our first new weapon line since 2004 - the polearm - and allowed us to integrate a great number of maps and models that had been sitting in a locked dungeon for what seemed like an eternity. The game picked up, and seemed to have a future once again.
+
+But the same forces that brought on the previous dark age, while diminished, had not vanished entirely, and the creative forces of MSC were fewer than ever before, and thus more vulnerable than ever before. In addition, as with most developers, the majority of them were at that "age of transition" - where one gets a job, gets married, and, well, has kids.
+
+Eventually, real life, coupled with the never ending frustration caused by the constant antagonism, caught up with too many members of the remaining dev team. In what could almost be described as a death rattle, it lashed out at the last of its enemies, but it was too little, and too late. Everyone who could script was gone, save one. Everyone who could code was no longer willing to deal with the frustration on top of their own real life obligations. Mappers were dreamers, few and far between, and modelers were all but non-existent, reluctant to put in even the most basic of efforts for art that may never see the light of day. Meanwhile, the Goldsrc developing community at large, with every other minor mod being slain by random Steam updates, continued to shrink into oblivion, thus there was no longer a pool from which to refresh our rapidly dwindling team of developers.
+
+...and now, really, it's just me...
+
+A few mappers hold on, dreaming of the day when we might see a patch and their maps might be released, but they are not the broad problem solver mappers of old, nor do they have any motivation to be, knowing it all hangs on my getting their work out, in the way that they desire, and that I should be solving their problems for them. Meanwhile, while certainly not at an age of transition, my life seems suddenly full of more unwanted excitement than since the last time I was. So I push the few frustrated dreaming mappers, to do whatever they can without me, and remain stingy with what I can offer, beyond advice, while, ever so slowly, pecking away at script, and code, and modeling, as best I can, while Steam updates continue to create ever more numerous and ever stranger puzzles, far beyond my capacity to resolve on my own.
+
+Thus, things are looking pretty bleak.
+
+But not hopeless.
+
+RKS has manage to keep our web services afloat and stronger than ever, provided us with the most reliable and wide reaching set of MSC servers we've ever had, and even given us hope for a Green Light which, may, resolve some of the worst of the problems Steam has laid upon us. Others have been providing new music and voice talent to add to a future release. Progress is slow, to be sure, but it is also steady, so a new expansion is indeed inevitable, with time - it's more of question of whether it will be grand enough to justify this new long period of darkness, and where things will go from there.
+
+And when we look upon what we have accomplished over the years, it's hard not to have hope. Despite all the turmoil we've seen, and all the miss-matched duct tape and glue that holds the whole thing together, MSC is indeed a majestic beast. From such humble beginnings, it is now by far the largest mod Goldsrc has ever produced, with nearly a hundred internal maps, and thousands of creatures lying in wait amongst them, it forms a world like none other in its sphere.
+
+(Okay, Svncoop might be *somewhat* comparable, but that's about it.)
+
+So yeah, there's your development history.
+
+...and then there's MSS... Which has a dramatically intertwined history that I could, similarly, go on about for far too long... Or at least until I get my Steam working again (which will probably be this weekend).

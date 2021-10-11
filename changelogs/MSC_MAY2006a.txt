@@ -1,0 +1,350 @@
+The following is a series of changelogs starting from MAY2006 and continuing to the current public release. Some links in older changelogs maybe unavailable, and the formatting may not always be consistent. New changelogs will be added here as they occur, in addition to the beta-pack news thread.
+
+There were a few patches before May 2006, but they were mostly centered around fixing technical issues (including a memory leak) without any changes to actual game play nor expansion of the world. Seems there's no surviving record of the exact changes involved in those few patches. Versions of Master Sword predating January 2005 are "Pre-Continued" and thus not included (ie. MS 1.35). I would like to get together a better history of the game though, as it goes as far back as 1998.
+
+(Let's all thank Zeus for getting this put together.)
+
+
+May 15th 2006 Public Changelog
+
+Fixed chance to spawn certain higher level items
+Modified the way riddle masters respond to player
+Fixed Calrian's attack range
+Fixed plains of daragoth
+Fixed inability to take from daragoth chests
+Unlinked basement and goblin chest
+Fixed some speech issues in Deralia
+Fixed some quests in edana
+Fixed edanasewers
+Fixed some gatecity script issues
+Fixed some goblintown script issues
+Fixed helena economy isue
+Helena guards now respond to attacks
+Fixed some mistakes in the help boxes
+Fixed Heras quest
+Fixed knight's armor
+Modified mana potion costs
+Modified erratic lightning
+Fixed damage association error with some burning weapons
+Modified glow spell
+Fixed multiple keledros issues
+Modified bandit exp
+Modified animated armor's difficulty
+Modified venomous spider's difficulty
+Fixed some skeletons
+Fixed the chests in mscave
+Disabled bankers until a fix is found
+Fixed sfor chest
+Changed starting spell
+Fixed some awkwardness with summoned monsters
+Fixed the troll
+Fixed the giant spider in the thornlands
+Fixed summoned creatures spawning in walls
+Sitting heals mana
+Fixed Deralia
+Fixed Proffund
+Fixed and tweaked goblin guards
+Tweaked night system - Expierimental
+Made torches more effective at night - Expierimental
+Added more items to the traveling merchant's store
+Fixed the script error with helena/weapstore
+Tweaked night system again
+Minor tweaks with a bunch of things
+Can no longer pick up goblin stones
+Catapault script added (other/catapault) - fire the events "OneBalls" and "FiveBalls" to make it launch
+
+Script by script:
+
+sv_world_vote - removed respawn on time vote to prevent 'big wad of players' stuck together
+
+New/Fixed/Returning Monsters
+monsters/anim_warrior2 - Infernal Animated Armor New mean guards for Keledros
+monsters/bear_cub_polar - 100% ready to roll
+monsters/bear_giant_black - 100% ready to roll
+monsters/bear_giant_brown - Is right Color
+monsters/bear_giant_polar - 100% ready to roll
+monsters/cobra - 100% ready to roll (non-agro less attacked)
+monsters/dragonfly - Good to go, but ignores monster clips
+monsters/giantspider - can attack now (mean SOB too)
+monsters/grizzly - Nastah bear
+monsters/kodiak - REALLY nastah bear!
+monsters/lan_skeleton - Maldora's chatty minions return
+monsters/lanskeleton - Some meaner than others
+monsters/lslime - Now with animations and sound, shocking! :)
+monsters/orc_unarmed - Unarmed orc, ala good old scream2 [ catches two developer ms_npcscript events: superorc godoff ]
+monsters/scorpion3 - Can attack now, added % chance to sting you with poison
+monsters/troll_ice - The mighty ice troll is ready to roll
+helena/orcwarboss - Graznux the Warbozz is back! [ catches ms_npcscript events: warboss_godon warboss_godoff warboss_infernal warboss_normal ]
+sfor/atholo - Atholo is mean, undead, and 100% ready to roll [ catches ms_npcscript event: vulnerable ]
+sfor/undamael - [is acutally Atholo under original naming convention]
+sfor/undamael2 - Undamael returns [ catches ms_npcscript event: vulnerable ]
+other/rock - It's a rock! (Now with proper hit box, and vanishes instantly on break)
+a3/bookbat - Now spawns lesser fire bat (as opposed to nothing at all)
+mscave/Shadahar - Yet more nasties of the undead, ready to go
+heras/GhorAsh - and yet another...
+keledrosprelude/stonespider - attacks, and may even kick your ass - maybe even into a hole
+keledrosruins/keledros - no more brain death for me, hopefully, plus I hired better guards.
+dq/murmur - yet another, really mean bear (although, not quite what he once was)
+dq/voldar - Former head of the black hand orc clan
+dq/voldarwarrior - ...And his poisoned blades
+minibosses/bloodreaver - Big, nasty, angry, skeleton boss
+minibosses/bloodreaverminion - His flaming minions
+minibosses/flesheater - He desires your flesh ^_^
+minibosses/flesheaterminion - The bossez flesh delivery service
+
+NPC edits:
+helena/archer - now fights back when players attack, and doesn't go brain dead after first orc kill
+helena/blacksmith - moved to invincible, bails when orcs invade (otherwise can't leave his anvil)
+helena/erkold - runs when struck
+helena/harry - anim fix
+helena/memorialguard - now fights back when players attack, and doesn't go brain dead after first orc kill
+helena/towerarcher - # arrow dropped fixed (not sure why I bothered)
+helena/vendor - #arrow groupings and various items
+helena/vendor8 - #arrow groupings and various items
+mscave/pillar - No more crashiness, quest works
+deralia/barguy - Quest now 100%
+deralia/guard - attacks without BD
+deralia/guard_barracks - ditto
+deralia/guard_gate - ditto
+deralia/hmaster - ditto
+deralia/knight_lord - Can hit now, and is one mean mofo
+deralia/pat - Quest now 100%
+deralia/Slinker - Quest now 100%
+deralia/thief - Fights back, changes name on discovery, no longer walking pot of free cash
+edana/masterp - Has new quest, good luck finding it. :)
+
+Modified Items
+items/armor_base - part of failed efforts to fix armor view bug listed in here (no actual changes currently in effect)
+items/armor_dark - part of failed efforts to fix armor view bug listed in here (ditto)
+items/armor_helm_mongol - fixed description
+items/axes_scythe - Attempted to fix reach - seems the model itself is the problem though :\
+items/base_scroll - Disambiguation over concentration ;)
+items/blunt_calrianmace - Uses proper view model now (will eventually swap Granite and Claruin mace stats)
+items/blunt_rustyhammer2 - Animation
+items/drink_wine - You can now get drunk!
+items/drink_mead - Really drunk!
+items/drink_ale - Really... Reealllyly *hick* drunK!
+items/item_log - And once drunk, you can start a camp fire :)
+items/item_runicsymbol - Item modified for new quest
+items/item_torch_light - got some buggars out of script - think radius still not increasing at night though (can't really tell on my system as I can't see it at all at night)
+items/proj_arrow_bluntwooden - Grouping fix (can pull from chests now)
+items/proj_arrow_broadhead - Grouping fix (can pull from chests now)
+items/proj_arrow_fire - minor fixes
+items/proj_arrow_fire_cl - much brighter now
+items/proj_arrow_jagged - Grouping fix (can pull from chests now)
+items/proj_arrow_wooden - Grouping fix (can pull from chests now)
+items/proj_catapaultball - AOE should work now (untested)
+items/proj_fire_dart - minor fixes
+items/ring_light2 - minor fixes
+items/swords_katanaX - changed names, so you know what you have, although which is best may still require testing. Also upped speed on katana4
+
+New Items that currently work (Pending Client side patch)
+items/axes_doubleaxe - Ye dwarven axe
+items/axes_greataxe - Ye great axe of Graznux (He does drop this, may cause someone an issue)
+items/axes_runeaxe - Hasted magic axe
+items/bows_swiftbow - Ye Elven Longbow
+items/crossbow_heavy - Pending model fix from Jester, untested
+items/crossbow_light - Pending model fix from Jester, untested
+items/crossbow_steam - Pending model fix from Jester, untested
+items/proj_arrow_poison - envenomed arrows w/effect_poison
+items/smallarms_dirk
+items/swords_lostblade - Hasted by ancient magics
+
+New Effects
+effects/effect_frostbite - As stun, but with light blue glow shell, works great
+effects/effect_stop - Freezes you solid, untested and unapplied thus far
+effects/effect_armor - ignore this, part of attempts to circumvent armor bug, not cached in /effects
+
+Standardized chests!
+chests/arrows - Ammunition
+chests/bolts - Ammunition for the pending crossbows (also % of xbow inside)
+chests/gold_10 - Around 10 gold, for the nubs
+chests/gold_25 - Around 25 gold, a nice treat
+chests/gold_50 - Around 50 gold, a fair reward
+chests/gold_100 - Around 100 gold, wow nice
+chests/gold_300 - Around 300 gold, holy crap epic quest
+chests/health_greater_a - Health and mana resupply chests, with seperate store names so they don't stack
+chests/health_greater_b - ditto
+chests/health_greater_c - ditto
+chests/health_lesser_a - ditto
+chests/health_lesser_b - ditto
+chests/health_lesser_c - ditto
+
+Other
+mscave/map_startup - no more rain in mscaves! (hopefully)
+keledrosruins/spawner_base - this is still here, but isn't really used anymore
+keledrosruins/spawnerX - only spawners #1,#5,and #6 actually spawn Infernal Animated armors, atm - may change once anti-BD measures have been thoroughly tested out on his own map
+monsters/attack_hack - #include script, so monsters without proper model animations can attack realistically (works very well)
+
+Bug warnings added:
+help/first_npc
+help/first_party
+help/first_transition
+
+Compatibility scripts:
+monsters/abaddon
+monsters/brownbear
+monsters/brownbearcub
+monsters/Copy of orcwarrior - Orc Warrior with torch, to light orcs in caves
+monsters/giantblackbear
+monsters/giantbrownbear
+monsters/giantpolarbear
+monsters/guard2 - non-wandering orc guard
+monsters/polarbearcub
+monsters/polarbear
+monsters/scream - Developer place holder
+monsters/scream2 - See ORC_Unarmed above
+helena/dorfgan - as blacksmith, but mortal
+helena/dorfgan_normal
+helena/genstore
+helena/merc
+helena/orcguard
+helena/orcwarrior_hard
+helena/OTTC1 - no GA though (as daragoth/chest_great)
+helena/serrold
+helena/troll
+worlditems/treasurechest - Still in the FGD
+sfor/Copy of undamael - Undamael, just here to chat
+a3/rudolf
+edana/Copy of fletcher
+edana/rentaguard1
+edana/rentaguard2
+edana/rentaguard3
+edana/shroom - good agro monster lure
+edana/trapper
+edana/tutorial
+dq/findlebind
+
+Minor fixes, Animations, Precache, Sounds, Arrow Grouping etc
+monsters/anim_archer
+monsters/anim_warrior
+monsters/bandit
+monsters/bandit_hard
+monsters/bat - new death anim
+monsters/fish_leech - Anims fixed
+monsters/fish_shark - better FOV
+monsters/giantrat - Anim fix
+monsters/goblin
+monsters/goblin_guard
+monsters/goblin_thrower
+monsters/goblinchief
+monsters/hawk
+monsters/hungryrat
+monsters/orc_archer
+monsters/orc_archer_blackhand
+monsters/orc_base
+monsters/orc_base_ranged
+monsters/orc_scout
+monsters/rat
+monsters/scorpion1
+monsters/scorpion2
+monsters/spider
+monsters/spider_base
+monsters/spider_giant
+monsters/spider_mini
+monsters/spider_spitting
+monsters/thornlandspider
+monsters/troll
+sfor/sforTC2
+a3/a3TC6
+mscave/cavechest9
+a3/olof
+a3/TC_orcs
+animals/bats
+calruin/cavebat - new death anim (doesn't hang upside down in your face)
+calruin/cavetroll
+calruin/chest_qspider
+calruin/fangtooth
+calruin/rat
+calruin/reanimate
+calruin/spidqueen - added 25-50 gold as well (as per MS 1.35's 150-300 gold)
+calruin/TC_fangtooth
+daragoth/spid_dude
+deralia/boss_spider
+deralia/grocer
+deralia/kayle
+edana/bryan
+edana/fletcher
+edanas/TC_heras
+edanas/TC_heras2
+effects/effect_burn - minor code errors
+effects/effect_poison - minor code errors
+gatecity/hunter
+heras/TC_heras
+keledrosprelude/bat
+keledrosruins/keledros_cl_cast
+mercenaries/archer
+mercenaries/archerf
+mines/rudolf - hopefully no longer repeats quest on fade
+
+Base edits:
+monsters/base_monster - new DELETE_ON_DEATH option, use on monsters that drop no items to help with server lag
+monsters/bat_base - Better death animations
+monsters/bear_base_giant - Minor anim issues
+monsters/boar_base - Minor precache issues
+items/proj_base - minor fixes
+
+New, but still buggy
+monsters/bludgeon - Funny guy, jumps on your head :)
+
+Skeletons that know how to stay dead (at least, this time around):
+(just suffix any persistant skeleton with _once)
+monsters/skeleton_once
+monsters/skeleton2_once
+calruin/corpse_once
+calruin/corpse2_once
+calruin/livingdead_once
+calruin/undeadwarrior_once
+
+Spells:
+monsters/summon/rat - HP/ATK formula now based on Spell Casting Skill (since summon cant be raised)
+monsters/summon/skeleton - ditto
+monsters/summon/summon_blizzard - Does damage now, applies frost bite to monster hit directly, uses SC for basis for now
+monsters/summon/summon_lightning_storm - Upped damage a bit
+monsters/summon/summon_volcano - Nerfed, and thoroughly debugged. Damage based on Fire level. Reduced req. to SC10
+items/magic_hand_blizzard - see above
+items/magic_hand_fire_dart - minor fixes
+items/magic_hand_ice_shield - 50% protection for 30+SC seconds for 50 mana
+items/magic_hand_lightning_storm - see above
+items/magic_hand_summon_base - minor error fixes
+items/magic_hand_summon_rat - see above
+items/magic_hand_summon_undead - see above
+items/magic_hand_volcano - see above
+items/scroll_xxxxxx - disambugation on all scroll script texts
+
+New Spells (Pending Client Patch, although maybe integrated into new spell system)
+items/magic_hand_fire_ball - Big nasty 256 AOE fireball 2xDart damage, effects
+items/magic_hand_poison - Slowly poison your enemies to death (good for rapid SC increase)
+items/proj_fire_ball - fireball's projectile
+
+New Mapper Scripts:
+weather/timer
+- This triggers map events every hour: hour_1, hour_2, hour_3, to hour_23 and so forth.
+- At hour_6, it also triggers is_dawn
+- At hour_17, it also triggers is_dusk (re: sunset)
+- At hour_20 it also triggers is_night
+- place as an ms_npc anywhere on your map
+- Can be combined with the following four scripts:
+weather/always_day
+- locks the TOD at NOON
+- if the hour advances more than an hour, for whatever reason, it should reset to noon within a few seconds
+- must be used in conjunction with weather/timer
+- weather/timer will no longer 'chime' hours when this ms_npc is present - however, it will call an event called hour_counter for each hour that would have passed were the script not active.
+weather/always_dusk - as always_day, but locks the time at 17:00 (sunset)
+weather/always_night - as always_night, but locks the time at midnight
+weather/no_weather - kills all weather effects at the top of every hour or would be hour (untested), must be combined with weather/timer
+
+weather/always_rain - should make it almost always rain (untested)
+weather/always_snow - should make it almost always snow (untested - and I've never seen snow)
+weather/make_fog - should make fog, but untested (probably wont work, may have to add to weather/timer
+weather/no_rain - should disable all rain (untested)
+weather/no_snow - should disable all snow (untested)
+weather/sfx_weather_rain - fixed error, added flag
+weather/sfx_weather_rain_storm - fixed error, added flag
+weather/sfx_weather_snow - added flag
+
+player/emote_sit&stand
+- Health regen rate is a now 5% of your maximum heal while sitting (minimum 2pts)
+- Mana regen rate is a now 20% of your maximum mana while sitting (minimum 4pts)
+- You cannot regen for 10 seconds (or so) after being struck.
+- This means no more sitting around for hours to regen/recharge

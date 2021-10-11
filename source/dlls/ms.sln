@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Master Sword", "ms.vcproj", "{F0157066-A8B8-4680-931F-673A2967FF2C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Debug DS = Debug DS
+		DebugDS = DebugDS
+		EXPAR = EXPAR
+		Release = Release
+		Release(Debug) = Release(Debug)
+		SSE1 = SSE1
+		SSE2 = SSE2
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Debug.ActiveCfg = Debug|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Debug.Build.0 = Debug|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Debug DS.ActiveCfg = Debug DS|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Debug DS.Build.0 = Debug DS|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.DebugDS.ActiveCfg = DebugDS|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.DebugDS.Build.0 = DebugDS|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.EXPAR.ActiveCfg = EXPAR|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.EXPAR.Build.0 = EXPAR|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Release.ActiveCfg = Release|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Release.Build.0 = Release|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Release(Debug).ActiveCfg = Release(Debug)|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.Release(Debug).Build.0 = Release(Debug)|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.SSE1.ActiveCfg = SSE1|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.SSE1.Build.0 = SSE1|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.SSE2.ActiveCfg = SSE2|Win32
+		{F0157066-A8B8-4680-931F-673A2967FF2C}.SSE2.Build.0 = SSE2|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

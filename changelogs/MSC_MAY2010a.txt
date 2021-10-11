@@ -1,0 +1,100 @@
+Re: List of changelogs
+
+MAY2010a PUBLIC CHANGELOG:
+
+MAY2010a_centerfold.jpg
+Bug squashing 101
+
+This patch is mostly dedicated to squashing bugs that cropped up in MAR2010, so not much in the way of new stuff here, but hopefully this should put an end to several headaches:
+
+Fixed Bugs
+• Fixed various spell casting / purchasing limitations.
+• Fixed various ammo stacking issues.
+• Fixed Olof being even crazier than usual (re-wrote script from ground up)
+• Fixed folks not being able to delete their characters (hopefully)
+• Fixed "body parts vanishing" and "transexual" issues caused by glowshells and the like
+• Fixed CL effect on Torkalath bows
+• If Forsuth is stuck in the elevator on The_Wall, he will eventually teleport to the top
+• Various other attempts to make Forsuth more dependable.
+- PS. Suggest using the *inside* pillar when getting Forsuth to travel up the spiral.
+• Some optimization for NPC death sequences (still not killed pfn_Think bug though)
+• Fixed various bugs with individualized treasure chests (hopefully - under new system).
+• Fixed Bludgeon's stunning with DOT at a distance.
+• Fixed some flaws with the vote system hanging (hopefully).
+• Fixed some bugs related to the new Steam UI.
+• Fixed various "script duplication" bugs causing various strange errors (though we've not tracked them all down yet).
+• Fixed various potential base_chat related bugs.
+• Fixed bug with the Felewyn ring quest.
+• Fixed some poison/spore cloud related bugs.
+• Fixed some magic circles being subject to push attacks.
+• Fixed some bugs with Captain Ron and a few other vendors.
+• Fixed the ****ing Iron Guardian. (Hopefully)
+• Fixed Ethereal dagger secondary attack not bypassing armor.
+• Holdan Returns!
+• Generated Tickets for various neglected items.
+• Various FGD updates.
+- func_plat now has a flag you can check to cause the elevator to adjust 16 units down after reaching its top, in an effort to prevent players getting stuck - this doesn't seem to really help, however. Need to come up with a better solution. :\
+• Fixed some 10,000 other minor bugs that I'm not going to bother to list...
+
+New Stuffs
+• /stuck will now adjust you 8 units up, if there is head room and you are not within /stuck range of a spawn, in case you get stuck on an elevator/platform. This is allowed once every 5 seconds.
+
+New Map
+• Umulak Necropolis by Dridje (40+, Disconnected)
+- A very attractive Egyptian theme map with many mummies and a few puzzles
+
+Map Updates
+• The Wall by Skillasaur (40+, Disconnected)
+- Some rebalancing, optimization, and various fixes (some of which may not be 100%, but we shall hope.)
+- Fixed unbreakable wall, gibbing ice reaver, etc. Improved general treasure layout, XP, etc.
+• Islesofdread1 by J (25-30)
+- Some changes to monster spawn layout and fixings of some potentially broken monster spawn chains.
+• Thanatos (30-35)
+- Fixed issues with some skeleton archer spawns.
+• Calruin2 (25)
+- Stripped most of the sprites from the map to allow for more dependable loading.
+• Aleyesu (25-30)
+- (Re-)Fixed monster spawn chains.
+
+Nerflog
+• Increased Torkalath bow damage (also fixed CL effect as noted)
+• Raised Torkalath elves XP
+• XP reduction for infinite spawn minions in Lodagond no longer apply to other minions
+• Fixed leveling sploit on Phoenix Bow
+
+- SPOILER SECTION -
+
+New Items
+• Bear Claws [MA30, SC20]
+- These powerful high-carb claws can turn the user into a huge bear with a right click.
+- While in bear form, the player will inflict massive damage, and be immune to most push and stun effects
+- While in bear form the player's manna will slowly drain until depleted, causing him to revert to human form. 30 manna is required to activate bear form, although no manna is actually drained by the transformation itself.
+
+New Beasties
+Beetles
+• monsters/beetle_horned [25] - Horned Beetle
+- This "small" beetle (about 3 feet across) can fly for short distances, leap attack, and bash players about with its horn.
+• monsters/beetle_horned_giant [30] - Giant Horned Beetle
+- Can't fly, nor do the short leap attacks of its smaller cousins, but this 8+ foot beast has multiple AOE and stun attacks, and can dish it out as well as take it better than the wee ones.
+• monsters/beetle_venom [30] - Venomsack Beetle
+- Farts to fly around, explodes into a cloud of nasty gas.
+• monsters/beetle_venom_giant [35] - Giant Venomsack
+- Giant version of same, minus flight, plus poison aura, plus AOE stun slam, plus breath of eye-watering gas.
+• monsters/beetle_fire [35] - Fire Beetle
+- Spits fire, explodes.
+• monsters/beetle_fire [40] - Giant Fire Beetle
+- As above, but meaner, larger, and flightless. AOE stun slam attack. Spits fire at multiple targets.
+
+Scarabs
+- Scarabs crawl around slowly, then leap at and latch onto enemies, immobilizing them, while chewing their way inside to the juicy bits.
+- Once sated, the Scarab will fall off and run away, to burn off some calories, before making another run.
+- Each scarab latched onto a target multiplies the damage of all scarabs attached to said target. (So, individually, not very threatening - but in a group, very deadly).
+- Scarabs only have partial AI's, to allow swarms to be easier on servers. This means they will ignore most additional parameters (but should accept npc_suicide, name changes, and dmg/hpmultis).
+- They are very small, and thus very difficult to hit.
+• monsters/scarab_fire [20*] - Golden Scarab
+- Burns, in addition to the usual synergistic chew damage.
+• monsters/scarab_fire [20*] - Jade Scarab
+- Poisons, in addition to the usual synergistic chew damage.
+- * Level estimates are for individual scarabs. A swarm of 10 or so should suffice for level 40.
+
+- END SPOILER SECTION -

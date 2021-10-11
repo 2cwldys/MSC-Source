@@ -1,0 +1,138 @@
+
+UNDERCLIFFS:
+
+Bosses: Wicked Widow; Adamantium Spider; Latrodectus Prismus
+
+Organic Spiders: Black Widow; White Widow; Araneus; Araneus Cryosis; Araneus Pyrosis; Archeo Araneus; Orb Weaver; Latrodectus Coccinix; Maisculus Demonicus; Tarantula; Veneficus Arachnidia; Veneficus Botulis; Veneficus Umbra
+
+Magic Spiders: Iron Spiderling; Iron Spider;  Granite Spiderling; Granite Spider; Mythril Spiderling; Mythril Spider; Adamantium Spiderling; Lodestone Spiderling
+
+Non Spiders: Werebat; Vampire Bat; Shrieker; Horror; Enraged Horror; Blitz Horror; Earth Djinn; Earth Elemental; Greater Earth Elemental; Ghost; Cave Ogre; Cave Ogre Whelp; Giant Cobra; King Cobra; Gigantic Stone Scorpion
+
+Skeletons: Dwarven Bones; monsters/skeleton_mage; monsters/skeleton_poison_random; Greater Stone Mason;
+
+
+UNDERPATH:
+
+
+Snakes: Viper; Sidewinder; Cobra; Under Viper
+
+Bats: Under Wing; Vampire Bat; Shrieker
+
+Bugs: Poisonous Spider (monsters/spider_mini_poison); Scorpion (monsters/scorpion1)
+
+Trolls: Young Troll; Hideous Cave Troll; Undertroll; Big Ugly (mid level miniboss)
+
+Plants: Under Root; Thunder Root
+
+Ogres: Cave Ogre Whelp; Big Baby (monsters/ogre_cave_welp); Cave Ogre (monsters/ogre_cave); Young Cave Ogre; Ogre; Young Ogre; Cave Ogre Queen (Boss)
+
+Djinns: Earth Djinn; Feral Frost Djinn; Fire Djinn
+
+Crocs: Cave Crocodile; Undergator
+
+Ants: Ant Larva; Soldier Ant; Worker Ant
+
+Goblins: Goblin Raider; (blood/vile) Goblin Needler; Goblin Pouncer; Goblin Warboss; Goblin Warshaman; Hobgoblin War Chief
+
+
+
+UNDERMINES:
+
+
+Toads: Hexatad/toad/choad; Tad/Toad/Choadclops
+
+Dwarves: Mad Dwarven Bomber; monsters/dwarf_zombie_unarmed; monsters/dwarf_zombie_pickaxe; monsters/dwarf_zombie_bloat
+
+Stone_Spiders: Granite Spider/ling; Mythril Spider/ling; Lodestone Spiderling
+
+Flans: Green Flan; Blue Flan; Red Flan; Yellow Flan;
+
+Slimes: Black Pudding; Black Momma; Bio-Electric Jelly; Green Goo; Giant Amoeba; Giant Bacteria; Fools Gold
+
+Trolls: Young Troll; Hideous Cave Troll; Undertroll;
+
+Ants: Ant Larva; Soldier Ant; Worker Ant; Fire Ant Larva
+
+Misc: monsters/horror; Werebat; Abyssal Worm (boss)
+
+Elementals: Earth Elemental; Diamond Construct
+
+
+
+UNDERCRYPT:
+
+
+Bats: small Cinder Wing; Cinder Wing; Huge Cinder Wing; Infernal Vampire Bat; Vampire Bat
+
+Slimes: small/Huge Magma Pudding; small/Huge Mud Pie; small/Huge Molten Jelly; Pyroclastic Jelly; Hot Momma; Fools Gold
+
+Scorpions: small/Huge Understinger; small/Huge Flamesting; small Stonestinger
+
+Fire Reaver: Fire Reaver Hatchling; Young Fire Reaver; Fire Reaver; Vulcan Reaver (rare)
+
+Undeath: Ghostly Miner; Ghastly Miner; Dwarven Wraith; Dwarven Bones; Crypt Haunter; Slave of King D'ragnwald the Fat; Guard of King D'ragnwald the Angry; Pupil of King D'ragnwald the Wise; King D'ragnwald the Fat/Angry/Wise (Boss); Lost Miner (very Rare)
+
+Elementals: Fire Elemental; Greater Fire Elemental; Earth Elemental
+
+Kharaztorant: Kharaztorant Larva; Kharaztorant Childre; Burning Larva; Burning Childre
+
+Trolls: Young Troll; Hideous Cave Troll; Undertroll;
+
+Rare Monsters: Ancient Efreeti; Diamond Troll; Greater Earth Elemental; Diamond Bones
+
+
+UNDERFYRE:
+
+
+Rare Monsters: Salamander; Ash Cloud; Vulcan Reaver; Dwarven Bones; Fire Reaver; Dwarven Wraith; Fire Imp; Shrieker; Vampire Bat; Diamond Boar
+
+Elementals: Fire Elemental; Greater Fire Elemental; Air Elemental; Greater Air Elemental; Earth Elemental; Greater Earth Elemental;
+
+Ants: Fire Ant Worker; Fire Ant Soldier; Fire Ant Scout
+
+Djinns; Earth Djinn; Lesser Fire Djinn
+
+Miscellaneous: Efreeti; Pyron Archon; Evil Eye; Lava Horror
+
+Fire Reavers: Fire Reaver Hatchling; Young Fire Reaver
+
+Boars: Lava Boar; Boar Made of Stone (keledrosprelude/stoneboar);
+
+Shadow Goblins: Shadow Goblin Warrior; Shadow Goblin Rogue; Shadow Goblin Elite; Shadow Goblin Champion; Shadow Goblin Defender; Shadow Goblin Slinger; Shadow Goblin Peon; Shadow Goblin Specter; Hobgoblin Necromancer (boss)
+
+
+
+UNDERFORGE:
+
+
+
+Rare Monsters: Salamander; Infernal Wereboar; Infernal Werebat
+
+Misc: Efreeti; Fire Cobra; Pyrefly; Volcanic Spider; Burning Dwarven Zombie; 
+
+Eagle: Firebird; Eagle made of stone
+
+Djinn: Lesser Fire Djinn; Earth Djinn; Ogre Made of Ashes (miniboss, always spawns same place)
+
+Elemental: Fire Elemental; Greater Fire Elemental; Grand Fire Elemental Magma Spawn
+
+Boars: Lava Boar; Great Lava Boar; Diamond Boar
+
+Horrors: Horror; Lava Horror; Elder Lava Horror
+
+Archons: Pyron Archon; Grand Pyron Archon
+
+Giants: Steam Powered Giant (miniboss); Armor of Hephaestus (boss)
+
+
+
+
+
+
+
+
+
+
+
+

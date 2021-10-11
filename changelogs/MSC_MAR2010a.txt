@@ -1,0 +1,206 @@
+Re: List of changelogs
+
+MAR2010a PUBLIC CHANGELOG:
+
+MAR2010a_centerfold.jpg
+Patch of the chix0rz, to be sure.
+
+New Stuffs
+
+• Female player model.
+- That's right, you can now be chix0rz!
+- Note that chix0r model seems to tremble a bit when in leather armor (just too much sexy for the engine to handle I guess), and may have a few other oddities.
+• Bag of Holding now eliminates all weight put into it, and can hold anything the heavy backpack can
+• Arrows and bolts automatically stack by type
+• Noob shops give advice and have been simplified
+- The only containers available are Big Sacks, Weapon Straps, and Backpacks. Their prices have been greatly reduced.
+- If you desire the older superfluous weapon sheaths, you can still get them in Gatecity.
+• Noob shops will warn/prevent purchasing of items beyond your level.
+- Should save some early investment pains for the newbies, will also give advice on more appropriate weapons.
+• Some items restricted by damage points.
+- Some items that fall into the game world will be reserved for the player with the most damage points.
+• More voice acting by Squaresoft.
+• DOT damages now stack!
+- Hopefully without increasing the number of server crashes, we'll see... :\
+- Note this is only true of differing DOT effects: Fire+Fire does not stack, while Fire+Ice does.
+
+New Maps
+• The Wall by Skillasaur (40+)
+- This ancient line elven fortresses stood as the last line of defense against Lor Malgoriand's armies during the Age of Blood.
+- The depopulated elven empire no longer has the forces to maintain them, however, and they have since been taken over by the undead.
+- Torkalath elves have fled their pursuers and now hide within. Can you capture their leaders, or will you merely add to the bastions of undead that rule there?
+- See spoiler section for various advice on dealing with The Wall.
+- (What, only one new map!?) - Sorry guys, but for once we have more new items than new maps, if that makes you feel any better.
+
+Map Updates
+• Islesofdread1 by J
+- Fixed various monster counters.
+• Isle by CSS
+- Fixed the music trigger
+• MScave by %WTF%
+- Various minor bugs
+• Shad_Palace by Rickler
+- Various bugs and exploits (recompile)
+
+Mapper Toys
+• Fixed some bugs in the FGD
+• env_model now has Scale option
+- Note that this does not preview in the hammer editor, nor does it affect collision boxes
+• Few new props (candles, lights, corpses, mountains, stalagmites/tites)
+• set_npc_turret additional param
+- Semi-universal param for setting a monster into turret mode
+• base trigger property: scriptevent
+- Calls a specific script event against player or monster when touched
+- Unlike script triggers, this obeys the rule of the trigger touched (flag, delay, etc.)
+- Code side HP/requirements system for triggers still pending
+• set_stepsize additional param
+- Following param destermines new monster step size, eg. "set_stepsize;64"
+- Useful for dealing with some monster navigation bugs
+• set_no_step_adj additional param
+- Causes monster not to adjust step size based on height
+- Also useful for dealing with some monster navigation bugs
+• set_summon_circle additional param
+- Causes monster to manifest in a summoning circle on spawn
+• set_fade_in additional param
+- Causes monster to fade in on spawn
+• npcatk_attack_till_spotted additional param
+- Causes monster to play its attack animation until struck or spotting enemy
+- Useful for making a monster look as though it was hacking away at something until it notices players
+- (May not work on all monsters)
+• ext_scale additional param
+- Scales monster models (up or down) and their collision boxes
+- Subsequent param deternines amount to scale, eg. "ext_scale;1.5"
+- Increases attack reach on most monsters, but may cause issues, especially if extreme numbers are used (2.0 seems to be about the safe max limit for most)
+• ext_no_player_damage additional param
+- Renders monster immune to player damage (good for critical NPC's you don't want to be slayable by players.)
+
+Scripter Toys
+• Various additions to base_chat
+- callevent bchat_auto_mouth_move <duration>
+-- Keeps NPC's mouth moving for X seconds, for use with a sentence
+-- chat_loop will do this automatically based on local chat delay
+- CHAT_DELAY_STEPX <seconds>
+-- Allows override of chat delay on sentence-by-sentence basis
+- CHAT_SOUNDX <string>
+-- Plays sound at chat step X - beware you must precache any sounds used by this function!
+- CHAT_EVENTX <event_name>
+-- Calls script event at step X
+- callevent bchat_close_mouth
+-- Forces NPC's mouth closed
+- Various base_chat bugs defeated
+• Arrays.
+- We now have a limited array system, see ms.stx "array.create" for details.
+• callclitemevent <item_id>
+- Calls a client event on a specific item that only affects the wielder (allows changing of viewmodels and such from the server side).
+• hud.addimgicon <player> <icon> <name> <x> <y> <width> <height> <duration>
+- Various fixes to this function. Note that TGA images must of hex-even multiples or they may distort. (256x256, or 512x512, etc.)
+• Fixed various bugs with NPC_RETURN_HOME function
+- Setting this to 1 will cause the NPC to return to home position and angles after kill, provided they are unmolested and see no new targets.
+- This setting is retained unless manually reset.
+- Note that NPC's returning home do not use the full navigation AI, as they are in idle mode, so it maybe difficult for them to find their way back, if it is a long ways back or the return path is fraught with obstacles.
+• monsters/base_jumper #include
+- Provides fairly accurate monster-jump to opponent, ala the sorcs and elves.
+- NPC_JUMPER must be set 1. See script for further documentation.
+
+Bug Fixes / Optimizations
+• Fixed persistent fog
+- The "clearsky" command should now remove fog and screen tint affects as well - however, it may also be affecting all players (really just need to redo the weather sys, tis a whole bag of chaos as it is written now.)
+• Shields unconsolidated
+- Should reduce the appearance of the viewmodel scramble bug.
+- You'll still get hit with it when pulling potions and the like, however.
+• Lag reduction for lightning shield effect
+• XP multipliers for various secondary effects (speed, demon blood)
+• Tomahawks and Lightning Axes should do more dependable DOT and XP on throws.
+- Damage also increased.
+• Fixed shop prices for skins
+• Reduced lag caused by rapid hp/mp changes
+• Various issues with the Frost Bow
+• Voting for HLDM maps has been blocked
+• Took a stab at some issues with crossbow bolts
+• Various chest bugs (including one not appearing on Thanatos)
+• Hopefully the last of the fire elemental bugs
+• Thuldhar and Undamael XP
+• Leadfoot potions now prevent being stunned
+• Potential issues with the view model distance fix
+• Various fixes for Fire Aura and Acid Plate armors
+• Made eagles play nicer with monsterclips on Thanatos
+• Hopefully beat the Iron Guardian into submission (cuz if not, I'm gonna re-write the bastard from scratch. ><)
+• Blinding poison, and a few other cleffect bugs from JAN2010b fixed.
+• Winter wolf pets >3000hp not freezing targets with howl.
+• Synced/re-wrote Derallin's (mscave actor) speech to better Squaresoft's acting.
+- Also added some new speech to Slinker, also via Squaresoft.
+• Fixed some, but probably not all, of the individualized chest bugs.
+• Some more anti-DOS attack measures for FN.
+• Various fixed exploits and bugs, aka. the usual 10,000 changes too numerous to list.
+
+Known Issues
+• Submodels sometimes scramble on char selection screen
+• Ice shield, etc. still seems to mess up the third person character display.
+• "clearsky" may affect other clients (mentioned above)
+• When first creating a female character, it will appear as male on the char selection screen.
+• Female model trembles in leather armor (mentioned above).
+• It is really hard to get Forsuth to follow you up the spiral staircase on The_Wall
+- If it gets harder with multiple players, may just "eff it" and rig him to teleport to the top.
+- Note: Due to forum outage, there have been NO multi-player tests for The_Wall, expect mucho bugs.
+• Some players may not be able to delete their chars. (Meantime, make delete requests in FN rollback request section.)
+
+- SPOILER SECTION -
+
+New Items
+• Ethereal Dagger [30]
+- Bypasses most all monster armor
+• Torkalath Ice Bow [30]
+- Fires a spiral of freezing cold
+• Torkalath Fire Bow [30]
+- Fires a spiral of flames
+• Torkalath Lightning Bow [30]
+- Fires a spiral of ball lightning
+• Torkalath Chaos Bow [30]
+- Fires random elemental spirals
+• Axe of Balance [25]
+- This ornate axe favors accuracy over damage
+
+New Beasties
+• monsters/skeleton_ice2_hammer - Frost Hammer [40]
+- First of the next tier of ice skeletons
+- This large ice skeleton wields two hammers and has a nasty speed attack
+• monsters/lost_soul_ice - Lost Soul [25]
+- Ice variant of the Lost Soul.
+- (Aggressive flight model, freezing attacks, explodes on death.)
+• traps/splodie_skull_ice [25]
+- Ice variant of the splodie skull (bounces randomly for about 20 secs, then explodes)
+• monsters/telf_wizard_novice [40]
+- Summons a sphere of floating death that he can guide through walls
+- Has repulsive shield attacks
+
+• the_wall/forsuth - Forsuth the Frosty, for The Wall
+- Extended escort mission character
+• the_wall/elf_wizard_guard - Seeker Velend Varon
+• the_wall/elf_warrior_guard1 - One of Velend's escorts
+• the_wall/elf_warrior_guard2 - Velend's other escort
+• the_wall/telf_necro - Ihotor, Torkie Necromancer of Dewm [40+]
+- Current XP value assumes extensive escort
+• the_wall/telf_leader1 - Azura - Industrial Strength Torkie [40+]
+• the_wall/telf_leader2 - Ulectrath " " [40+]
+• the_wall/telf_leader3 - Ivicta " " [40+]
+
+Advice for The Wall
+• This map be neigh impossible to solo once you hit the Torkie elves. Bring dependable allies, and resistance potions.
+• You can use the Seekers to aid in your initial battles, working into the wall, but it is risky. If Velend dies, you won't get any rewards from him. They stand about a 50% chance of defeating the opening wave on their own, but about a 90% chance, if they are first ice shielded.
+• Forsuth is tough, but not invulnerable. He must survive to the end of the map for you to receive additional rewards from him.
+• It is VERY difficult to get Forsuth to follow you up the staircase. Bring him up slowly, and if he runs back down the stairs, follow him quickly. He'll always follow the last player who +use'd him. Making noise (eg. by attacking) may also cause him to face you.
+• To get the final reward from Forsuth, you must have already defeated all three Torkalath leaders and Ihotor. (Only likely to be an issue if you've entered the map from The Frost Caverns, The Bleak, or The Wall East spawns.)
+• Beware that Wraiths can only be attacked with Holy Weapons, and will kill Forsuth, or your pets, quite quickly. Remember they drain MP, not health, but will still slay you if you run out of MP.
+• Forsuth and Velend have so much HP, it'll take a team to heal them. Forsuth has passive regen, but it's not very fast.
+• Ihotor is likely to have one player completely immobilized at any given time, however, he'll likely focus most of his attention on this player. Use this opportunity to attack him, but also have a player free to keep his army of undead in check.
+• Keep an eye out for the red sprites that make up Ihotor's barrier. When they are present, they'll repel and damage nearby attackers.
+• The flying skulls near The Cold One are worth little to no XP, but cannot follow you past the fog barrier into his domain. They are there to prevent you from exploiting him from the top, and will vanish during The Cold One's final stage.
+• Getting bounced around by Torkie Apprentices' crossbows is very annoying. Have a potion of leadfoot on hand, or try to break their fire up by bringing multiple players into the mix.
+• Velend's rewards are chosen randomly, and some are not real great. He'll give one random reward for each Torkie head retrieved, and an additional, fixed list of rewards, for all players, for Ihotor's head.
+• Forsuth, as indicated, offers an additional random reward to the player with the most damage points, provided you can escort him to the end of the map.
+• Map is of epic length, and heavy on the ents. Try not to crash it before the end! :/
+
+- END SPOILER SECTION -
+
+Ye Download:
+Your one-and-only source for MSC Downloads!

@@ -1,0 +1,215 @@
+Re: List of changelogs
+
+APR2012a PUBLIC CHANGELOG:
+APR2012a_centerfold.jpg
+"Will the dark staff find you worthy... or wanting?"
+
+New Maps
+• Hunderswamp North [hunderswamp_north] by Sgt Rehab (Very Hard, Connects to the_wall)
+- This remote untamed swamp contains many beasts of legend
+
+• Phobia Fortress [phobia] by Callum (Hard, event transition from Foutpost)
+- Failing at the Forgotten Outpost, our heroes are captured by the Blackhand and locked up in Graznux's Phobia Fortress... It seems some bandits are here to rescue their own imprisoned allies, but aren't too interested in sorting friend from foe.
+- Note: Any transition from Foutpost to Edana will put you in Phobia (this hack saves some size on the betapack - not needing to edit Foutpost and all). I still question the wisdom of this, however, as Phobia is a hell of a lot harder than Foutpost.
+
+Updated Maps
+• Phlames - Minor fixes and texture changes, more detail textures, now connects to sfor
+- Also fixed a bug that might result in Phlames the Everburning teleporting inside players
+• The_Wall - Various exploit fixes and optimizations, connection to Hunderswamp_North
+• Sfor - Connection to Phlames
+• Bloodshrine - Various exploit fixes. Also fixed bug where the orc escorts were being a bit snobbish about who they would reward
+• Catacombs - Various exploit fixes and a glitch or two.
+
+New Stuff
+
+• Donator Halo's
+msc_donator_halo.jpg
+- Those of you with the guts (and access to paypal) to donate to keeping the web page alive (such as it is), and provided Steam ID's, receive angelic halos.
+- These have no affect on the game. You can toggle them by typing /halo in chat or console. The toggle status should stick between connections. These Halos have no affect on game play, and are just "hats" for show.
+- Donators who provided preferred character slots, also have one-time access to the Exploiters Reward system, see Sembelbin (Master Urdualian priest of Edana) for details.
+- Halo's will be present on all your characters (and the toggle is stored on each individually). The extra reward goes to your preferred character slot.
+- Planning to come up with more donator rewards in the future. Said future rewards will be passed out retroactively.
+- Halo should stick, even if placed within a solid. But please report any Haibane Renmei incidents should they fall off.
+
+• Dodge (Thank MiB!)
+- From Martial Arts Proficiency level 10, you can dodge side to side. From level 15 onward, you can dodge backwards.
+- Double tapping in the appropriate direction will cause the player to make this short-leap dodge. Pressing +speed while pressing the appropriate direction key will have the same effect.
+- If this gets to be too disorienting, you can set the client cvar ms_doubletapdodge to 0. Holding the +speed will still apply the appropriate directional leap. Though learning to use the double tap system will make the ability easier to access.
+- Holding the +speed button and forward will cause you to break into a jog, as if you had double tapped the forward key (regardless of Martial Arts skill). Double tapping the forward key still breaks into a job, regardless of the ms_doubletapdodge setting.
+- Each leap direction has an independent three second cool down, and requires a certain amount of Stamina. You cannot dodge in any situation where you cannot move, jump, attack, are ducking, or cannot access your inventory, nor, in some cases, while transformed.
+- BEWARE THAT +speed IS NOT BOUND IN THE DEFAULT INSTALL - You can bind it with the following console command:
+Code:
+bind shift +speed
+- You can also replace shift with a key of your choosing. This will be the default bind come the next full installer.
+
+• Autocharge (Thank MiB!)
+- By default, weapons will charge so long as you hold the mouse button, meaning it is no longer required to double click. If you prefer the old system, you can return to it with the client cvar ms_autocharge 0. However, you will likely find that autocharge is preferable with the new dual wield system, and the incremental charge systems described below.
+
+• Dual Wield (Thank MiB!)
+- You may now attack with both weapons at once, making our dual wield system actually useful beyond mere aesthetics and shields.
+- A damage penalty applies, however. Attacking with two weapons incurs a 40% damage penalty.
+- If both the weapons match, or one of the weapons is light (smallarm), the dual wield damage penalty is reduced to 30%.
+- Dual wield damage penalty does not apply to empty hands, magic spells, shields, or two handed weapons.
+
+• Incremental Charge Attacks (Thank MiB!)
+- On weapons where the second charge provides double damage, a partially charged attack will still increase damage from 125% to 175%. (125% to 275% for two-handed Axes.)
+
+• Moar Quick Slots (Thank MiB!)
+- You can now have as many as 24 quick slots. Simply bind keys accordingly:
+- eg. bind F11 "+quickslot 11"
+- I meant to provide an alias to "alt shift" your quick slots in extras.cfg, but kinda forgot... Here's an example configuration:
+http://www.thothie.com/msc_dev3/quickslot_shifter.rar
+- Alter the binds as desired
+
+• DOT and Elemental Resistance Changes: Elemental resistance no longer affects DOT apply chances. This is true for both players and monsters. It still affects secondary effects. So, while successfully resisting Frost Damage removes the slow effect, the target still takes damage over time - though that damage is still reduced by the target's resistance value. (Which still means no affect at all, if the target is completely immune to the element.)
+
+Nerf Log
+• Boss Flagged monsters provide up to x4 XP for additional players.
+• Two-handed Axes now do 3x damage instead of double damage on second charge.
+• Ice Staff now fires semi-guided ice bolts on second charge, instead of doing nothing.
+• Finally nerfed those spiders on orc_for a bit (got sick of getting reports about them.)
+
+New Mapper Toys
+• All sprite/model/sound precaches appear in the log_msdll.log - helps mappers see their limits, though it does not track brush models nor media loaded by the engine. (Limits are: 256 models+sprites, 524 sounds).
+• Additional Parameter: set_push_resist;<ratio>
+- This adds or reduces a monsters effective weight, making it more or less vulnerable to being pushed. This does not affect trigger_push brushes or special scripted pushes with the "override" flag.
+- Lower numbers mean more resistance, so a monster with " set_push_resist;0.25" moves 75% less when pushed.
+
+Other Stuff
+
+• Pet Changes
+- Pets are on a new, more optimal system. Your current pet should be converted over to it.
+- Pets feature improved navigation and teleportation systems.
+- Using the "All Follow" chat command will cause your pets to teleport to you as well.
+- Pets are now "egged" by default on map start. You can summon them via the player menu (default: F)
+- You will also get a help pop-up reminding you have a pet at map start.
+
+• Various improvements to the summon command and behavior system.
+
+• Emotes are now on the Player Menu, as well as the old Act menu (default: F)
+- This is intended to free up a key for +speed, should you already have something bound to Shift.
+
+• Fixed (or at least mitigated) the inventory overflow corruption issue.
+- Still can't allow more items until we reduce the overhead they cause though. :\
+
+• Improved code side monster navigation quite a bit. (Blame MiB!)
+
+• Improved the ice lance hit registry a bit.
+
+• r_dynamic 0 now disables MSC scripted glow lights as well. This only applies to lights activated after the cvar is set. (Should save some of you folks running on Intel GMA's and older legacy cards - just remember to set some light fog, if it's too dark to see.)
+
+• Fixed bug where players couldn't push monsters while under the effect of a Leadfoot potion.
+
+• Weighted Monsters - some monsters are now harder to push due to extra weight - reducing the distance they move when pushed. Currently, this only applies to the various Greater Bears, and a smattering of other monsters. If you see more monsters you feel should have this feature, feel free to make suggestions.
+
+• Vanishing Steam Bow Madness - Your Steambow will be replaced by another script the first time you draw it - hopefully one less prone to mysterious vanishing. This means, however, that it will mysteriously vanish the first time you draw it, but the replacement should appear in your pack. (Doesn't apply to Steam bows acquired after the patch, which will already use the new script.)
+
+• Moved the vast majority of the sound system to the client side to save on overhead.
+
+• ...and the usual 100,000+ unlisted tweaks and fixes.
+
+New Items
+• Chromatic Vest
+- This fabulous magical vest provides 40% base protection, and grants 100% resistance to a random element every 90 seconds.
+- More accurate to say, this first element is random, while the next will come about in a cycle: fire, lightning, cold, poison.
+- Known bug: If you die while this is equipped, the elemental resistance icon will be wiped from the corner of your screen. You'll likely retain the elemental resistance, however, and it will be restored when the vest hits the next element in the cycle.
+
+• Dark Staff [Req. Affliction: 25,30,35]
+- This is almost more of a tool for gathering manna than it is a weapon, however, the dark staff has a wide array of abilities.
+- Primary Attack: Creates a weak sustained beam of dark energy that will drain the life force from enemies and convert it to manna. (The conversion rate is consistent regardless of the actual damage done.)
+- Holding Right Click will cause you to stare into the eyes of the staff while it cycles up to various charges. Said charges are as follows:
+- Bright Green: Lesser Circle of Death. Operates similar to the Circles of Death deployed by golden skeletons.
+- Bright Red: Greater Circle of Death. This is a much larger version of the same circle.
+- The staff can maintain one lesser and one greater circle of death at any given time.
+- Bright Gold: Summon Lesser Wraith
+- The lesser wraith will go about attacking monsters, converting the damage done into manna for its master.
+- The wraith can travel through walls, is highly resistant to most physical and magical attacks, with the exception lightning and holy, to which it is highly vulnerable. The wraith's hit points are fixed at 1000. It also obeys most summon commands (it even has a summon menu, but due to the clipping, you'll have to +use on its "feet" to actually see it.)
+- The staff can maintain one wraith at a time. The wraith will continue to do its duty, even if the staff is put away, though it will vanish after 5 minutes, or so, whether the staff is deployed or not.
+- When not attacking the wraith will try to maintain a position just behind its master. If the wraith gets confused, and starts blocking your vision, simply jump, and the wraith will reposition itself.
+- (Mappers note: The wraith will not initiate combat with any monster it doesn't think its master can reach [via traceline from the player's center to the monster's], so you don't have to worry *too* much about wraiths getting at otherwise inaccessible monsters, though such traces may pass straight through player clips).
+- At each charge level, the staff creates a repulsive shield. The first of which is stronger than the subsequent ones, and also does a small amount of dark energy damage. You cannot move (nor be pushed) while the staff is charging, but you may release the charge at any time.
+
+• Summon Bear Guardian (scroll and tome): Req. SC 20
+- Provided you can find an area with enough room, you can use this spell to summon a very large bear. You can only summon one such bear at a time.
+- Scaling system is a bit different than most summons, working by a ratio system. Here's the levels at some notable tiers:
+-- @ SC 20: hp 2400, dmg/attack 80
+-- @ SC 25: hp 3000, dmg/attack 100
+-- @ SC 30: hp 3600, dmg/attack 120
+- The actual attack dmg/attack varies as the monster does different amounts of damage based on whether it has room to do its standing attack animation (which is its strongest and fastest attack). The Bear Guardian also has some knock back and leaping charge abilities.
+- Anti-Troll: Due to the shear size and health of this beast, it's fairly easy to block hallways with it. As such, if the bear is struck by a player at melee range, the bear will attempt to move out of the player's path. If the bear struck in the same fashion five times consecutively, by any player, it will be unsummoned, regardless of the amount of actual damage done.
+
+• Lesser Leadfood Potion
+- Reduces what the ACLU has forced us to call "involuntary velocity changes caused by militant natives" by 75%, and provides a flat 75% stun resistance to boot. The stun resistance does not change if the player changes helms while under this effect. (There shouldn't be any issues if you drink a regular leadfoot potion along with this, or visa versa, though doing so offers no additional effects.)
+- Lasts until death or map change
+
+New Beasties / Scripts
+
+• monsters/borc - Feral Borsh (Very Hard)
+- Yes, the old neon-green, tiger-skin loin cloth wearing orcs are back, sort of...
+- Leaderless, and trapped in the harsh environment of the hunderswamps, this once mighty contingent of the lost Borsh tribe have gone native... Very native.
+- Stupidly powerful, and powerfully stupid, these knuckledraggers let their huge fists do the talking!
+- Relying on dashing melee attacks, these brutes are also very good jumpers. One of their favorite maneuvers being to introduce their victims to the Lordeldian space program, via a mighty uppercut, and then pounce on the stunned pray.
+- (Hopefully this will help take little-G out of his depression.)
+
+• monsters/croc1 - Crocodile (Hard)
+- It's a crocodile... Or maybe an alligator, never could really tell.
+- These beasts move much faster through water than on land, and feature a fairly hefty bite with knock back.
+
+• monsters/trencherbeak - Trencherbeak (Medium)
+- These strange creatures with bark-like exoskeletons hunt for pray in large packs.
+- Though relatively weak physically, their huge maws can easily maim even the strongest opponents.
+
+• monsters/swamp_tube - Oodle-Beak (Hard)
+- Once common, these exoskeleton, plant like creatures were valued for the series of tubes on their back, which could be transformed into musical instruments, and nearly hunted into extinction. The hardiest of the species can be found in the Hunderswamp, their mournful song warning travelers that they've entered the Oodlebeak's territory.
+- Relying mostly on ranged needle attacks, the Oodlebeak can also create a mortal-like volley of deadly poison.
+- Rumor has it there are gigantic "queen" oodlebeaks from which the smaller ones are born.
+
+• hunderswamp/tubequeen - Oodle-beak Hivemother (Very Hard)
+- Seems the rumors were true...
+- This is a large stationary creature, requiring a lot of room, and a hefty escort, in addition to careful exploit prevention. She's designed to be sitting on the edge of rather specifically designed crevice, which she will fall into upon death. You can use an env_model of the beast to gauge proper placement, or ask for a source of the Hunderswamp_North boss chamber. If she's attacked by enemies remaining outside her strike range long enough, she'll create a huge sphere of guided slime to deal with them. She also spawns up to three of her young to aid in her defense.
+- Any trencherbeaks or oodlebeaks with the additional parameter "set_mommy_escort", in addition to those she spawns, will go into ultra-depression mode and attempt to follow their mother to her death when she is defeated.
+
+• monsters/swamp_keeper - Swamp Keeper (Hard)
+- Debuting as "Keeper Gle'Ka", "Keeper O'roh", and "Keeper J'than"
+- Perhaps an offshoot of a golbinoid race, the Swamp Keepers live deep in the marshlands, rending the flesh of any who dare wander too close to their lairs.
+- Slow, clumsy, and solitary in nature, Swamp Keepers nonetheless have ferocious claws, and can summon up balls of blinding muck from the swampy floors they tread upon.
+
+• monsters/vine_poison - Poison Vine (Medium)
+- Similar to the vines seem on Phlames, these are stationary hazards, hunting by sound, rather than sight. For sake of optimization, they do not have the full AI, though should still respond to dmg and hp multipliers, and npc_suicide requests.
+
+• monsters/snake_gcobra_fire - Fire Cobra (Medium)
+- A giant fire spitting cobra. Sleeps until player crosses FOV or attacks.
+
+• Greater Brown / Black Bears (Medium-Hard)
+- monsters/gbear_black_hpoly
+- monsters/gbear_brown_hpoly
+- monsters/gbear_black_lpoly
+- monsters/gbear_brown_lpoly
+- Similar in behavior to the Greater Polar Bears, sans the freezing breath ability (and somewhat weaker), these come in high poly and low poly variants. The difference between the two models is rather minimal, but feel free to use the higher poly variant should there not be too many other beasts around.
+- Greater Kodiak available on request (Not made it yet, but shouldn't be too much trouble - prob breath fire, or some such.)
+
+• Fire Guardians (Hard-Very Hard)
+- monsters/elemental_fire_guardian1 (Lesser Fire Guardian)
+- monsters/elemental_fire_guardian2 (Fire Guardian)
+- monsters/elemental_fire_guardian3 (Greater Fire Guardian) - Debuting as "Cethin the Shadow"
+- More of Felewyn's front-line leftovers
+- Similar in behavior to the Ice Guardians, the Fire Guardians deploy a range of flame attacks.
+- In short, remember all those abilities that Phlame's staff has that he never used? Well, these gals use them.
+- The #2 variant tries to stay at the back of any combat lines, relying on her ranged attacks, so much like the #2 ice guardian, she's intended to be used in conjunction with an escort. The ideal being the #1 variant, which is more melee oriented.
+- The Greater Fire Guardian combines Fire and Acid/Poison attacks, in much the same way the Greater Ice Guardian combines Ice and Lightning attacks.
+- The immunity/resistance/vulnerability schemes are also similar to their Ice Guardian counterparts, save that it's a fire/cold/acid dynamic, instead of cold/fire/lightning.
+
+• phobia/ralion_ally - Ralion, Bandit Boss Ally for Phobia (Archery)
+• phobia/betor_ally - Ralion's "Leftenant" Betor (Bluntarms)
+• phobia/skelr_ally - Ralion's "Rightenant" Skelr (Smallarms)
+- These are the scripts for the escort mission at the end of Phobia.
+- After successfully completing Phobia (defeating Cethin), the players can train from any one of the surviving bandits, adding 20,000XP (+25% per player beyond the first), to the related skill.
+- While they are a match for the bears and the bear god, it's very difficult to get them to survive Cethin. If Ralion survives to see her, he'll order his men to use special potions of fire resistance. This will help quite a bit, but it'll still be a challenge. Without them, however, the remaining bandits stand little chance of survival.
+- Similar to the Sorc escort mission on Bloodshrine, only players in the top 75% of damage points may train from the bandits - but hopefully we won't have any bugs related to that, and that particular bug should be squashed on Bloodshrine as well.
+- Similar to the Sorc escorts and Forsuth, healing multipliers for these bandits are at x5
+
+APR2012b Server Patch
+
+- Fixes Volcano crashing servers
+- Fixes unconverted Steam Bow vanishing on first use when inventory full (hopefully)
+-- Steam Bow will still fall at your feet, and there'll be about a 1 second delay before you get the converted version

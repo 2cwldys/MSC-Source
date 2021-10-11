@@ -1,0 +1,24 @@
+Re: List of changelogs
+
+June 18th 2006 Public Changelog
+
+Alright, *finally* got around to redoing the AI, yet again.
+
+Skeletons seem to be very deft navigators now - orcs pretty good. It's the bats that are driving me, batty - they tend to pancake into things and get stuck on them while looking for you.
+
+Things to look for in the AI:
+- Doesn't decide you don't exist when you go behind a wall
+- Realizes it's stuck on something, after awhile
+- Realizes you can hit it, but it can't hit you, after a awhile (then runs away for a few seconds trying to get a better position)
+
+Monsters can now hear by default, and monsters can retaliate, by default. So boss monsters might be less likely to stand in fire walls and minions be less likely to ignore low level players trying to XP farm them while the high end players hold em in place.
+
+Needless to say, all of this has potential for mass bugs. So please, hit my test server, see how it goes. Make critiques there or here - I'll read the logs eventually.
+
+Speaking of minions... Anyone notice that Maldora's aren't unholy? ... Heh... Sooo many things to fix... *sigh*
+
+Oh, yeah - we also maybe fulfilling Mario's dearest wish in the next patch...
+
+...one thing that would fix a LOT of lag that Im tempted to do - but it may mess up some maps - is make monsters do NOTHING until they see a player. Reason being, is that the vast majority of the vanilla maps do not understand the concept of spawnstart 1 - and just spawn dozens of monsters all over the map, that immediately start doing dozens of checks every tenth of a second. Daragoth, Thornlands, and a few other heavy offenders are very lagtastic as a result of this.
+
+"Decloned" Helena duplicate NPCs (name changes based on map)

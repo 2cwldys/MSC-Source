@@ -1,0 +1,129 @@
+Re: List of changelogs
+
+Febuary 1st 2007 Public Changelog
+Public Changelog:
+- Major SC.DLL Changes: -
+New Stuffz
+New console commands:
+- day = set time to noon
+- dusk = set time to sunset
+- clearsky = clear all weather effects (from YOUR client only)
+- All weather/time commands have a 30 second delay to help prevent abuse
+show_health [0/1] - causes health/mana to show up in combat console (lower left) - good if your hud is hidden to improve FPS
+- Note: this isn't a cvar, so you can't add it to your config, but it must be activated in game (you can, however, bind it, eg. bind x "show_health")
+- if you ommit the 0/1 it toggles whatever mode it is in
+- health will display whenever you are struck or healed, and mana will display whenever you cast a spell
+- note that it is a console command, not a true cvar, so autoexec wont catch it, but you can bind it (not perfect, but works)
+Minor NPC fixes: Fixed/replaced Tristan quest, NPC menu for barmaid, tweaks to Vadrel
+Summons now on new AI
+Summons have interaction menu with commands (press +use to control individual summons)
+New summon command: stay/guard (causes summon to stay in specific spot)
+Restored Foglund to his MS 1.35 look
+Gave shop keeper aprons due to Orochi's bitching (I think it looks awful though)
+Boosted Flesheater
+Boosted Sir Geric
+Levelup FX and global message when you gain experience
+Chain Lightning - Go out Palpatine style, with this nasty spell that is now in the game
+Golden Axe - An undead slayin' axe that does goads of damage! Can ye find it?
+
+New Beasties
+monsters/slime_black_small - black pudding
+monsters/slime_black_large - large black pudding, splits into small puddings
+monsters/slime_black_huge - huge black pudding, splits into large puddings (mean)
+- note large and huge slimes and their children are "demon" faction while small slimes are "wildanimal" faction - this is to ease placement (low level areas tend to have more "wildanimal" types)
+monsters/anim_warrior_hard_random - random elemental animated armors, not new, but works now (mean!)
+monsters/slime_ceriux1 - tiny green slime - do not tie to firepershall events, buggy model forces buggy kill meathod - it will not detect
+monsters/fallen_armor_triggered - this variant of the fallen armor doesn't get up until he recieves the ms_npcscript event " enter_combat " (v.mean!)
+monsters/zombie_decayed - a weak zombie - zomg it sounds like brain bread! (even though its some other mod entirely)
+The following "no roam" variants of these monsters exist due to there being no monster spawns in edanasewers and the need to restrict their movement in said map:
+- monsters/slime_ceriux1_nr
+- monsters/zombie_decayed_nr
+- monsters/slime_black_large_nr
+monsters/skeleton_geric - Alias for The Dread Knight Sir Geric, ww3d style. Note: New model, and in some ways, meaner than his cousin Lord BS.
+
+New Mapper Toys
+More lures (new ones in green)
+monsters/lure //default with 1hp
+monsters/lure_25hp
+monsters/lure_100hp
+monsters/lure_150hp
+monsters/lure_200hp
+monsters/lure_250hp
+monsters/lure_300hp
+monsters/lure_500hp
+monsters/lure_750hp
+monsters/lure_1000hp
+
+BugZ Squashed + Odder stuffz
+Further attempts to cut down on edict errors caused by fire dart/ball spam
+Fixed issue with some monsters going into "perpetual flinch mode" when struck by fireball/poison, etc
+Helena stores now close during raids (still need to get them back into their stalls when raid ends)
+Blizzard changes:
+- Made blizzard look "a little more threatening" via ice-shards. Some rebalance.
+- Blizzard now scans more like Poison Cloud. (ie. has a % chance of freezing things that walk through it.)
+- Also renamed it "ice storm" for no paticular reason (sounds more threatening?)
+Obliterated and rebuilt old AI based on January + new AI mods (all clean again)
+- This should fix love-making boars, ice djinn throwing himself, etc - all sorts of crap really
+Studio frame advance errors on temporary entities
+Scatter bolts - EVERYWHERE - and the fletcher's are catching up with this "cutting edge" crossbow technology as well!
+Boosted the arrows a bit, pending are more permanant solution
+
+- Major MS.DLL Changes: -
+Addded SMID extensions for SSE2 enabled processors
+Further efforts to get the thing to realize it isnt in debug mode
+
+- AMX Changes -
+Attempts to get the vote counter to work right (really need to re-write from scratch)
+Three new vote systems, set cvar as desired:
+- ms_votemap_type 0 - the classic system: allows votes for adjacent maps
+- ms_votemap_type 1 - retricted voting: allows votes only at transitions
+- ms_votemap_type 2 - ultra voting: vote for any map you can name (amx_ultra_vote no longer works - use this instead)
+- all modes also allow you to vote for root towns and custom maps (as defined by your custommap cvar)
+- all modes prevent voting into gauntlet and boss maps
+- Vote system now parses custommaps string so players can read all the map names (up to 1280 characters)
+(Even this has its limits, eventually going to have to make it via custom config file instead of cvar)
+[font color=red]THIS WILL AUTO-INSTALL WITH THE BETAPACK
+- just the vote plugin, not all of AMX - it wont affect your configs. You still need AMX to actually use it.
+AMX LINK
+
+- MAP Updates -
+Edanasewers
+- Edanasewers, in an effort to increase tourism to aid an aleing economy has hired new staff in their "massive beef up" campaign
+- Still about the same level map, so n00b friendly
+- see if you can find: 2 electric slimes, 8 sewer slimes, 7 decaying zombies, a flying leech or two, and 1 large black pudding
+- Green fog makes for low end-puter friendly graphics (rough having your light on all the time), type clearsky at console to remove
+Minor fixes/tweaks on various other maps
+
+- Installer Changes -
+Installer will now attempt to patch your maps! (It'll ask)
+- If you see "bspfile '%s' does not exist" it simply means you do not have the map to patch. I'll clean this up in the next ver.
+Installer will also ask if you want to add FN to your configs
+
+alias toggle_hud_on "show_health 0;ms_hidehud 0;alias toggle_hud toggle_hud_off"
+alias toggle_hud_off "show_health 1;ms_hidehud 1;alias toggle_hud toggle_hud_on""
+alias toggle_hud toggle_hud_on
+
+...and the usual 10,000 minor changes I'm not bothering to list...
+
+FEB2007a_Supplemental wrote:
+Btw, figured we should review the various summon modes, since they've been pretty thoroughly revamped, behavior wise:
+
+• "Defend Mode" (by speech "defend" - default mode on spawn)
+- If the summon has no target, he will follow you. Summon will ignore targets more than a short distance from it. Summon will maintain a respectful distance, but stay nearby.
+• "Follow Mode" (by menu or speech "follow")
+- Summon will disengage any combat and ignore all targets, and follow you very closely.
+• "Hunt Mode" (by menu or by speech "hunt")
+- Summon will move away from master and look for something to kill.
+• "Kill Target Mode" (by speech "kill")
+- Summon will attack the master's current target (if any). If there is no valid target, it will enter hunt mode. If it's target is slain, it will also enter hunt mode.
+• "Guard Mode" (by menu or speech "guard")
+- Summon will stop and guard its position. It will not move, at all. It will engage attackers but not move from its spot to do so. If it is thrown or otherwise dislodged from its guard position, it will attempt to return to it or the general vicinity.
+• "Unsummon" (by menu or speech "dismiss")
+- Summon will vanish. There's a 10 summon limit, so this can be useful.
+
+Hired NPC's also have this same menu, and all these options (save for "Unsummon" where they instead have "Disband")
+
+Summons should lag a LOT LESS now. One of the issues I discovered is that the summon's AI script was actually running on both the client and the server at the same time (this caused much of the odd behavior as well). Summons are now entirely server side, and shouldn't leave any "ghost" code on the client that causes you to get consecutively laggier even after they're gone.
+
+MAPPER TOY
+Forgot this one: "xyz" at console now returns both your position AND your ANGLES - which is VERY handy for placing monsters in maps you are ripenting. It also returns them in a hammer-friendly format (ie. separated by spaces) so you can just right-click copy and paste.

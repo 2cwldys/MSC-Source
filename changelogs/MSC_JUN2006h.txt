@@ -1,0 +1,5 @@
+Re: List of changelogs
+
+June 23rd 2006 Public Changelog
+
+Today's update includes gauntlets that add damage to MA, and hitwall sounds for most all weapons. Also (unreported) yesterday's update set the max cycle lag for monsters to 1.2 seconds or so, so hopefully mons be a bit more responsive on this update. (So far seems so.) Sadly, also means less extreme lag reduction. All this, combined with the usual fifty to sixty minor bug fixes.

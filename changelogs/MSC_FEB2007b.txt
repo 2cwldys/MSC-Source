@@ -1,0 +1,50 @@
+Re: List of changelogs
+
+FEB2007b Betapackage
+
+This is a supplemental update, it isn't critical. If you play on a FEB2007a server with this patch, there are only two potential items you could lose (see below) so you should be relatively safe.
+
+Originally it was going to be nothing but server-side bug fixes, but I all you guys really want is more items and maps, so... ;)
+
+Bug Fixes
+• MS.DLL - now defaults to the non-SSE2 enabled version. Versions with SSE1 and SSE2 enhanced instruction sets are included in the dlls folder for those who want them.
+• Dated clients no longer crash when they level (although they may still crash if they see someone with the "A" patch level.)
+• Dated clients should no longer crash on new weather changes
+• Further efforts to fix the occasional No Free Edict from fireball/dart bug.
+• Chain Lightning now does damage.
+• Bats drop down
+• Zombie quest counter fixed.
+• Bone Blade not heals against all monsters (save for undead, as per usual)
+• Ice Djinn will hopefully not ignore monster clips
+• Skycastle chests security altered
+• Orc brawlers should stay frozen when struck by greater ice blade.
+• Fixed some precache hitwall sound errors.
+• Blizzard/Ice Storm now visible indoors.
+• Lures should not get glowshells when struck by elemental magic
+• Weather should reset between maps
+
+New Stuff
+• Potion of Regeneration (in game)
+- Rapid healing for around 5 minutes.
+• Bottle of Vampire Blood (in game)
+- Read the warning label - note on some maps, it applies to anywhere during the day. ;)
+- Lasts about 5 minutes. Does not work against undead.
+
+New Monsters
+• monsters/zombie - Like decayed zombie, but... not so decayed. (in game)
+• monsters/zombie_huge - Remember Fred? (in game)
+• monsters/skeleton_stone1
+- weakest of the pending Stone Skeleton series - fast moving, damage resistant bastard with sword and shield. (in game)
+• monsters/skeleton_ice - not new, but now has a shotgun. ^_^
+• All the enraged skeletons (save the weakest) have a new model that favors the ability to run over speeding up the animation that caused the odd lag effect. (Specifically: Enraged Poisoner, and Enraged Ice Skeleton)
+• Miniboss Minions ( monsters/flesheaterminion and monsters/bloodreaverminion ) have been moved to the "smart" model and are thus now much more frightening.
+• heras/GhorAsh - moved to "smart" skeleton model, and is now fleet of foot as well.
+
+Installer Changes
+• Better feedback on the map update batch file.
+
+Lots of other minor changes.
+
+Stuff that didn't get done:
+- I'd have to delay this another day to get you the AMX fix, but I'll release it as a separate AMX update when I get it working.
+- Shaddarh refuses to play nice with his COD under the new model... So maybe we'll go with laser eyes later. ;)

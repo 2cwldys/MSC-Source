@@ -1,0 +1,40 @@
+Re: List of changelogs
+
+JAN2008a BETA PUBLIC CHANGELOG:
+
+Almost a B patch this year, but we're fixin everything that broke in DEC2007a - and lots of other stuff that broke before that.
+
+New Stuffs
+• Internal Map Vote System
+- Type votemap in chat or console.
+- No more fuxing with buggy AMX/X builds
+- ATM, you can vote for any map, save those that are in gauntlet series, within mazes, or otherwise hidden
+- more restrictive map voting options will be available via server vars in the future
+- You can only vote for FN approved maps
+- Uses AMX delayed reconnect map crash fix, and crashed.cfg updating
+- AMX votemap plugin is included, and has been modded to play nice with it
+- Nice clean list of maps not connected to the world displays in console for ease of reference
+• Wipe individual spells (Thank MIB!)
+- You can go visit Torwhodoc, and for his usual exuberant charge, he can wipe specific spells from your list.
+- Eventually the Potion of Forgetfulness will work this same way (and likely take over the job.)
+
+Bug Fixes, and Such
+• Fixed: Bug where all players are required to touch proper transition on gauntlet maps (should only require 1)
+• Fixed: Monsters cropping up invulnerable
+• Fixed: Ice shield only being able to cast once
+• Fixed: Lightning storm/Chain Lightning not working
+• Fixed: Orionbow god-like
+• Fixed: Dorfgan not giving rewards on old_helena
+• Fixed: Helena->Keledrosprelude transition goes to Keledrosprelude1
+• Fixed: Bug with monsters not responding proper to Siege Map mode
+• Fixed: Novablade Volcano not sustaining
+• Fixed: Bugged lodagond chests
+• Fixed: Fixed bug with Semblin's name-change script taking every subsequent chat line as a new name change
+- If ye got nailed by this bug, give me a heads up, I maybe able to fix ye.
+- Also fixed a limitation where Semblin couldn't tell who was talking to him
+- If someone else says "Penis" while yer telling him yer new name, he will kindly tell them to STFU
+• Fixed: Bolt bundles have no gravity
+• Fixed: J-M shall no longer receive 0's
+• Fixed: Poison reports giving funky messages
+• Fixed: Ice Lance, and Kaz Fire Knife "arching"
+• Some efforts to reduce edicts

@@ -1,0 +1,64 @@
+Re: List of changelogs
+
+October 1st 2006 Public Changelog
+
+Public Changelog:
+New Stuffz
+Summoned Skeletons now upgrade armor/weaponry based on your SC level.
+Helmets actually do something now! (stun resistance %)
+Future helmets may do more interestin stuff.
+The Light XBOW is in - seek and ye shall find (prob needs some balance/bug tweaks still)
+More XBow types to come... All bolts are in game too, but you'll have to hunt them down. (Scattered)
+Snake Staff - available, but not officially in yet
+Bone Blade - ditto
+The Spiderblade - New sword for eight legged creepies
+
+New Beasties
+monsters/snake_sidewinder
+- poisonous rattler
+monsters/snake_gsidewinder
+- same thing, but bigger
+monsters/snake_gcobra
+- giant cobra... Similar 'trap' concept as the regular cobra, but harder not to set off. (sleeps coiled)
+monsters/snake_lord
+- Silthar (level 25 miniboss), snake summoning bastard and apprentice to Venevus
+monsters/snake_cursed
+- One-shot snakes summoned by snake summoning bastard.
+monsters/skeleton_poison_bolter
+- "Envenomed Bones" shoots poisoned bolts (same as Horror's but < damage). Unlike the frost bolters, he only shoots at the player he is facing, rather than all enemies in a radius.
+monsters/skeleton_poison_vamper
+- "Vampyric Poisoner" has a Bone Blade that lets him regen per-hit
+monsters/skeleton_poison_bomber
+- "Poisoned Spore" explodes into a poison cloud if struck hard enough or low enough on HP
+monsters/skeleton_poison_sworder
+- "Envenomed Blade" for two types of extra damage (non-roamer)
+monsters/skeleton_poison_rager
+- "Enraged Poisoner" on crack with poison axes - not quite the same quality of crack that the Enraged Ice Bone is on, but still fast
+monsters/skeleton_poison_guarder
+- "Poisonus Guardian" slow moving, low damage, high armor skeleton that periodically surrounds himself with poison fog. (non-roamer)
+monsters/skeleton_poison_random
+- picks one of the above 6 at random - not a bad idea, as they tend to complement each other, and it adds to variety per map visit. Guardian and Sworder will go roaming if spawned through this random script.
+* Poison bone series intended for levels 20-30 (depending on how many you use at once)
+bloodrose/venevus
+- "Venevus the Corruptor" yet another necro modeled after Keledros (just to piss off davidos.)
+
+New Mapper Toys
+shards / key / and related NPC for Crow's map
+dq/findlebind <-> kodiak -> slithar -> venevus bloodrose quest package worked out
+go_roam - ms_npcscript event, makes a non-roaming monster start roaming
+no_roam - ms_npcscript event, sets a roaming monster into guard mode
+
+BugZ Squashed + Odder stuffz
+More optimization for the new AI (no longer high-cycles vs. mons/sounds)
+Old AI given the 'alert allies on struck' ability (but not on spot)
+Pot tweakage
+Bandit screwups from September fixed
+Orc Flayer screwups from September fixed
+*some* improvement to the flyer AI (currently affects most bats and Horrors)
+No more invulnerable low-flying horrors (sadly, horror death sequence also nerfed) [includes model fix]
+BS BD mitigated, but something odd is still going on there
+Sembelbin High Priest chat fixed, and much more chat added.
+Forsuth chat fixed and his constant nodding (hopefully once and for all)
+Default NPC menus - wander around and F11 on some random NPC's - ye may even learn somethin new! ;)
+
+...and the usual 10,000 minor changes I'm not bothering to list...

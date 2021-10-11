@@ -1,0 +1,9 @@
+Re: List of changelogs
+
+June 25th 2006 Public Changelog
+
+- Fixed BD minions
+- Improved advanced monster searching behavior
+- Attempted to reduce monster 'hesistation' lag post advanced search
+New Monster:
+monsters/horror

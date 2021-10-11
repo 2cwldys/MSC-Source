@@ -1,0 +1,26 @@
+Re: List of changelogs
+
+May 20th 2006 Public Changelog
+
+- Shields Work (May need some nerfing)
+- Blizzard, Lightning Storm, Firewall, and Volcano all work (properly)
+- New spells currently available: Poison, Fire Ball
+- Blizzard Raises Ice skill, Poison Raises Affliction
+- Ice shield blocks 50% of all incoming damage for ~30secs, for 50 mana - this stacks with armor and shield effects. Ice Shield also works on pets.
+- Summoned pets do damage (Summoned Pets Skill is based on SC)
+- Summoned pets respond to commands (hunt, follow, kill, status, vanish - and a few other commands unique to each monster) - must use NPC speak, and must be in range.
+- Summoned Rats upgrade to summoned Giant Rats at SC 8 (doing something similar for skeleton later)
+- All known quests should now function
+- Healing rate is now 5% of your max health, 20% of your max mana per tick (minimum 2pts/4pts). This means everyone should heal at about the same rate regardless of level. Also hoping this discourages character deletes from mass potion haulers / lag from rejuv abuse. You will not be able to heal for a few moments after being struck.
+- Mana pots should be more useful, though I keep forgetting to actually test that.
+- Anti-spam system to prevent No Free Edict errors (refined as of 5/20)
+- 99.9% MS 1.35 Compatible (note: some old MS maps also require wad files not found in MSC, and map behavior may still be quite buggy.)
+- MANY bugged treasure chests fixed, there are many items out there you may have missed. (Largely due to [=>] != [>=])
+- Elven swords each uniquely named (and sword_bastard, is now actually a bastard sword, instead of the weakest elven sword under the wrong name)
+- Search the sewers for some new friends.
+
+-> Beware there is an eight spell limit (working on this, may have new spell casting method entirely)
+
+Mappers should read the full change log on the patches page. There are now time and weather control features available.
+
+There's also a new ms.dll running on the server (hence the 'dev_h') - but there are no changes to speak of there yet - it's basically testing the recompile for solidity.

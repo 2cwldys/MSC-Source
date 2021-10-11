@@ -1,0 +1,79 @@
+Re: List of changelogs
+
+JUN2011a PUBLIC CHANGELOG:
+
+JUN2011_centerfold.jpg
+Some assembly required...
+
+New Maps
+
+• Deralia Sewers (deraliasewers, NPC trans) [semi-self adjusting, Medium-Hard] - An extensive set of tunnels running beneath the human capital and to parts beyond.
+- Deralia lost yet another construction crew down here recently. You can find your way here by asking around town.
+- Features a "VHLT" lighting compile. (Although, as VHLT maybe affecting stability, we may undo this.)
+
+Map Updates
+
+• The Wall (the_wall, disconnected) [v.hard] - Has been broken up into The_Wall (disconnected) and The_Wall2 (gauntlet) for the sake of stability. It has also be re-lighted via VHLT.
+
+• keledrosprelude2 [medium] - now has a transition to Idemarks_Tower, and visa versa.
+
+• orc_for [self adjusting, easy-v.hard] - now connects via Thornlands, sitting between the classic map and Bloodrose. It now also connects properly to Idemarks_Tower. There are, however, no return transitions to orc_for from either Bloodrose or Idemarks, at the moment (they still return to Thornlands and Keledrosprelude2, accordingly.)
+
+• dragooncaves [medium] - has been stripped and recompiled for stability... Unfortunately just after the release for this patch, it turns that it also now fails to load on DS servers. Will remedy...
+
+• catacombs [self adjusting, medium to hard, disconnected] - Some re-balancing, and entity stripping for stability.
+
+Other Changes
+• The Galat Wondrous Chest has had its storage capacity increased more than three fold. (Anywhere from 60 to 100+ items.)
+- Beware that a very stuffed chest may take some time to load when withdrawing items.
+• Memorized tome spells will no longer cause slow down during preparation. (Thank Orochi!)
+• Weakened the Goblin Pouncer, as folks seem to be having trouble rescuing other players from him.
+
+Nerflog
+• The Portuguese bucket has had a bit of a boost.
+• Orc_For chests rendered a bit kinder to smaller parties, in some ways.
+
+Bug Fixes
+• Galat Wondrous Chest should no longer lock out other players when full. It will also not allow you to attempt to withdraw items when your inventory is full.
+• Scrolls will not cast when inventory is full (to prevent their loss).
+• Land based monsters can now attack players hiding in water.
+• Added crash prevention for item/monster display names and descriptions being too long.
+- You may see some names or descriptions being cropped off though.
+• Dragonaxe flames should come out at roughly the right height (seems we changed the bone order on the player models at some point.)
+• And the usual 10,000 bug fixes and minor changes I'm not bothering to list.
+
+New Items:
+• Earth Breaker [35, bluntarms] - Massive Dark Damage hammer, can generate a damaging stun wave when striking the ground fully charged that also repels opponents.
+
+• Helm of Venom - Provides 25% acid and poison resistance. The helm itself looks kinda neat, but sadly clashes with the rest of our equipment no end. Also, I'm kinda open for ideas as to something else to do with it. >_>
+
+New Critters:
+
+• monsters/abomination_venom - Venomous Bone Abomination [hard]
+- This beastie is similar to the first incarnation of the Bone Abomination, but better for open spaces, featuring a charge attack, a poison burst, venom and fire breath, while lacking the lightning shield of his predecessor.
+
+• monsters/shambler1 - Shambler [medium]
+- Not new, per-say, but previously unused. This god-awful model has been reskinned, but there's really no hope for it. ^_^ Straight forward swamp monster, walks up and hits you, sometimes with considerable knock back. The last of the scripts created by our dear departed Shurik3n.
+
+• monsters/shambler2 - Greater Shambler [hard]
+- Bigger version of the same beastie, same author.
+
+• monsters/swampeye - Swamp Eye [medium]
+- This is a stationary, worm-like monster, best placed in shallow water, that raises up and blasts anything it sees with an eye beam. It can also swipe with its claws. Yes, the model is totally ripped - but sven stole it first so...
+
+• monsters/demonwing_venom - Demonwing [medium]
+- This is the venomous variant of the Demonwing, based on the Firebat Half-life model (fair game IMO, it being base engine material). When I say "variant", put it in finger-quotes, as there is no other version, at the moment. It flies about with a semi-aggressive pattern similar to the grav-fly horrors. It can spit projectiles, in addition to having a pretty mean bite and evasive tactics.
+- Additional Parameters: set_no_ceiling_idle
+- By default, the Demonwing starts stuck to the ceiling and will only come down when it hears or spots nearby prey. It will also return to the ceiling after slaying its victim, if it perceives no further threats. This prevents that behavior, which maybe useful if you have your Demonwing under a sky brush or such. (As he'd look odd sticking to the sky.)
+
+• monsters/slime_green_large - Large Green Slime [medium]
+- This big green slime can toss projectiles at multiple targets, and generates a poison cloud periodically, as well as when destroyed. Unlike its smaller cousins, this one beast is purely aggressive (Not really new, but the previous version failed to function.)
+
+• monsters/slime_green_huge - Huge Green Slime [medium]
+- Bigger, meaner variant of same thing with more rapid attacks.
+
+• deraliasewers/mummy_warrior2b - Mummified Flame Guard [hard]
+- This is a nerfed version of the standard Flame Guard for use as a final boss under the medium variant of Deraliasewers.
+
+• other/keyhole_sewer - Sewer Maintenance Keyhole
+- Not a monster, obviously, but here for reference. Needless to say, takes Sewer Maintenance Keys (item_key_sewer). Triggers "ustart" upon receipt.

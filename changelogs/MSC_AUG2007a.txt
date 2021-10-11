@@ -1,0 +1,166 @@
+Re: List of changelogs
+
+AUG2007a BETA PUBLIC CHANGELOG:
+
+AUG2007a_centerfold.gif
+
+New Stuffs
+• new client cvar ms_xpdisplay
+- Choose your poison:
+ms_xpdisplay 0 (default)
+ms_xpdisplay0.gif
+ms_xpdisplay 1 (extended)
+ms_xpdisplay1.gif
+ms_xpdisplay 2 (Shurik3n's original)
+ms_xpdisplay2.gif
+ms_xpdisplay 3 (extended precent only)
+ms_xpdisplay3.gif
+ms_xpdisplay 4 (classic)
+ms_xpdisplay4.gif
+• Thunder Axe
+- Nasty lightning enchanted battle axe – that you can throw!
+• Greater Thunder Axe
+- Too big to throw, but much nastier and spectacular.
+• Lightning Rod
+- This lightning enchanted blunt has a number of lightning abilities, provided you have the level to use them, even if you don't, it makes a fair mace.
+- Abilities include a nasty thunderbolt, and the ability to repel all monsters nearby with less than twice your health.
+• Dark Sword
+- “Sword of Wounding” Up to six levels of charge at Sword 30, each multiplies the damage x2.
+• Urdulian Shield
+- Forged from the gates of a fallen temple, this is for the “meat shield” character who has no intention of moving out of the way.
+- This shield offers incredible damage reduction, but is so unwieldy it slows the user to a crawl.
+
+New Beasties
+• monsters/wolf - pack wolf
+• monsters/wolf_alpha - pack wolf leader (slightly stronger)
+- pack wolves will stay near their pack wolf leader (they detect their leader 2 seconds after spawning)
+- so long as the alpha wolf is alive, pack wolves will flee no further than his location
+- alpha wolves fight to the death
+- hostile to pretty much everything, save each other
+- (These are low level wolves for thornlands)
+• monsters/wolf_shadow - Shadow Wolf
+- This, much meaner nastier wolf, is a lone wolf. Stunning howl and fire attacks. (Don't place with regular wolves: he'll eat them.)
+• monsters/ogre_ice - Marogar Ogre
+- Just in case your standard ogres weren't mean enough, this frosty variant features freezing claws and damage reduction.
+- Demon factioned to play nice with undead
+• monsters/ice_mage - Ice Mage
+- Frozen masters of the icey art trained by Maldora himself.
+• monsters/maldora_gminion_random - Maldora's Greater Minions
+- These things seem downright invulnerable! Or are they? Come in four random elemental flavors:
+- monsters/maldora_gminion_poison, monsters/maldora_gminion_ice, monsters/maldora_gminion_fire, monsters/maldora_gminion_lightning
+• monsters/skeleton_lightning - Lightning Forged Skeleton
+- Golden skeleton with a lightning wand and a bone to pick with you
+• monsters/anim_archer_hard
+- Random hard animated elemental archer, each glows and fires a nasty arrow of its element
+- Individual variants include: monsters/anim_archer_hard_fire monsters/anim_archer_hard_lightning monsters/anim_archer_hard_ice monsters/anim_archer_hard_poison
+- PS. These buggers can fly
+• monsters/anim_warrior_hard_poison - Enchanted Armor of Venom
+- added to the anim_warrior_hard lineup, which all now glow the appropriate elemental color
+• monsters/elemental_air0 - Summoned Air Elemental
+- Floats around, shoots lightning. Intended as backup for Djinn Ji'Azolt
+• monsters/djinn_lightning - Djinn Ji'Azolt
+- Ogre lightning djinn boss: lighting with push, stun, invisibility, temporary flight
+- Unlike previous Djinn, this monster is dependent on the map for his backup
+• monsters/horror_lightning - Electric Horror
+- If clones dream of electric sheep, this must be what they have nightmare about? ;)
+• monsters/shambler1 - Bog Creature
+- Fugly, player sized, bog creature (pretty mean) by Shurik3n
+• monsters/shambler2 - Shambler
+- Larger, meaner, gooier, bog creature by Shurik3n
+• monsters/fish_demon – Demon Fish
+- A large red shark that smells your blood in the water (v. mean, horror flight AI)
+- Remember, with fishies, you have to monster clip them into water, or they fly (working on ways around this)
+• monsters/lightning_worm – Ethereal Vermicular
+- This creature from dimensions beyond, brought forth by some twisted magics gone awry, is as strange as its name suggests
+- The Vermicular will rise 256 units, and then circle in a 256 unit radius, hovering up and down -196/+128 units during its circling, it's max attack range is 2048 units (keep in mind with placement)
+- The Ethereal Vermicular will ignore and pass through any and all obsticles in its flight path, including solids
+• cleicert/fpriest - Ghostly Priest
+- Mouthy NPC for Cleicert Temple. Fires "GiveCrystalOne" mid speech.
+• lodagond/maldora_fragment - Fragment of Maldora
+- This is a generic, attack on sight, no orc intro variant of Maldora, you'll probably run into in groups in Lodagond
+• lodagond/maldora - Maldora
+- Yes, the one, true, Maldora.
+- This placeholder is fully deadly, and fully functional, but hope to add more tricks and intro/exit text later
+• monsters/cold_lady - Cold Lady
+- This ghostly apparition proves that hell hath no fury like a woman scorned
+- Like the Vermicular, these pass through anything and everything. Unlike the Vermicular, they haunt their targets
+- Cold Ladies will hunt any target within 4096 units of its spawn. It will circle 128 units from its spawn until it sees a target.
+- These ladies are near impossible to solo without some sort of cold resistance, although for a group of players, they are only an annoyance... Provided there aren't a lot of these ghosts about.
+- These are particularly CPU friendly, so feel free to add a swarm
+
+- Shahaddar Orcs -
+( After the death of Lor Malgorand, the founders of this Orc tribe took up residence in the abandoned lair of the sorcerer Shahaddar. Here they were able to obtain his powers, making them the most feared orcs in all of Daragoth. These are among the weakest of their warriors: )
+• monsters/sorc_recruit - Shahaddar Novice
+- This is the lowliest of the Shahaddar Tribe, yet he would strike fear in the hearts of all but the most powerful of the Blackhand.
+• monsters/sorc_warrior_lesser - Shahaddar Warrior
+- Carrying a Thunder Axe, this beast can usually be found leading small groups of recruits.
+• monsters/sorc_shaman_lesser - Shahaddar Shaman Initiate
+- A lightning elementalist with a shocking grip, this initiate has learned well from his masters.
+
+- Bludgeons! -
+(Someone get Little-G a napkin!)
+• monsters/bludgeon_gaz1 – Bludgeon with a scythe he calls an axe, and he can throw it at j00
+• monsters/bludgeon_gaz2 – Bludgeon with a big hammer
+• monsters/bludgeon_gaz1_demon – Demon Bludgeon has additional armor and fire attacks, this is axe boy
+• monsters/bludgeon_gaz2_demon – Demon Bludgeon, with hammah
+- Currently all bludgeons are demon faction, so they won't fight with orcs, undead, or one another
+- Bludgeons are all really mean (30+ minions) – the Demon Bludgeons border on insane mean (40+)
+- Probably work out smaller and larger bludgeons down the line, and maybe shamans and the like
+- Bludgeons have charge, can jump real well, and have multiple stun attacks
+
+New Mapper Toys
+• msarea_music changes:
+- You may now define music in folders OTHER than music/ (eg. "media/Half-Life01.mp3") - only real advantage to this is that you can now use the music in the valve/media folder
+• msmonster_XXX / ms_npc, new property: nplayers
+- You can set a #player requirement for a monster or npc to appear
+- If the monster does not spawn due to insufficient number of players, he does not count against the fireallperish, so the spawn shouldn't fail to fire as a result
+- This also works with treasure ms_npc's (and MAYBE msworlditem_treasure)
+• msmonster_XXX / ms_npc, new property: reqhp
+- As above, but instead requires the health of all players on server combined to total this number or above before the npc will spawn
+- can be combined with nplayers property, in which case both conditions must be met for the monster to spawn
+• trigger_push
+- Now has a "Players Only" flag (32) - this can be used to block players but not monsters
+• Aliased entities: mstrig_push, ms_text
+- These are trigger_push, and game_text to help with FGD conflicts, respectively
+• Updated FGD
+- Includes all the above, some new defaults, and has ms_npcscript included, removed some confusing misnamed ents (such as “multimanager” sans the underscore)
+- Removed dated HL entires from ms1.4.fgd
+- Added halflife.fgd to the dev folder to make it clearer you need to use both
+- This custom halflife.fgd include MSC variants of: game_text, env_message, and trigger_push
+
+BugZ Squashed + Odder stuffz
+• Fixed bugs with new AI flee
+• Party Chat / DMG Should now function (maybe) *
+- Thank MiB!
+• XP locked at 100% bugfix / Enhanced XP display *
+- Thank Shurik3n!
+• Revamp of all lower weapon tiers
+- Thank Evaan!
+
+- AMX Changes -
+(None... Hummingbird, fail)
+
+- MAP Updates -
+• The_Keep
+- Fixed last of buggy doors, we hope
+• May have additional map updates later in the month in a separate package
+
+- Installer Changes -
+(nadda)
+
+Bumped to next month (in order of priority):
+- Helena NPC post invasion award (complicated, and likely made pointless by Helena2)
+- AMX vote re-write (now part of the AMXmodX project)
+- Alter chain lighting to work more like, well, chain lightning
+- Shadahar revamp (bumped for fifth month in a row)
+- New Swim AI (really people, just put monster clips on the water, tis how HL1 monsters work)
+- Mining System (doesn't look like Vomica wants to work on his map anymore :( )
+- Single Player Mode (adjust for single player + not on central server)
+
+* Known bugs:
+• If you remove your armor, and replace it, you will be invisible in third person.
+- Type 'vis' to remedy. If you do not type vis, your armor should appear correctly to other players.
+• Blood axe hits with its broadside in third person
+- Never got Orochi to fix it
+• Artifact Chests still give repeatedly to most powerful player around
+- Didn't have time to fix

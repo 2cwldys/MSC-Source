@@ -1,0 +1,252 @@
+Re: List of changelogs
+
+MAR2011a PUBLIC CHANGELOG:
+
+MAR2011_centerfold.jpg
+Only rednecks hunt with automatic weapons
+
+New Maps
+• Dragoon Caves (dragooncaves) by Furion [Medium-High] (connects via The_Keep)
+- Beyond the bandit keep lies the hidden home of dreaded dragoons.
+- A large winding map that's friendly to the graphics card, of about the same difficulty as The_Keep
+
+• Idemark's Tower (idemarks_tower) by jon50559 [Medium-High] (disconnected*)
+- The wilderness and ruins that surround the fallen tower of the fallen Apostle Idemark.
+- Not so friendly to the graphics card, but very pretty. Some wilderness and ruins to explore.
+- This map is currently disconnected, but to connect via Keledrosprelude2 and orc_for in the future.
+
+• Orkat Forest (orc_for) by Sgt Rehab [Self Adjusting, Low-Very High] (disconnected*)
+- This forest is infested with tribes of goblins and orcs. A stronghold of the Blackhand lies hidden within, where it is said that sinister plots are beginning to take shape.
+- The map self adjusts, from, roughly, 15 to 40+, based on the strength of the players present, both in terms of the strength and types of monsters, experience, and in terms of treasure.
+- Final boss is balanced to deal with four players the current tier, and which monster he is will vary with the strength of players present.
+- BEWARE: The Goblin Pouncer, and the Hobgoblin Lightning Shaman. One will ride you like a pony while pounding the sides of your head, and the other will trap you in a lightning cage. If either of these things happens, you are dewmed, until another player saves you. So beware the snicker, and keep an eye out for the glowing fist.
+- You gain 2000 dmg points for rescuing another player from a Lightning Shaman or Pouncer.
+- This map is currently disconnected, but to connect via Thornlands and idemarks_tower in the future. (Pending real-world balance tests.)
+
+Updated Maps
+• The_Keep - Connected to Dragoon Caves, and fixed the dreaded chains of FPS dewm.
+• Catacombs - Fixed an exploit or two, re-balanced for lower levels (min ~20), boosted treasure
+(PS. If there's a texture missing from Lodagond-4 still, sorry, forgot to fix that... :\)
+
+New Mapper Toys
+• reqhp property on msmonster_xxx/ms_npc can now have a minimum and a maximum by adding a semi-colon and a second value. eg. "1000;3000" will cause the monster to spawn ONLY if the total HP of players present is ranged from 1000 to 3000.
+• Monsters with reqhp property will no longer spawn later, should they suddenly qualify after more players join. (ie. their spawn is only checked once)
+• Gold now multiplies with set_self_adj flag (at the same ratio that XP does)
+• Additional Parameter: set_non_agro
+- Will cause most creatures to remain calm until attacked. However, once attacked - by anything, they will go agro on any and all non-allied targets until slain, regardless of actual guilt. (Much like a real wounded animal, I suppose...)
+• Additional Parameter: set_no_avg
+- Self adjusting monsters (set_self_adj) with this parameter won't count their death against the global average. This is handy if you have a weak monster near the spawn who maybe slain before all the characters connect.
+- (If you have developer on, you'll get a pop-up tracking your current average.)
+
+Nerf Log
+• The level cap has been raised from 40 to 45
+• MP to Damage ratio doubled for Infernal Claws
+• Shadowfire Blade Burst now repels
+• Improved firewave on Shadadow Fire Blade/Infernal Claws
+• Added what should be the last of the missing tomes
+
+Bug Fixes and Other stuffs
+• Fixed arrow/bolt stacking issues
+• Fixed various inventory icons (be sure to report any that we missed)
+• Fixed some issues with pouches of coins in chests (picking up with full hands, etc.)
+• Fixed MSCave Zombie Archer attack range and "Zombie Zombie"
+• Fixed some Pharaoh Lance Force Cage issues (somewhat)
+• Fixed some boar issues
+• Fixed mayor quest in Edana
+• Fixed the ocean crossing cannon (*hopefully*)
+• Fixed boars/firegiants and a few others lacking XP
+• Fixed Jade/Emerald key for gay men
+• Fixed ms_lildude using wrong gender
+• Fixed chest skins on bloodrose
+• Updated the Edana help sprites. They'll now auto-activate at anything under 100hp.
+• ...and the usual 10,000 bug fixes and balancing tweaks I'm not bothering to write about.
+
+New Weapons:
+• Fire Star [Req: Bluntarms/Fire: 20/20]
+- A morning star forged with elemental fire
+- Chance of Fire DOT (100% on full charge + stun). Burst of repelling fire when striking the ground fully charged.
+- (p_model, inv icon, and viewmodel do not match up, we know...)
+
+• Dragon Lance [Req: Polearms: 15]
+- A lance forged with elemental fire
+- Polearm Features: Charged_Thrust, Block, Backhand (blunt+stun), Charged_Throw
+- Chance of Fire DOT (100% on power thrust).
+- Charged throw projectile creates a burst of flame on impact, if thrown a fair distance.
+
+• Steam Crossbow [Req: Archery: 35]
+- A strange dwarven contraption, designed to fire multiple bolts
+- Fires six crossbow bolts in rapid succession. Then takes a painfully long time to reload.
+- You can "fire on the run" with this weapon (attacking with it will not slow you down).
+- Beware that storing the weapon mid-reload may cause strange issues, but that you should be fine after reloading the weapon again. (In the more extreme situations, you may also need to change ammo type by tapping "4").
+- Firing dwarven bolts very rapidly sometimes causes some not to register, but you can still fire them off fairly quickly without wasting any.
+- First of the level 35 line
+
+New Critters:
+*deep breath*
+
+• monsters/abomination_bone - Bone Abomination [Very High]
+- A huge necromantic construct of miss-matched bones and dark magic in the form of some giant beast
+- Meant to be one of a series, this one has a lightning field, blinding acidic breath, and an AOE stun attack. Beyond that, he attacks at two separate ranges for differing amounts of damage, and is just an all around tough bastard.
+( orc_for/abomination_bone_sa - is the self adjusting Orc For variant, ranging in difficulty from High to Very High Boss [30-40+], but it cannot be used elsewhere without a also using orc_for/orc_summoner.)
+
+• monsters/djinn_ogre_fire - Lesser Fire Djinn [Medium-High]
+- Ogre variant of the Fire Djinn. No summons. Can create bursts of flame and shoot flames from his hands, plus Fire DOT, and the usual stunning headbutt.
+( orc_for/djinn_ogre_fire_sa - is the self adjusting Orc For variant, ranging in difficulty from Medium to High Boss [25-30+], but it cannot be used elsewhere without a also using orc_for/orc_summoner.)
+
+• monsters/boar2 - Greater Boar [Low]
+- It's a big boar. Mind you, these are hostile by default, the ones on orc_for are flagged to be docile.
+- orc_for/boar2 = self adjusting variant (though set_self_adj may work just about as well), their collision boxes had to be adjusted to deal with the trees.
+
+• monsters/skeleton_spartaaa [Medium-High]
+- Giant skeleton with greek style armor as seen in Catacombs (forgot to add it to the old changelog, me thinks). I *think* it'll come up with Geric's name, if you fail to give it a custom one.
+
+• monsters/spider_webber - Constrictor Spider [Low-Medium]
+- This is more or less the same as the snow spider, sans cold resistance, and white fur.
+
+• monsters/troll_armored - Battle Troll [Medium-High]
+- This is a heavily armored troll. Additionally, he can throw giant spiked metal balls that bounce around and explode.
+
+• orc_for/bgoblin_archer_sa - Blood Goblin Needler [Self Adjusting, Low-High]
+- Fire DOT. At the higher adjustment levels, arrows have an AOE burst effect.
+
+• orc_for/goblin_archer_sa - Goblin Needler [Self Adjusting, Low-High]
+- At the higher levels the arrow gain a knock-back effect.
+
+• orc_for/goblin_pouncer_sa [Self Adjusting, Medium-High]
+- This creature will periodically latch onto the back of opponents, rendering them helpless against him until either he or they die. He gives fair warning, at which time you can either dodge or get out of sight, and he'll need a few moments to "recharge" and try again. Summons make good decoys here, as he'll just as happily ride them.
+
+• orc_for/goblin_sa - Goblin [Self Adjusting, Low-High]
+- It's a goblin. It's also fairly dexterous, and good and navigating heights.
+
+• orc_for/hgoblin_lshaman_sa - Hobgoblin Lightning Shaman [Self Adjusting, Medium-High]
+- This dreaded would-be chieftain is too busy learning to harness the power of the storms to be bothered leading his people.
+- Periodically, he can trap opponents in lightning cages, rendering them helpless until they die. However, if he can't see you, he can't trap you, and he'll need a bit of time to recharge.
+
+• orc_for/orc_demonic_sa - Demonic Blackhand [Self Adjusting, Medium-High]
+- This orc has made an evil deal, with something...
+- Fire DOT, fire immune, and can periodically toss fire balls. Slightly holy vulnerable.
+
+• orc_for/orc_flayer_sa - Orc Flayer [Self Adjusting, Low-High]
+- Same as the old orc flayer - just a different range of adjustment than you'd get with the default set_self_adj addparam.
+
+• orc_for/orc_fshaman_sa - Orc Fire Shaman [Self Adjusting, Low-High]
+- Same thing...
+
+• orc_for/orc_poisoner - Orc Poisoner [Self Adjusting, High-Very High]
+- Same as the usual Orc Poisoner (eg. Voldor), but with a rather odd self-adjusting range. Note that the horrors he spawns do not self adjust, but they still provide good cover.
+
+• orc_for/orc_pshaman_sa - Orc Venom Shaman [Self Adjusting, Medium-High]
+- Same as the venom shamans on Wicard Oven, but self adjusting. (This script was never actually used, I don't think.)
+
+• orc_for/orc_sniper_sa - Blackhand Elite Archer [Self Adjusting, Low-High]
+- Higher levels have some knock back.
+
+• orc_for/orc_summoner - Orc Summoner [N/A]
+- This isn't a monster, it's just a special NPC script for dealing with summoning the final boss on orc_for. With the map's aid, he summons either an Ogre Fire Djinn or a Bone Abomination, then is promptly eaten by it (rather gruesomely, in the case of the Abomination).
+
+• orc_for/orc_warrior_sa - Blackhand Warrior [Self Adjusting, Low-High]
+- Self adjusting orc warrior. Has a better hit chance than the standard orc warrior.
+
+• orc_for/sgoblin_sa - Shadow Goblin [Self Adjusting, Medium-High]
+- No one's used the original Shadow Goblin script, so I'll refresh your memory: This goblin can vanish at will.
+- At the lower levels of self-adjustment, he's renamed "Shadow Goblin Trainee". Trainees are not invulnerable while invisible, and leave trails of blood when wounded, allowing you to see where they are.
+
+• orc_for/skeleton_archer_fire2 - Demonic Archer [Self Adjusting, Medium-High]
+- Same as monsters/skeleton_archer_fire2, but tweaked to deal with lower level ranges.
+
+• orc_for/vgoblin_archer_sa - Vile Goblin Needler [Self Adjusting, Low-High]
+- Same as monsters/vgoblin_archer, but with a wider range of self-adjustment than set_self_adj could supply.
+
+• furion/dragoons/dragoon - Dragoon (random) [Low-Medium]
+- Dragoons are, more or less, the same as bandits, but they have random elemental DOT effects. They are usually also vulnerable to the opposing element that they use, suggesting that they are somehow infused with the element, rather than just using an elemental weapon. They are color-coded by element. You can set them in fixed versions as follows:
+• furion/dragoons/random_archer - Dragoon Archer, random element
+• furion/dragoons/random_axe - Dragoon Axeman, random element (+HP)
+• furion/dragoons/random_mace - Dragoon Berserker, random element (+Stun)
+• furion/dragoons/random_sword - Dragoon Swordsman, random element (faster atk speed)
+• furion/dragoons/random_unarmed - Dragoon Brawler, random element
+• furion/dragoons/random_mage - Dragoon Mage, random element (Casts deluxe Ice Shield - may also cast Blizzard, Poison Cloud, Fire Wall, or Lightning Storm, depending on element.)
+• furion/dragoons/random_random - Same as furion/dragoons/dragoon >_>
+• furion/dragoons/random_random_nm - Random Dragoon, Random Element, but never a mage
+• furion/dragoons/fire_archer - Dragoon Archer, fire element
+• furion/dragoons/fire_axe - Dragoon Axeman, fire element
+• furion/dragoons/fire_mace - You get the idea...
+• furion/dragoons/fire_mage - " "
+• furion/dragoons/fire_random - " "
+• furion/dragoons/fire_random_nm - " " (never a mage)
+• furion/dragoons/fire_sword - " "
+• furion/dragoons/fire_unarmed - " "
+• furion/dragoons/ice_archer - Dragoon Archer, ice element
+• furion/dragoons/ice_axe - You get the idea...
+• furion/dragoons/ice_mace - " "
+• furion/dragoons/ice_mage - " "
+• furion/dragoons/ice_random - " "
+• furion/dragoons/ice_random_nm - " " (never a mage)
+• furion/dragoons/ice_sword - " "
+• furion/dragoons/ice_unarmed - " "
+• furion/dragoons/psn_archer- Dragoon Archer, poison DOT
+• furion/dragoons/psn_axe - Again, you get the idea...
+• furion/dragoons/psn_mace - " "
+• furion/dragoons/psn_mage - " "
+• furion/dragoons/psn_random - " "
+• furion/dragoons/psn_random_nm - " "
+• furion/dragoons/psn_sword - " "
+• furion/dragoons/psn_unarmed - " " (never a mage)
+• furion/dragoons/zap_archer - Dragoon Archer, lightning element
+• furion/dragoons/zap_axe - And again...
+• furion/dragoons/zap_mace - " "
+• furion/dragoons/zap_mage - " "
+• furion/dragoons/zap_random - " "
+• furion/dragoons/zap_random_nm - " " (never a mage)
+• furion/dragoons/zap_sword - " "
+• furion/dragoons/zap_unarmed - " "
+• There is also a random dagger-wielding Dragoon known as a "Rogue", but he can't be called up individually.
+
+• furion/dragoons/dragoon_elite - Elite Dragoon (Random) [Medium]
+- Similar to Elite bandits, these Dragoons have honed their skills to the point where they can create many of the same secondary effects that players can with their weapons, and then some. They also carry magical weapons with effects similar to those players are familiar with. In similar fashion to the lesser Dragoons, they are infused with an element and are vulnerable to its opposite. They are color-coded by element.
+• furion/dragoons/e_rand_archer
+- Elite Dragoon Archer, Random Element (can tri-shot arrows, periodically)
+• furion/dragoons/e_rand_axe
+- Elite Dragoon Axeman, Random Element (can jump and land for a stunning burst, periodically)
+• furion/dragoons/e_rand_mace
+- Elite Dragoon Berserker, Random Element (can hit the floor for a stunning burst, periodically)
+• furion/dragoons/e_rand_rand - Same as furion/dragoons/dragoon_elite
+• furion/dragoons/e_rand_spear
+- Elite Dragoon Lancer, Random Element (periodic charge attack, increased attack range)
+• furion/dragoons/e_rand_sword
+- Elite Dragoon Lancer, Random Element (Can freeze opponents with Ice Blade)
+• furion/dragoons/e_rand_unarmed
+- Elite Dragoon Martial Artist, Random Element (Can stun with jump kick or sweeping kick)
+Select specific weapon and specific element, as follows:
+• furion/dragoons/e_fire_archer
+• furion/dragoons/e_fire_axe
+• furion/dragoons/e_fire_mace
+• furion/dragoons/e_fire_rand
+• furion/dragoons/e_fire_spear
+• furion/dragoons/e_fire_sword
+• furion/dragoons/e_fire_unarmed
+• furion/dragoons/e_ice_archer
+• furion/dragoons/e_ice_axe
+• furion/dragoons/e_ice_mace
+• furion/dragoons/e_ice_rand
+• furion/dragoons/e_ice_spear
+• furion/dragoons/e_ice_sword
+• furion/dragoons/e_ice_unarmed
+• furion/dragoons/e_psn_archer
+• furion/dragoons/e_psn_axe
+• furion/dragoons/e_psn_mace
+• furion/dragoons/e_psn_rand
+• furion/dragoons/e_psn_spear
+• furion/dragoons/e_psn_sword
+• furion/dragoons/e_psn_unarmed
+• furion/dragoons/e_zap_archer
+• furion/dragoons/e_zap_axe
+• furion/dragoons/e_zap_mace
+• furion/dragoons/e_zap_rand
+• furion/dragoons/e_zap_spear
+• furion/dragoons/e_zap_sword
+• furion/dragoons/e_zap_unarmed
+• There is also a random Bone-Blade wielding Dragoon known as a "Elite Dragoon Rogue", but he can't be called up individually. He can regen via the vampyric blade, and periodically do the fast-attack secondary smallarms effect.
+
+• furion/dragoons/dragoon_boss - Demetricus the Dragoon Leader [High]
+- Unlike the other Dragoons and the bandit bosses, this guy comes in only one flavor: Dragon Lance.
+- Has all the abilities of a standard bandit boss (ie. potion madness), plus increased attack range, and a periodic burst o flame.

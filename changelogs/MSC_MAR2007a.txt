@@ -1,0 +1,236 @@
+Re: List of changelogs
+
+MAR2007a PUBLIC CHANGELOG:
+
+- SC.DLL Changes: -
+New Stuffz
+• You can kick!
+- Starting at MA level 5 you can kick
+- At level 10+ your kicks will have increasing knockback
+- At level 20+ your kicks will also stun with increasing duration
+• New client cvar: ms_lildude [0|1] - default 1
+- You can now get rid of the little red rendered bastard on your hud with ms_lildude 0.
+- This is a genuine cvar, thus it can be set in your userconfig.cfg, or whatnot.
+• New server cvar: ms_fxlimit [0-9999] - default 0 (disabled)
+- This is the highly experimental MS.DLL based spam control.
+- Hope is that this should put an end to NO FREE EDICT errors
+- However, at the moment, the method it uses to work is very screwy, as it tracks all spam on the #1 indexed player's script
+- (If said player leaves, I do not know if the next player in line will become the spam tracker, or if it simply will no longer track spam)
+- Reason for this is, I can't figure how to store the count var on a global script from the places it executes atm.
+- If it causes issues, set it to 0 to disable. (Most likely issue: no fx display)
+- If you wish to try it out, I recommend setting it to 20
+• New Backpack Model (barely under the wire)
+
+New Beasties
+• monsters/skeleton_stone2 - Stone Mason. Tough stone skeleton with dual weilded hammers. Stun attacks, summons rocks.
+• monsters/skeleton_stone3 - Petrified Blademaster. V. Tough stone skeleton with a big sword. Throws peeps a lot (dangerous around hazards).
+• monsters/skeleton_gstone1 - Greater Stone Mason (uses huge skeleton model). VERY mean. Creates storms of boulders that float around his head then fly at you.
+• monsters/skeleton_gstone1_noxp - Same thing, but worth no XP, nor gold. (For Foamy's Trap)
+Not so much "new" as "polished":
+• Fixed up Undead Fire Giants and setup new scripts:
+monsters/firegiantghoul1 - lesser undead fire giant
+monsters/firegiantghoul2 - undead fire giant
+monsters/firegiantghoul3 - greater undead fire giant
+monsters/firegiantghoul1_turret - lesser undead fire giant, acts as turret (no wander)
+monsters/firegiantghoul2_turret - undead fire giant, acts as turret (no wander)
+monsters/firegiantghoul3_turret - greater undead fire giant, acts as turret (no wander)
+• monsters/bludgeon - got an update and is actually pretty mean, and thus now worth some xp/gold. (Still funny as hell though, and no, we don't have a model from Gazomica yet)
+
+New Mapper Toys
+Skeleton Control
+• monsters/skels_sleep
+- Spawn this monster, and all subsequently spawned skeletons will spawn "playing dead" and not get up until a player comes near them (128 units).
+- Stone skeletons will pose as statues instead
+- Skeletons are invunerable while in this state, and their names/status are not visible.
+- Killtarget this and subsequently spawned skeletons will not be affected
+- (The skeletons in the first cave of Thornlands are now set to always have this affect, if you want to see it in action.)
+• monsters/skels_deep_sleep
+- Spawn this monster, and all subsequently spawned skeletons will spawn "playing dead" and not get up for anythying, save for monsters/skels_wakeup below:
+- Stone skeletons will pose as statues instead
+- Skeletons are invunerable while in this state, and their names/status are not visible.
+- Killtarget this and subsequently spawned skeletons will not be affected
+• monsters/skels_wakeup
+- All sleeping and deep sleeping skeletons will get up, and resume normal behavior. (Stone skeletons will simply animate)
+- This is a temporary entity. It removes itself on spawn, and maybe trigger-spawned repeatedly.
+- (See weather tower tutorial for how to repeatedly spawn temporary entities as monsters)
+• You can awaken individual skeletons by applying the ms_npcscript eventname " skeleton_wakeup_call " (see ms_npcscript tutorial)
+• The following skeletons are unaffected by Skeleton Control:
+- The following minions: Bloodreaver's, Flesheater's, Maldora's
+- All bosses, minibosses, and red skeles: Calrian, Lord BS, Ice Lord, Sir Geric, Bloodreaver, Flesheater, Fire Giants, Keledros II
+NOTE TO FOAMY: Be sure to killtarget any skels_deep_sleep you use before Slithar shows up, or his summoned skeletons will be affected as well!
+• XYZ console command change: XYZ now returns the height of the ground you are standing on the Z coordinate, instead of your center. (Easier monster placement)
+• Slithar has been moved to slithar/slithar ( monsters/snake_lord will be used for a generic version later)
+- Slithar has a whole SLEW of commands, and is now officially our most complicated script, evah, thus his own script folder.
+- For a detailing of his control commands, see the Slithar Command Reference document. (Hopefully Foamy is the only one who really needs to worry about this, but it gives you an idea of what we can do.)
+• NPCs/dwarf_lantern and NPCs/default_dwarf_still
+- Thse are for Vomica. Each is a dwarf that glows (_still doesn't roam unless struck). Note the new model in models/npcs/dwarf_lantern.mdl, this is the model used by the script. The script assumes you are adding the lantern as a fifth submodel in weapon group (if you add it to the model that way, the script will use it). I made it a seperate model from the standard dwarf so you may change the animations, if you so choose.
+
+- MS.DLL Changes: -
+• People attempting to memorize more than 8 spells will no longer crash servers
+- BUT THEY WILL LOSE THE SCROLL THEY TRY TO MEMORIZE!
+- I've not figured a way around this yet. Can't seem to figure a way to pull the # of spells up before the learn function takes place.
+• Players now recieve messages when gaining experience showing the number of points gained.
+• Players receive a warning message when carrying more than 50 items
+• Players will not be allowed to pick up items if they already have 100 or more
+- There's also an item and weight counter in console when you pick up items, if you care to look
+• Eliminated "size" element regarding items due to it being buggard (no more "too big" errors - just too heavy)
+• Fixed the ramp with Strength vs. Weight Allowance (those with 30-60 str can carry more now, those under 30 maybe able to carry a tad less)
+• Changes to Mana/HP calculation (You now get some HP for spellcasting, and more mana for spellcasting than for parry)
+
+- CLIENT.DLL Changes: -
+Yes, ye dreaded client update is finally here. A copy of the FEB2007b client dll is provided in case you want to play on an older server. If you try to play on an older server with the new client, you will get a "client.dll does not match server's" error.
+• Aformentioned ms_lildude cvar
+• Synced aformentioned Strength Ramp change
+• Synced aformentioned Mana/HP calculation change
+• Summoning and Protection no longer appear in spell stat list
+• Released version optimized for speed instead of debuggary (although no SSE2 or anything proc specific)
+
+BugZ Squashed + Odder stuffz
+• Golden Axe tickets are now available (use them wisely)
+• Clearsky command works, but affects all clients
+• Jagged arrows ramped to par with other arrows
+• Poison Guardians now using proper models / framerates
+• Odd mace no longer costs 30 gold to remove from chest
+• Golden Axe swings proper
+• Erkhold and Rocks bleed proper colors (ie. red, and not at all, respectively)
+• Fixed issue with some old AI creatures not going agro until struck
+• Fixed X/Y flip on Freezing Sphere
+• Fixed some bugs with Forsuth (not being able to open store while beasts outside door)
+• Summons will no longer attack guards unless you specifically target them (via "kill")
+• Summons now return to defend mode after sucsesful slaying of targets specified via "kill" (more guard friendly)
+• Vadrel (FOutpost) can no longer be slain before or after orc invasion
+• Removed the last sticky client bit on the summons that was causing t3h l4gs!
+- Sadly, I'm thinking there are several similarly affected monsters; I'll have to track them down. Apparently it is bad to have a monster call itself as a client-side effect as said effect never goes away, even if the monster dies, is deleted, or attempts to remove the effect to upon its death.
+- You'll get a message every 10 secs a monster uses a client command on you (so if all the mons are dead, you know one of them is an evil lagger)
+
+- AMX Changes -
+...Darn, none. Although I've setup a possible way to have individual clients start map votes when touching a trans, just not worked out the details.
+
+- MAP Updates -
+• Increased spawn rate in gatecity x4 (also 150% quest req.)
+• Reduced push brush speed on secondary to-boss teleporter on WW3D in effort to fix.
+
+- Installer Changes -
+• Tweaked Fuznet auto-configurator to add a carriage return to server/listenserver.cfg before adding "exec fuznet.cfg"
+- In otherwords, using the 'configure for fuznet' option should work for everyone now.
+
+AND LOTS AND LOTS OF MODEL CONSOLIDATION - So maybe we can get some of those new weapons in now.
+
+...and the usual 10,000 minor changes I'm not bothering to list...
+
+Sorry: Shad 2.0 and the new weapons didn't make it in this month (but we got enough consolidation done to allow a bunch). If there's a B patch, I'll toss in somethin. :\
+Health readout bars will also have to wait until I get the spam control perfected, as I realized they create a new entity each time they are used (even though, it's only supposed to be 1 bar that just relocs, damnit).
+
+=============== MAP UPDATES TO DATE [up to and including MAR2007a] ===============
+
+Moving map update news to the betapack, and it is now part of the changelog, so I'm no longer updating the seperate mapupdatenews.txt
+
+Thothie's Map Updates for MS:C
+For use with MS:C 1.0 to 1.01_dev_h
+(Other versions update at your own risk)
+There should soon be MS:C updates that will make most of this patch redundant.
+As such, I do not recommend using this patch for later versions.
+
+Misc Changes:
+- ms_player_begin spawn points in all maps (so players can join)
+- removed info_player_start from Edanasewers (may still not work)
+- removed banker from Edana, as bank deletes characters.
+
+Calruin:
+- Fixed spawn merge on time chage in Calruin
+- Fixed issue where third riddle master would not spawn
+[these fixes are not needed for Calruin2]
+
+Carluin2:
+- Fixed minor issue where "ghoul wall" was breakable by players
+- Fixed invulnerable horror
+
+Challs:
+- Fixed bug where skeletons would fall into bottomless pits
+- Fixed bug where bottomless pit wouldn't kill you
+- Capped Skele lives at 5 to prevent prolonged camping
+- Set monsterspawns to by trigger in attempt to avoid ModExtradata errors
+- Fixed sploit with treasure chests
+- Added zombies, stone skeletons, and giant zombie
+
+Deralia:
+- Fixed transition pointing to non-existent desttrans
+- Addded Galat's Storage (REQUIRES BETAPACK JAN2007a or later)
+
+Edana:
+- Added weapon/armor storage guy
+- Addded Galat's Storage (REQUIRES BETAPACK JAN2007a or later)
+
+Edanasewers
+- Edanasewers, in an effort to increase tourism to aid an aleing economy has hired new staff in their "massive beef up" campaign
+- Still about the same level map, so n00b friendly
+- see if you can find: 2 electric slimes, 8 sewer slimes, 7 decaying zombies, a flying leech or two, and 1 large black pudding
+- Green fog makes for low end-puter friendly graphics (rough having your light on all the time), type clearsky at console to remove
+- Fixed non-sprite set to glow lag
+- Gave zombies and slimes multiple respawns for farming goodness
+
+Gatecity:
+- Added zombie dwarves (REQUIRES SC.DLL JULY 7th 2006 OR LATER)
+- Addded Galat's Storage (REQUIRES BETAPACK JAN2007a or later)
+
+Keledrosprelude:
+- Transition Warning
+
+Helena:
+- Added critical merchants
+- Added chance for Bandit Raids
+- Text notification for raids
+- Addded Galat's Storage (REQUIRES BETAPACK JAN2007a or later)
+- Merchants and civlians scatter and run during raids
+- Chicks are finally in town
+
+MSCave:
+- Added orc fire shamans
+
+Sfor:
+- Made invulnerable web breakable (lazy work around fix)
+- Re-added missing treasure
+- Transwarning
+- Re-Re-Added missing treasure (requires SC.DLL update as well)
+
+Thornlands:
+- Fixed Thornlands Spider Queen FOR SURE THIS TIME! ><
+- Fixed Thornlands CSpawn5 Skeletons Spawning in Ceiling
+- Added easter egg surprises
+- Added skeleton to closet
+- Various FX
+- Fixed issue where spider would spawn inside crystal and go wild
+- Spider Queen can now attack
+
+Third party:
+
+ms_snow:
+- Made morc spawn chains more dependable
+- Made Ice Queen death trigger more dependable
+- Moved Morc chest condition to morc chief death
+- Turned water to ice
+- Fixed invulnerable queen escort
+
+orcplace2_beta:
+- Made door break trigger conditional on death of forward orcs
+- Made orc chief death trigger mode dependable (downside: chair may move before chief dead)
+- Upgraded the orcs in rafters
+- Upgraded chief death treasure layout
+- Removed false master from teleporter generating dev spam (downside: tele isn't locked)
+
+skycastle:
+- added monsterclip staircase so skeletons aren't trapped in pit at beginning
+- new treasure chests
+
+highlands_msc
+- fixed possible spawn chain preventer
+- new treasure chests
+
+Unrest
+- Fixed spawn merge (not thoroughly tested)
+
+WW3d
+- New Chest
+- Tweaked push brush on secondary to-boss teleporter to make said porter more reliable
+
+===============================================================

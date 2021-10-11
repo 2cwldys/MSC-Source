@@ -1,0 +1,18 @@
+Re: List of changelogs
+
+JUN2008a PUBLIC CHANGELOG:
+
+• You can now store your pets safely out of the way by unsummoning them (F11 menu, or click on the pet)
+• Pets level up a bit more like players now
+- Pets require the creature they kill has at least 10% of their XP
+- So you can only level up on rats so long before you must move on to boars, etc.
+• Pets anti-suicide system
+- Pets teleport to player if they fall. They also stick to the player a bit better than they used to, and have slightly improved navigation
+• Support for Isle by CSS
+• Open support for future maps
+• Several training sploits patched up (both for pets and people)
+• XP multipliers on Lodagond are nixed, and the better treasure shifted to the end.
+• Parry is capped at 40
+- This should cut down on parry whoring, and serve as a go-between step for removal of the stat
+- This will also allow very high level characters to alter their title, pending title system
+• ...and the usual 100,000 changes I'm not bothering to list
