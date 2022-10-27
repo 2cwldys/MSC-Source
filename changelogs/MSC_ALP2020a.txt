@@ -1,0 +1,552 @@
+======================================================================
+YE ALPHA CHANGELOG
+======================================================================​
+
+New Maps
+• Deralia by Dehoth (Safe)
+- What's that? You've already been to Deralia? No, no you have not.
+• Kroush by Dehoth (Medium)
+- This lush, tranquil place is now a starting point for bandit raiders.
+- This map maybe released before the next patch.
+• Thornlands North by Dridje
+- You want more Thornlands? Dridje has ya covered.
+- This map maybe released before the next patch.
+• Undercrypt by TheOysterHippopotami and Phosphorcracker (Self adjusting hard+)
+- These ancient mineshaft tunnels conceal a long forgotten secret.
+• Underfyre by TheOysterHippopotami and Caluminium (Self adjusting hard+)
+- [Description Pending]
+• Underkeep by Crow and TheOysterHippopotami (Safeish)
+- This difficult to reach dwarven capital has long since been cut off from its provinces by Khazorant and his minions.
+• Underforge by Regotry and TheOysterHippopotami (Self adjusting hard+)
+- Ye underworld temple of hawt lava.
+• Undermines by TheOysterHippopotami and Regorty (Self adjusting hard+)
+- Kind of a hybrid of rmines + fmines with some new stuff and a whole lotta optimization, intended to replace them both.
+- (But we'll keep em in there, disconnected, case ya really like em.)
+
+Alpha Maps (May not be ready by next patch)
+• Dungeoncrawl by Ultima (Very Hard)
+- [WIP] Puzzles and traps, puzzles and traps everywhere.
+
+Map Fixes and Tweaks
+• The Highlands (highlands_msc)
+- Fixed viewdistance bug (again, they keep changing how that works...)
+• Old Helena (old_helena)
+- Catapults can no longer be hijacked.
+- The inn's "back door" is more easily entered.
+- The inn's front door is now a two stage breakable.
+- Harry's HP increased from 25 to 200.
+- Fixed bug where mission would fail before all the townsmen were dead.
+- Zero point obscured.
+- Deaths in past Helena may affect lives in future Helena (on partial successes on individual servers).
+• Tundra
+- Made the jump puzzle a tad easier.
+- Freezing water does much less damage and does not sap XP.
+- Reduced the front area bear count (varies with # of players).
+- Greater Polar Bears now use lesser stun instead of heavy.
+- Upon reaching the shrine entrance, a portal from the boat to shore will open.
+- Broke up the 40 Boars run into three waves:
+-- First wave is 12 Huge Snow Boars and Greater Polar Bears, in groups of 2-4.
+-- Second wave is 12 Ice Reavers in groups of 2-4, plus 3-6 Reaver Hatchling escort.
+-- Third wave is 2-4 Icebone Ravagers (slightly nerfed) in groups of 2-4, with 1-4 Enraged Icebone escort.
+-- Third wave also has 2 Skeletal Mage Apprentice snipers in the darkness, but they do not repeat.
+--- (Bring some dwarven bolts, those snipers are hard to reach.)
+-- Group size varies with # of players, escorts and mages do not count towards wave advancement.
+-- The shrine entrance will open when the Ice Ravager wave is complete.
+- Atruth now provides you with a small spirit to help you track down his old mining expedition members more quickly.
+- "Huge Dwarves" and "Corrupter" dwarves, switched out for Bloated Dwarves.
+- Various monster waves should remove proper now.
+- Fixed some aesthetic issues.
+• Umulak
+- Added some more boxes. Sadly, little harder to push now, but yeah, finally fixed "that".
+- Added switch to reset box positions, should one mess up the puzzle. (Does not restore broken boxes.)
+- Made the return trip from the keyhole box a bit easier.
+- Added some lighting to make said keyhole area more obvious.
+- All elevators flagged unblockable.
+• Undercliffs
+- The spiders in the dwarf village do not spawn unless you break an egg first.
+- The annoying teleportation mistake in the boss room has been fixed so when you teleport in you no longer fall to the ground sometimes.
+- The chapel bat monster was renamed "Werebat" (will be used for a monster hunting quest)
+- Stone Ogre renamed to Earth Djinn
+- Annoying monsters such as the Earth Djinn and Earth Elemental have had their scaling capped
+• Underpath
+- There is now a neat looking road that goes from spawn to underkeeps front entrance (hence the "path" in Underpath)
+- The left side entrance to the boss room (ie, the tunnel you built that drops from the ceiling) is now blocked off until the boss spawns, forcing you to go through the cave with the shrieker bat
+- The ogres do not spawn automatically anymore. Now you have to locate the boss room and slay a lone baby ogre in the nest and only then the ogres will start spawning around the map.
+- The map is now populated with low level creatures using the new dyn_spawn system so there is something to do if you don't spawn the ogres (so now the map has a low level, mid level, AND high level component to it)
+- Added a rotting meat carcass with a treasure chest inside of it in the boss room that bursts open IF you slay the fire djinn that can spawn during the boss fight
+- Said fire djinn sometimes will not spawn and an alligator will spawn in his place (killing the gator opens the aforementioned meat carcass with a treasure chest in it)
+- Replaced the flying demon shark with plant turrets again, but they are not as OP as the original plant that was in the map when it was first released.
+
+Big Changes
+• Max level cap has been raised to 50!
+• The Galat Storage Chest can now contain ammunition and potions!
+- In addition to heavily increased storage space.
+- Thank @greatguys1 !
+• Lore library system
+- Scattered throughout the game and various quests one can now find ample reading material. (Thank @The Man In Black and @greatguys1)
+• Assisted spell aiming for Ice Shield and Rejuvenation
+- Rejuvenation and Ice Shield now offer various aim types, these can be selected with a "fake" cvar:
+- ms_aim_type 0 [default] - Auto-snaps an aiming reticle to the nearest valid target to your viewpoint.
+- ms_aim_type 1 - Provides a free-floating aiming reticle that heals/shields a single target in the circle.
+- ms_aim_type 2 - The old hit-scan method with no aim assist.
+- If there's no valid target, or you aim at your feat, the spell will heal or shield the caster.
+• Memory Deallocation Errors are now non-fatal
+- This maybe a bad idea, and may have to be undone, as it may result in unpredictable behavior of both client and server.
+- If there is a memory deallocation error, a message relaying said will appear on your hud in within 60 seconds.
+- The message will be green if the error is on your client, and red if it is on the server side.
+- It will also appear in your console and respective log (log_msdll.log and chatlog for server, log_cldll.log for clients.)
+- "Couldn't Allocate New Block" messages will also be surpressed server side and log, but still incurs a pop-up client side, as it is fatal.
+• Elemental resistance system rebuilt.
+- Should fix all sorts of bugs, and as per usual, lead to new, more interesting ones.
+• Charge bar now makes a sound that rises in pitch with each charge level.
+- This can be customized with the cvar ms_chargebar_sound - must point to an 8-bit 11.025Khz wav.
+- The volume of the alert can be adjusted with ms_chargebar_volume (1-10, 0 to disable)
+• Change bar's size and vertical position maybe adjusted.
+- ms_chargebar_scale (ratio, default 1.0)
+- ms_hands_display_y (vertical offset percent, default 20)
+• New optional replacements for that little avatar at the bottom of your hud.
+- ms_hands_display 0 = disable
+- ms_hands_display 1 = classic HUD avatar
+- ms_hands_display 2 = Item icons instead of avatar
+- ms_hands_display 3 = Avatar and Icons
+- ms_hands_display 4 = Smaller Icons
+- ms_hands_display 5 = Avatar and small icons
+- Icons align themselves with the charge bar.
+- (This replaces the ms_lildude cvar)
+• Alphabatized inventory option (no more shifting inventory!)
+- This can be enabled either via a checkbox at the bottom of the inventory panel, or via the cvar ms_alpha_inventory (1|0)
+• Custom Glow Color
+- You can determine your glow color via the cvar ms_glowcolor, formatting is "(RRR,GGG,BBB)" (WITH quotes). This glow color will show to other players.
+• ms_showotherglow 1|0
+- Dun like the new rainbow land? You can now disable other player's glows on your client with by setting this cvar to 0.
+- Thank @The Man In Black for all the above HUD and inventory changes!
+• Major code side changes, including optimization, string space, and critical server security issues - all of which made this patch possible!
+- Thank @Solokiller !
+
+Misc Changes
+• New model for Greater Staff of Affliction. ( Thank @DarkFox for purchasing via 3DRT )
+• New model for Phlame's Staff. ( Thank @DarkFox for purchasing via 3DRT )
+• New models for Ether and Vorpal Blades. ( Thank @Hush for purchasing via 3DRT )
+• New model for Blood Blades. ( Thank @DarkFox for purchasing via 3DRT )
+• New model for Crecent Blades. ( Thank @Truewarrior for making these from scratch! )
+• Halved the stamina cost of dodge.
+• Increased the distance of dodge.
+• Dodge provides a split second invulnerability. (Thank @The Man In Black)
+• When a Bloated Dwarven Zombie slimes a target, nearby zombies will be greatly accelerated for 10 seconds and target the victim.
+• Improved the small sack new players begin with (this does not affect currently owned small sacks).
+• Reduced Stamina drain for Skullblades and Dark Maul
+• Felewyn Symbol quests now requires 750+hp to begin, rather than just to acquire symbols, to avoid confusion.
+• Various improvements to stacking damage over time events.
+• Most Stun effects that prevent attack can only be applied once every 10 seconds, and have a maximum duration of 5 seconds.
+• New, more dynamic global elemental resistance/vulnerability system.
+• Demon Blood now adds its damage value as dark energy.
+• Vampire Blood adds to darkness level as health regenerates.
+• Phlame's Staff now adds a stack of Blaze to any target already on fire. Blaze increases fire vulnerability by 20% per strike. Each stack of Blaze lasts five seconds.
+- Melee strkes with Phlame's staff will add an additional stack of Blaze that lasts ten seconds.
+• Dual wield changes:
+- If one item is a shield, bow, spell, or non-weapon, there is no dual wield damage penalty.
+- If two weapons are wielded, and one is a smallarm, the dual wield penalty is 30%
+- If both weapons are smallarms, the dual wield penalty is 20%
+- If both weapons are identical (modded or otherwise), the dual wield penalty is halved (10% for smallarms, 15% for mixed, 20% if both heavy).
+- Otherwise, the dual wield penalty is 40%
+- Special matched set items recieve no dual wield penalty (eg. blood blades, crecent blades).
+- (In the future, some Titles may mitigate or eliminate the duel wield penalty with some or all combinations.)
+• Parry Value is, as always, determined by your weapon skill. However, all shields now provide a minimum +1 multiplier.
+- (So the buckler provides 130% parry and the Urdualian Shield 400%)
+• If you have a shield, and the other hand empty or a non-weapon, your base Parry Value is equal to your Martial Arts Skill, times the Shield Multiplier.
+- Wielding two shields will combine their multipliers with your Martial Arts skill (max Parry is 255).
+• Shields now reduce 50% of any blockable incoming damage that is below your Parry Value.
+• Shields can now counter-stun nearby enemies, if you time the block correctly. Stun duration is determined by the shield's quality (up to 15 seconds).
+• Placeholders included so Titles can adjust Dual Wield penalty and shield values.
+
+New Music
+• Battle (MSBattle2.mp3), converted from Lanethan's original midi by TheOysterHippopotami.
+• Bells, original composition by Lucifer Majiskus.
+• The Clocktower Grows (MSTheWay.mp3), original composition by Lanethan.
+• Dawn Over Asceria, original composition by Lanethan.
+• DwaDawd, original composition by Lucifer Majiskus.
+• Imperial Bosendorfer, original composition Lucifer Majiskus, as performed by "RKS" PY004.
+• Little River (MSLittleRiver.mp3), converted from Lanethan's original midi by TheOysterHippopotami.
+• The Mexican Hat Dance, public domain by unknown performers [check Shazam]
+• MSdemo, original composition by Lanethan.
+• SadToo, original composition by Lucifer Majiskus.
+• Starlight, original composition by Lucifer Majiskus.
+• Undercrypt, original composition by TheOysterHippopotami.
+
+Other Bug Fixes
+• Fixed some DOT stacking issues
+• Fixed various issues and exploits with the bank
+• Fixed a viewdistance propagation bug (again)
+• Fixed several crash issues
+• Fixed some experience propigation/reward issues
+• Fixed hitscan issues with Ice Skeletons.
+• Fixed horror egg crashes.
+• Fixed potential issue where an NPC with no addparams might ignore global addparams.
+• Fixed Author and the Archery sharing the same shop in Helena.
+• Fixed the ancient occasional "all entities becoming invisibile on death" bug (Thank @The Man In Black!)
+• Fixed issues with canceling a charged attack and various other charged attack issues (Thank @The Man In Black!)
+• Fixed dead players not being able to see chat (Thank @The Man In Black!)
+• Fixed issues with menu boxes resizing and centering (Thank @The Man In Black!)
+• Fixed the Curse of the Bear God. (Thank @The Man In Black!)
+• ...The usual ten thousand other minor bugs and exploits (largely thanks to @greatguys1 and @The Man In Black)
+
+New Mapper Toys
+• Global Monster Limit
+- You can now set a global limit to how many monsters maybe alive on the map at the same time via the "Max Monsters" (spawnlimit) Map Property.
+- Any ms_monsterspawn with a targetname prefixed by "crit" (sans quotes), will override this limit.
+- This is recommended for bosses and their escorts (though monsters tied to critical spawns still count towards the global monster limit).
+- Summoned monsters do not count against the monster limit, nor will they be prevented from spawning by it.
+- This also affects treasure spawns, so be sure they are prefixed with crit. (Though the chests themselves will not add to the monster count.)
+- Similarly, keyholes and traps, and other non-AI scripts will not count against the limit, nor will any player-allied NPC (beloved, human, or hguard factioned).
+- Their spawners, however, will be blocked if the limit is reached and they aren't marked crit.
+- Strongly suggest using the addparam "set_die_nt;20" on all non-critical monsters on any map using this feature, so monsters the players can't find will auto-remove eventually.
+- (You can set this globally with the "Global Map Addparams", and tag mobs you don't want to auto-remove with "no_global".)
+• ms_monsterspawn /msarea_monsterspawn now have an "Additional Parameters" option.
+- This will propigate to all monsters tied to the spawn.
+- The order of parsing is global->ms_monsterspawn->monster.
+- Using the addparam "no_global" will ommit global parameters.
+- Using the addparam "no_local" on individual monsters will ommit local monsterspawn parameters.
+• New races: hostile1 ... hostile5
+- These races are hostile to any faction other than their own, making it easier to setup tribal conflicts, and the like. (Blackhand vs. Sorcs, for instance.)
+- Use the set_race;hostileX addparam to rig em up.
+• monster spawn requirement fix (Thank @Lark!)
+- If your monster spawn has no monsters that meet the requirements, system will attempt again in short order, twice, after which you'll have to target the spawn to make another attempt.
+- It is suggested that if you have a spawn with strong mobs you only want to be checked once, add an instance of monsters/blank with zero requirements.
+- This will ensure the cycle attempt will stop after that temporary and invisible monster spawns and suicides.
+• gm_suspend_mob_spawns;1 - using this scriptevent will disable all monster spawners. gm_suspend_mob_spawns;0 to resume.
+
+New Add Params
+• set_dyn_spawn
+- Monster will attempt to spawn in a spot within its msarea_monsterspawn's bounds, where no player is looking.
+- This is to create a sort of subtle 'mysterious appearance' effect, not dissimilar to the system used in Left4Dead.
+- Accounts for brushes within the area that may block view (though it doesn't account for their transparency, treating all brushes as opaque).
+- Beware, as always, your msarea_monsterspawn's bounds must be made up of 90 degree angles and a single brush.
+- Strongly suggest using the addparam set_die_nt;20 as well, in case it appears somewhere the players do not find it.
+- This can only be used on monsters tied to an msarea_monsterspawn (not the ms_monsterspawn point entity).
+• set_world_spawn;[max_distance]
+- This is similar to set_dyn_spawn, but it will attempt to find a player to teleport to, anywhere in the world.
+- If there are three or more players to choose from, it will attempt to select from the tightest cluster of players.
+- It will also favor the forward view of the player it selects, in an attempt to find an area where he is traveling to.
+- Default distance is 512 (about 50 feet + double mob width), but you can customize distance for tighter or more open maps with [max_distance].
+- The effect will be cleanest with an ms_monsterspawn point entity, with the mobs starting location in an inaccesible box somewhere off the map.
+• set_lshield
+- Adds a self-scaling lighting field to monsters that more or less forces engagement at range.
+- Careful about applying to any monster that prefers to get close and "hug" players and is thus liable to trap them within the field.
+• On traps/quake: vocanic - causes quake to drop large flaming rocks periodically. These dmg for 30% maxhp, and add fire DOT for 10% maxhp/5secs.
+• lures can now be given material sounds when struck:
+- set_mat;<default|stone|metal|glass|bloat|plant|wood|bone|bone_large|bullet|carapace>
+
+New Test Scripts Stuff
+• YOU CAN NOW MAKE YOUR OWN ITEMS!
+- Yes, you can finally make that Sword of a Thousand Truths you always wanted (though generic quest items are certainly easier).
+- Simply customize or replace any of the msc\test_scripts\item_test_script[1-4].script scripts.
+- You can ask the Script Assistant to spawn them for you, or stick em on your creations with the "give" command. (eg. give item_test_script2)
+- There's are also new items folders in both the reference and example script folders full of stuff to get you started.
+• ms.stx changes
+- ms.stx reformated a bit to make easier for use as a reference.
+- This had the unfortunate side effect of changing a catagory position. So if you're using EditPlus:
+- Go to Tools->Preferences...->Settings and Syntax->[MSC Script]->[Colors and Syntax] ...
+- Then change "Built-in Functions / Commands" to whatever color you had originally (probably bright red).
+- (Or just leave it, if you prefer the new color scheme. Won't hurt anything.)
+
+New Script Commands and Functions
+• $get_tbox_abs(<filter:any|player|monster|enemy|ally>,<(absmins)>,<(absmax)>)
+- As $get_tbox (assembles a token list of targets in area), but allows you to define a proper box from two vectors.
+• $indiam(<range>,<vec1>,<vec2>) - returns 1 if <vec1> is within <range> of <vec2>
+- Handy for remote range checks and saves a step with $dist(<vec1>,<vec2>).
+- Also available in $indiam2D flavor (note capitlization.)
+- Not to be confused with $inrange below.
+• $inrange(<var>,<low>,<high>) - returns 1 if <var> is from <low> to <high>, conditional abbreviator.
+• $inset_num(<var>,<params...>) - returns 1 if <var> mathmatically equals any of <params...>, conditional abbreviator.
+• $inset_string(<var>,<params...>) returns 1 if <var> string-wise equals any of <params...>, conditional abbreviator.
+• $and(), $or(), and $xor() if conditional helpers.
+- The four above are basically designed to save you some conditional foot work, since our if statements provide no and/or functionality.
+• $random_of_set(<params...>) - returns one of the provided parameters selected at random.
+• $get_random_token(<token_string>) - returns an element of the token string at random.
+• $math("vectoradd|vectormultiply",<vec>,<"x"|"y"|"z"|float|vec>,[vec])
+- The $math function now supports vectors for when an in-line function is preferable to the vectoradd/vectormultiply commands.
+• $math(sqrt,<num>)
+- Returns square root of <num> (two decimal places). Mind ye, this is potentially CPU intensive, so don't spam it.
+• New $func()/return command enhancements:
+- The return command can now be instanced to specific $func() events.
+- Normally, the return command sets or adds to a special variable on the entity used by all $func() events.
+- return **<event_name> <data> will cause the data return to be only for the related $func(<event_name>) call.
+- return **<event_name> **clear** will clear the data instanced for that call.
+- return **clear** will clear the entity's general return data. (Useful if you have a function within a function.)
+- As per normal, if not cleared, each subsequent return command creates another token in the return data, until the $func() is resolved.
+• $subst(<var>,<search_word>,<substitute_word>) - new string processor replaces <search_word> with <substitute_word> (up to 100 occurances)
+• New Hard Event: game_predeath - use this if you need to change properties of the corpse generated on death
+• New Hard Event: game_deleted - this goes off whenever a monster is forcibly deleted (instead of slain). It also goes off when the corpse finishes fading away and once during the precache stage (which creates a temporary copy of the script and erases it).
+• New Hard Event: game_menu_selected <player> <callback> <data>
+- When a game_menu_getoptions selection is used, it's information is mirrored here for extra/easier processing
+• If you use "returndata abortmenu" in a game_menu_getoptions, the menu will be canceled without sending to the player.
+- Still ain't figured a way to close the menu directly though.
+• $pass() function
+- Sick of having to store PARAM1 into a local before passing it onto another event? Now you don't have to!
+- callevent some_event $pass(PARAM1)
+- Works with all PARAM#'s without altering them.
+• breakloop - you may now exit a calleventloop in progress by using this command within the loop
+• xdodamage - dmgevent now returns as the fourth parameter in game_damaged_other for custimized handling
+- Updated and modernized how_to_make_a_monster.script accordingly.
+• The hard event player_main->game_xpgain now returns the id of the monster granting XP in the second parameter
+• $getcl(<idx>,height/width) can now return client side height/width for indexes with models based on mins/maxs, including players.
+- Beware these may not always match up with the server's height/width settings.
+• Books (text box) can now hold images and have more formatting options. ( Thank @The Man In Black !)
+- See test_scripts/books.txt for options
+• Timed hudstatus icons can be refreshed or otherwise have their timer changed (just recreate the icon with the same name tag). ( Thank @The Man In Black !)
+• Syntax file for Notepad++. ( Thank @greatguys1 !)
+
+=========================================================================
+BELOW THIS LINE THAR BE SPOILERS
+=========================================================================
+
+New Stuffs
+• The Voltaic Edge*
+- (Description pending)
+
+• The Gut Buster*
+- (Description pending)
+
+• Throwable Bombs
+- Various bombs available for dealing with those really nasty opponents and swarms.
+- You can hold the button to throw a bomb farther.
+- Damage and xp gained based on related spellcasting skill.
+- Bombs stack in inventory.
+• Fire Bomb
+- Spawns a towering inferno some 512 units wide that burns anything within.
+- Targets already on fire will take increased fire damage from all sources (+20% per stack, 10 seconds each).
+- Inferno pulses do Fire Skill x 30 damage. Effect persists 30 seconds.
+• Lightning Flask
+- Spawns a ball of lightning that'll cause deliterous Lightning DOT to anything within 512 units.
+- Targets already under Lightning DOT will be subject to a Force Cage effect, should they not be too large to be affected.
+- Lightning pulses do Lightning Skill x 20 damage. Effect persists 30 seconds.
+• Ice Bomb
+- Spawns a stationary freezing sphere that'll slow and add Cold DOT to anything within 512 units.
+- Targets already under Cold DOT will be subject to a Freeze Solid effect, should they not be too large to be affected.
+- Freezing sphere's pulses do Ice Skill x 15 damage. Effect persists 30 seconds.
+• Venom Bomb*
+- Spawns a sentient poison cloud that will roam about and poison targets as it goes.
+- Targets already under Poison DOT effects will also be hit with an Acid DOT effect.
+- The cloud emmits a burst every two seconds that does Affliction Skill x 10 poison damage. Cloud persists 2 minutes.
+• Bottle of Holy Water*
+- Splashes undead in the target area with a massive amount of Holy damage, turns them, and prevents resurections, if applicable.
+- Also heals all allies within area of effect to 100% health and removes Divination Skill x 100 Darkness Contamination.
+• Bottle of Choads
+- Spawns 2-6 Choads that rush about, nibbling on targets, increasing damage the longer they nibble, until they explode.
+- Choads and their explosions do dark damage, and grant affliction XP. Explosion applies a 10 second Defile effect.
+- The number of Choads that spawn and their damage is based on your Affliction Skill.
+
+• Bandolier
+- Sling this over your shoulder to keep all your bombs at easy reach.
+
+• Apothetcary Satchel
+- A little pouch dedicated to potions and healing items.
+
+New Monsters
+• monsters/wyrm_lava - Lava Wyrm (hard demon, 80x256, 5000hp+50%A, Base 750xp)
+- Wyrms are large, snake-like creatures, that create tunnels throughout the underworld of Leane. Some were harnessesd by Lor Malgoriand to create underground paths through which his armies could move unseen and bypass portions of The Wall. Dwarves, while they have yet to harness them directly, will sometimes herd groups of smaller wyrms to create tunnels faster, though such efforts are desperate and dangerous.
+- Wyrms come in a staggering variey of types and sizes. This paticular wyrm is a moderately sized Lava Wyrm, capable of swimming through solid rock as if it were water.
+-
+- Placement: Intended to be semi mobile around edges of a large platform, with holes he can pop up through or placed in a pit of appropriately themed deadly element.
+-
+- optional entities:
+-- info_target: wyrm_edge1 (up to ...20)
+--- Teleport points around the edge of the platfrom the mob can emerge at and float between.
+--- There should be a clear line of movement between these points in logical order, similar to looping func_train tracks.
+-- info_target: wyrm_pit1 (up to ...20)
+-- Pits in the platform or scattered across the level that the mob can tunnel up and emerge at.
+-
+- If none of these entities exist, mob will float around randomly near its spawn point, hopefully obeying monster clips.
+When mobile, mob's movement is independent of his aim target, either floating from wyrm_edgeX points or randomly until blocked.
+While at wyrm_pitX points, wyrm remains stationary, wyrm periodically submerges and re-emerges at wyrm_pitX point closest to target.
+-
+- Attack pattern consists of four AOE melee attacks, one of which is stun, and another a heavy repulse via uncoiling.
+If no targets are in melee range, the Lava Wyrm will continue to fire projectiles, half of which are guided, all of which explode on impact, applying force and DOT.
+After every fourth or fifth projectile, the Lava Wyrm will pause to roar and create an earthquake. This will cause flaming rocks to dislodge from the ceiling.
+These do signifigant damage, but can be fairly easily avoided by continuous movement.
+-
+- The wyrm's kenetic force is of such strength that those who are immune to push effects will absorb it as extra damage.
+-
+- other addparams:
+-- set_noquakes
+--- If you are using more than one lava wyrm, or lava wyrms combined with Earth Elementals, this is recomended, as the tempent spam from multiple quakes is rough.
+--- Wyrms with set_noquake will spit projectiles more often.
+-
+- Creature is initially hidden, and wont react until it hears a target within 384 units.
+- Not the toughest thing ever, but a fairly self-sufficient boss, whose mobility gives him some staying power.
+-
+- XP maybe adjusted based on mobility
+- Other flavors and sizes easily available upon request.
+- Thank @Hush for purchasing the new model via 3DRT.
+
+• monsters/elf_warrior_new - The New Elf Warriors (medium-v.hard human/torkie/demon, 32x96, 1500-2500hp, 500-3500xp)
+- Similar to the Dragon Guards, these elves must be built and defined through various addparams as follows:
+-- Gender, pick one (Affects name. Females are slightly faster, while males have slightly more HP.)
+--- es_female - XX (default)
+--- es_male - XY
+-- Weapon, pick one (affects XP):
+--- es_wp;0 - Switches dynamically between sword(s), conventional bow, and unarmed attacks (default)
+--- es_wp;1 - Uses double "laser" bow and unarmed attacks only
+--- es_wp;2 - Uses spiral bow and unarmed attacks only
+--- es_wp;3 - Uses conventional bow and unarmed attacks only
+--- es_wp;4 - Uses sword only
+--- es_wp;5 - Uses bows and blades only
+--- es_wp;6 - Uses unarmed attacks only (kick, sweep, punch)
+-- Faction Type, pick one (affects race, skin, name prefix):
+--- es_typ;0 - Elven (Default, human faction)
+--- es_typ;1 - Torkalath (Ramatta, Torkie faction)
+--- es_typ;2 - Eshu (human faction)
+--- es_typ;3 - Seeker (human faction)
+--- es_typ;4 - Djinn (demon faction)
+-- Element (optional, affects name suffix, skin, and XP), pick one:
+--- es_elm;0 - none (default)
+--- es_elm;1 - natural (binding thorns and venom) (poison can upgrade to thorn prison if <50% poison resist)
+--- es_elm;2 - fire (can upgrade to vulnerability to fire if target <50% fire resist)
+--- es_elm;3 - cold (can upgrade to freeze_solid if target <50% cold resist)
+--- es_elm;4 - dark (can cloak) [can't have aura] (shadowflames upgrade to defile after 4 applications)
+--- es_elm;5 - shock (can teleport) (can upgrade to hold_person if target <50% lightning resist)
+--- es_elm;6 - chaos (es_wp must be bow only (es_wpn;1-4), otherwise error. Cycles arrow elements: (cold/shock/fire)
+--- es_elm;7 - holy (heals self and allies nearby) (holy will affect players with sufficient dark contamination)
+--- Spiral/Laser Bow weilders with no element set do "magic" damage with a white spiral/beam
+--- Chaos element stacks do not "upgrade".
+-- Aura (optional, affects XP), pick one:
+--- es_aur;0 - none (default)
+--- es_aur;-1 - by es_elm setting
+--- es_aur;1 - poison
+--- es_aur;2 - fire
+--- es_aur;3 - cold
+--- es_aur;4 - dark (reduces victim's damage)
+--- es_aur;5 - shock (repels) [bit mean on melee elves]
+--- es_aur;6 - (chaos) random element (shock/poison/lightning/fire/cold) each second
+--- es_aur;7 - holy (heals allies, damages holy vulnerable)
+-- Other options:
+--- set_follower (human factioned only, makes battle ally)
+--- set_leader (human factioned only, makes battle ally, attempts to run ahead of allies)
+- It is recomend that you only have one elementally enabled elf per encounter, perhaps with several non-elemental escort, as the elemental elves can be quite spammy.
+- Thank @Hush for purchasing the new (rather expensive) models via 3DRT.
+
+• monsters/elemental_pure_fire - Pyron Archon (medium demon, 48x80, 2500hp, Base 500xp)
+- Appearing as a vaguley humanoid column of flames, this disembodied elemental force is immune to physical attacks.
+- Primarily a ranged attacker, other flavors pending.
+
+• monsters/slime_frost - Frost Pudding (low wildanmal, 40x64, 100hp, Base 50xp)
+- Not new, so much as the script somehow got emptied.
+- If you have <15% frost resistance, its frost damage can periodically upgrade to frozen solid.
+
+• monsters/slime_lava_large - Lava Pudding (medium wildanimal, 60x44, 750hp, Base 150xp)
+• monsters/slime_lava_small - Small Lava Pudding (medium wildanimal, 40x64, 350hp, Base 75xp)
+- Fire damage oriented slimes. The larger splits into the smaller.
+
+• monsters/bat_large2 - Huge Bat (medium vermin, 32x32, 500hp, Base 150xp)
+- This is a large bat, visually scaled up x2, and using a grav-fly model for better navigation.
+
+• monsters/summon/monster_finder - Finder Spirit (Player aid)
+- This helpful little spirit helps players track down monsters.
+- When first spawns, chooses a host to guide.
+- When finds target, it emits light and makes noise, then returns to the player it was guiding. Rinse and repeat.
+- Spirit is invulnerable, floats through walls, and will not be targeted by nor agro monsters.
+- If player disconnects (ceases to exist) the spirit aborts hunting, and finds new player, then resumes.
+- Removed by calling scriptevent: "gm_remove_finders" through trigger_relay or such.
+- Requires additional parameter: "<search_string|all>"
+- <search_string> being the partial or full name of monsters to be found (narrows selection), or "all" just to hunt all hostiles.
+- The Finder Spirit on Tundra is using the partial search string "Dwar".
+- Spirit only hunts monsters hostile to player faction (human), so you don't have to worry about matching player names, or such.
+- This script does not have the full AI and takes no other parameters.
+
+...and the usual 100,000 other things we can't be bothered to itemize.
+
+BUGS REPORTED:
+
+:idea: Fixed_soon :arrow: Fixable :?: Mystery|Can't Duplicate :oldangry: Prob not fixable
+:mrgreen: = PLEASE RETEST (should be fixed) :oldshock:= PLEASE BALANCE TEST
+
+Code/Script:
+:idea: I spawned at the wrong transition! (Yes, we know. Will remain true for any map not in the alpha pack and the Underworld until beta.)
+:arrow: Chat be bjorked.
+:arrow: Still a few dual wielding stat issues, particularly with partially matched sets.
+:arrow: Stun issues (model sticking, wrong effects, BE_RESIST_STRING)
+:arrow: effects_base system is returning immune during resists, and other such wonkiness.
+:arrow: Shadahar achievement still isn't working.
+:?: Inventory mousewheel scroll issues
+:oldshock: Can the bombs easily take more than 1/3rd of the HP of a boss of your level?
+:?: Keyholes requiring keys to be in hand
+:arrow: Deralia: Shopkeep near the bank, opposite the street, has no inventory.
+:arrow: Helm of the dead doesn't protect from any of the undead in undercrypt.
+:arrow: Elemental arrows except for greater holy do not give XP corresponding to their respective spell casting levels.
+:?: Shields can still get stuck when stored, making you need to draw and lower them to attack with any weapons.
+:arrow: Status icons visible, but unreadable, beyond certain render distances.
+:arrow: Status icons may stack too wide and too many.
+:arrow: The DOT glow highlight for the Holy Bomb's custom damage seems to be purple, as if it's applying Defile or Shadowfire.
+:idea: Holy Water Bomb/Flask reporting far more damage than it's doing.
+:arrow: Most two handed swords allow you to attack while parrying.
+:?: Old_Helena quest paradox not working (but the server is writing other files fine).
+:arrow: EXEC_CMD errors involving beam_update/removeall/clear_beams on some scripts. (Non-fatal.)
+:arrow: EXEC_CMD errors involving $get_traceline() with the client side of Phlame's Staff. (Non-fatal.)
+:arrow: EXEC_CMD errors involving addvelocity/setvelocity, particularly when pushed in water. (Non-fatal.)
+:?: Pressing +use in combat results in "sliding" behavior.
+:arrow: Canceling an interact with NPC menu may result in inability to disengage +use until a certain distance is reached.
+
+:oldangry: Status icons may occasionally be hidden inside mobs.
+:oldangry: Inventory clears selections, slightly after dropping an item into "Player's Hands", with a delay long enough that it may deselect your next selection.
+- Only really an issue when trying to equip two weapons in a hurry - suggest highlighting both before selecting hands.
+:oldangry: Listen servers are not reliable for hosting under this build. (Sadly, but the new maps wouldn't be possible otherwise.)
+:oldangry: Pure Virtual Function Call crash error on exit in Windows 10
+
+Packaging:
+:idea: Scoreboard title text unreadable in 1920xYYY resolution (missing/incomplete font resolution definition files).
+
+Map:
+:arrow: Various Underworld transition issues.
+:arrow: Dungeoncrawl: In world trigger_once blocking path @ 1046 572 -155
+:arrow: Cleicert2: End chests vanishing and/or end chests inventories linked.
+
+Resolved (Green = need report on retesting)
+:mrgreen: the_keep: bandits spawning as weak variants named "Npc" or "mini_boss_1" etc.
+:mrgreen: The shadowfire blade still needs mana to use its fire burst attack, but does not consume any when it is used.
+:mrgreen: Player submodels models not setting right, causing clothes to poke through armor, again.
+:mrgreen: The Unholy Blade's shield of darkness does not apply DOT. (was 15% chance of 75% reduct, now 100% of 25% reduct)
+:mrgreen: ms_aim_type resets its value to "0"
+:mrgreen: Some crests using wrong submodel indexes.
+:mrgreen: Cold helm's resistance not re-apply after respawn. (Never duplicated, but we re-did the resist system from bottom up)
+:mrgreen: Swiftblade Potions messing with Steam Crossbow (possibly other unconventional bows, like Orion/Tork.)
+:mrgreen: Darkness level increase/decrease message spam
+:mrgreen: Some book text may have bad font labels
+:mrgreen: Spider protection HUD icon not showing up (possibly others)
+:mrgreen: "Sell" button unusuable.
+:mrgreen: Elf Warrior fixes: Auras not always applying. Chaos Auras appearing white. Chaos Bows not cycling elements. Shadow archers not repositioning after shooting while cloaked. Shadow warriors only cloaking once. Shadow (Dark) element now vulnerable to Holy.
+:mrgreen: The_Wall layout change: Spiral Archers in Ulectrath's section replaced with Mystic Bows (Chaos, Shadow, Lightning). One Chaos Spiral Bow added to Ivicta's escorts.
+:mrgreen: Vote kicks now also ban for a minimum of 5 minutes, or 25% of the cvar ms_ban_time (which defaults to 60mins - thus the default is 15mins for kick-bans). That is, unless ms_ban_time is 0, in which case kicks do not invoke a temp ban.
+:mrgreen: Flask Bombs: Added a delay to prevent accidental throw for 3 secs after respawn. (View anim still plays though.)
+:mrgreen: Galat Chest deposit issues.
+:mrgreen: Bear Guardian Tome only requiring SC3 (instead of 20) (turned out to be a truly ancient bug)
+:mrgreen: Stackable items can be grabbed from other player's hands (causing crash issues for bombs).
+:mrgreen: New elven warriors have no vulnerability to their opposing element.
+:mrgreen: Still some limited viewmodel wonkiness.
+:mrgreen: "Drop Selected" issues
+:mrgreen: Thunderbird spamming infomsg for attacks
+:mrgreen: Ihotor is taking a vacation to the scenic Shadahar Village.
+:mrgreen: Missing additional "matched set" features,, beyond the damage penalty negation.
+:mrgreen: Underfyre's ghostly dwarves are not immune to physical damage.
+:mrgreen: Weapons.script: Matched set weapons do not get their blocking bonus. (Actually maybe screwier in ALP2019b)
+:mrgreen: Chargebar sound not included in package
+:mrgreen: Deralia: Wrong gosh dern version.
+:mrgreen: The_Wall: Most of the elves are of the wrong variety. (Wrong map version.)
+:mrgreen: Dungeoncrawl: Water tunnel teleport destination seems to be in the ceiling.
+:mrgreen: Tundra: The bears have... "cool" names...
+:mrgreen: Dungeoncrawl_34's water teleporter has the same issue as v32. (info_teleport_destination "att1")
+:mrgreen: Dungeoncrawl_34 seems unpassable where the thin fall of sand is (1056 544 48 ) the nearby by red func_wall toggle has no targetname.
+:mrgreen: Swiftblade potion effect does not "stick" to weapons inserted and withdrawn from packs.
+:mrgreen: "Perfect Parry" can be triggered via DOT's (due to typo in the check)
+:mrgreen: Resistance potions not removing on death
+:mrgreen: Spider potion issues (HUD icon doesn't show up though)
+:mrgreen: Error Item on 0 axis errors
+:mrgreen: Umulak boxes too easily trolled. (Letting go as "mitigated", not nearly as bad as it was under NOV2015.)
+:mrgreen: Choad bomb crashes server
+:mrgreen: Every time I use the last bomb in inventory, it doesn't actually throw the bomb.
+:mrgreen: if monster has armor --> vorp damage = 10 (might req ms.dll patch?)
+:mrgreen: Lore: The letter to Tharic opens the Edana journal.
+:mrgreen: Not gaining XP beyond level 45
+:mrgreen: Alpha flag isn't auto-validating some maps (doesn't apply to Underworld maps where the system has been bypassed)
+:mrgreen: Bandolier & Apothecary Satchel using backpack model
+:mrgreen: Viewmodel wonkiness
+:mrgreen: ms_aim_type 0 has difficulty targeting on slopes.
