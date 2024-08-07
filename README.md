@@ -19,5 +19,3 @@ Master Sword Continued is a Half Life 1 (GoldSRC) modification that adds RPG fan
 
 # Maintainers:
 - [2cwldys](https://github.com/2cwldys)
-
-For inquiries or general contact purposes, you may do so at my [personal email](sdpayne113@gmail.com).
